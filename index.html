@@ -5753,7 +5753,7 @@
                   <sc-if value="{{ m.hasFile }}" hint-placeholder-val="{{ false }}">
                     <a href="{{ m.file }}" download="{{ m.fileName }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
                   </sc-if>
-                  {{ m.text }}
+                  <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
                   <div style="{{ m.whenStyle }}">{{ m.when }}</div>
                 </div>
               </div>
@@ -7089,7 +7089,7 @@
                 <div style="{{ m.rowStyle }}">
                   <div style="{{ m.bubbleStyle }}">
                     <div style="{{ m.whoStyle }}">{{ m.who }}</div>
-                    {{ m.text }}
+                    <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
                     <div style="{{ m.whenStyle }}">{{ m.when }}</div>
                   </div>
                 </div>
@@ -11003,8 +11003,8 @@ class Component extends DCLogic {
           return {
             text: m.text, when: clock(m.at), who: m.byName,
             whoStyle: cur.kind === "direct" || mine ? "display:none;" : "font-weight:700;font-size:12px;color:var(--mr-teal);margin-bottom:3px;",
-            rowStyle: "display:flex;justify-content:" + (mine ? "flex-end" : "flex-start") + ";",
-            bubbleStyle: "max-width:min(78%,520px);border-radius:16px;padding:11px 15px;font-size:14.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;box-shadow:0 1px 2px rgba(24,24,72,0.08);background:" +
+            rowStyle: "display:flex;flex:none;justify-content:" + (mine ? "flex-end" : "flex-start") + ";",
+            bubbleStyle: "max-width:min(78%,520px);border-radius:16px;padding:11px 15px;font-size:14.5px;line-height:1.55;word-break:break-word;box-shadow:0 1px 2px rgba(24,24,72,0.08);background:" +
               (mine ? "var(--mr-teal);color:#fff;border-bottom-right-radius:5px;" : "#fff;color:var(--mr-ink);border:1px solid #E4EAF1;border-bottom-left-radius:5px;"),
             whenStyle: "font-size:11px;margin-top:5px;text-align:right;color:" + (mine ? "rgba(255,255,255,0.75)" : "#98A5B4") + ";",
             hasFile: !!m.file, file: m.file || "", fileName: m.fileName || "file",
@@ -14897,8 +14897,8 @@ class Component extends DCLogic {
               text: m.text, who: m.byName,
               when: new Date(m.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
               whoStyle: t.kind === "direct" || mineM ? "display:none;" : "font-weight:700;font-size:11px;color:var(--mr-teal);margin-bottom:2px;",
-              rowStyle: "display:flex;justify-content:" + (mineM ? "flex-end" : "flex-start") + ";",
-              bubbleStyle: "max-width:82%;border-radius:14px;padding:9px 12px;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word;background:" +
+              rowStyle: "display:flex;flex:none;justify-content:" + (mineM ? "flex-end" : "flex-start") + ";",
+              bubbleStyle: "max-width:82%;border-radius:14px;padding:9px 12px;font-size:13.5px;line-height:1.5;word-break:break-word;background:" +
                 (mineM ? "var(--mr-teal);color:#fff;border-bottom-right-radius:4px;" : "#fff;color:var(--mr-ink);border:1px solid #E4EAF1;border-bottom-left-radius:4px;"),
               whenStyle: "font-size:10px;margin-top:3px;text-align:right;color:" + (mineM ? "rgba(255,255,255,0.72)" : "#98A5B4") + ";"
             };
