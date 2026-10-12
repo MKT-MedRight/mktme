@@ -478,7 +478,7 @@
                 </div>
                 <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:15px;">
                   <sc-for list="{{ b.gifts }}" as="g" hint-placeholder-count="6">
-                    <div data-fn="gifts" onClick="{{ g.tap }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
+                    <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
                   </sc-for>
                 </div>
                 <sc-for list="{{ b.wishes }}" as="w" hint-placeholder-count="0">
@@ -526,9 +526,44 @@
                 <p style="font-size:14.5px;line-height:1.6;color:#3A4453;margin:13px 0 0;text-wrap:pretty;">{{ r.text }}</p>
                 <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:15px;">
                   <sc-for list="{{ r.gifts }}" as="g" hint-placeholder-count="6">
-                    <div data-fn="gifts" onClick="{{ g.tap }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
+                    <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
                   </sc-for>
                 </div>
+              <sc-if value="{{ r.hasReacts }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:11px;">
+                  <div onClick="{{ r.rxToggle }}" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;cursor:pointer;">
+                    <span style="font-size:13px;color:#3A4453;font-weight:600;">{{ r.reactLine }}</span>
+                    <span style="font-size:12.5px;font-weight:700;color:var(--mr-teal);">{{ r.rxLabel }}</span>
+                  </div>
+                  <sc-if value="{{ r.rxOpen }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:10px;background:#F7FAFC;border:1px solid #E4EAF1;border-radius:12px;padding:13px 14px;animation:hbRise 0.22s ease both;">
+                      <sc-if value="{{ r.isMine }}" hint-placeholder-val="{{ false }}">
+                        <div style="margin-bottom:13px;">
+                          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+                            <sc-for list="{{ r.rxTiles }}" as="t" hint-placeholder-count="3"><div style="background:#fff;border:1px solid #E4EAF1;border-radius:10px;padding:9px 10px;"><div style="font-family:var(--mr-head);font-weight:800;font-size:20px;color:var(--mr-navy);">{{ t.value }}</div><div style="font-size:11px;color:#7A8899;line-height:1.3;margin-top:2px;">{{ t.label }}</div></div></sc-for>
+                          </div>
+                          <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px;">
+                            <sc-for list="{{ r.rxEmojis }}" as="x" hint-placeholder-count="3"><div style="display:flex;gap:9px;align-items:center;"><span style="flex:none;width:24px;font-size:16px;">{{ x.em }}</span><div style="flex:1;height:7px;background:#E4EAF1;border-radius:4px;overflow:hidden;"><div style="{{ x.barStyle }}"></div></div><span style="flex:none;font-size:12px;font-weight:700;width:22px;text-align:right;">{{ x.n }}</span></div></sc-for>
+                          </div>
+                          <div style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#7A8899;margin:13px 0 6px;">By department</div>
+                          <div style="display:flex;flex-direction:column;gap:6px;">
+                            <sc-for list="{{ r.rxDepts }}" as="x" hint-placeholder-count="2"><div><div style="display:flex;justify-content:space-between;gap:8px;font-size:12.5px;"><span style="font-weight:600;">{{ x.name }}</span><span style="color:#7A8899;">{{ x.n }}</span></div><div style="height:6px;background:#E4EAF1;border-radius:4px;overflow:hidden;margin-top:4px;"><div style="{{ x.barStyle }}"></div></div></div></sc-for>
+                          </div>
+                        </div>
+                      </sc-if>
+                      <div style="display:flex;flex-direction:column;gap:7px;max-height:240px;overflow-y:auto;">
+                        <sc-for list="{{ r.rxPeople }}" as="p" hint-placeholder-count="3">
+                          <div style="display:flex;gap:10px;align-items:center;">
+                            <span style="flex:none;font-size:15px;min-width:22px;">{{ p.ems }}</span>
+                            <span style="flex:1;min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;line-height:1.3;">{{ p.name }}</span><span style="display:block;font-size:11.5px;color:#8B97A8;">{{ p.dept }}</span></span>
+                            <span style="flex:none;font-size:11.5px;color:#8B97A8;">{{ p.when }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
               </div>
             </div>
           </sc-for>
@@ -6230,9 +6265,44 @@
               <p style="font-size:14.5px;line-height:1.62;color:#3A4453;margin:13px 0 0;text-wrap:pretty;">{{ r.text }}</p>
               <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:15px;">
                 <sc-for list="{{ r.gifts }}" as="g" hint-placeholder-count="6">
-                  <div data-fn="gifts" onClick="{{ g.tap }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
+                  <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
                 </sc-for>
               </div>
+              <sc-if value="{{ r.hasReacts }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:11px;">
+                  <div onClick="{{ r.rxToggle }}" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;cursor:pointer;">
+                    <span style="font-size:13px;color:#3A4453;font-weight:600;">{{ r.reactLine }}</span>
+                    <span style="font-size:12.5px;font-weight:700;color:var(--mr-teal);">{{ r.rxLabel }}</span>
+                  </div>
+                  <sc-if value="{{ r.rxOpen }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:10px;background:#F7FAFC;border:1px solid #E4EAF1;border-radius:12px;padding:13px 14px;animation:hbRise 0.22s ease both;">
+                      <sc-if value="{{ r.isMine }}" hint-placeholder-val="{{ false }}">
+                        <div style="margin-bottom:13px;">
+                          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+                            <sc-for list="{{ r.rxTiles }}" as="t" hint-placeholder-count="3"><div style="background:#fff;border:1px solid #E4EAF1;border-radius:10px;padding:9px 10px;"><div style="font-family:var(--mr-head);font-weight:800;font-size:20px;color:var(--mr-navy);">{{ t.value }}</div><div style="font-size:11px;color:#7A8899;line-height:1.3;margin-top:2px;">{{ t.label }}</div></div></sc-for>
+                          </div>
+                          <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px;">
+                            <sc-for list="{{ r.rxEmojis }}" as="x" hint-placeholder-count="3"><div style="display:flex;gap:9px;align-items:center;"><span style="flex:none;width:24px;font-size:16px;">{{ x.em }}</span><div style="flex:1;height:7px;background:#E4EAF1;border-radius:4px;overflow:hidden;"><div style="{{ x.barStyle }}"></div></div><span style="flex:none;font-size:12px;font-weight:700;width:22px;text-align:right;">{{ x.n }}</span></div></sc-for>
+                          </div>
+                          <div style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#7A8899;margin:13px 0 6px;">By department</div>
+                          <div style="display:flex;flex-direction:column;gap:6px;">
+                            <sc-for list="{{ r.rxDepts }}" as="x" hint-placeholder-count="2"><div><div style="display:flex;justify-content:space-between;gap:8px;font-size:12.5px;"><span style="font-weight:600;">{{ x.name }}</span><span style="color:#7A8899;">{{ x.n }}</span></div><div style="height:6px;background:#E4EAF1;border-radius:4px;overflow:hidden;margin-top:4px;"><div style="{{ x.barStyle }}"></div></div></div></sc-for>
+                          </div>
+                        </div>
+                      </sc-if>
+                      <div style="display:flex;flex-direction:column;gap:7px;max-height:240px;overflow-y:auto;">
+                        <sc-for list="{{ r.rxPeople }}" as="p" hint-placeholder-count="3">
+                          <div style="display:flex;gap:10px;align-items:center;">
+                            <span style="flex:none;font-size:15px;min-width:22px;">{{ p.ems }}</span>
+                            <span style="flex:1;min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;line-height:1.3;">{{ p.name }}</span><span style="display:block;font-size:11.5px;color:#8B97A8;">{{ p.dept }}</span></span>
+                            <span style="flex:none;font-size:11.5px;color:#8B97A8;">{{ p.when }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
               <sc-if value="{{ r.canRemove }}" hint-placeholder-val="{{ false }}">
                 <div onClick="{{ r.remove }}" style="font-size:12.5px;font-weight:600;color:#B4443A;cursor:pointer;margin-top:12px;">Remove</div>
               </sc-if>
@@ -6257,9 +6327,44 @@
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;flex:none;">
               <sc-for list="{{ r.gifts }}" as="g" hint-placeholder-count="4">
-                <div data-fn="gifts" onClick="{{ g.tap }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
+                <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
               </sc-for>
             </div>
+              <sc-if value="{{ r.hasReacts }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:11px;">
+                  <div onClick="{{ r.rxToggle }}" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;cursor:pointer;">
+                    <span style="font-size:13px;color:#3A4453;font-weight:600;">{{ r.reactLine }}</span>
+                    <span style="font-size:12.5px;font-weight:700;color:var(--mr-teal);">{{ r.rxLabel }}</span>
+                  </div>
+                  <sc-if value="{{ r.rxOpen }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:10px;background:#F7FAFC;border:1px solid #E4EAF1;border-radius:12px;padding:13px 14px;animation:hbRise 0.22s ease both;">
+                      <sc-if value="{{ r.isMine }}" hint-placeholder-val="{{ false }}">
+                        <div style="margin-bottom:13px;">
+                          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+                            <sc-for list="{{ r.rxTiles }}" as="t" hint-placeholder-count="3"><div style="background:#fff;border:1px solid #E4EAF1;border-radius:10px;padding:9px 10px;"><div style="font-family:var(--mr-head);font-weight:800;font-size:20px;color:var(--mr-navy);">{{ t.value }}</div><div style="font-size:11px;color:#7A8899;line-height:1.3;margin-top:2px;">{{ t.label }}</div></div></sc-for>
+                          </div>
+                          <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px;">
+                            <sc-for list="{{ r.rxEmojis }}" as="x" hint-placeholder-count="3"><div style="display:flex;gap:9px;align-items:center;"><span style="flex:none;width:24px;font-size:16px;">{{ x.em }}</span><div style="flex:1;height:7px;background:#E4EAF1;border-radius:4px;overflow:hidden;"><div style="{{ x.barStyle }}"></div></div><span style="flex:none;font-size:12px;font-weight:700;width:22px;text-align:right;">{{ x.n }}</span></div></sc-for>
+                          </div>
+                          <div style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#7A8899;margin:13px 0 6px;">By department</div>
+                          <div style="display:flex;flex-direction:column;gap:6px;">
+                            <sc-for list="{{ r.rxDepts }}" as="x" hint-placeholder-count="2"><div><div style="display:flex;justify-content:space-between;gap:8px;font-size:12.5px;"><span style="font-weight:600;">{{ x.name }}</span><span style="color:#7A8899;">{{ x.n }}</span></div><div style="height:6px;background:#E4EAF1;border-radius:4px;overflow:hidden;margin-top:4px;"><div style="{{ x.barStyle }}"></div></div></div></sc-for>
+                          </div>
+                        </div>
+                      </sc-if>
+                      <div style="display:flex;flex-direction:column;gap:7px;max-height:240px;overflow-y:auto;">
+                        <sc-for list="{{ r.rxPeople }}" as="p" hint-placeholder-count="3">
+                          <div style="display:flex;gap:10px;align-items:center;">
+                            <span style="flex:none;font-size:15px;min-width:22px;">{{ p.ems }}</span>
+                            <span style="flex:1;min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;line-height:1.3;">{{ p.name }}</span><span style="display:block;font-size:11.5px;color:#8B97A8;">{{ p.dept }}</span></span>
+                            <span style="flex:none;font-size:11.5px;color:#8B97A8;">{{ p.when }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
           </div>
         </sc-for>
       </div>
@@ -6285,9 +6390,44 @@
           <p style="font-size:14.5px;line-height:1.6;color:#3A4453;margin:12px 0 0;text-wrap:pretty;">{{ r.text }}</p>
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:13px;">
             <sc-for list="{{ r.gifts }}" as="g" hint-placeholder-count="4">
-              <div data-fn="gifts" onClick="{{ g.tap }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
+              <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
             </sc-for>
           </div>
+              <sc-if value="{{ r.hasReacts }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:11px;">
+                  <div onClick="{{ r.rxToggle }}" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;cursor:pointer;">
+                    <span style="font-size:13px;color:#3A4453;font-weight:600;">{{ r.reactLine }}</span>
+                    <span style="font-size:12.5px;font-weight:700;color:var(--mr-teal);">{{ r.rxLabel }}</span>
+                  </div>
+                  <sc-if value="{{ r.rxOpen }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:10px;background:#F7FAFC;border:1px solid #E4EAF1;border-radius:12px;padding:13px 14px;animation:hbRise 0.22s ease both;">
+                      <sc-if value="{{ r.isMine }}" hint-placeholder-val="{{ false }}">
+                        <div style="margin-bottom:13px;">
+                          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+                            <sc-for list="{{ r.rxTiles }}" as="t" hint-placeholder-count="3"><div style="background:#fff;border:1px solid #E4EAF1;border-radius:10px;padding:9px 10px;"><div style="font-family:var(--mr-head);font-weight:800;font-size:20px;color:var(--mr-navy);">{{ t.value }}</div><div style="font-size:11px;color:#7A8899;line-height:1.3;margin-top:2px;">{{ t.label }}</div></div></sc-for>
+                          </div>
+                          <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px;">
+                            <sc-for list="{{ r.rxEmojis }}" as="x" hint-placeholder-count="3"><div style="display:flex;gap:9px;align-items:center;"><span style="flex:none;width:24px;font-size:16px;">{{ x.em }}</span><div style="flex:1;height:7px;background:#E4EAF1;border-radius:4px;overflow:hidden;"><div style="{{ x.barStyle }}"></div></div><span style="flex:none;font-size:12px;font-weight:700;width:22px;text-align:right;">{{ x.n }}</span></div></sc-for>
+                          </div>
+                          <div style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#7A8899;margin:13px 0 6px;">By department</div>
+                          <div style="display:flex;flex-direction:column;gap:6px;">
+                            <sc-for list="{{ r.rxDepts }}" as="x" hint-placeholder-count="2"><div><div style="display:flex;justify-content:space-between;gap:8px;font-size:12.5px;"><span style="font-weight:600;">{{ x.name }}</span><span style="color:#7A8899;">{{ x.n }}</span></div><div style="height:6px;background:#E4EAF1;border-radius:4px;overflow:hidden;margin-top:4px;"><div style="{{ x.barStyle }}"></div></div></div></sc-for>
+                          </div>
+                        </div>
+                      </sc-if>
+                      <div style="display:flex;flex-direction:column;gap:7px;max-height:240px;overflow-y:auto;">
+                        <sc-for list="{{ r.rxPeople }}" as="p" hint-placeholder-count="3">
+                          <div style="display:flex;gap:10px;align-items:center;">
+                            <span style="flex:none;font-size:15px;min-width:22px;">{{ p.ems }}</span>
+                            <span style="flex:1;min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;line-height:1.3;">{{ p.name }}</span><span style="display:block;font-size:11.5px;color:#8B97A8;">{{ p.dept }}</span></span>
+                            <span style="flex:none;font-size:11.5px;color:#8B97A8;">{{ p.when }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
         </div>
       </sc-for>
     </div>
@@ -12908,12 +13048,30 @@ class Component extends DCLogic {
         countStyle: who.length ? "margin-left:5px;font-size:11.5px;font-weight:800;color:var(--mr-navy);" : "display:none;",
         style: "display:inline-flex;align-items:center;font-size:16px;line-height:1;padding:6px 10px;border-radius:18px;cursor:pointer;transition:transform 0.18s ease;border:1px solid " +
           (mine ? "var(--mr-teal);background:#E7F1F7;" : "#E4EAF1;background:#F7FAFC;"),
-        tap: () => this.react(r.id, e)
+        tap: () => this.react(r.id, e),
+        tip: who.length ? who.map(x => x === me.email ? "You" : ((this.acct(x) || {}).name || x)).join(", ") : "React with " + e
       };
     });
+    const rxOf = r => {
+      const S = this.reactSummary(r), open = st.rxOpen === r.id, mineCard = r.to === me.email;
+      const pct = n => S.people.length ? Math.round(n * 100 / S.people.length) : 0;
+      return {
+        hasReacts: S.people.length > 0,
+        reactLine: S.line,
+        rxToggle: () => this.setState({ rxOpen: open ? null : r.id }),
+        rxLabel: open ? "Hide" : (mineCard ? "See who reacted & the breakdown" : "See who reacted"),
+        rxOpen: open,
+        rxPeople: S.people.map(p => { const a = this.acct(p.e) || {}; return { name: S.nm(p.e), dept: a.dept || "", ems: p.ems.join(" "),
+          when: p.t ? new Date(p.t).toLocaleDateString("en-GB", { day: "2-digit", month: "short" }) : "" }; }),
+        isMine: mineCard && open,
+        rxTiles: [["People who reacted", String(S.people.length)], ["Reactions in total", String(S.total)], ["Departments", String(Object.keys(S.depts).length)]].map(t => ({ label: t[0], value: t[1] })),
+        rxEmojis: S.top.map(em => ({ em: em, n: String((r.reactions[em] || []).length), barStyle: "height:100%;border-radius:4px;background:var(--mr-teal);width:" + Math.round((r.reactions[em] || []).length * 100 / Math.max(1, S.total)) + "%;" })),
+        rxDepts: Object.keys(S.depts).sort((a, b) => S.depts[b] - S.depts[a]).map(d => ({ name: d, n: S.depts[d] + (S.depts[d] === 1 ? " person" : " people"), barStyle: "height:100%;border-radius:4px;background:#C96A0F;width:" + pct(S.depts[d]) + "%;" }))
+      };
+    };
     const card = r => {
       const m = meta(r.kind), col = colOf(r.kind);
-      return {
+      return Object.assign(rxOf(r), {
         id: r.id, kindLabel: m[1], icon: m[2], toName: r.toName, period: r.period || "",
         text: r.text || r.title || "", gift: r.gift || m[2], initials: initials(r.toName),
         sub: [r.toDept, r.title, r.kind === "kudos" ? "from " + (r.by === me.email ? "you" : r.byName) : "named by " + r.byName].filter(Boolean).join(" · "),
@@ -12931,7 +13089,7 @@ class Component extends DCLogic {
         remove: () => { this.saveRecog(st.recog.filter(x => x.id !== r.id)); this.flash("Removed", "It is off the wall now."); },
         adminMeta: m[1] + " · " + (r.period || r.date) + " · by " + r.byName,
         rowStyle: "display:flex;gap:13px;padding:14px 18px;align-items:center;border-bottom:1px solid #EDF1F6;"
-      };
+      });
     };
     const first = k => list.filter(r => r.kind === k)[0];
     const spotlight = [first("eotm"), first("eotq"), first("promotion")].filter(Boolean).map(card);
@@ -13048,6 +13206,9 @@ class Component extends DCLogic {
 
   react(id, emoji) {
     const me = this.state.me;
+    const rec = (this.state.recog || []).filter(r => r.id === id)[0];
+    if (!rec || !me) return;
+    const had = ((rec.reactions || {})[emoji] || []).indexOf(me.email) > -1;
     this.saveRecog(this.state.recog.map(r => {
       if (r.id !== id) return r;
       const rx = Object.assign({}, r.reactions || {});
@@ -13055,8 +13216,32 @@ class Component extends DCLogic {
       const at = list.indexOf(me.email);
       if (at > -1) list.splice(at, 1); else list.push(me.email);
       if (list.length) rx[emoji] = list; else delete rx[emoji];
-      return Object.assign({}, r, { reactions: rx });
+      const ra = Object.assign({}, r.reactAt || {});
+      const k = emoji + "|" + me.email;
+      if (had) delete ra[k]; else ra[k] = Date.now();
+      return Object.assign({}, r, { reactions: rx, reactAt: ra });
     }));
+    if (!had && rec.to && rec.to !== me.email) {
+      const what = rec.kind === "eotm" ? "your Employee of the Month" : rec.kind === "eotq" ? "your Employee of the Quarter" : rec.kind === "promotion" ? "your promotion" : rec.kind === "bday" ? "your birthday" : "your recognition";
+      this.notify([{ to: rec.to, kind: "recog", route: "recog", recogId: rec.id, threadId: "rx-" + rec.id,
+        title: me.name + " reacted " + emoji + " to " + what, text: "Open Recognition to see everyone who reacted." }]);
+    }
+  }
+  reactSummary(r) {
+    const me = this.state.me || {}, rx = r.reactions || {}, at = r.reactAt || {};
+    const nm = e => e === me.email ? "You" : ((this.acct(e) || {}).name || e);
+    const rows = [];
+    Object.keys(rx).forEach(em => (rx[em] || []).forEach(e => rows.push({ em: em, e: e, t: at[em + "|" + e] || 0 })));
+    const people = {};
+    rows.forEach(x => { const p = people[x.e] || (people[x.e] = { e: x.e, ems: [], t: 0 }); p.ems.push(x.em); p.t = Math.max(p.t, x.t); });
+    const plist = Object.keys(people).map(k => people[k]).sort((a, b) => b.t - a.t);
+    const names = plist.map(p => nm(p.e));
+    const line = !names.length ? "" : names.length === 1 ? names[0] + " reacted" : names.length === 2 ? names[0] + " and " + names[1] + " reacted"
+      : names.slice(0, 2).join(", ") + " and " + (names.length - 2) + (names.length - 2 === 1 ? " other" : " others") + " reacted";
+    const depts = {};
+    plist.forEach(p => { const d = (this.acct(p.e) || {}).dept || "Other"; depts[d] = (depts[d] || 0) + 1; });
+    const total = rows.length, top = Object.keys(rx).sort((a, b) => (rx[b] || []).length - (rx[a] || []).length);
+    return { people: plist, names: names, line: line, total: total, depts: depts, top: top, nm: nm };
   }
 
   changePassword(email, next) {
@@ -13075,17 +13260,19 @@ class Component extends DCLogic {
     const now = Date.now(), keep = n => { const t = Date.parse(n.at || "") || now; return now - t < (n.read ? 30 : 90) * 864e5; };
     let list = this.state.notes.filter(keep);
     const key = n => n.to + "|" + n.threadId;
-    const folds = new Set(add.filter(n => n.kind === "chat" && n.threadId).map(key));
+    const folds = new Set(add.filter(n => (n.kind === "chat" || n.kind === "recog") && n.threadId).map(key));
     const counts = {};
     if (folds.size) list = list.filter(n => {
-      if (n.kind === "chat" && n.threadId && !n.read && folds.has(key(n))) { counts[key(n)] = (n.count || 1); return false; }
+      if ((n.kind === "chat" || n.kind === "recog") && n.threadId && !n.read && folds.has(key(n))) { counts[key(n)] = (n.count || 1); return false; }
       return true;
     });
     const out = add.map(n => {
-      const k = n.kind === "chat" && n.threadId ? key(n) : null;
+      const k = (n.kind === "chat" || n.kind === "recog") && n.threadId ? key(n) : null;
       if (!k || !counts[k]) return n;
       const c = counts[k] + 1;
-      return Object.assign({}, n, { count: c, title: n.title + " \u00b7 " + c + " new" });
+      return n.kind === "recog"
+        ? Object.assign({}, n, { count: c, title: n.title.replace(/ reacted .*$/, "") + " and " + (c - 1) + (c - 1 === 1 ? " other" : " others") + " reacted to your recognition" })
+        : Object.assign({}, n, { count: c, title: n.title + " \u00b7 " + c + " new" });
     });
     this.save(K.notes, list.concat(out), "notes");
   }
