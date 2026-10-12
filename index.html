@@ -8205,9 +8205,15 @@ class Component extends DCLogic {
 
     try { window.history.replaceState({ hb: true, route: patch.route || "home", id: patch.id || null }, ""); } catch (e) {}
 
-    this.onAnyClick = () => {
-      const n = this.state.quotes.length;
-      if (n > 1) this.setState({ quoteN: (this.state.quoteN + 1) % n });
+    this.onAnyClick = e => {
+      const st = this.state, el = e && e.target && e.target.closest ? e.target : null;
+      const inside = sel => !!(el && el.closest(sel));
+      const close = {};
+      if (st.notesOpen && !inside('[data-mr="notes"]') && !inside('[data-fn="notify"]')) close.notesOpen = false;
+      if (st.menuOpen && !inside('[data-mr="nav"]')) close.menuOpen = null;
+      if (st.dockListOpen && !inside('[data-mr="dock"]')) close.dockListOpen = false;
+      if (st.toast && !inside('[data-mr="float"]')) close.toast = null;
+      if (Object.keys(close).length) this.setState(close);
     };
     window.addEventListener("click", this.onAnyClick);
     this._slideTimer = setInterval(() => {
@@ -13074,8 +13080,8 @@ class Component extends DCLogic {
       return Object.assign(rxOf(r), {
         id: r.id, kindLabel: m[1], icon: m[2], toName: r.toName, period: r.period || "",
         text: r.text || r.title || "", gift: r.gift || m[2], initials: initials(r.toName),
-        sub: [r.toDept, r.title, r.kind === "kudos" ? "from " + (r.by === me.email ? "you" : r.byName) : "named by " + r.byName].filter(Boolean).join(" · "),
-        fromTo: (r.by === me.email ? "You" : r.byName) + "  →  " + (r.to === me.email ? "you" : r.toName),
+        sub: [r.toDept, r.title, r.kind === "kudos" ? "from " + (r.by === me.email ? "you" : r.to === me.email ? r.byName : "a colleague") : "named by " + r.byName].filter(Boolean).join(" · "),
+        fromTo: (r.by === me.email ? "You" : r.to === me.email || r.kind !== "kudos" ? r.byName : "A colleague") + "  →  " + (r.to === me.email ? "you" : r.toName),
         tag: r.by === me.email ? "Sent by you" : r.to === me.email ? "For you" : "",
         tagStyle: r.by === me.email ? this.pill("#EAF4F9", "#12607F") : r.to === me.email ? this.pill("#FFF4E4", "#9A5A0B") : "display:none;",
         moveLabel: r.newRole ? ((r.fromRole ? r.fromRole + "  →  " : "Promoted to ") + r.newRole) : "Promotion confirmed",
@@ -13197,8 +13203,8 @@ class Component extends DCLogic {
       gift: st.kudosGift, photo: "", period: "", date: today(), stamp: Date.now(), reactions: {}
     };
     this.saveRecog(st.recog.concat([rec]));
-    this.notify([{ id: "n" + Date.now(), to: st.kudosTo, kind: "recog", title: "You received a compliment",
-      text: me.name + " sent you " + st.kudosGift + " — " + rec.text.slice(0, 90), route: "recog", read: false, date: today() }]);
+    this.notify([{ to: st.kudosTo, kind: "recog", recogId: rec.id, title: "You received a compliment",
+      text: me.name + " sent you " + st.kudosGift + " — " + rec.text.slice(0, 90), route: "recog" }]);
     this.setState({ kudosTo: "", kudosText: "" });
     if (who && !this.routeAllowed("recog", who.email) && this.warnAudience("recog", "Your compliment")) return;
     this.flash("Sent " + rec.gift, who ? who.name + " has been told." : "Delivered.");
@@ -13282,16 +13288,17 @@ class Component extends DCLogic {
     const st = this.state;
     if (!n.read) this.save(K.notes, st.notes.map(x => x.id === n.id ? Object.assign({}, x, { read: true }) : x), "notes");
     this.setState({ notesOpen: false, toast: null });
-    if (n.kind === "chat" || n.threadId) {
+    if (n.kind === "chat") {
       if (n.threadId && (st.chat || []).some(t => t.id === n.threadId)) return this.openThread(n.threadId);
       return this.setState({ route: "chat", chatOpen: n.threadId || st.chatOpen, chatWait: n.threadId || "", menuOpen: null });
     }
+    if (n.recogId) return this.go("recog", { rxOpen: n.recogId });
     if (n.policyId) return this.openPolicy(n.policyId);
     if (n.formId && (n.stats || /^New response/i.test(n.title || "")) && this.can("forms")) return this.openStats(n.formId);
     if (n.formId) return this.openFill(n.formId);
     if (n.route) return this.go(n.route);
     if (n.ref) return this.go("inbox");
-    this.go("home");
+    this.setState({ notesOpen: true });
   }
   staffEmails(exclude) {
     return this.state.accounts.filter(a => a.status !== "suspended" && a.email !== exclude).map(a => a.email);
