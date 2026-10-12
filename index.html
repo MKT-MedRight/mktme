@@ -353,7 +353,7 @@
       </div>
     </div>
 
-    <div data-mr="pad" style="max-width:1280px;margin:-34px auto 0;padding:0 26px 70px;">
+    <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1280px;margin:-34px auto 0;padding:0 26px 70px;">
       <sc-if value="{{ hasHomeCases }}" hint-placeholder-val="{{ false }}">
         <div style="background:#fff;border:3px solid #8C2B2B;border-radius:var(--mr-r-lg);box-shadow:0 20px 46px -26px rgba(140,43,43,0.7);padding:22px 24px;margin-bottom:20px;position:relative;overflow:hidden;animation:hbPop 0.45s cubic-bezier(0.34,1.4,0.64,1) both;">
           <div style="position:absolute;top:-70%;right:-20%;width:70%;height:240%;background:radial-gradient(circle,rgba(140,43,43,0.16),transparent 62%);animation:hbDrift 22s ease-in-out infinite;pointer-events:none;"></div>
@@ -810,7 +810,7 @@
   </sc-if>
 
   <sc-if value="{{ vList }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
     <div style="display:flex;gap:10px;background:#fff;border:1px solid #DCE2EA;border-radius:34px;padding:6px 8px 6px 18px;align-items:center;max-width:640px;">
       <span style="font-size:17px;color:#8B97A8;">⌕</span>
       <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search all policies…" style="flex:1;min-width:0;border:none;outline:none;font-size:15.5px;color:var(--mr-navy);background:transparent;padding:10px 0;">
@@ -1137,7 +1137,7 @@
   </sc-if>
 
   <sc-if value="{{ vMe }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:34px;letter-spacing:-0.035em;margin:0 0 6px;">My policies</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 26px;">{{ meName }} · {{ meDept }} · {{ meEmail }}</p>
     <sc-for list="{{ meGroups }}" as="g" hint-placeholder-count="3">
@@ -1167,7 +1167,7 @@
   </sc-if>
 
   <sc-if value="{{ vDash }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1340px;margin:0 auto;padding:30px 24px 80px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1340px;margin:0 auto;padding:30px 24px 80px;">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:31px;letter-spacing:-0.035em;margin:0 0 5px;">{{ dashGreeting }}</h1>
@@ -1262,7 +1262,7 @@
   </sc-if>
 
   <sc-if value="{{ vLibrary }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Policy library</h1>
@@ -1310,7 +1310,7 @@
   </sc-if>
 
   <sc-if value="{{ vEditor }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
     <div onClick="{{ goLibrary }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to library</div>
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">{{ editorTitle }}</h1>
     <p style="font-size:14.5px;color:#5C6B80;margin:0 0 26px;">Every field is editable, and you can add your own fields at the bottom. Save as draft while you work; publish when it is ready for staff.</p>
@@ -1581,7 +1581,7 @@
   </sc-if>
 
   <sc-if value="{{ vAcks }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Acknowledgements</h1>
     <p style="font-size:14.5px;color:#5C6B80;margin:0 0 18px;">{{ ackSub }}</p>
     <sc-if value="{{ ackMsgShown }}" hint-placeholder-val="{{ false }}">
@@ -1672,7 +1672,7 @@
   </sc-if>
 
   <sc-if value="{{ vInbox }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 80px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 80px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Questions</h1>
     <p style="font-size:14.5px;color:#5C6B80;margin:0 0 24px;">{{ inboxSub }}</p>
     <div style="display:flex;flex-direction:column;gap:12px;">
@@ -1727,7 +1727,7 @@
   </sc-if>
 
   <sc-if value="{{ vAccounts }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Accounts</h1>
     <p style="font-size:14.5px;color:#5C6B80;margin:0 0 24px;">{{ accSub }}</p>
     <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;">
@@ -1967,7 +1967,7 @@
   </sc-if>
 
   <sc-if value="{{ vSettings }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 80px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 80px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Settings</h1>
     <p style="font-size:14.5px;color:#5C6B80;margin:0 0 24px;">Categories, departments and the data behind the hub. Everything here is editable.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;">
@@ -2071,7 +2071,7 @@
   </sc-if>
 
   <sc-if value="{{ vForms }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1280px;margin:0 auto;padding:34px 26px 80px;">
     <sc-if value="{{ formsEmployee }}" hint-placeholder-val="{{ false }}">
     <div>
       <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Forms &amp; surveys</h1>
@@ -2152,7 +2152,7 @@
   </sc-if>
 
   <sc-if value="{{ vFormBuild }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
     <sc-if value="{{ hasFB }}" hint-placeholder-val="{{ false }}">
     <div>
       <div onClick="{{ cancelForm }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to forms</div>
@@ -2315,7 +2315,7 @@
   </sc-if>
 
   <sc-if value="{{ vFormFill }}" hint-placeholder-val="{{ false }}">
-  <div style="max-width:760px;margin:0 auto;padding:34px 26px 90px;">
+  <div style="width:100%;box-sizing:border-box;max-width:760px;margin:0 auto;padding:34px 26px 90px;">
     <sc-if value="{{ hasFill }}" hint-placeholder-val="{{ false }}">
     <div>
       <div onClick="{{ cancelFill }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back</div>
@@ -2431,7 +2431,7 @@
   </sc-if>
 
   <sc-if value="{{ vStats }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
     <sc-if value="{{ hasStats }}" hint-placeholder-val="{{ false }}">
     <div>
       <div onClick="{{ backToForms }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to forms</div>
@@ -2533,7 +2533,7 @@
   </sc-if>
 
   <sc-if value="{{ vAnn }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Announcements &amp; news</h1>
@@ -2552,9 +2552,7 @@
           <h3 style="font-family:var(--mr-head);font-weight:800;font-size:19px;margin:0 0 3px;">Video on the home page</h3>
           <p style="font-size:13.5px;color:#5C6B80;margin:0;line-height:1.55;">A YouTube link plays inside the hub. A small uploaded file plays too.</p>
         </div>
-        <div onClick="{{ toggleVideo }}" style="display:flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;font-weight:600;">
-          <span style="{{ videoOnBox }}">{{ videoOnMark }}</span> Show it
-        </div>
+        <span style="{{ vidStatusStyle }}">{{ vidStatus }}</span>
       </div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin:16px 0 14px;">
         <sc-for list="{{ videoKindChips }}" as="c" hint-placeholder-count="2">
@@ -2586,6 +2584,28 @@
       <sc-if value="{{ videoMsgShown }}" hint-placeholder-val="{{ false }}">
         <div style="{{ videoMsgStyle }}">{{ videoMsg }}</div>
       </sc-if>
+      <sc-if value="{{ vidPreviewOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:18px;background:#F7FAFC;border:1px solid #E4EAF1;border-radius:14px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;">
+            <span style="font-weight:700;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:#7A8899;">Preview &mdash; only you can see this</span>
+            <span onClick="{{ vidPreviewClose }}" style="font-size:13px;font-weight:600;color:#5C6B80;cursor:pointer;">Close</span>
+          </div>
+          <div style="font-family:var(--mr-head);font-weight:800;font-size:20px;letter-spacing:-0.025em;margin-bottom:4px;">{{ vidPreviewTitle }}</div>
+          <div style="font-size:14px;color:#5C6B80;margin-bottom:12px;">{{ vidPreviewDesc }}</div>
+          {{ vidPreviewBlock }}
+        </div>
+      </sc-if>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid #EDF1F6;">
+        <div onClick="{{ vidPublish }}" style="background:#0E8F66;color:#fff;font-weight:700;font-size:14px;padding:12px 24px;border-radius:22px;cursor:pointer;" style-hover="filter:brightness(1.08);">Publish to home page</div>
+        <div onClick="{{ vidPreviewGo }}" style="border:1px solid #DCE2EA;background:#fff;color:var(--mr-navy);font-weight:600;font-size:14px;padding:12px 20px;border-radius:22px;cursor:pointer;" style-hover="border-color:var(--mr-teal);color:var(--mr-teal);">Preview</div>
+        <div onClick="{{ vidSaveDraft }}" style="border:1px solid #DCE2EA;background:#fff;color:var(--mr-navy);font-weight:600;font-size:14px;padding:12px 20px;border-radius:22px;cursor:pointer;" style-hover="border-color:var(--mr-navy);">Save draft</div>
+        <sc-if value="{{ vidDirty }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ vidDiscard }}" style="color:#5C6B80;font-weight:600;font-size:14px;padding:12px 10px;cursor:pointer;">Discard changes</div>
+        </sc-if>
+        <sc-if value="{{ vidIsLive }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ vidTakeDown }}" style="margin-left:auto;border:1px solid #F1C3C3;background:#fff;color:#B4443A;font-weight:600;font-size:14px;padding:12px 20px;border-radius:22px;cursor:pointer;" style-hover="background:#FDECEA;">Take it down</div>
+        </sc-if>
+      </div>
     </div>
     </sc-if>
 
@@ -2657,7 +2677,7 @@
   </sc-if>
 
   <sc-if value="{{ vServices }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
     <sc-if value="{{ svcEmployee }}" hint-placeholder-val="{{ false }}">
     <div>
       <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Suggestion box</h1>
@@ -2680,12 +2700,34 @@
         <h2 style="font-family:var(--mr-head);font-weight:800;font-size:22px;letter-spacing:-0.03em;margin:0 0 14px;">What you have sent</h2>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <sc-for list="{{ mySuggestions }}" as="s" hint-placeholder-count="2">
-            <div style="background:#fff;border:1px solid #DCE2EA;border-radius:13px;padding:17px 19px;">
-              <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+            <div style="background:#fff;border:1px solid #DCE2EA;border-radius:14px;padding:18px 20px;">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap;">
                 <span style="{{ s.statusStyle }}">{{ s.statusLabel }}</span>
                 <span style="font-size:12.5px;color:#8B97A8;margin-left:auto;">{{ s.date }}</span>
               </div>
-              <p style="font-size:14.5px;line-height:1.6;color:#3A4453;margin:0;">{{ s.text }}</p>
+              <p style="font-size:14.5px;line-height:1.6;color:#3A4453;margin:0;white-space:pre-wrap;">{{ s.text }}</p>
+              <div style="display:flex;align-items:flex-start;margin:16px 0 4px;max-width:420px;">
+                <sc-for list="{{ s.bar }}" as="b" hint-placeholder-count="3">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:none;width:84px;"><div style="{{ b.dotStyle }}">{{ b.dot }}</div><div style="{{ b.labelStyle }}">{{ b.label }}</div></div>
+                  <div style="{{ b.lineStyle }}"></div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ s.hasLog }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+                  <sc-for list="{{ s.log }}" as="l" hint-placeholder-count="1">
+                    <div style="{{ l.rowStyle }}"><div style="{{ l.whoStyle }}">{{ l.who }} · {{ l.when }}</div>{{ l.text }}</div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ s.hasDecision }}" hint-placeholder-val="{{ false }}">
+                <div style="{{ s.decisionStyle }}"><div style="font-weight:800;font-size:12.5px;margin-bottom:3px;">{{ s.decisionHead }}</div>{{ s.decisionNote }}</div>
+              </sc-if>
+              <sc-if value="{{ s.canReply }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:9px;align-items:flex-end;margin-top:14px;flex-wrap:wrap;">
+                  <textarea value="{{ s.draft }}" onInput="{{ s.onDraft }}" placeholder="Add more detail or answer their question" style="flex:1 1 260px;min-width:0;box-sizing:border-box;min-height:46px;resize:vertical;font-family:inherit;font-size:14px;line-height:1.55;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:11px 13px;outline:none;"></textarea>
+                  <div onClick="{{ s.send }}" style="flex:none;background:var(--mr-teal);color:#fff;font-weight:700;font-size:14px;padding:12px 22px;border-radius:22px;cursor:pointer;" style-hover="filter:brightness(1.1);">Reply</div>
+                </div>
+              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -2697,7 +2739,7 @@
     <sc-if value="{{ svcAdmin }}" hint-placeholder-val="{{ false }}">
     <div>
       <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Requests &amp; suggestions</h1>
-      <p style="font-size:14.5px;color:#5C6B80;margin:0 0 20px;line-height:1.6;">{{ svcOpenCount }} still open.</p>
+      <p style="font-size:14.5px;color:#5C6B80;margin:0 0 20px;line-height:1.6;">{{ svcOpenCount }} waiting for a decision. Reply to the sender, move it to review, then approve or decline &mdash; they see every step.</p>
       <div style="background:#fff;border:1px solid #DCE2EA;border-radius:13px;padding:17px 19px;margin-bottom:18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
         <span style="font-size:14px;font-weight:600;">Suggestions are handled by</span>
         <select value="{{ svcHandler }}" onChange="{{ onSvcHandler }}" style="font-size:14px;border:1px solid #DCE2EA;border-radius:9px;padding:10px 12px;outline:none;background:#fff;">
@@ -2714,10 +2756,38 @@
               <span style="{{ s.whoStyle }}">{{ s.who }}</span>
               <span style="font-size:12.5px;color:#8B97A8;margin-left:auto;">{{ s.date }}</span>
             </div>
-            <p style="font-size:14.5px;line-height:1.65;color:#3A4453;margin:0 0 14px;">{{ s.text }}</p>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid #EDF1F6;">
-              <div onClick="{{ s.review }}" style="border:1px solid #DCE2EA;background:#fff;color:#3A4453;font-weight:600;font-size:13px;padding:9px 17px;border-radius:20px;cursor:pointer;" style-hover="border-color:var(--mr-navy);">Under review</div>
-              <div onClick="{{ s.close }}" style="border:1px solid #DCE2EA;background:#fff;color:#3A4453;font-weight:600;font-size:13px;padding:9px 17px;border-radius:20px;cursor:pointer;" style-hover="border-color:var(--mr-navy);">Close</div>
+            <p style="font-size:14.5px;line-height:1.65;color:#3A4453;margin:0;white-space:pre-wrap;">{{ s.text }}</p>
+            <div style="display:flex;align-items:flex-start;margin:16px 0 4px;max-width:420px;">
+              <sc-for list="{{ s.bar }}" as="b" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:none;width:84px;"><div style="{{ b.dotStyle }}">{{ b.dot }}</div><div style="{{ b.labelStyle }}">{{ b.label }}</div></div>
+                <div style="{{ b.lineStyle }}"></div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ s.hasLog }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+                <sc-for list="{{ s.log }}" as="l" hint-placeholder-count="1">
+                  <div style="{{ l.rowStyle }}"><div style="{{ l.whoStyle }}">{{ l.who }} · {{ l.when }}</div>{{ l.text }}</div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ s.hasDecision }}" hint-placeholder-val="{{ false }}">
+              <div style="{{ s.decisionStyle }}"><div style="font-weight:800;font-size:12.5px;margin-bottom:3px;">{{ s.decisionHead }}</div>{{ s.decisionNote }}</div>
+            </sc-if>
+            <sc-if value="{{ s.open }}" hint-placeholder-val="{{ true }}">
+              <textarea value="{{ s.draft }}" onInput="{{ s.onDraft }}" placeholder="Reply to the sender, ask a question, or write the reason for your decision" style="width:100%;box-sizing:border-box;margin-top:14px;min-height:64px;resize:vertical;font-family:inherit;font-size:14px;line-height:1.55;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:11px 13px;outline:none;"></textarea>
+            </sc-if>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;margin-top:12px;border-top:1px solid #EDF1F6;">
+              <sc-if value="{{ s.open }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                  <div onClick="{{ s.reply }}" style="background:var(--mr-navy);color:#fff;font-weight:700;font-size:13px;padding:9px 18px;border-radius:20px;cursor:pointer;" style-hover="filter:brightness(1.3);">Send reply</div>
+                  <div onClick="{{ s.review }}" style="border:1px solid #DCE2EA;background:#fff;color:#3A4453;font-weight:600;font-size:13px;padding:9px 17px;border-radius:20px;cursor:pointer;" style-hover="border-color:var(--mr-navy);">Under review</div>
+                  <div onClick="{{ s.approve }}" style="background:#0E8F66;color:#fff;font-weight:700;font-size:13px;padding:9px 18px;border-radius:20px;cursor:pointer;" style-hover="filter:brightness(1.08);">Approve</div>
+                  <div onClick="{{ s.decline }}" style="border:1px solid #F1C3C3;background:#fff;color:#B4443A;font-weight:700;font-size:13px;padding:9px 17px;border-radius:20px;cursor:pointer;" style-hover="background:#FDECEA;">Not approved</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ s.isDecided }}" hint-placeholder-val="{{ false }}">
+                <div onClick="{{ s.reopen }}" style="border:1px solid #DCE2EA;background:#fff;color:#3A4453;font-weight:600;font-size:13px;padding:9px 17px;border-radius:20px;cursor:pointer;" style-hover="border-color:var(--mr-navy);">Reopen</div>
+              </sc-if>
               <div onClick="{{ s.del }}" style="border:1px solid #F1C3C3;background:#fff;color:#B4443A;font-weight:600;font-size:13px;padding:9px 17px;border-radius:20px;cursor:pointer;margin-left:auto;" style-hover="background:#FDECEA;">Delete</div>
             </div>
           </div>
@@ -2732,7 +2802,7 @@
   </sc-if>
 
   <sc-if value="{{ vComply }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1040px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1040px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">My compliance</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 22px;line-height:1.6;max-width:720px;">Everything you have been asked to read, sign or declare, in one place &mdash; and a safe way to raise a concern.</p>
     <div style="display:flex;gap:16px;align-items:stretch;flex-wrap:wrap;margin-bottom:18px;">
@@ -2957,7 +3027,7 @@
   </sc-if>
 
   <sc-if value="{{ vCompDenied }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:720px;margin:0 auto;padding:60px 26px;text-align:center;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:720px;margin:0 auto;padding:60px 26px;text-align:center;">
     <div style="font-family:var(--mr-head);font-weight:800;font-size:24px;">The compliance console is for compliance officers</div>
     <p style="font-size:14.5px;color:#5C6B80;line-height:1.6;">Ask People &amp; Organisation for the &ldquo;Run compliance&rdquo; privilege if you need it.</p>
     <div style="display:flex;justify-content:center;"><div onClick="{{ goComply }}" style="background:var(--mr-teal);color:#fff;font-weight:700;font-size:14px;padding:12px 22px;border-radius:22px;cursor:pointer;">Go to My compliance</div></div>
@@ -2965,7 +3035,7 @@
   </sc-if>
 
   <sc-if value="{{ vCompAdmin }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:34px 26px 0;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:34px 26px 0;">
     <div style="display:flex;gap:14px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px;">
       <div style="min-width:0;">
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Compliance</h1>
@@ -3072,7 +3142,7 @@
   </sc-if>
 
   <sc-if value="{{ caRegister }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:0 26px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:0 26px;">
     <div style="display:flex;flex-direction:column;gap:14px;">
       <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
         <div style="display:flex;gap:7px;flex-wrap:wrap;"><sc-for list="{{ rgCounts }}" as="c" hint-placeholder-count="3"><span style="{{ c.style }}">{{ c.label }}</span></sc-for></div>
@@ -3117,7 +3187,7 @@
   </sc-if>
 
   <sc-if value="{{ caAudits }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:0 26px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:0 26px;">
     <div style="display:flex;flex-direction:column;gap:14px;">
       <sc-if value="{{ adClosed }}" hint-placeholder-val="{{ true }}"><div style="display:flex;"><div onClick="{{ adNew }}" style="background:var(--mr-teal);color:#fff;font-weight:700;font-size:14px;padding:12px 22px;border-radius:22px;cursor:pointer;" style-hover="filter:brightness(1.1);">+ Plan an audit or inspection</div></div></sc-if>
       <sc-if value="{{ adOpen }}" hint-placeholder-val="{{ false }}">
@@ -3178,7 +3248,7 @@
   </sc-if>
 
   <sc-if value="{{ caAi }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:0 26px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:0 26px;">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;align-items:start;">
       <div style="display:flex;flex-direction:column;gap:12px;min-width:0;">
         <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
@@ -3220,7 +3290,7 @@
   </div>
   </sc-if>
   <sc-if value="{{ caReports }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:0 26px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:0 26px;">
     <div style="display:flex;flex-direction:column;gap:12px;">
       <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
         <div style="display:flex;gap:7px;"><sc-for list="{{ repFilters }}" as="f" hint-placeholder-count="3"><div onClick="{{ f.go }}" style="{{ f.style }}">{{ f.label }}</div></sc-for></div>
@@ -3261,7 +3331,7 @@
   <sc-if value="{{ vCompAdmin }}" hint-placeholder-val="{{ false }}"><div style="height:90px;"></div></sc-if>
 
   <sc-if value="{{ vMgmt }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1100px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1100px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">{{ mgTitle }}</h1>
     <p style="font-size:14.5px;color:#5C6B80;line-height:1.6;margin:0 0 24px;max-width:640px;">{{ mgLead }}</p>
 
@@ -3495,7 +3565,7 @@
   </sc-if>
 
   <sc-if value="{{ vMarketing }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:8px;">
       <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0;">Marketing mode</h1>
       <div onClick="{{ resetThemeBtn }}" style="border:1px solid #DCE2EA;background:#fff;color:#3A4453;font-weight:600;font-size:13.5px;padding:11px 20px;border-radius:22px;cursor:pointer;" style-hover="border-color:var(--mr-navy);">Reset to Med Right default</div>
@@ -3668,8 +3738,8 @@
     <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r);padding:22px;">
       <div data-mr="stack" style="display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:6px;">
         <div style="flex:1;min-width:220px;">
-          <h3 style="font-family:var(--mr-head);font-weight:700;font-size:17px;margin:0 0 4px;">Whole sections, open or closed</h3>
-          <p style="font-size:13.5px;color:#7A8899;margin:0;line-height:1.6;">Open a section and it appears in the menu and starts working. Close it and it vanishes for everyone &mdash; nothing is deleted. Or put it in testing and pick exactly who can see it while you try it out. {{ secSummary }}</p>
+          <h3 style="font-family:var(--mr-head);font-weight:700;font-size:17px;margin:0 0 4px;">Whole sections</h3>
+          <p style="font-size:13.5px;color:#7A8899;margin:0;line-height:1.6;"><strong>Everyone</strong> &mdash; in the menu and working. <strong>Testing</strong> &mdash; only the people you tick. <strong>Hide</strong> &mdash; out of the menu, but home-page blocks, links and notifications still open it. <strong>Disable</strong> &mdash; completely off: no menu, no home block, cannot be opened, no notifications. Nothing is ever deleted. {{ secSummary }}</p>
         </div>
         <div data-mr="stack" style="display:flex;gap:8px;flex-wrap:wrap;">
           <div onClick="{{ allSecOn }}" style="border:1px solid #DCE2EA;background:#fff;font-weight:600;font-size:13px;padding:9px 16px;border-radius:20px;cursor:pointer;white-space:nowrap;" style-hover="border-color:var(--mr-navy);">Open everything</div>
@@ -4127,7 +4197,7 @@
   </sc-if>
 
   <sc-if value="{{ vRecruit }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Recruitment</h1>
@@ -4402,7 +4472,7 @@
   </sc-if>
 
   <sc-if value="{{ vCandEdit }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:880px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:880px;margin:0 auto;padding:34px 26px 90px;">
     <div onClick="{{ goRecruit }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to recruitment</div>
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 22px;">{{ nbTitle }}</h1>
     <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:24px;display:flex;flex-direction:column;gap:16px;">
@@ -4576,7 +4646,7 @@
   </sc-if>
 
   <sc-if value="{{ vMyAsks }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:900px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:900px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">Ask People &amp; Organisation</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 26px;line-height:1.6;">{{ myAsksSub }}</p>
 
@@ -4689,8 +4759,8 @@
   </sc-if>
 
   <sc-if value="{{ vPoQueue }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
-    <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 5px;">Requests from the team</h1>
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+    <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 5px;">Staff requests</h1>
     <p style="font-size:14.5px;color:#5C6B80;margin:0 0 24px;">{{ poQueueSub }}</p>
     <div style="display:flex;flex-direction:column;gap:15px;">
       <sc-for list="{{ poQueue }}" as="a" hint-placeholder-count="2">
@@ -4735,7 +4805,7 @@
   </sc-if>
 
   <sc-if value="{{ vMyCases }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:960px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:960px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">From People &amp; Organisation</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 24px;line-height:1.6;">{{ myCasesSub }}</p>
     <div style="display:flex;flex-direction:column;gap:16px;">
@@ -4831,7 +4901,7 @@
   </sc-if>
 
   <sc-if value="{{ vCaseAdmin }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1080px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1080px;margin:0 auto;padding:34px 26px 90px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Notices &amp; investigations</h1>
@@ -4945,7 +5015,7 @@
   </sc-if>
 
   <sc-if value="{{ vCaseEdit }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:820px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:820px;margin:0 auto;padding:34px 26px 90px;">
     <div onClick="{{ goCaseAdmin }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back</div>
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 22px;">{{ cbTitle }}</h1>
     <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:24px;display:flex;flex-direction:column;gap:16px;">
@@ -4992,7 +5062,7 @@
   </sc-if>
 
   <sc-if value="{{ vEvents }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">Events &amp; activities</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 20px;line-height:1.6;">{{ eventsSub }}</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;">
@@ -5027,7 +5097,7 @@
   </sc-if>
 
   <sc-if value="{{ vEventCheck }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:820px;margin:0 auto;padding:26px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:820px;margin:0 auto;padding:26px 26px 90px;">
     <div onClick="{{ goEvents }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← All events</div>
     <sc-if value="{{ hasEvent }}" hint-placeholder-val="{{ false }}">
     <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);overflow:hidden;animation:hbRise 0.45s ease both;">
@@ -5108,7 +5178,7 @@
   </sc-if>
 
   <sc-if value="{{ vEventAdmin }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Events &amp; attendance</h1>
@@ -5182,7 +5252,7 @@
   </sc-if>
 
   <sc-if value="{{ vEventEdit }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:900px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:900px;margin:0 auto;padding:34px 26px 90px;">
     <div onClick="{{ goEventAdmin }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to events</div>
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 22px;">{{ ebTitle }}</h1>
     <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:24px;display:flex;flex-direction:column;gap:16px;">
@@ -5316,7 +5386,7 @@
   </sc-if>
 
   <sc-if value="{{ vBenefits }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">Your benefits</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 22px;line-height:1.6;">{{ benSub }}</p>
     <div style="display:flex;gap:10px;background:#fff;border:1px solid #DCE2EA;border-radius:34px;padding:6px 8px 6px 18px;align-items:center;max-width:600px;margin-bottom:24px;">
@@ -5359,7 +5429,7 @@
   </sc-if>
 
   <sc-if value="{{ vBenefit }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:940px;margin:0 auto;padding:26px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:26px 26px 90px;">
     <div onClick="{{ goBenefits }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← All benefits</div>
     <sc-if value="{{ hasBenefit }}" hint-placeholder-val="{{ false }}">
       <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);overflow:hidden;animation:hbRise 0.45s ease both;">
@@ -5415,7 +5485,10 @@
             </sc-for>
           </div>
           <sc-if value="{{ bn.hasHtml }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:26px;">{{ bn.htmlBlock }}</div>
+            <div style="margin-top:26px;">
+              <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><div onClick="{{ bn.fullScreen }}" style="border:1px solid #DCE2EA;background:#fff;font-weight:600;font-size:13.5px;padding:9px 18px;border-radius:20px;cursor:pointer;" style-hover="border-color:var(--mr-teal);color:var(--mr-teal);">&#x26F6; Open full screen</div></div>
+              {{ bn.htmlBlock }}
+            </div>
           </sc-if>
           <sc-if value="{{ bn.hasHow }}" hint-placeholder-val="{{ false }}">
             <div style="background:#FDF6EA;border:1px solid #EFD9AE;border-radius:14px;padding:20px 22px;margin-top:26px;">
@@ -5438,7 +5511,7 @@
   </sc-if>
 
   <sc-if value="{{ vBenefitAdmin }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1080px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1080px;margin:0 auto;padding:34px 26px 90px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Benefits</h1>
@@ -5491,7 +5564,7 @@
   </sc-if>
 
   <sc-if value="{{ vBenefitEdit }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:940px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:940px;margin:0 auto;padding:34px 26px 90px;">
     <div onClick="{{ goBenefitAdmin }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to benefits</div>
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 22px;">{{ bbTitle }}</h1>
     <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:24px;display:flex;flex-direction:column;gap:16px;">
@@ -5614,7 +5687,7 @@
   </sc-if>
 
   <sc-if value="{{ vChat }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1240px;margin:0 auto;padding:26px 26px 60px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1240px;margin:0 auto;padding:26px 26px 60px;">
     <div style="display:flex;gap:18px;align-items:stretch;flex-wrap:wrap;">
       <div style="flex:1 1 320px;min-width:0;max-width:380px;background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:14px;display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;padding:4px 4px 0;">
@@ -5718,7 +5791,7 @@
   </sc-if>
 
   <sc-if value="{{ vKnow }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">Knowledge hub</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 22px;line-height:1.6;">{{ knowSub }}</p>
     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:22px;">
@@ -5755,7 +5828,7 @@
   </sc-if>
 
   <sc-if value="{{ vKnowItem }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1020px;margin:0 auto;padding:26px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1020px;margin:0 auto;padding:26px 26px 90px;">
     <div onClick="{{ goKnow }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Knowledge hub</div>
     <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);overflow:hidden;animation:hbRise 0.45s ease both;">
       <div style="{{ ki.headStyle }}">
@@ -5967,7 +6040,7 @@
   </sc-if>
 
   <sc-if value="{{ vExams }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1080px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1080px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">Assessments</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 24px;line-height:1.6;">{{ examsSub }}</p>
     <div style="display:flex;flex-direction:column;gap:13px;">
@@ -5998,7 +6071,7 @@
   </sc-if>
 
   <sc-if value="{{ vExamRun }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:900px;margin:0 auto;padding:26px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:900px;margin:0 auto;padding:26px 26px 90px;">
     <div style="background:var(--mr-navy);color:#fff;border-radius:var(--mr-r-lg) var(--mr-r-lg) 0 0;padding:20px 26px;position:sticky;top:0;z-index:30;">
       <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
         <div style="flex:1 1 200px;min-width:0;">
@@ -6060,7 +6133,7 @@
   </sc-if>
 
   <sc-if value="{{ vExamDone }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:760px;margin:0 auto;padding:44px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:760px;margin:0 auto;padding:44px 26px 90px;">
     <div style="background:#fff;border:2px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);overflow:hidden;animation:hbPop 0.45s cubic-bezier(0.34,1.4,0.64,1) both;">
       <div style="{{ res.headStyle }}">
         <div style="font-family:var(--mr-comic);font-size:44px;line-height:1;letter-spacing:0.02em;">{{ res.headline }}</div>
@@ -6106,7 +6179,7 @@
   </sc-if>
 
   <sc-if value="{{ vRecog }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">Recognition wall</h1>
     <p style="font-size:15px;color:#5C6B80;margin:0 0 26px;line-height:1.6;">{{ recogSub }}</p>
 
@@ -6205,6 +6278,10 @@
             </div>
             <span style="flex:none;font-size:22px;">{{ r.gift }}</span>
           </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;">
+            <span style="font-size:12.5px;font-weight:700;color:#3A4453;">{{ r.fromTo }}</span>
+            <span style="{{ r.tagStyle }}">{{ r.tag }}</span>
+          </div>
           <p style="font-size:14.5px;line-height:1.6;color:#3A4453;margin:12px 0 0;text-wrap:pretty;">{{ r.text }}</p>
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:13px;">
             <sc-for list="{{ r.gifts }}" as="g" hint-placeholder-count="4">
@@ -6221,7 +6298,7 @@
   </sc-if>
 
   <sc-if value="{{ vKnowAdmin }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Knowledge hub &amp; training</h1>
@@ -6352,7 +6429,7 @@
   </sc-if>
 
   <sc-if value="{{ vKnowEdit }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:960px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:960px;margin:0 auto;padding:34px 26px 90px;">
     <div onClick="{{ goKnowAdmin }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to the knowledge hub</div>
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 22px;">{{ kbTitle }}</h1>
     <div style="display:flex;flex-direction:column;gap:18px;">
@@ -6607,7 +6684,7 @@
   </sc-if>
 
   <sc-if value="{{ vExamAdmin }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px;">
       <div>
         <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">Exams &amp; assessments</h1>
@@ -6647,7 +6724,7 @@
   </sc-if>
 
   <sc-if value="{{ vExamBuild }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1000px;margin:0 auto;padding:34px 26px 90px;">
     <div onClick="{{ goExamAdmin }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to exams</div>
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 22px;">{{ xbTitle }}</h1>
     <div style="display:flex;flex-direction:column;gap:18px;">
@@ -6802,7 +6879,7 @@
   </sc-if>
 
   <sc-if value="{{ vExamResults }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
     <div onClick="{{ goExamAdmin }}" style="font-size:13.5px;font-weight:600;color:var(--mr-teal);cursor:pointer;margin-bottom:16px;">← Back to exams</div>
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 5px;">{{ xr.title }}</h1>
     <p style="font-size:14.5px;color:#5C6B80;margin:0 0 22px;">{{ xr.sub }}</p>
@@ -6893,9 +6970,16 @@
   </sc-if>
 
   <sc-if value="{{ vRecogAdmin }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 5px;">Recognition console</h1>
     <p style="font-size:14.5px;color:#5C6B80;margin:0 0 24px;">Name the employee of the month or quarter, announce a promotion, or give a team shout-out. Everything published here appears on the home page and notifies everyone.</p>
+    <sc-if value="{{ recogLimited }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:#FFF4E4;border:1px solid #EFD9AE;border-radius:14px;padding:14px 18px;margin:-6px 0 22px;">
+        <span style="flex:none;width:30px;height:30px;border-radius:50%;background:#C96A0F;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;">!</span>
+        <span style="flex:1 1 260px;min-width:0;font-size:14px;line-height:1.55;color:#5A3A0A;">{{ recogLimitText }}</span>
+        <div onClick="{{ recogOpenAll }}" style="flex:none;background:#C96A0F;color:#fff;font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:20px;cursor:pointer;" style-hover="filter:brightness(1.08);">Open to everyone</div>
+      </div>
+    </sc-if>
     <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;">
       <div style="flex:1 1 340px;background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:24px;display:flex;flex-direction:column;gap:15px;">
         <div style="font-family:var(--mr-head);font-weight:700;font-size:19px;letter-spacing:-0.02em;">Publish recognition</div>
@@ -7085,7 +7169,7 @@
   </sc-if>
 
   <sc-if value="{{ candNudge }}" hint-placeholder-val="{{ false }}">
-  <div data-mr="pad" style="max-width:760px;margin:0 auto;padding:34px 26px 0;">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:760px;margin:0 auto;padding:34px 26px 0;">
     <div style="background:#FFFDF6;border:2px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:5px 5px 0 var(--mr-ink);padding:22px 24px;">
       <div style="font-family:var(--mr-comic);font-size:26px;color:var(--mr-teal);">Welcome, {{ candFirstName }}</div>
       <p style="font-size:14.5px;line-height:1.6;color:#3A4453;margin:8px 0 0;">You have a candidate account. Your assessments and any forms People &amp; Organisation asks you to fill in are in the menu — nothing else in the hub is shared with you.</p>
@@ -7294,8 +7378,51 @@ function sealAccount(a) {
 }
 const LS_DROPPABLE = ["mrhub-notes-v1", "mrhub-chat-v1", "mrhub-resp-v1", "mrhub-attempts-v1", "mrhub-checkin-v1", "mrhub-know-v1", "mrhub-candidates-v1",
   "mrhub-recog-v1", "mrhub-submissions-v1", "mrhub-certs-v1", "mrhub-events-v1", "mrhub-compreports-v1", "mrhub-compdecls-v1", "mrhub-inbox-v1", "mrhub-userdata-v1"];
+let _lbDb = null;
+const _lbMem = new Map(), _lbIds = new Map();
+function lbDb() {
+  if (_lbDb) return _lbDb;
+  _lbDb = new Promise(res => {
+    try { const r = indexedDB.open("mrhub-blobs", 1); r.onupgradeneeded = () => r.result.createObjectStore("b"); r.onsuccess = () => res(r.result); r.onerror = () => res(null); }
+    catch (e) { res(null); }
+  });
+  return _lbDb;
+}
+function lbPut(id, v) { lbDb().then(d => { if (!d) return; try { d.transaction("b", "readwrite").objectStore("b").put(v, id); } catch (e) {} }); }
+function lbGet(id) {
+  if (_lbMem.has(id)) return Promise.resolve(_lbMem.get(id));
+  return lbDb().then(d => d ? new Promise(res => { try { const q = d.transaction("b").objectStore("b").get(id); q.onsuccess = () => res(q.result || null); q.onerror = () => res(null); } catch (e) { res(null); } }) : null);
+}
+function lbId(str) {
+  if (_lbIds.has(str)) return _lbIds.get(str);
+  let h1 = 0x811c9dc5, h2 = 0x2c1b3c6d;
+  for (let i = 0; i < str.length; i += 7) { const c = str.charCodeAt(i); h1 = Math.imul(h1 ^ c, 16777619); h2 = Math.imul(h2 ^ c, 2246822519); }
+  const id = "L" + (h1 >>> 0).toString(36) + (h2 >>> 0).toString(36) + str.length.toString(36);
+  _lbIds.set(str, id); _lbMem.set(id, str);
+  return id;
+}
+function lbPack(v, puts) {
+  if (typeof v === "string") { if (v.length > 6000 && v.slice(0, 5) === "data:") { const id = lbId(v); puts.set(id, v); return "mrblob:" + id; } return v; }
+  if (Array.isArray(v)) return v.map(x => lbPack(x, puts));
+  if (v && typeof v === "object") { const o = {}; for (const k in v) if (v[k] !== undefined) o[k] = lbPack(v[k], puts); return o; }
+  return v;
+}
+function lbRefs(v, out) { const j = typeof v === "string" ? v : JSON.stringify(v || null); const re = /"mrblob:([A-Za-z0-9]+)"/g; let m; while ((m = re.exec(j))) out.add(m[1]); return out; }
+function lbInject(v) {
+  if (typeof v === "string") return v.slice(0, 7) === "mrblob:" && _lbMem.has(v.slice(7)) ? _lbMem.get(v.slice(7)) : v;
+  if (Array.isArray(v)) return v.map(lbInject);
+  if (v && typeof v === "object") { const o = {}; for (const k in v) o[k] = lbInject(v[k]); return o; }
+  return v;
+}
+const _lbDone = new Set();
 function lsSet(key, value, cloudLive) {
-  const raw = typeof value === "string" ? value : JSON.stringify(value);
+  let raw;
+  if (typeof value === "string") raw = value;
+  else {
+    const puts = new Map();
+    raw = JSON.stringify(lbPack(value, puts));
+    puts.forEach((v, id) => { if (!_lbDone.has(id)) { _lbDone.add(id); lbPut(id, v); } });
+  }
   try { localStorage.setItem(key, raw); return true; } catch (e) {}
   if (!cloudLive) return false;
   const sizes = LS_DROPPABLE.filter(k => k !== key).map(k => [k, (localStorage.getItem(k) || "").length]).sort((a, b) => b[1] - a[1]);
@@ -7659,7 +7786,7 @@ const NAV_GROUPS = [
   ["Learning", ["know", "knowadmin", "exams", "examadmin"]],
   ["Events", ["events", "eventadmin"]],
   ["Recognition", ["recog", "recogadmin"]],
-  ["Messages", ["inbox", "chat"]],
+  ["Messages", ["chat", "inbox"]],
   ["Investigations", ["mycases", "caseadmin"]],
   ["Recruitment", ["recruit"]],
   ["Compliance", ["comply", "compadmin"]],
@@ -7668,7 +7795,7 @@ const NAV_GROUPS = [
 const NAV_LABELS = {
   home: "Home", dash: "Dashboard", all: "All policies (staff)", library: "Library (admin)", me: "My policies", acks: "Acknowledgements",
   mgmt: "Management review / Policy voting", benefits: "Benefits (staff)", benefitadmin: "Benefits console", forms: "Forms & surveys",
-  services: "Suggestion box / Requests", myasks: "Requests to P&O", poqueue: "Team requests", know: "Knowledge hub", knowadmin: "Knowledge hub console / Teaching",
+  services: "Suggestion box / Requests", myasks: "Requests to P&O", poqueue: "Staff requests", know: "Knowledge hub", knowadmin: "Knowledge hub console / Teaching",
   exams: "My assessments", examadmin: "Exams console", events: "Events (staff)", eventadmin: "Events console", recog: "Recognition wall",
   recogadmin: "Recognition console", inbox: "Questions / Messages", chat: "Chat", mycases: "My notices", caseadmin: "Investigations console",
   recruit: "Recruitment", comply: "My compliance", compadmin: "Compliance console", ann: "Announcements", accounts: "Accounts", marketing: "Marketing mode", settings: "Settings"
@@ -7910,6 +8037,7 @@ class Component extends DCLogic {
     this.setState(patch);
     if (patch.me) setTimeout(() => this.recheckRecurring(), 80);
     if (patch.me) this.startAmbient();
+    this.hydrateBlobs();
     this.startCloud();
     setTimeout(() => this.installFonts(), 60);
     this.touchPresence();
@@ -7986,8 +8114,9 @@ class Component extends DCLogic {
       if (e.key === K.theme) { try { this.applyTheme(JSON.parse(e.newValue)); } catch (er) {} }
       if (!field) return;
       try {
-        const value = JSON.parse(e.newValue);
+        const value = lbInject(JSON.parse(e.newValue));
         const patch = {}; patch[field] = value;
+        if (lbRefs(value, new Set()).size) setTimeout(() => this.hydrateBlobs([field]), 0);
         if (field === "accounts" && this.state.me) {
           const fresh = value.filter(a => a.email === this.state.me.email)[0];
           if (fresh) patch.me = fresh;
@@ -8139,6 +8268,15 @@ class Component extends DCLogic {
     if (due.length) this.notify(due);
   }
 
+  hydrateBlobs(fields) {
+    const list = fields || Object.keys(CLOUD_FIELDS).map(k => CLOUD_FIELDS[k]);
+    const need = new Set(), hit = [];
+    list.forEach(f => { const before = need.size; lbRefs(this.state[f], need); if (need.size > before || lbRefs(this.state[f], new Set()).size) hit.push(f); });
+    if (!need.size) return;
+    Promise.all(Array.from(need).map(id => lbGet(id).then(v => { if (v) _lbMem.set(id, v); }))).then(() => {
+      this.setState(s => { const p = {}; hit.forEach(f => { p[f] = lbInject(s[f]); }); return p; });
+    });
+  }
   cloudKey(storageKey) {
     const map = {};
     map[K.video] = "video";
@@ -9150,12 +9288,24 @@ class Component extends DCLogic {
   }
   benHtmlBlock(html, key) {
     if (!String(html || "").trim()) return null;
+    const fit = e => { try { const f = e.target, d = f.contentDocument; const h = Math.max(d.documentElement.scrollHeight, d.body ? d.body.scrollHeight : 0); f.style.height = Math.max(520, h + 8) + "px"; } catch (er) {} };
     return React.createElement("iframe", {
-      key: key,
-      srcDoc: "<!DOCTYPE html><html><head><meta charset='utf-8'><style>body{margin:0;padding:18px;font-family:'Work Sans',system-ui,sans-serif;color:#14121C;line-height:1.65;font-size:15px;}img{max-width:100%;height:auto;}table{border-collapse:collapse;width:100%;}td,th{border:1px solid #DCE2EA;padding:8px 10px;text-align:left;}h1,h2,h3{font-family:'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:-0.02em;}</style></head><body>" + html + "</body></html>",
-      title: "Benefit detail",
-      style: { width: "100%", minHeight: "420px", border: "1px solid #E4EAF1", borderRadius: "13px", background: "#fff", display: "block" }
+      key: key, srcDoc: this.benDoc(html), title: "Benefit detail", onLoad: fit,
+      style: { width: "100%", height: "70vh", minHeight: "520px", border: "1px solid #E4EAF1", borderRadius: "13px", background: "#fff", display: "block" }
     });
+  }
+  benDoc(html) {
+    const full = /<html[\s>]|<body[\s>]/i.test(html);
+    if (full) return /<meta[^>]+viewport/i.test(html) ? html : html.replace(/<head([^>]*)>/i, "<head$1><meta name='viewport' content='width=device-width,initial-scale=1'>");
+    return "<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><style>body{margin:0;padding:22px 26px;font-family:'Work Sans',system-ui,sans-serif;color:#14121C;line-height:1.65;font-size:15.5px;}img{max-width:100%;height:auto;}table{border-collapse:collapse;width:100%;}td,th{border:1px solid #DCE2EA;padding:8px 10px;text-align:left;}h1,h2,h3{font-family:'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:-0.02em;}</style></head><body>" + html + "</body></html>";
+  }
+  benFull(html, title) {
+    try {
+      const url = URL.createObjectURL(new Blob([this.benDoc(html)], { type: "text/html" }));
+      const w = window.open(url, "_blank");
+      if (!w) this.flash("Pop-up blocked", "Allow pop-ups for this site to open the benefit full screen.", "no");
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch (e) {}
   }
   commitBenefit(status) {
     const bb = this.state.bb;
@@ -9247,6 +9397,7 @@ class Component extends DCLogic {
         hasPoints: (cur.points || []).filter(p => String(p).trim()).length > 0,
         hasHtml: !!String(cur.html || "").trim(),
         htmlBlock: this.benHtmlBlock(cur.html, "ben-" + cur.id),
+        fullScreen: () => this.benFull(cur.html, cur.title),
         sections: (cur.sections || []).map((s, i) => ({
           num: String(i + 1).padStart(2, "0"), heading: s.heading || "", body: s.body || "",
           items: (s.items || []).filter(x => String(x).trim()),
@@ -10792,7 +10943,8 @@ class Component extends DCLogic {
   chatPack() {
     const st = this.state, me = st.me || {};
     const threads = this.threadsFor(me.email).slice().sort((a, b) => (b.touched || 0) - (a.touched || 0));
-    const cur = threads.filter(t => t.id === st.chatOpen)[0] || threads[0] || null;
+    const cur = threads.filter(t => t.id === st.chatOpen)[0] || threads.filter(t => t.kind !== "channel" && (t.msgs || []).length)[0] || threads[0] || null;
+    if (st.chatWait && threads.some(t => t.id === st.chatWait)) setTimeout(() => { if (this.state.chatWait) this.openThread(this.state.chatWait); this.setState({ chatWait: "" }); }, 0);
     const clock = ms => {
       const d = new Date(ms), n = new Date();
       const same = d.toDateString() === n.toDateString();
@@ -12758,7 +12910,10 @@ class Component extends DCLogic {
       return {
         id: r.id, kindLabel: m[1], icon: m[2], toName: r.toName, period: r.period || "",
         text: r.text || r.title || "", gift: r.gift || m[2], initials: initials(r.toName),
-        sub: [r.toDept, r.title, r.kind === "kudos" ? "from " + r.byName : "named by " + r.byName].filter(Boolean).join(" · "),
+        sub: [r.toDept, r.title, r.kind === "kudos" ? "from " + (r.by === me.email ? "you" : r.byName) : "named by " + r.byName].filter(Boolean).join(" · "),
+        fromTo: (r.by === me.email ? "You" : r.byName) + "  →  " + (r.to === me.email ? "you" : r.toName),
+        tag: r.by === me.email ? "Sent by you" : r.to === me.email ? "For you" : "",
+        tagStyle: r.by === me.email ? this.pill("#EAF4F9", "#12607F") : r.to === me.email ? this.pill("#FFF4E4", "#9A5A0B") : "display:none;",
         moveLabel: r.newRole ? ((r.fromRole ? r.fromRole + "  →  " : "Promoted to ") + r.newRole) : "Promotion confirmed",
         hasPhoto: !!r.photo, photo: r.photo || "",
         photoStyle: "height:196px;background:#EDF1F6 center/cover no-repeat" + (r.photo ? " url('" + r.photo + "')" : "") + ";border-bottom:2px solid var(--mr-ink);",
@@ -12862,6 +13017,7 @@ class Component extends DCLogic {
       route: "recog", read: false, date: today()
     })));
     this.setState({ rg: { kind: g.kind, to: "", period: g.period, title: "", text: "", photo: "", role: "", from: "" } });
+    if (this.warnAudience("recog", kindLabel + " for " + rec.toName)) return;
     this.flash("Published to the hub", kindLabel + " for " + rec.toName + " is now on everyone's home page.");
   }
 
@@ -12880,6 +13036,7 @@ class Component extends DCLogic {
     this.notify([{ id: "n" + Date.now(), to: st.kudosTo, kind: "recog", title: "You received a compliment",
       text: me.name + " sent you " + st.kudosGift + " — " + rec.text.slice(0, 90), route: "recog", read: false, date: today() }]);
     this.setState({ kudosTo: "", kudosText: "" });
+    if (who && !this.routeAllowed("recog", who.email) && this.warnAudience("recog", "Your compliment")) return;
     this.flash("Sent " + rec.gift, who ? who.name + " has been told." : "Delivered.");
   }
 
@@ -12908,7 +13065,7 @@ class Component extends DCLogic {
     if (!items || !items.length) return;
     const stamp = Date.now();
     const iso = new Date().toISOString();
-    const add = items.filter(n => n && n.to).map((n, i) => Object.assign({}, n, { id: "n" + stamp + "-" + i + "-" + Math.random().toString(36).slice(2, 7), date: today(), at: iso, read: false }));
+    const add = items.filter(n => n && n.to && (!n.route || this.routeAllowed(n.route, n.to))).map((n, i) => Object.assign({}, n, { id: "n" + stamp + "-" + i + "-" + Math.random().toString(36).slice(2, 7), date: today(), at: iso, read: false }));
     const now = Date.now(), keep = n => { const t = Date.parse(n.at || "") || now; return now - t < (n.read ? 30 : 90) * 864e5; };
     let list = this.state.notes.filter(keep);
     const key = n => n.to + "|" + n.threadId;
@@ -12932,8 +13089,12 @@ class Component extends DCLogic {
     const st = this.state;
     if (!n.read) this.save(K.notes, st.notes.map(x => x.id === n.id ? Object.assign({}, x, { read: true }) : x), "notes");
     this.setState({ notesOpen: false, toast: null });
-    if (n.kind === "chat" && n.threadId && (st.chat || []).some(t => t.id === n.threadId)) return this.openThread(n.threadId);
+    if (n.kind === "chat" || n.threadId) {
+      if (n.threadId && (st.chat || []).some(t => t.id === n.threadId)) return this.openThread(n.threadId);
+      return this.setState({ route: "chat", chatOpen: n.threadId || st.chatOpen, chatWait: n.threadId || "", menuOpen: null });
+    }
     if (n.policyId) return this.openPolicy(n.policyId);
+    if (n.formId && (n.stats || /^New response/i.test(n.title || "")) && this.can("forms")) return this.openStats(n.formId);
     if (n.formId) return this.openFill(n.formId);
     if (n.route) return this.go(n.route);
     if (n.ref) return this.go("inbox");
@@ -13085,7 +13246,7 @@ class Component extends DCLogic {
   secMode(k) {
     const s = (this.T().sections || {})[k];
     const m = s && s.mode;
-    return m === "off" || m === "test" ? m : "on";
+    return m === "off" || m === "test" || m === "hide" ? m : "on";
   }
   secWho(k) {
     const s = (this.T().sections || {})[k];
@@ -13093,7 +13254,7 @@ class Component extends DCLogic {
   }
   sectionOn(k, email) {
     const mode = this.secMode(k);
-    if (mode === "on") return true;
+    if (mode === "on" || mode === "hide") return true;
     if (mode === "off") return false;
     const who = this.secWho(k);
     const e = email || ((this.state.me || {}).email || "");
@@ -13142,22 +13303,55 @@ class Component extends DCLogic {
   navMode(key) {
     const n = (this.T().navSw || {})[key];
     const m = n && n.mode;
-    return m === "off" || m === "test" ? m : "on";
+    return m === "off" || m === "test" || m === "hide" ? m : "on";
   }
-  navOn(key) {
+  navOn(key, email) {
     const mode = this.navMode(key);
-    if (mode === "on") return true;
+    if (mode === "on" || mode === "hide") return true;
     if (mode === "off") return false;
     const who = ((this.T().navSw || {})[key] || {}).who || [];
-    return who.indexOf((this.state.me || {}).email || "") > -1;
+    return who.indexOf(email || (this.state.me || {}).email || "") > -1;
   }
-  routeAllowed(route) {
+  routeAllowed(route, email) {
     if (NAV_LOCKED.indexOf(route) > -1) return true;
     const k = SEC_OF_ROUTE[route];
-    if (k && !this.sectionOn(k)) return false;
+    if (k && !this.sectionOn(k, email)) return false;
     const g = NAV_GROUPS.filter(x => x[1].indexOf(route) > -1)[0];
-    if (g && !this.navOn("g:" + g[0])) return false;
-    if (NAV_LABELS[route] && !this.navOn(route)) return false;
+    if (g && !this.navOn("g:" + g[0], email)) return false;
+    if (NAV_LABELS[route] && !this.navOn(route, email)) return false;
+    return true;
+  }
+  inMenu(route, email) {
+    if (!this.routeAllowed(route, email)) return false;
+    if (NAV_LOCKED.indexOf(route) > -1) return true;
+    const k = SEC_OF_ROUTE[route];
+    if (k && this.secMode(k) === "hide") return false;
+    const g = NAV_GROUPS.filter(x => x[1].indexOf(route) > -1)[0];
+    if (g && this.navMode("g:" + g[0]) === "hide") return false;
+    if (NAV_LABELS[route] && this.navMode(route) === "hide") return false;
+    return true;
+  }
+  routeGap(route) {
+    const k = SEC_OF_ROUTE[route];
+    const g = NAV_GROUPS.filter(x => x[1].indexOf(route) > -1)[0];
+    const gaps = [];
+    if (k && this.secMode(k) !== "on" && this.secMode(k) !== "hide") gaps.push({ kind: "sec", key: k, mode: this.secMode(k), label: (SECTIONS.filter(x => x[0] === k)[0] || [k, k])[1] + " section" });
+    if (g && this.navMode("g:" + g[0]) !== "on" && this.navMode("g:" + g[0]) !== "hide") gaps.push({ kind: "nav", key: "g:" + g[0], mode: this.navMode("g:" + g[0]), label: "the " + g[0] + " menu" });
+    if (NAV_LABELS[route] && this.navMode(route) !== "on" && this.navMode(route) !== "hide") gaps.push({ kind: "nav", key: route, mode: this.navMode(route), label: "the " + NAV_LABELS[route] + " item" });
+    return gaps;
+  }
+  warnAudience(route, what) {
+    const gaps = this.routeGap(route);
+    if (!gaps.length) return false;
+    const reach = this.state.accounts.filter(a => a.status !== "suspended" && this.routeAllowed(route, a.email)).length;
+    const list = gaps.map(x => x.label + (x.mode === "off" ? " is disabled" : " is in testing")).join(", ");
+    this.ask(what + " is only visible to " + reach + (reach === 1 ? " person" : " people"),
+      "Because " + list + ", everyone else cannot see it on their home page or open the notification. Open it to everyone now?",
+      "Open to everyone", "Keep it limited",
+      () => {
+        gaps.forEach(x => { if (x.kind === "sec") this.setSecMode(x.key, "on"); else this.setNavMode(x.key, "on"); });
+        setTimeout(() => this.flash("Open to everyone", what + " now shows for every employee. Their notifications open it too."), 50);
+      }, () => {});
     return true;
   }
   setNavMode(key, mode) {
@@ -13165,10 +13359,11 @@ class Component extends DCLogic {
     ns[key] = Object.assign({ mode: "on", who: [] }, ns[key] || {}, { mode: mode });
     this.setTheme("navSw", ns);
     const label = key.indexOf("g:") === 0 ? "The " + key.slice(2) + " menu" : (NAV_LABELS[key] || key);
-    this.flash(mode === "on" ? label + " is open to everyone" : mode === "off" ? label + " is hidden" : label + " is in testing",
+    this.flash(mode === "on" ? label + " is open to everyone" : mode === "hide" ? label + " is hidden from the menu" : mode === "off" ? label + " is disabled" : label + " is in testing",
       mode === "on" ? "It shows in the navigation bar for everyone who has access."
-        : mode === "off" ? "It is gone from the navigation bar and cannot be opened. The menu closes up around it."
-        : "Only the people you tick can see it in the navigation bar.");
+        : mode === "hide" ? "It is out of the navigation bar, but it still works — home-page blocks, links and notifications still open it."
+        : mode === "off" ? "Completely off: gone from the menu and the home page, it cannot be opened, and no notifications are sent for it. Nothing is deleted."
+        : "Only the people you tick can see it and use it.");
   }
   toggleNavWho(key, email) {
     const ns = Object.assign({}, this.T().navSw || {});
@@ -13187,9 +13382,10 @@ class Component extends DCLogic {
     secs[k] = cur;
     this.setTheme("sections", secs);
     const label = (SECTIONS.filter(s => s[0] === k)[0] || [k, k])[1];
-    this.flash(mode === "on" ? label + " is open to everyone" : mode === "off" ? label + " is closed" : label + " is in testing",
+    this.flash(mode === "on" ? label + " is open to everyone" : mode === "hide" ? label + " is hidden from the menu" : mode === "off" ? label + " is disabled" : label + " is in testing",
       mode === "on" ? "It appears in the menu and works for every account that has the privilege."
-        : mode === "off" ? "It disappears from the menu for everyone. Nothing is deleted — turn it back on and it returns exactly as it was."
+        : mode === "hide" ? "It is out of the navigation bar, but still works — its home-page blocks, links and notifications still open it."
+        : mode === "off" ? "Completely off for everyone: no menu, no home-page block, cannot be opened, no notifications. Nothing is deleted — turn it back on and it returns exactly as it was."
         : "Only the people you tick below can see it. Everyone else will not know it exists.");
   }
   toggleSecWho(k, email) {
@@ -13296,7 +13492,7 @@ class Component extends DCLogic {
       return this.flash(label + " is not open yet",
         this.secMode(k) === "test"
           ? label + " is being tested by a small group. People & Organisation will open it to everyone shortly."
-          : label + " has been switched off for now.", "no");
+          : label + " is disabled for now.", "no");
     }
     const patch = Object.assign({ route: route, ackModal: false, notesOpen: false }, extra || {});
     this.setState(patch);
@@ -13644,13 +13840,13 @@ class Component extends DCLogic {
           .filter(n => n[0] === "dash" ? this.feat("dash") : this.can(n[3]));
     if (!staffMode && this.can("mgmt")) navDefs.push(["mgmt", "Management review", String(this.overdueVotes().length || "")]);
     if (this.isMgr()) navDefs.push(["mgmt", "Policy voting", String(this.myOpenVotes().length || "")]);
-    if (staffMode) navDefs.push(["inbox", "Messages", String(unreadThreads || "")]);
+    if (staffMode) navDefs.push(["inbox", "My questions", String(unreadThreads || "")]);
     if ((st.me || {}).role === "Candidate")
       this._candNav = [["exams", "My assessments", String(this.openExams().length || "")], ["forms", "My forms", ""]];
     navDefs.push(["chat", "Chat", String(this._chatUnread || "")]);
     if (!staffMode && this.can("recruit")) navDefs.push(["recruit", "Recruitment", ""]);
     if (staffMode) navDefs.push(["mycases", "Investigations", String(this._openCases || "")]);
-    if (staffMode && this._canAsk) navDefs.push(["myasks", "Requests", ""]);    if (!staffMode && this.can("recruit")) navDefs.push(["poqueue", "Team requests", String(this._openAsks || "")]);
+    if (staffMode && this._canAsk) navDefs.push(["myasks", "Requests", ""]);    if (!staffMode && ((st.me || {}).role === "P&O" || this.isSuper())) navDefs.push(["poqueue", "Staff requests", String(this._openAsks || "")]);
     if (!staffMode && this.can("cases")) navDefs.push(["caseadmin", "Investigations", ""]);
     if (staffMode) navDefs.push(["comply", "My compliance", String(this.compItemsFor(st.me).filter(i => !i.done).length || "")]);
     if (!staffMode && this.can("compliance")) navDefs.push(["compadmin", "Compliance console", ""]);
@@ -13670,7 +13866,7 @@ class Component extends DCLogic {
     if (this.isSuper() && !staffMode) navDefs.push(["marketing", "Marketing mode", ""], ["settings", "Settings", ""]);
     const navHidden = this.T().navHidden || [];
     const navLabels = this.T().navLabels || {};
-    const nav = navDefs.filter(n => navHidden.indexOf(n[0]) < 0 && this.routeAllowed(n[0])).map(n => {
+    const nav = navDefs.filter(n => navHidden.indexOf(n[0]) < 0 && this.inMenu(n[0])).map(n => {
       n = [n[0], navLabels[n[0]] || n[1], n[2]];
       const on = st.route === n[0] || (n[0] === "all" && st.route === "list");
       return {
@@ -14229,6 +14425,12 @@ class Component extends DCLogic {
       markAllRead: () => this.save(K.notes, st.notes.map(n => n.to === me.email ? Object.assign({}, n, { read: true }) : n), "notes"),
 
       vRecog: st.route === "recog", vRecogAdmin: st.route === "recogadmin",
+      recogLimited: st.route === "recogadmin" && this.routeGap("recog").length > 0,
+      recogLimitText: st.route === "recogadmin" && this.routeGap("recog").length
+        ? "Only " + st.accounts.filter(a => a.status !== "suspended" && this.routeAllowed("recog", a.email)).length + " people can see recognition right now (" +
+          this.routeGap("recog").map(x => x.label + (x.mode === "off" ? " is off" : " is in testing")).join(", ") + "). Everyone else will not see it on their home page or be able to open the notification."
+        : "",
+      recogOpenAll: () => { this.routeGap("recog").forEach(x => { if (x.kind === "sec") this.setSecMode(x.key, "on"); else this.setNavMode(x.key, "on"); }); },
       vCandExam: st.route === "candexam",
       cxName: (st.candSelf || {}).name || "",
       cxLogoSrc: this.logoPath(this.T().logoLogin, this.T().logoLoginData),
@@ -14296,6 +14498,7 @@ class Component extends DCLogic {
       _ask: (this._ask = this.asksPack()),
       vMyAsks: st.route === "myasks", vPoQueue: st.route === "poqueue",
       askKinds: this._ask.askKinds, askIsHire: this._ask.askIsHire, askIsReopen: this._ask.askIsReopen,
+      askIsText: !!this._ask.askIsText, askSubjectLabel: this._ask.askSubjectLabel || "", askWhyLabel: this._ask.askWhyLabel || "The detail",
       ask: this._ask.ask, askTargets: this._ask.askTargets, noAskTargets: this._ask.noAskTargets,
       myAsks: this._ask.myAsks, noMyAsks: this._ask.noMyAsks, myAsksSub: this._ask.myAsksSub,
       poQueue: this._ask.poQueue, noPoQueue: this._ask.noPoQueue, poQueueSub: this._ask.poQueueSub,
@@ -14318,7 +14521,7 @@ class Component extends DCLogic {
       benShowTiles: !!this._bp.benShowTiles, benCatTiles: this._bp.benCatTiles || [],
       benSub: this._bp.benSub || "", benListTitle: this._bp.benListTitle || "",
       benCards: this._bp.benCards || [], noBenCards: !!this._bp.noBenCards, benBack: this._bp.benBack || (() => {}),
-      hasBenefit: !!this._bp.hasBenefit, bn: this._bp.bn || { sections: [], points: [] },
+      hasBenefit: !!this._bp.hasBenefit, bn: this._bp.bn || { sections: [], points: [], fullScreen: () => {} },
       benAdminSub: this._bp.benAdminSub || "", benRows: this._bp.benRows || [], noBenRows: !!this._bp.noBenRows,
       newBenefit: this._bp.newBenefit || (() => {}), benCatOpts: this._bp.benCatOpts || [],
       newBenCat: this._bp.newBenCat || "", onNewBenCat: this._bp.onNewBenCat || (() => {}),
@@ -14557,7 +14760,7 @@ class Component extends DCLogic {
           send: () => { this.ensureWish(a); setTimeout(() => this.addWish(rid, this.state.wishDraft), 40); }
         };
       }),
-      hasBirthdays: this.birthdaysToday().length > 0,
+      hasBirthdays: this.birthdaysToday().length > 0 && this.routeAllowed("recog"),
       wishDraft: st.wishDraft,
       onWishDraft: e => this.setState({ wishDraft: e.target.value }),
 
@@ -14591,7 +14794,7 @@ class Component extends DCLogic {
       tkLater: () => this.setState({ tkDismissed: (st.tkDismissed || []).concat([this._tk]) }),
 
       /* ---- docked messenger ---- */
-      showDock: this.fnOn("dock") && st.screen === "app" && st.route !== "examrun" && st.route !== "candexam" && !st.interviewMode,
+      showDock: this.fnOn("dock") && this.routeAllowed("chat") && st.screen === "app" && st.route !== "examrun" && st.route !== "candexam" && !st.interviewMode,
       dockListOpen: !!st.dockListOpen,
       toggleDockList: () => this.setState({ dockListOpen: !st.dockListOpen }),
       goChatFull: () => this.setState({ dockListOpen: false, route: "chat" }),
@@ -14728,7 +14931,7 @@ class Component extends DCLogic {
       updateReady: !!st.updateReady,
       applyUpdate: () => {
         if (this.safeToReload()) return this.applyUpdate();
-        this.ask("Refresh now?", "You have something open that is not saved yet. Save it first, or refresh anyway and lose it.", "Not yet", "Refresh anyway", () => this.closeModal(), () => this.applyUpdate());
+        this.ask("Refresh now?", "You have something open that is not saved yet. Save it first, or refresh anyway and lose it.", "Refresh anyway", "Not yet", () => this.applyUpdate(), () => {});
       },
       dismissUpdate: () => this.setState({ updateReady: false }),
       hasToast: !!st.toast,
@@ -14749,7 +14952,7 @@ class Component extends DCLogic {
       tabBar: (() => {
         const ICONS = { home: "⌂", dash: "◫", list: "☰", all: "☰", library: "☰", me: "★", acks: "✓", forms: "▤", services: "✦", inbox: "✉", mgmt: "⚖", comply: "◎", compadmin: "◎", ann: "◈", accounts: "◉", marketing: "✎", settings: "⚙", profile: "☺" };
         const SHORT = { "Forms & surveys": "Forms", "Acknowledgements": "Confirm", "Management review": "Review", "Announcements": "News", "Requests & suggestions": "Requests", "All policies": "Policies", "My policies": "Mine", "Policy voting": "Voting", "Dashboard": "Home", "Questions": "Ask" };
-        const picked = (() => { const ok = navDefs.filter(n => this.routeAllowed(n[0])); const c = ok.filter(n => n[0] === "comply")[0]; const base = ok.filter(n => n[0] !== "comply" && n[0] !== "services").slice(0, c ? 3 : 4); return c ? base.concat([c]) : base; })();
+        const picked = (() => { const ok = navDefs.filter(n => this.inMenu(n[0])); const c = ok.filter(n => n[0] === "comply")[0]; const base = ok.filter(n => n[0] !== "comply" && n[0] !== "services").slice(0, c ? 3 : 4); return c ? base.concat([c]) : base; })();
         const rows = picked.concat([["profile", "You", ""]]);
         return rows.map(n => {
           const key = n[0] === "all" ? "list" : n[0];
@@ -15404,7 +15607,7 @@ class Component extends DCLogic {
     this.saveResp(st.responses.concat([rec]));
     if (f.handler && !f.anon) {
       const staff = st.accounts.filter(a => a.role === f.handler).map(a => a.email);
-      this.notify(staff.map(e => ({ to: e, kind: "reply", title: "New response: " + f.title, text: st.me.name + " completed it.", formId: f.id })));
+      this.notify(staff.map(e => ({ to: e, kind: "reply", title: "New response: " + f.title, text: st.me.name + " completed it.", formId: f.id, stats: true })));
     }
     this.go("forms", { fill: null, fillMsg: "", formTab: "open" });
   }
@@ -15799,13 +16002,17 @@ class Component extends DCLogic {
     const isNew = !d.id;
     if (isNew) d.id = uid("a");
     this.saveAnn(isNew ? this.state.ann.concat([d]) : this.state.ann.map(a => a.id === d.id ? d : a));
-    if (isNew && d.active && d.importance !== "normal") {
+    if (isNew && d.active) {
       this.notify(this.staffEmails(this.state.me.email).map(e => ({
         to: e, kind: "request", route: "home", title: d.kind === "news" ? "News: " + d.title : "Announcement: " + d.title,
         text: (d.body || "").slice(0, 110)
       })));
     }
     this.setState({ annDraft: null, annMsg: "" });
+    if (!this.feat("slider")) {
+      this.ask("Saved — but the home slider is switched off", "Announcements only appear on the home page when the Announcements & news slider is on. Turn it on for everyone now?", "Turn it on", "Leave it off",
+        () => { this.setFeat("slider", true); setTimeout(() => this.flash("Slider on", "Everyone now sees announcements on their home page."), 50); }, () => {});
+    } else this.flash(d.active ? "Published" : "Saved as hidden", d.active ? "It is on everyone's home page now." : "Switch it to Show when it should go live.");
   }
   delAnn(id) { this.saveAnn(this.state.ann.filter(a => a.id !== id)); }
 
@@ -15863,6 +16070,21 @@ class Component extends DCLogic {
     return V;
   }
 
+  decideSvc(x, ok) {
+    const st = this.state, me = st.me;
+    const note = String((st.svcReply || {})[x.id] || "").trim();
+    if (!ok && !note) return this.flash("Say why", "Write a short reason in the reply box before marking it not approved — the sender deserves to know.", "no");
+    const by = me.name;
+    this.save(K.svc, st.svc.map(y => y.id === x.id ? Object.assign({}, y, {
+      status: ok ? "approved" : "declined", decidedBy: by, decidedAt: Date.now(), decisionNote: note,
+      log: (y.log || []).concat(note ? [{ id: uid("l"), by: me.email, byName: by, staff: true, text: note, at: Date.now(), on: today() }] : [])
+    }) : y), "svc");
+    this.setState({ svcReply: Object.assign({}, st.svcReply || {}, { [x.id]: "" }) });
+    if (x.email) this.notify([{ to: x.email, kind: ok ? "reply" : "request", route: "services",
+      title: ok ? "Your suggestion was approved" : "Decision on your suggestion", text: note || x.text.slice(0, 110) }]);
+    this.flash(ok ? "Approved" : "Marked not approved", x.email ? x.name + " has been told." : "The anonymous sender will see it in their suggestion box.", ok ? "ok" : "no");
+  }
+
   // ================= services / suggestion box =================
   svcVals() {
     const st = this.state, V = {}, me = st.me;
@@ -15887,36 +16109,100 @@ class Component extends DCLogic {
         id: uid("s"), kind: "suggestion", text: d.text.trim(), status: "open", date: today(),
         at: new Date().toISOString(), email: d.anon ? "" : me.email, name: d.anon ? "" : me.name, dept: d.anon ? "" : me.dept
       };
+      rec.log = [];
       this.save(K.svc, st.svc.concat([rec]), "svc");
+      try { const mine = JSON.parse(localStorage.getItem("mrhub-mysvc-v1") || "[]"); mine.push(rec.id); localStorage.setItem("mrhub-mysvc-v1", JSON.stringify(mine.slice(-200))); } catch (e) {}
       const to = st.accounts.filter(a => a.role === (st.handlers.suggestion || "P&O")).map(a => a.email);
       this.notify(to.map(e => ({ to: e, kind: "request", route: "services", title: "New suggestion", text: rec.text.slice(0, 110) })));
       this.setState({ svcDraft: { text: "", anon: false }, svcMsg: "Thank you — it has reached " + ((st.handlers.suggestion || "P&O") === "P&O" ? "People & Organisation" : "Marketing") + "." });
     };
 
-    const mineS = st.svc.filter(s => s.email && s.email === me.email).slice().reverse();
-    V.mySuggestions = mineS.map(s => ({
-      text: s.text, date: s.date,
-      statusLabel: s.status === "open" ? "Received" : s.status === "review" ? "Under review" : "Closed",
-      statusStyle: this.pill(s.status === "closed" ? "#EDEFF3" : s.status === "review" ? "#FFF4E4" : "#EAF4F9",
-        s.status === "closed" ? "#4A5567" : s.status === "review" ? "#C96A0F" : "#1880A8")
+    let myIds = [];
+    try { myIds = JSON.parse(localStorage.getItem("mrhub-mysvc-v1") || "[]"); } catch (e) {}
+    const decided = x => x.status === "approved" || x.status === "declined" || x.status === "closed";
+    const stage = x => decided(x) ? 2 : x.status === "review" ? 1 : 0;
+    const stLabel = (x, forAdmin) => x.status === "approved" ? "Approved" : x.status === "declined" ? "Not approved" : x.status === "closed" ? "Closed"
+      : x.status === "review" ? "Under review" : forAdmin ? "New" : "Received";
+    const stPill = x => x.status === "approved" ? this.pill("#E6F5EE", "#0E6B4E") : x.status === "declined" ? this.pill("#FDECEA", "#B4443A")
+      : x.status === "closed" ? this.pill("#EDEFF3", "#4A5567") : x.status === "review" ? this.pill("#FFF4E4", "#C96A0F") : this.pill("#EAF4F9", "#1880A8");
+    const bar = x => ["Received", "Under review", "Decision"].map((l, i) => {
+      const at = stage(x), done = i < at || (i === at && i === 2), on = i === at;
+      const col = i === 2 && x.status === "declined" ? "#B4443A" : "#0E8F66";
+      return {
+        label: i === 2 && decided(x) ? stLabel(x) : l, dot: done ? "✓" : String(i + 1),
+        dotStyle: "width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;" +
+          (done ? "background:" + col + ";color:#fff;" : on ? "background:var(--mr-navy);color:#fff;" : "background:#EDF1F6;color:#8B97A8;"),
+        labelStyle: "font-size:11.5px;font-weight:700;text-align:center;color:" + (done || on ? "#2C3646" : "#98A5B4") + ";",
+        lineStyle: i === 2 ? "display:none;" : "flex:1;height:3px;border-radius:2px;margin-top:12px;min-width:20px;background:" + (i < at ? "#0E8F66" : "#E4EAF1") + ";"
+      };
+    });
+    const logOf = x => (x.log || []).map(l => ({
+      who: l.byName || (l.staff ? "People & Organisation" : "You"), when: l.on || "", text: l.text,
+      rowStyle: "border-radius:11px;padding:11px 14px;font-size:14px;line-height:1.6;white-space:pre-wrap;" +
+        (l.staff ? "background:#F1F7FB;border:1px solid #D6E7F1;color:#123C4F;" : "background:#F7F8FA;border:1px solid #E4EAF1;color:#2C3646;"),
+      whoStyle: "font-size:12px;font-weight:700;margin-bottom:3px;color:" + (l.staff ? "#12607F" : "#5C6B80") + ";"
+    }));
+    const reply = st.svcReply || {};
+    const setReply = (id, v) => this.setState({ svcReply: Object.assign({}, this.state.svcReply || {}, { [id]: v }) });
+    const handlerRole = st.handlers.suggestion || "P&O";
+    const upd = (id, fn) => this.save(K.svc, this.state.svc.map(x => x.id === id ? fn(x) : x), "svc");
+    const entry = (text, staff) => ({ id: uid("l"), by: me.email, byName: staff ? me.name + " · " + (handlerRole === "P&O" ? "People & Organisation" : "Marketing") : me.name, staff: !!staff, text: text, at: Date.now(), on: today() });
+
+    const mineS = st.svc.filter(x => (x.email && x.email === me.email) || myIds.indexOf(x.id) > -1).slice().reverse();
+    V.mySuggestions = mineS.map(x => ({
+      text: x.text, date: x.date + (x.email ? "" : " · sent anonymously"),
+      statusLabel: stLabel(x), statusStyle: stPill(x), bar: bar(x),
+      log: logOf(x), hasLog: (x.log || []).length > 0,
+      canReply: !decided(x), draft: reply[x.id] || "",
+      onDraft: e => setReply(x.id, e.target.value),
+      send: () => {
+        const t = String(reply[x.id] || "").trim();
+        if (!t) return this.flash("Write your reply first", "", "no");
+        upd(x.id, y => Object.assign({}, y, { log: (y.log || []).concat([entry(t, false)]) }));
+        setReply(x.id, "");
+        const to = st.accounts.filter(a => a.role === handlerRole && a.status !== "suspended").map(a => a.email);
+        this.notify(to.map(e => ({ to: e, kind: "request", route: "services", title: "Reply on a suggestion", text: (x.email ? me.name : "Anonymous") + ": " + t.slice(0, 100) })));
+        this.flash("Reply sent", "People & Organisation will see it with your suggestion.");
+      },
+      decisionNote: decided(x) ? (x.decisionNote || "") : "", hasDecision: decided(x) && !!x.decisionNote,
+      decisionStyle: "margin-top:14px;border-radius:12px;padding:13px 15px;font-size:14px;line-height:1.6;white-space:pre-wrap;" +
+        (x.status === "declined" ? "background:#FDECEA;color:#7A2A22;border:1px solid #F1C3C3;" : "background:#E6F5EE;color:#0B4F3A;border:1px solid #B9E3D1;"),
+      decisionHead: x.status === "approved" ? "Approved" + (x.decidedBy ? " by " + x.decidedBy : "") : x.status === "declined" ? "Not approved" + (x.decidedBy ? " · " + x.decidedBy : "") : "Closed"
     }));
     V.hasMySuggestions = mineS.length > 0;
 
     const all = st.svc.slice().reverse();
-    V.svcRows = admin && !staffMode ? all.map(s => ({
-      text: s.text, date: s.date,
-      who: s.name ? s.name + (s.dept ? " · " + s.dept : "") : "Anonymous",
-      whoStyle: "font-size:12.5px;font-weight:600;color:" + (s.name ? "#3A4453" : "#8B97A8") + ";",
-      statusLabel: s.status === "open" ? "New" : s.status === "review" ? "Under review" : "Closed",
-      statusStyle: this.pill(s.status === "closed" ? "#EDEFF3" : s.status === "review" ? "#FFF4E4" : "#EAF4F9",
-        s.status === "closed" ? "#4A5567" : s.status === "review" ? "#C96A0F" : "#1880A8"),
-      review: () => this.save(K.svc, st.svc.map(x => x.id === s.id ? Object.assign({}, x, { status: "review" }) : x), "svc"),
-      close: () => this.save(K.svc, st.svc.map(x => x.id === s.id ? Object.assign({}, x, { status: "closed" }) : x), "svc"),
-      del: () => this.save(K.svc, st.svc.filter(x => x.id !== s.id), "svc")
+    const tellSender = (x, title, text) => { if (x.email) this.notify([{ to: x.email, kind: "reply", route: "services", title: title, text: text.slice(0, 120) }]); };
+    V.svcRows = admin && !staffMode ? all.map(x => ({
+      text: x.text, date: x.date,
+      who: x.name ? x.name + (x.dept ? " · " + x.dept : "") : "Anonymous",
+      whoStyle: "font-size:12.5px;font-weight:600;color:" + (x.name ? "#3A4453" : "#8B97A8") + ";",
+      statusLabel: stLabel(x, true), statusStyle: stPill(x), bar: bar(x),
+      log: logOf(x), hasLog: (x.log || []).length > 0,
+      open: !decided(x), isDecided: decided(x), anon: !x.email,
+      draft: reply[x.id] || "", onDraft: e => setReply(x.id, e.target.value),
+      reply: () => {
+        const t = String(reply[x.id] || "").trim();
+        if (!t) return this.flash("Write the reply first", "", "no");
+        upd(x.id, y => Object.assign({}, y, { status: y.status === "open" ? "review" : y.status, log: (y.log || []).concat([entry(t, true)]) }));
+        setReply(x.id, "");
+        tellSender(x, "Reply on your suggestion", t);
+        this.flash("Reply sent", x.email ? x.name + " has been notified." : "Anonymous sender — they will see it in their suggestion box.");
+      },
+      review: () => { upd(x.id, y => Object.assign({}, y, { status: "review", log: (y.log || []).concat([entry("Your suggestion is now under review.", true)]) })); tellSender(x, "Your suggestion is under review", x.text); this.flash("Marked under review", "The sender can see the step change."); },
+      approve: () => this.decideSvc(x, true),
+      decline: () => this.decideSvc(x, false),
+      reopen: () => { upd(x.id, y => Object.assign({}, y, { status: "review", log: (y.log || []).concat([entry("Reopened for another look.", true)]) })); tellSender(x, "Your suggestion was reopened", x.text); this.flash("Reopened", "Back under review."); },
+      decisionNote: x.decisionNote || "", hasDecision: decided(x) && !!x.decisionNote,
+      decisionHead: x.status === "approved" ? "Approved" + (x.decidedBy ? " by " + x.decidedBy : "") : x.status === "declined" ? "Not approved" + (x.decidedBy ? " · " + x.decidedBy : "") : "Closed",
+      decisionStyle: "margin-top:12px;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.6;white-space:pre-wrap;" +
+        (x.status === "declined" ? "background:#FDECEA;color:#7A2A22;" : "background:#E6F5EE;color:#0B4F3A;"),
+      del: () => this.ask("Delete this suggestion?", "It will be removed for everyone, including the sender.", "Delete", "Keep it",
+        () => { this.save(K.svc, this.state.svc.filter(y => y.id !== x.id), "svc"); this.flash("Deleted", ""); }, () => {})
     })) : [];
     V.noSvcRows = admin && !staffMode && all.length === 0;
     V.svcEmployee = staffMode; V.svcAdmin = admin && !staffMode;
-    V.svcOpenCount = String(st.svc.filter(s => s.status === "open").length);
+    V.svcOpenCount = String(st.svc.filter(x => !decided(x)).length);
     return V;
   }
 
@@ -16048,14 +16334,14 @@ class Component extends DCLogic {
       const mode = this.secMode(s[0]);
       const who = this.secWho(s[0]);
       const open = st.secOpen === s[0];
-      const tone = mode === "on" ? ["#0E8F66", "#F4FBF7", "#BCE3D2"] : mode === "test" ? ["#E09A2E", "#FDF6EA", "#EFD9AE"] : ["#8B97A8", "#F7F8FA", "#ECEFF4"];
+      const tone = mode === "on" ? ["#0E8F66", "#F4FBF7", "#BCE3D2"] : mode === "test" ? ["#E09A2E", "#FDF6EA", "#EFD9AE"] : mode === "hide" ? ["#1880A8", "#F1F7FB", "#CFE3EF"] : ["#B4443A", "#FBF3F2", "#F1D2CE"];
       return {
         label: s[1], hint: s[2],
         cardStyle: "background:" + tone[1] + ";border:1px solid " + tone[2] + ";border-radius:var(--mr-r-sm);padding:14px 16px;",
-        stateLabel: mode === "on" ? "Open to everyone" : mode === "test" ? (who.length ? "Testing · " + who.length + " " + (who.length === 1 ? "person" : "people") : "Testing · nobody picked yet") : "Closed",
+        stateLabel: mode === "on" ? "Open to everyone" : mode === "test" ? (who.length ? "Testing · " + who.length + " " + (who.length === 1 ? "person" : "people") : "Testing · nobody picked yet") : mode === "hide" ? "Hidden from menu · still works" : "Disabled",
         stateStyle: "flex:none;display:inline-flex;gap:7px;align-items:center;font-size:11.5px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:" + tone[0] + ";",
         dotStyle: "width:8px;height:8px;border-radius:50%;background:" + tone[0] + ";",
-        modes: [["on", "Everyone"], ["test", "Testing"], ["off", "Closed"]].map(m => ({
+        modes: [["on", "Everyone"], ["test", "Testing"], ["hide", "Hide"], ["off", "Disable"]].map(m => ({
           label: m[1], go: () => this.setSecMode(s[0], m[0]),
           style: "font-size:12.5px;font-weight:700;padding:8px 15px;border-radius:18px;cursor:pointer;white-space:nowrap;border:1px solid " +
             (mode === m[0] ? tone[0] : "#DCE2EA") + ";background:" + (mode === m[0] ? tone[0] : "#fff") + ";color:" + (mode === m[0] ? "#fff" : "#5C6B80") + ";"
@@ -16080,10 +16366,11 @@ class Component extends DCLogic {
     V.secSummary = (() => {
       const on = SECTIONS.filter(s => this.secMode(s[0]) === "on").length;
       const test = SECTIONS.filter(s => this.secMode(s[0]) === "test").length;
-      const off = SECTIONS.length - on - test;
-      return on + " open to everyone, " + test + " in testing, " + off + " closed.";
+      const hid = SECTIONS.filter(s => this.secMode(s[0]) === "hide").length;
+      const off = SECTIONS.length - on - test - hid;
+      return on + " open to everyone, " + test + " in testing, " + hid + " hidden from the menu, " + off + " disabled.";
     })();
-    const navTone = mode => mode === "on" ? ["#0E8F66", "#F4FBF7", "#BCE3D2"] : mode === "test" ? ["#E09A2E", "#FDF6EA", "#EFD9AE"] : ["#8B97A8", "#F7F8FA", "#ECEFF4"];
+    const navTone = mode => mode === "on" ? ["#0E8F66", "#F4FBF7", "#BCE3D2"] : mode === "test" ? ["#E09A2E", "#FDF6EA", "#EFD9AE"] : mode === "hide" ? ["#1880A8", "#F1F7FB", "#CFE3EF"] : ["#B4443A", "#FBF3F2", "#F1D2CE"];
     const navPick = key => {
       const who = ((this.T().navSw || {})[key] || {}).who || [];
       const open = st.navPickOpen === key;
@@ -16104,7 +16391,7 @@ class Component extends DCLogic {
         }) : []
       };
     };
-    const navModes = (key, mode, tone) => [["on", "Everyone"], ["test", "Testing"], ["off", "Hidden"]].map(m => ({
+    const navModes = (key, mode, tone) => [["on", "Everyone"], ["test", "Testing"], ["hide", "Hide"], ["off", "Disable"]].map(m => ({
       label: m[1], go: () => this.setNavMode(key, m[0]),
       style: "font-size:12px;font-weight:700;padding:6px 12px;border-radius:16px;cursor:pointer;white-space:nowrap;border:1px solid " +
         (mode === m[0] ? tone[0] : "#DCE2EA") + ";background:" + (mode === m[0] ? tone[0] : "#fff") + ";color:" + (mode === m[0] ? "#fff" : "#5C6B80") + ";"
@@ -16145,7 +16432,7 @@ class Component extends DCLogic {
         stateLabel: mode === "on" ? "On" : mode === "test" ? (who.length ? "Testing \u00b7 " + who.length : "Testing \u00b7 nobody yet") : "Off",
         stateStyle: "flex:none;display:inline-flex;gap:7px;align-items:center;font-size:11.5px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:" + tone[0] + ";",
         dotStyle: "width:8px;height:8px;border-radius:50%;background:" + tone[0] + ";",
-        modes: [["on", "On"], ["test", "Testing"], ["off", "Off"]].map(m => ({
+        modes: [["on", "On"], ["test", "Testing"], ["off", "Disable"]].map(m => ({
           label: m[1], go: () => this.setFnMode(f[0], m[0]),
           style: "font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:18px;cursor:pointer;white-space:nowrap;border:1px solid " +
             (mode === m[0] ? tone[0] : "#DCE2EA") + ";background:" + (mode === m[0] ? tone[0] : "#fff") + ";color:" + (mode === m[0] ? "#fff" : "#5C6B80") + ";"
@@ -16332,12 +16619,37 @@ class Component extends DCLogic {
     return V;
   }
 
+  vidDraft() {
+    const live = this.state.video || {};
+    const base = Object.assign({ kind: "youtube", url: "", data: "", title: "", desc: "" }, live, live.draft || {});
+    delete base.draft; delete base.on;
+    return Object.assign(base, this.state.vidDraft || {});
+  }
   setVideo(k, v) {
-    const nx = Object.assign({ on: false, kind: "youtube", url: "", data: "", title: "", desc: "" }, this.state.video || {});
-    nx[k] = v;
+    const d = Object.assign({}, this.state.vidDraft || {});
+    d[k] = v;
+    this.setState({ vidDraft: d, videoMsg: "", vidPreview: this.state.vidPreview });
+  }
+  commitVideo(mode) {
+    const d = this.vidDraft();
+    if (mode !== "draft" && d.kind === "youtube" && !this.ytEmbed(d.url)) return this.flash("Add a YouTube link first", "Paste the whole address from the browser bar.", "no");
+    if (mode !== "draft" && d.kind === "upload" && !d.data) return this.flash("Choose a video file first", "", "no");
+    if (mode === "preview") return this.setState({ vidPreview: true });
+    const live = Object.assign({ on: false, kind: "youtube", url: "", data: "", title: "", desc: "" }, this.state.video || {});
+    const nx = mode === "draft" ? Object.assign({}, live, { draft: d })
+      : mode === "publish" ? Object.assign({}, d, { on: true, draft: null })
+      : Object.assign({}, live, { on: false });
     this.save(K.video, nx, "video");
-    this.setState({ videoMsg: k === "on" ? (v ? "ok:The video is live on everyone's home page." : "ok:Hidden. Nobody sees the video block now.") : "ok:Saved." });
-    this.flash(k === "on" ? (v ? "Video switched on" : "Video hidden") : "Video saved", k === "on" ? "" : "Everyone sees the change on their next visit.");
+    this.setState({ vidDraft: null, vidPreview: false });
+    if (mode === "publish") {
+      if (!this.feat("video")) {
+        return this.ask("Published — but the video block is switched off", "Turn on \"Video block on the home page\" so everyone can see it?", "Turn it on", "Leave it off",
+          () => { this.setFeat("video", true); setTimeout(() => this.flash("Video is live", "It is on everyone's home page now."), 50); }, () => {});
+      }
+      return this.flash("Video is live", "It is on everyone's home page now.");
+    }
+    if (mode === "hide") return this.flash("Video taken down", "Nobody sees the video block now. Your settings are kept.");
+    this.flash("Draft saved", live.on ? "The video already on the home page stays as it was until you publish." : "Nothing is on the home page yet — publish when it is ready.");
   }
   ytEmbed(url) {
     const m = String(url || "").match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{6,})/);
@@ -16349,7 +16661,7 @@ class Component extends DCLogic {
     if (!f) return;
     if (f.size > 3500000) return this.setState({ videoMsg: "err:That file is " + Math.round(f.size / 1048576) + " MB. Uploads must stay under about 3 MB — for anything longer, put it on YouTube and paste the link." });
     const r = new FileReader();
-    r.onload = () => this.setVideo("data", String(r.result || ""));
+    r.onload = () => { this.setVideo("data", String(r.result || "")); this.setState({ videoMsg: "ok:File loaded. Preview it, then publish." }); };
     r.readAsDataURL(f);
   }
 
@@ -16777,7 +17089,7 @@ class Component extends DCLogic {
     V.dashActions = [
       ["New policy", "Write and publish", () => this.newPolicy(), this.can("policies")],
       ["New form", "Ask a question", () => this.newForm("form"), this.can("forms")],
-      ["Team requests", "Hires and reopen asks", () => this.go("poqueue"), this.can("recruit")],
+      ["Staff requests", "Hires, reopen asks, general requests", () => this.go("poqueue"), (st.me || {}).role === "P&O" || this.isSuper()],
       ["New survey", "Gather opinions", () => this.newForm("survey"), this.can("forms")],
       ["Announcement", "Put it on the home page", () => this.go("ann"), this.can("ann")],
       ["Add a person", "Invite an account", () => this.go("accounts"), this.can("accounts")],
@@ -16995,6 +17307,14 @@ class Component extends DCLogic {
     V.logoLoginStyle = "width:" + (th.logoLoginW || 252) + "px;height:auto;max-height:" + Math.round((th.logoLoginW || 252) * 0.142) + "px;object-fit:contain;display:block;";
     V.loginBlurb = th.loginBlurb; V.loginFoot = th.loginFoot;
     V.heroA = th.heroA; V.heroB = th.heroB; V.heroBlurb = th.heroBlurb;
+    const heroLeft = (th.heroAlign || "center") === "left";
+    V.heroInnerStyle = "position:relative;max-width:" + (heroLeft ? "1180px" : "760px") + ";margin:0 auto;text-align:" + (heroLeft ? "left" : "center") + ";";
+    V.heroBlurbStyle = "font-size:16px;line-height:1.65;color:#C3D5E6;margin:0 " + (heroLeft ? "0" : "auto") + " 24px;max-width:620px;text-wrap:pretty;";
+    V.showHeroSearch = this.feat("search");
+    V.showStreak = this.feat("streak");
+    V.showTiles = this.feat("tiles");
+    V.showTopCard = V.showStreak || V.showTiles;
+    V.showSlider = this.feat("slider");
 
     // ---- rotating quote
     const q = st.quotes.length ? st.quotes[st.quoteN % st.quotes.length] : null;
@@ -17125,27 +17445,45 @@ class Component extends DCLogic {
     V.videoDesc = vid.desc || "";
     V.videoHasDesc = !!(vid.desc && vid.desc.trim());
     V.videoAdmin = admin && this.can("video");
-    V.videoOnBox = this.box(vid.on);
-    V.videoOnMark = vid.on ? "✓" : "";
-    V.toggleVideo = () => this.setVideo("on", !vid.on);
+    const vd = this.vidDraft(), vdYt = this.ytEmbed(vd.url);
+    V.vidDirty = !!st.vidDraft || !!(vid.draft);
+    V.vidStatus = (vid.on ? "Live on the home page" : "Not published") + (st.vidDraft ? " · unsaved changes" : vid.draft ? " · draft saved" : "");
+    V.vidStatusStyle = this.pill(vid.on ? "#E6F5EE" : "#EDEFF3", vid.on ? "#0E6B4E" : "#4A5567");
+    V.vidIsLive = !!vid.on;
+    V.vidSaveDraft = () => this.commitVideo("draft");
+    V.vidPreviewGo = () => this.commitVideo("preview");
+    V.vidPublish = () => this.commitVideo("publish");
+    V.vidTakeDown = () => this.ask("Take the video off the home page?", "Your settings are kept, so you can publish it again later.", "Take it down", "Cancel", () => this.commitVideo("hide"), () => {});
+    V.vidDiscard = () => { if (vid.draft) this.save(K.video, Object.assign({}, vid, { draft: null }), "video"); this.setState({ vidDraft: null, vidPreview: false, videoMsg: "" }); this.flash("Changes discarded", vid.on ? "The live video is unchanged." : ""); };
+    V.vidPreviewOpen = !!st.vidPreview;
+    V.vidPreviewClose = () => this.setState({ vidPreview: false });
+    V.vidPreviewTitle = vd.title || "Watch this";
+    V.vidPreviewDesc = vd.desc || "";
+    V.vidPreviewBlock = st.vidPreview
+      ? (vd.kind === "youtube" && vdYt
+          ? React.createElement("iframe", { key: "vp-" + vdYt, src: vdYt, title: "Preview", allow: "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture", allowFullScreen: true, style: { width: "100%", aspectRatio: "16 / 9", border: "none", borderRadius: "12px", display: "block", background: "#000" } })
+          : vd.kind === "upload" && vd.data
+            ? React.createElement("video", { key: "vpf", src: vd.data, controls: true, style: { width: "100%", borderRadius: "12px", display: "block", background: "#000" } })
+            : null)
+      : null;
     V.videoKindChips = [["youtube", "A YouTube link"], ["upload", "A file I upload"]].map(k => ({
-      label: k[1], style: this.chip(vid.kind === k[0]), go: () => this.setVideo("kind", k[0])
+      label: k[1], style: this.chip(vd.kind === k[0]), go: () => this.setVideo("kind", k[0])
     }));
-    V.videoIsYtMode = vid.kind === "youtube";
-    V.videoIsUpMode = vid.kind === "upload";
-    V.videoUrl = vid.url;
+    V.videoIsYtMode = vd.kind === "youtube";
+    V.videoIsUpMode = vd.kind === "upload";
+    V.videoUrl = vd.url;
     V.onVideoUrl = e => this.setVideo("url", e.target.value);
-    V.videoTitleField = vid.title;
+    V.videoTitleField = vd.title;
     V.onVideoTitle = e => this.setVideo("title", e.target.value);
-    V.videoDescField = vid.desc;
+    V.videoDescField = vd.desc;
     V.onVideoDesc = e => this.setVideo("desc", e.target.value);
     V.onVideoFile = e => { this.loadVideoFile(e.target.files && e.target.files[0]); e.target.value = ""; };
-    V.videoFileState = vid.data ? "A file is loaded and playing on the home page." : "No file chosen yet.";
+    V.videoFileState = vd.data ? (vd.data === vid.data && vid.on ? "This file is playing on the home page." : "A file is loaded — preview it, then publish.") : "No file chosen yet.";
     V.videoMsgShown = !!st.videoMsg;
     V.videoMsg = (st.videoMsg || "").replace(/^(ok|err):/, "");
     V.videoMsgStyle = "margin-top:12px;font-size:13.5px;line-height:1.55;padding:11px 14px;border-radius:10px;" +
       ((st.videoMsg || "").indexOf("err:") === 0 ? "background:#FDECEA;color:#B4443A;" : "background:#E8F6F0;color:#0E6B4E;");
-    V.videoBadUrl = vid.on && vid.kind === "youtube" && !!vid.url && !ytSrc;
+    V.videoBadUrl = vd.kind === "youtube" && !!vd.url && !vdYt;
     V.vMarketing = st.route === "marketing";
     V.isSuper = sup; V.isStaffView = staffMode;
     V.bgMotion = this.feat("motion");
@@ -17173,7 +17511,7 @@ class Component extends DCLogic {
           ";border-radius:14px;padding:16px 18px;cursor:pointer;transition:transform 0.18s ease,box-shadow 0.18s ease;"
       };
     });
-    V.hasHomeEvents = staffMode && evUp.length > 0;    V.homeEventsHead = "Events coming up";    V.homeEventsSub = evUp.length === 1 ? "One event you are invited to." : evUp.length + " events you are invited to.";
+    V.hasHomeEvents = staffMode && evUp.length > 0 && this.routeAllowed("events");    V.homeEventsHead = "Events coming up";    V.homeEventsSub = evUp.length === 1 ? "One event you are invited to." : evUp.length + " events you are invited to.";
     V.goAllEvents = () => this.go("events");
 
     // ---- red flag: open notices & investigations for me
