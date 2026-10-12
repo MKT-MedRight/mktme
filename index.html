@@ -2004,7 +2004,7 @@
           <span style="{{ cloudDotStyle }}"></span>
           <span style="font-family:var(--mr-head);font-weight:700;font-size:18px;letter-spacing:-0.02em;">Live sync — {{ cloudLabel }}</span>
         </div>
-        <p style="font-size:14px;color:#5C6B80;line-height:1.6;margin:0 0 14px;">{{ cloudMsg }}</p>
+        <p style="font-size:14px;color:#5C6B80;line-height:1.6;margin:0 0 14px;">{{ cloudMsg }} {{ cloudReach }}</p>
         <sc-if value="{{ cloudLive }}" hint-placeholder-val="{{ false }}">
           <div>
             <p style="font-size:14px;color:#5C6B80;line-height:1.6;margin:0 0 14px;">Policies, accounts, questions, acknowledgements and notifications now travel between every device the moment they change. No committing files.</p>
@@ -8314,7 +8314,8 @@ class Component extends DCLogic {
       this.setState({ accounts: sealed });
       lsSet(K.acc, sealed, false);
     }
-    import("./firebase-sync.js").then(m => {
+    import("./firebase-sync.js?v=3-" + Math.floor(Date.now() / 3600000).toString(36)).then(m => {
+      const oldSync = !m.VERSION || m.VERSION < 3;
       if (!m.enabled()) {
         this.setState({ cloud: "off", cloudMsg: "Not connected — this browser only. Add your Firebase keys to firebase-config.js (see GO-LIVE.md) so policies and questions reach everyone." });
         this.pullShared();
@@ -8322,10 +8323,15 @@ class Component extends DCLogic {
       }
       this._cloud = m;
       this.setState({ cloud: "connecting", cloudMsg: "Connecting to Firebase…" });
+      this._rx = {};
       m.start({
-        onStatus: (s, msg) => this.setState({ cloud: s, cloudMsg: msg || "" }),
-        onData: (key, value) => this.applyRemote(key, value)
+        onStatus: (s, msg) => {
+          if (oldSync && s === "live") return this.setState({ cloud: "error", cloudMsg: "Connected, but firebase-sync.js on your site is an old copy — only notifications and questions sync. Upload the new firebase-sync.js to GitHub (next to index.html), then press Ctrl+Shift+R." });
+          this.setState({ cloud: s, cloudMsg: msg || "" });
+        },
+        onData: (key, value) => { this._rx[key] = Date.now(); this.applyRemote(key, value); }
       });
+      if (oldSync) setTimeout(() => this.flash("Sync is only partly working", "The firebase-sync.js file on your website is out of date, so chat, recognition, courses and most new features are not shared between people. Upload the new firebase-sync.js to GitHub, then refresh with Ctrl+Shift+R.", "no"), 2500);
     }).catch(() => {
       this.setState({ cloud: "off", cloudMsg: "Not connected — this browser only. Add your Firebase keys to firebase-config.js (see GO-LIVE.md) so policies and questions reach everyone." });
       this.pullShared();
@@ -15324,6 +15330,7 @@ class Component extends DCLogic {
       cloudLive: st.cloud === "live",
       cloudOff: st.cloud === "off",
       cloudLabel: st.cloud === "live" ? "Live" : st.cloud === "connecting" ? "Connecting" : st.cloud === "error" ? "Sync problem" : "This browser only",
+      cloudReach: st.cloud === "live" ? "Receiving " + Object.keys(this._rx || {}).length + " of " + Object.keys(CLOUD_FIELDS).length + " data types from Firebase." : "",
       cloudMsg: st.cloudMsg || "Everything stays in this browser until Firebase is connected.",
       cloudDotStyle: "flex:none;width:9px;height:9px;border-radius:50%;display:block;background:" +
         (st.cloud === "live" ? "#5FD3A6" : st.cloud === "connecting" ? "#FFD34D" : st.cloud === "error" ? "#E0442E" : "#8B97A8") +
