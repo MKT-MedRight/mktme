@@ -6100,7 +6100,9 @@
         </sc-if>
         <div style="margin-top:26px;padding-top:20px;border-top:1px solid #EDF1F6;display:flex;gap:11px;align-items:center;flex-wrap:wrap;">
           <span style="{{ ki.deadlineStyle }}">{{ ki.deadlineLabel }}</span>
-          <div onClick="{{ ki.markDone }}" style="{{ ki.doneBtnStyle }}" style-hover="filter:brightness(1.08);">{{ ki.doneBtnLabel }}</div>
+          <sc-if value="{{ ki.showDone }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ ki.markDone }}" style="{{ ki.doneBtnStyle }}" style-hover="filter:brightness(1.08);">{{ ki.doneBtnLabel }}</div>
+          </sc-if>
           <sc-if value="{{ ki.hasExam }}" hint-placeholder-val="{{ false }}">
             <div onClick="{{ ki.startExam }}" style="background:#0E8F66;color:#fff;font-weight:700;font-size:15px;padding:13px 26px;border-radius:26px;cursor:pointer;" style-hover="filter:brightness(1.08);">Take the assessment</div>
           </sc-if>
@@ -7447,6 +7449,28 @@
         </div>
       </div>
     </div>
+    <sc-if value="{{ pwCanChange }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#fff;border:1px solid #DCE2EA;border-radius:14px;padding:24px 26px;margin-top:18px;">
+      <h2 style="font-family:var(--mr-head);font-weight:800;font-size:20px;letter-spacing:-0.025em;margin:0 0 4px;">Change my password</h2>
+      <p style="font-size:14px;color:#5C6B80;margin:0 0 18px;line-height:1.6;">At least 8 characters. You stay signed in on this device.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+        <label style="display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:13px;grid-column:1/-1;">Current password
+          <input type="{{ pwType }}" value="{{ pwOld }}" onInput="{{ onPwOld }}" autocomplete="current-password" style="width:100%;box-sizing:border-box;font-size:15px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:12px 14px;outline:none;font-family:inherit;">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:13px;">New password
+          <input type="{{ pwType }}" value="{{ pwNew }}" onInput="{{ onPwNew }}" autocomplete="new-password" style="width:100%;box-sizing:border-box;font-size:15px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:12px 14px;outline:none;font-family:inherit;">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:13px;">Type it again
+          <input type="{{ pwType }}" value="{{ pwNew2 }}" onInput="{{ onPwNew2 }}" onKeyDown="{{ onPwKey }}" autocomplete="new-password" style="width:100%;box-sizing:border-box;font-size:15px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:12px 14px;outline:none;font-family:inherit;">
+        </label>
+      </div>
+      <div style="{{ pwHintStyle }}">{{ pwHint }}</div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px;">
+        <div onClick="{{ changeMyPw }}" style="background:var(--mr-navy);color:#fff;font-weight:700;font-size:14px;padding:12px 24px;border-radius:22px;cursor:pointer;" style-hover="filter:brightness(1.3);">Update password</div>
+        <div onClick="{{ togglePwShow }}" style="color:#5C6B80;font-weight:600;font-size:14px;padding:12px 8px;cursor:pointer;">{{ pwShowLabel }}</div>
+      </div>
+    </div>
+    </sc-if>
   </div>
   </sc-if>
 
@@ -9055,6 +9079,7 @@ class Component extends DCLogic {
 
   claimDone(course) {
     const st = this.state, me = st.me;
+    if (this.courseLocked(course)) return this.flash("Enrol first", "You are not enrolled in this course.", "no");
     if (!this.courseDone(course)) return this.flash("Not everything is finished", "Complete every module and its assessment first.", "no");
     if (!this.assignmentsDone(course)) return this.flash("An assignment is outstanding", "Every assignment has to be accepted by your instructor first.", "no");
     if (this.certRec(course.id)) return this.flash("Already sent", "Your certificate is waiting for approval.", "no");
@@ -11375,6 +11400,10 @@ class Component extends DCLogic {
   startExam(id) {
     const ex = this.state.exams.filter(e => e.id === id)[0];
     if (!ex) return;
+    if (!this.state.candMode && this.examLockedByCourse(id)) {
+      const k = this.examCourse(id);
+      return this.flash("This assessment belongs to a course", "Enrol in \"" + k.title + "\"" + (this.needsCode(k) ? " with its enrolment code" : "") + " first.", "no");
+    }
     const asked = (ex.retake || []).indexOf(this.state.me.email) > -1;
     const mine = this.state.attempts.filter(a => a.examId === id && a.email === this.state.me.email);
     const failedIt = mine.length > 0 && !mine.some(a => a.passed);
@@ -12190,7 +12219,22 @@ class Component extends DCLogic {
         this.flash("Removed", who.name + " is off " + k.title + ".");
       });
   }
-  needsCode(k) { return !!k && this.enrolWay(k, "code") && !!String(k.enrolCode || "").trim(); }
+  needsCode(k) { return !!k && (this.enrolWay(k, "code") || !!k.enrolCode) && !!String(k.enrolCode || "").trim(); }
+  courseExempt(k) {
+    const st = this.state, me = st.me || {};
+    return !!k && (k.instructor === me.email || (this.isAdmin() && this.can("know") && !st.asStaff));
+  }
+  courseLocked(k) {
+    if (!k || this.courseExempt(k)) return false;
+    const me = (this.state.me || {}).email;
+    if ((k.enrolled || []).indexOf(me) > -1) return false;
+    if (this.needsCode(k)) return true;
+    return (k.lessons || []).length > 0;
+  }
+  examCourse(examId) {
+    return (this.state.know || []).filter(k => k.examId === examId || (k.lessons || []).some(l => l.examId === examId))[0] || null;
+  }
+  examLockedByCourse(examId) { const k = this.examCourse(examId); return !!k && this.courseLocked(k); }
   enrol(id, viaCode) {
     const st = this.state, me = st.me;
     const k = (st.know || []).filter(x => x.id === id)[0];
@@ -12238,6 +12282,8 @@ class Component extends DCLogic {
     return (lessons === 0 || doneLessons >= lessons) && exOk && modOk;
   }
   markModule(courseId, i) {
+    const kk = (this.state.know || []).filter(x => x.id === courseId)[0];
+    if (this.courseLocked(kk)) return this.flash("Enrol first", this.needsCode(kk) ? "Enter the enrolment code to open this course." : "Join the course to work on it.", "no");
     const u = this.ud();
     const mods = Object.assign({}, u.modules || {});
     const list = (mods[courseId] || []).slice();
@@ -12311,6 +12357,7 @@ class Component extends DCLogic {
     return (st.exams || []).filter(e => {
       if (e.status !== "live") return false;
       if (!this.examMine(e)) return false;
+      if (!st.candMode && this.examLockedByCourse(e.id)) return false;
       if (this.examWindow(e) !== "open") return false;
       if ((e.retake || []).indexOf(st.me.email) > -1) return true;
       const mine = (st.attempts || []).filter(a => a.examId === e.id && a.email === st.me.email);
@@ -12359,8 +12406,7 @@ class Component extends DCLogic {
     const cur = (st.know || []).filter(k => k.id === st.knowOpen)[0] || visible[0] || blankKnow("", "");
     const curMeta = kindMeta(cur.kind), curCol = colOf(cur.kind);
     const curDone = done.indexOf(cur.id) > -1;
-    const curLocked = (cur.lessons || []).length > 0 && (cur.enrolled || []).indexOf(me.email) < 0 && cur.instructor !== me.email
-      && !(this.isAdmin() && this.can("know") && !st.asStaff);
+    const curLocked = this.courseLocked(cur);
     const ytSrc = cur.kind === "video" && !curLocked ? this.ytEmbed(cur.url) : "";
 
     const myAtt = id => (st.attempts || []).filter(a => a.examId === id && a.email === me.email);
@@ -12450,8 +12496,7 @@ class Component extends DCLogic {
           hasExam: !!(l.examId && (this.state.exams || []).some(e => e.id === l.examId && e.status === "live")),
           startExam: () => this.startExam(l.examId)
         })),
-        showEnrol: (cur.lessons || []).length > 0 && (cur.enrolled || []).indexOf(me.email) < 0
-          && this.enrolWay(cur, "open") && !this.needsCode(cur) && !this.courseShut(cur) && !this.hasLeftCourse(cur),
+        showEnrol: curLocked && this.enrolWay(cur, "open") && !this.needsCode(cur) && !this.courseShut(cur) && !this.hasLeftCourse(cur),
         locked: curLocked,
         lockedNote: this.hasLeftCourse(cur) ? "You left this course. Ask People & Organisation to let you back in."
           : this.needsCode(cur) ? "This course is locked. Enter the enrolment code below to open the material."
@@ -12461,8 +12506,7 @@ class Component extends DCLogic {
         enrolNote: (cur.lessons || []).length + " modules" + (cur.examId ? " and a final assessment" : "") +
           (cur.closes ? " · available until " + cur.closes : ""),
         enrol: () => this.enrol(cur.id),
-        showCodeBox: (cur.lessons || []).length > 0 && (cur.enrolled || []).indexOf(me.email) < 0
-          && this.enrolWay(cur, "code") && !this.courseShut(cur) && !this.hasLeftCourse(cur),
+        showCodeBox: curLocked && this.needsCode(cur) && !this.courseShut(cur) && !this.hasLeftCourse(cur),
         codeDraft: st.courseCode || "",
         onCodeDraft: e => this.setState({ courseCode: e.target.value.toUpperCase() }),
         joinWithCode: () => {
@@ -12481,7 +12525,8 @@ class Component extends DCLogic {
           ? Math.max(Math.round(((this.ud().modules || {})[cur.id] || []).length / (cur.lessons || []).length * 100), 2) : 2) +
           "%;background:" + curCol + ";border-radius:5px;animation:hbGrow 0.9s cubic-bezier(0.22,1,0.36,1) both;",
         meta: "Added " + cur.date + (cur.by ? " · " + cur.by : ""),
-        doneReady: (cur.lessons || []).length === 0 || (this.courseDone(cur) && this.assignmentsDone(cur)),
+        doneReady: !curLocked && ((cur.lessons || []).length === 0 || (this.courseDone(cur) && this.assignmentsDone(cur))),
+        showDone: !curLocked,
         doneBtnLabel: curDone ? "✓ Marked as completed"
           : ((cur.lessons || []).length && !this.courseDone(cur)) ? "Finish every module first"
           : ((cur.lessons || []).length && !this.assignmentsDone(cur)) ? "An assignment is still outstanding"
@@ -12495,12 +12540,13 @@ class Component extends DCLogic {
             return this.flash("Not finished yet", "Complete every module and pass its assessment before marking the course done.", "no");
           if ((cur.lessons || []).length && !this.assignmentsDone(cur))
             return this.flash("An assignment is outstanding", "Your instructor has to accept every assignment first.", "no");
+          if (this.courseLocked(cur)) return this.flash("Enrol first", this.needsCode(cur) ? "Enter the enrolment code to open this course." : "Join the course to work on it.", "no");
           const next = curDone ? done.filter(x => x !== cur.id) : done.concat([cur.id]);
           this.setUd({ learned: next });
           this.flash(curDone ? "Marked as not done" : "Nice work",
             curDone ? "" : cur.title + " is logged as completed. You can request your certificate now.");
         },
-        hasExam: !!(cur.examId && liveExams.some(e => e.id === cur.examId)),
+        hasExam: !curLocked && !!(cur.examId && liveExams.some(e => e.id === cur.examId)),
         startExam: () => this.startExam(cur.examId),
         showDrop: (cur.lessons || []).length > 0 && (cur.enrolled || []).indexOf(me.email) > -1 && !curDone,
         dropNote: "Leaving takes this course off your learning list. You will not be able to rejoin on your own — People & Organisation would have to put you back on it.",
@@ -13424,6 +13470,20 @@ class Component extends DCLogic {
     if (n.route) return this.go(n.route);
     if (n.ref) return this.go("inbox");
     this.setState({ notesOpen: true });
+  }
+  changeMyPw() {
+    const st = this.state, me = st.me || {};
+    const a = this.acct(me.email);
+    if (!a) return this.flash("Account not found", "Sign out and in again, then try once more.", "no");
+    const oldOk = a.ph ? hashPw(me.email, st.pwOld || "") === a.ph : !a.pass || (st.pwOld || "") === a.pass;
+    if (!oldOk) return this.flash("Current password is wrong", "Type the password you signed in with today.", "no");
+    const n = st.pwNew || "";
+    if (n.length < 8) return this.flash("Too short", "Use at least 8 characters.", "no");
+    if (n !== st.pwNew2) return this.flash("Passwords do not match", "Type the new password the same way twice.", "no");
+    if (n === st.pwOld) return this.flash("That is your current password", "Choose a new one.", "no");
+    this.save(K.acc, st.accounts.map(x => x.email === me.email ? sealAccount(Object.assign({}, x, { pass: n, pwChangedAt: Date.now() })) : x), "accounts");
+    this.setState({ pwOld: "", pwNew: "", pwNew2: "", pwShow: false });
+    this.flash("Password updated", "Use the new password next time you sign in, on any device.");
   }
   staffEmails(exclude) {
     return this.state.accounts.filter(a => a.status !== "suspended" && a.email !== exclude).map(a => a.email);
@@ -14730,6 +14790,18 @@ class Component extends DCLogic {
       bigAvatar: this.avatar(96, this.roleColor(me.role), me.photo, me.name),
       goProfile: () => this.go("profile"),
       vProfile: st.route === "profile",
+      pwCanChange: !st.candMode && !st.interviewMode && me.role !== "Candidate",
+      pwType: st.pwShow ? "text" : "password",
+      pwShowLabel: st.pwShow ? "Hide" : "Show",
+      togglePwShow: () => this.setState({ pwShow: !st.pwShow }),
+      pwOld: st.pwOld || "", pwNew: st.pwNew || "", pwNew2: st.pwNew2 || "",
+      onPwOld: e => this.setState({ pwOld: e.target.value }),
+      onPwNew: e => this.setState({ pwNew: e.target.value }),
+      onPwNew2: e => this.setState({ pwNew2: e.target.value }),
+      onPwKey: e => { if (e.key === "Enter") this.changeMyPw(); },
+      changeMyPw: () => this.changeMyPw(),
+      pwHint: (() => { const n = st.pwNew || "", n2 = st.pwNew2 || ""; if (!n) return ""; if (n.length < 8) return "Too short — " + (8 - n.length) + " more character" + (8 - n.length === 1 ? "" : "s") + "."; if (n2 && n2 !== n) return "The two new passwords do not match yet."; if (n2 === n) return "✓ Looks good."; return ""; })(),
+      pwHintStyle: "font-size:13px;margin-top:10px;min-height:18px;color:" + (((st.pwNew || "").length >= 8 && st.pwNew === st.pwNew2) ? "#0E6B4E" : "#B4443A") + ";",
       hasMyPhoto: !!me.photo,
       onMyPhoto: e => {
         const f = e.target.files && e.target.files[0];
