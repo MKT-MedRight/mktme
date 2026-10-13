@@ -171,6 +171,39 @@
 </div>
 </sc-if>
 
+<sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+<div class="hb-noprint" onClick="{{ closeLb }}" style="position:fixed;inset:0;z-index:500;background:rgba(8,8,20,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 20px 24px;box-sizing:border-box;">
+  <div style="position:absolute;top:12px;left:16px;right:16px;display:flex;gap:10px;align-items:center;color:#fff;">
+    <span style="flex:1;min-width:0;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:0.85;">{{ lbName }}</span>
+    <a href="{{ lbSrc }}" download="{{ lbName }}" onClick="{{ stopProp }}" style="flex:none;color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:20px;background:rgba(255,255,255,0.14);">⇩ Download</a>
+    <span onClick="{{ closeLb }}" style="flex:none;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;">×</span>
+  </div>
+  <img onClick="{{ stopProp }}" src="{{ lbSrc }}" alt="{{ lbName }}" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,0.5);">
+</div>
+</sc-if>
+
+<sc-if value="{{ fwdOpen }}" hint-placeholder-val="{{ false }}">
+<div class="hb-noprint" onClick="{{ closeFwd }}" style="position:fixed;inset:0;z-index:450;background:rgba(12,12,36,0.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div onClick="{{ stopProp }}" style="width:100%;max-width:420px;max-height:80vh;display:flex;flex-direction:column;background:#fff;border-radius:18px;box-shadow:0 30px 80px -20px rgba(12,12,36,0.6);overflow:hidden;animation:hbPop 0.25s ease both;">
+    <div style="display:flex;align-items:center;gap:10px;padding:16px 18px 10px;">
+      <span style="flex:1;font-family:var(--mr-head);font-weight:800;font-size:18px;letter-spacing:-0.02em;color:var(--mr-navy);">Forward to…</span>
+      <span onClick="{{ closeFwd }}" style="font-size:20px;color:#8B97A8;cursor:pointer;">×</span>
+    </div>
+    <div style="margin:0 18px 10px;padding:9px 12px;border-left:3px solid var(--mr-teal);background:#F1F7FB;border-radius:8px;font-size:13px;color:#3A4453;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ fwdPreview }}</div>
+    <input value="{{ fwdSearch }}" onInput="{{ onFwdSearch }}" placeholder="Search people or groups" style="margin:0 18px 8px;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:10px 13px;outline:none;font-family:inherit;">
+    <div style="flex:1;overflow-y:auto;padding:4px 10px 12px;display:flex;flex-direction:column;gap:2px;">
+      <sc-for list="{{ fwdTargets }}" as="f" hint-placeholder-count="4">
+        <div onClick="{{ f.go }}" style="display:flex;gap:11px;align-items:center;padding:8px 9px;border-radius:11px;cursor:pointer;" style-hover="background:#F4F7FA;">
+          <span style="{{ f.discStyle }}">{{ f.initials }}</span>
+          <span style="flex:1;min-width:0;"><span style="display:block;font-size:14px;font-weight:600;color:var(--mr-navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ f.name }}</span><span style="display:block;font-size:12px;color:#8B97A8;">{{ f.sub }}</span></span>
+          <span style="flex:none;font-size:12.5px;font-weight:700;color:var(--mr-teal);">Send</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</sc-if>
+
 <sc-if value="{{ hasModal }}" hint-placeholder-val="{{ false }}">
 <div class="hb-noprint" onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:400;background:rgba(12,12,36,0.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:26px;animation:hbRise 0.18s ease both;">
   <div onClick="{{ stopProp }}" style="{{ modalCard }}">
@@ -230,6 +263,38 @@
         <div data-mr="cloudpill" onClick="{{ goSettings }}" style="{{ cloudPillStyle }}" title="{{ cloudMsg }}">
           <span style="{{ cloudDotStyle }}"></span>{{ cloudLabel }}
         </div>
+        <sc-if value="{{ msgrOn }}" hint-placeholder-val="{{ false }}">
+        <div style="position:relative;flex:none;">
+          <div data-mr="msgrbtn" onClick="{{ toggleMsgr }}" title="Messages" style="{{ msgrStyle }}" style-hover="background:rgba(255,255,255,0.14);">
+            <span style="font-size:17px;line-height:1;">💬</span>
+            <span style="{{ msgrBadgeStyle }}">{{ msgrBadge }}</span>
+          </div>
+          <sc-if value="{{ msgrOpen }}" hint-placeholder-val="{{ false }}">
+            <div data-mr="msgr" style="position:absolute;top:44px;right:0;width:min(92vw,370px);max-height:520px;display:flex;flex-direction:column;background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r);box-shadow:0 24px 60px -20px rgba(12,12,36,0.55);z-index:60;animation:hbRise 0.22s ease both;color:var(--mr-ink);">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px 8px;">
+                <span style="font-family:var(--mr-head);font-weight:800;font-size:18px;letter-spacing:-0.02em;color:var(--mr-navy);">Messages</span>
+                <span onClick="{{ msgrNew }}" style="font-size:12.5px;font-weight:700;color:var(--mr-teal);cursor:pointer;">+ New message</span>
+              </div>
+              <div style="flex:1;overflow-y:auto;padding:4px 8px 8px;display:flex;flex-direction:column;gap:2px;">
+                <sc-for list="{{ msgrList }}" as="t" hint-placeholder-count="3">
+                  <div onClick="{{ t.go }}" style="{{ t.rowStyle }}" style-hover="background:#F4F7FA;">
+                    <span style="{{ t.discStyle }}">{{ t.initials }}<span style="{{ t.dotStyle }}"></span></span>
+                    <div style="flex:1;min-width:0;">
+                      <div style="display:flex;gap:8px;align-items:baseline;"><span style="{{ t.nameStyle }}">{{ t.name }}</span><span style="flex:none;margin-left:auto;font-size:11.5px;color:#98A5B4;">{{ t.when }}</span></div>
+                      <div style="{{ t.previewStyle }}">{{ t.preview }}</div>
+                    </div>
+                    <span style="{{ t.unreadDot }}"></span>
+                  </div>
+                </sc-for>
+                <sc-if value="{{ msgrEmpty }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:26px 16px;text-align:center;font-size:13.5px;color:#8B97A8;">No conversations yet.</div>
+                </sc-if>
+              </div>
+              <div onClick="{{ msgrAll }}" style="padding:12px;text-align:center;font-size:13.5px;font-weight:700;color:var(--mr-teal);border-top:1px solid #EDF1F6;cursor:pointer;" style-hover="background:#F7FAFC;">See all in Messages</div>
+            </div>
+          </sc-if>
+        </div>
+        </sc-if>
         <div style="position:relative;flex:none;">
           <div data-fn="notify" onClick="{{ toggleNotes }}" style="{{ bellStyle }}" style-hover="background:rgba(255,255,255,0.14);">
             <span style="font-size:16px;line-height:1;">🔔</span>
@@ -5801,13 +5866,18 @@
               <div style="{{ ct.subStyle }}">{{ ct.sub }}</div>
             </div>
           </div>
-          <div style="flex:1;min-height:280px;max-height:52vh;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:11px;background:#F7FAFC;">
+          <div data-chatscroll="{{ chatScrollKey }}" style="flex:1;min-height:280px;max-height:52vh;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:11px;background:#F7FAFC;">
             <sc-for list="{{ ct.msgs }}" as="m" hint-placeholder-count="3">
               <div style="{{ m.rowStyle }}">
+                <div style="{{ m.colStyle }}">
                 <div style="{{ m.bubbleStyle }}">
                   <div style="{{ m.whoStyle }}">{{ m.who }}</div>
+                  <sc-if value="{{ m.isFwd }}" hint-placeholder-val="{{ false }}"><div style="{{ m.fwdStyle }}">↪ Forwarded</div></sc-if>
+                  <sc-if value="{{ m.hasReply }}" hint-placeholder-val="{{ false }}">
+                    <div style="{{ m.replyStyle }}"><div style="font-weight:700;">{{ m.replyWho }}</div><div style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;opacity:0.9;">{{ m.replyText }}</div></div>
+                  </sc-if>
                   <sc-if value="{{ m.isImg }}" hint-placeholder-val="{{ false }}">
-                    <a href="{{ m.file }}" target="_blank" style="display:block;margin-bottom:8px;"><img src="{{ m.file }}" alt="{{ m.fileName }}" style="display:block;max-width:100%;max-height:280px;border-radius:10px;object-fit:contain;background:rgba(0,0,0,0.06);"></a>
+                    <img onClick="{{ m.openImg }}" src="{{ m.file }}" alt="{{ m.fileName }}" title="Open full screen" style="display:block;max-width:100%;max-height:280px;border-radius:10px;object-fit:contain;background:rgba(0,0,0,0.06);margin-bottom:8px;cursor:zoom-in;">
                   </sc-if>
                   <sc-if value="{{ m.hasFile }}" hint-placeholder-val="{{ false }}">
                     <a href="{{ m.file }}" download="{{ m.fileName }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
@@ -5818,6 +5888,11 @@
                   <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
                   <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                 </div>
+                <div style="{{ m.actStyle }}">
+                  <span onClick="{{ m.doReply }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↩ Reply</span>
+                  <span onClick="{{ m.doFwd }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↪ Forward</span>
+                </div>
+                </div>
               </div>
             </sc-for>
             <sc-if value="{{ ct.empty }}" hint-placeholder-val="{{ false }}">
@@ -5825,6 +5900,12 @@
             </sc-if>
           </div>
           <div style="padding:14px 16px;border-top:1px solid #EDF1F6;">
+            <sc-if value="{{ chatReplyOn }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:10px;align-items:center;border-left:3px solid var(--mr-teal);background:#F1F7FB;border-radius:8px;padding:8px 12px;margin-bottom:10px;">
+                <div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:700;color:var(--mr-teal);">Replying to {{ chatReplyWho }}</div><div style="font-size:13px;color:#5C6B80;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ chatReplyText }}</div></div>
+                <span onClick="{{ cancelReply }}" style="flex:none;color:#8B97A8;font-weight:700;font-size:18px;cursor:pointer;padding:0 4px;">×</span>
+              </div>
+            </sc-if>
             <sc-if value="{{ hasChatFile }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;gap:9px;align-items:center;background:#F1F9FC;border:1px solid #B9DCEA;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:13px;">
                 <span style="flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">⇧ {{ chatFileName }}</span>
@@ -7268,13 +7349,18 @@
         </div>
         <sc-if value="{{ d.open }}" hint-placeholder-val="{{ true }}">
           <div>
-            <div style="height:270px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;background:#F7FAFC;">
+            <div data-chatscroll="{{ d.scrollKey }}" style="height:270px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;background:#F7FAFC;">
               <sc-for list="{{ d.msgs }}" as="m" hint-placeholder-count="2">
                 <div style="{{ m.rowStyle }}">
+                  <div style="{{ m.colStyle }}">
                   <div style="{{ m.bubbleStyle }}">
                     <div style="{{ m.whoStyle }}">{{ m.who }}</div>
+                    <sc-if value="{{ m.isFwd }}" hint-placeholder-val="{{ false }}"><div style="{{ m.fwdStyle }}">↪ Forwarded</div></sc-if>
+                    <sc-if value="{{ m.hasReply }}" hint-placeholder-val="{{ false }}">
+                      <div style="{{ m.replyStyle }}"><div style="font-weight:700;">{{ m.replyWho }}</div><div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:0.9;">{{ m.replyText }}</div></div>
+                    </sc-if>
                     <sc-if value="{{ m.isImg }}" hint-placeholder-val="{{ false }}">
-                      <a href="{{ m.file }}" target="_blank" style="display:block;margin-bottom:6px;"><img src="{{ m.file }}" alt="{{ m.fileName }}" style="display:block;max-width:100%;max-height:180px;border-radius:9px;object-fit:contain;background:rgba(0,0,0,0.06);"></a>
+                      <img onClick="{{ m.openImg }}" src="{{ m.file }}" alt="{{ m.fileName }}" title="Open full screen" style="display:block;max-width:100%;max-height:180px;border-radius:9px;object-fit:contain;background:rgba(0,0,0,0.06);margin-bottom:6px;cursor:zoom-in;">
                     </sc-if>
                     <sc-if value="{{ m.hasFile }}" hint-placeholder-val="{{ false }}">
                       <a href="{{ m.file }}" download="{{ m.fileName }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
@@ -7284,6 +7370,11 @@
                     </sc-if>
                     <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
                     <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
+                  </div>
+                  <div style="{{ m.actStyle }}">
+                    <span onClick="{{ m.doReply }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↩ Reply</span>
+                    <span onClick="{{ m.doFwd }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↪ Forward</span>
+                  </div>
                   </div>
                 </div>
               </sc-for>
@@ -7296,6 +7387,12 @@
                 <sc-for list="{{ d.emojis }}" as="e" hint-placeholder-count="8">
                   <span onClick="{{ e.add }}" style="font-size:19px;text-align:center;padding:4px 0;border-radius:7px;cursor:pointer;" style-hover="background:#F1F5F9;">{{ e.em }}</span>
                 </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ d.replyOn }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:8px;align-items:center;margin:8px 12px 0;border-left:3px solid var(--mr-teal);background:#F1F7FB;border-radius:7px;padding:6px 10px;">
+                <div style="flex:1;min-width:0;"><div style="font-size:11px;font-weight:700;color:var(--mr-teal);">Replying to {{ d.replyWho }}</div><div style="font-size:12px;color:#5C6B80;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ d.replyText }}</div></div>
+                <span onClick="{{ d.cancelReply }}" style="flex:none;color:#8B97A8;font-weight:700;font-size:16px;cursor:pointer;">×</span>
               </div>
             </sc-if>
             <sc-if value="{{ d.hasFile }}" hint-placeholder-val="{{ false }}">
@@ -8359,6 +8456,7 @@ class Component extends DCLogic {
       if (st.notesOpen && !inside('[data-mr="notes"]') && !inside('[data-fn="notify"]')) close.notesOpen = false;
       if (st.menuOpen && !inside('[data-mr="nav"]')) close.menuOpen = null;
       if (st.dockListOpen && !inside('[data-mr="dock"]')) close.dockListOpen = false;
+      if (st.msgrOpen && !inside('[data-mr="msgr"]') && !inside('[data-mr="msgrbtn"]')) close.msgrOpen = false;
       if (st.toast && !inside('[data-mr="float"]')) close.toast = null;
       if (Object.keys(close).length) this.setState(close);
     };
@@ -8442,7 +8540,10 @@ class Component extends DCLogic {
     this.onEsc = e => {
       if (e.key !== "Escape") return;
       const st = this.state;
+      if (st.lightbox) return this.setState({ lightbox: null });
+      if (st.fwdMsg) return this.setState({ fwdMsg: null });
       if (st.modal) return this.closeModal();
+      if (st.msgrOpen) return this.setState({ msgrOpen: false });
       if (st.notesOpen || st.menuOpen || st.toast) this.setState({ notesOpen: false, menuOpen: null, toast: null });
     };
     window.addEventListener("keydown", this.onEsc);
@@ -8506,8 +8607,19 @@ class Component extends DCLogic {
     }, 9000);
   }
 
+  scrollChats() {
+    document.querySelectorAll("[data-chatscroll]").forEach(el => {
+      const k = el.getAttribute("data-chatscroll");
+      if (el._sk === k) return;
+      el._sk = k;
+      el.scrollTop = el.scrollHeight;
+      setTimeout(() => { el.scrollTop = el.scrollHeight; }, 250);
+      setTimeout(() => { el.scrollTop = el.scrollHeight; }, 900);
+    });
+  }
   componentDidUpdate() {
     const st = this.state;
+    this.scrollChats();
     this.applyFnCss();
     if (st.me && st.screen === "app" && !this._brandFixed) this.fixBrandOnce();
     if (st.me && st.screen === "app" && this.can("compliance") && this._compRemDay !== this.isoToday()) {
@@ -11288,6 +11400,7 @@ class Component extends DCLogic {
     const msg = { id: "m" + Date.now() + Math.random().toString(36).slice(2, 7), by: me.email, byName: me.name, text: body,
       file: st.chatFile ? st.chatFile.data : "", fileName: st.chatFile ? st.chatFile.name : "",
       at: Date.now(), seen: [me.email] };
+    if (st.chatReply && st.chatReply.threadId === t.id) msg.reply = { id: st.chatReply.id, who: st.chatReply.who, text: st.chatReply.text };
     const next = list.map(x => x.id === t.id ? Object.assign({}, x, { msgs: (x.msgs || []).concat([msg]), touched: Date.now() }) : x);
     this.saveChat(next);
     const targets = t.kind === "channel"
@@ -11297,7 +11410,82 @@ class Component extends DCLogic {
       title: t.kind === "channel" ? "Message in " + t.name : (t.kind === "group" ? t.name : me.name),
       text: (t.kind === "group" ? me.name + ": " : "") + (body || "Sent a file").slice(0, 90),
       route: "chat", read: false, date: today() })));
-    this.setState({ chatDraft: "", chatFile: null, chatOpen: t.id, chatEmoji: false });
+    this.setState({ chatDraft: "", chatFile: null, chatOpen: t.id, chatEmoji: false, chatReply: st.chatReply && st.chatReply.threadId === t.id ? null : st.chatReply });
+  }
+  fwdTargets() {
+    const st = this.state, me = (st.me || {}).email, q = String(st.fwdSearch || "").trim().toLowerCase();
+    const disc = (bg, round) => "flex:none;width:36px;height:36px;border-radius:" + (round ? "50%" : "11px") + ";background:" + bg + ";color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:700;font-size:12.5px;";
+    const thr = (this._threads || []).filter(t => t.kind !== "direct").map(t => ({ name: t.name, sub: t.kind === "channel" ? "Team channel" : (t.members || []).length + " people", initials: t.kind === "channel" ? (t.icon || "◉") : initials(t.name),
+      discStyle: disc(t.kind === "channel" ? (t.color || "#181848") : "#0E8F66", false), go: () => this.forwardTo({ id: t.id, name: t.name }) }));
+    const recent = (this._threads || []).filter(t => t.kind === "direct").map(t => (t.members || []).filter(e => e !== me)[0]);
+    const people = (st.accounts || []).filter(a => a.email !== me && a.status !== "suspended" && a.role !== "Candidate")
+      .sort((a, b) => { const ra = recent.indexOf(a.email), rb = recent.indexOf(b.email); return (ra < 0 ? 999 : ra) - (rb < 0 ? 999 : rb) || String(a.name).localeCompare(b.name); })
+      .map(a => ({ name: a.name, sub: [a.dept, this.isOnline(a.email) ? "Online" : ""].filter(Boolean).join(" · "), initials: initials(a.name), discStyle: disc(this.roleColor(a.role), true), go: () => this.forwardTo({ email: a.email, name: a.name }) }));
+    const all = thr.concat(people);
+    return (q ? all.filter(x => (x.name + " " + x.sub).toLowerCase().indexOf(q) > -1) : all).slice(0, 30);
+  }
+  msgrList() {
+    const st = this.state, meE = (st.me || {}).email;
+    const ago = ms => { const m = Math.round((Date.now() - ms) / 60000); if (m < 1) return "now"; if (m < 60) return m + "m"; const h = Math.round(m / 60); if (h < 24) return h + "h"; return Math.round(h / 24) + "d"; };
+    return (this._threads || []).filter(t => (t.msgs || []).length).slice(0, 12).map(t => {
+      const last = t.msgs[t.msgs.length - 1];
+      const un = t.msgs.filter(m => m.by !== meE && (m.seen || []).indexOf(meE) < 0).length;
+      const other = (t.members || []).filter(e => e !== meE)[0];
+      const nm = t.kind === "direct" ? ((this.acct(other) || {}).name || t.name) : t.name;
+      const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : "var(--mr-teal)";
+      const online = t.kind === "direct" && this.isOnline(other);
+      return {
+        name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : initials(nm),
+        preview: (last.by === meE ? "You: " : t.kind === "direct" ? "" : (last.byName || "").split(" ")[0] + ": ") + String(last.text || (last.fileName ? "📎 " + last.fileName : "Sent a file")).slice(0, 60),
+        when: ago(last.at || Date.now()),
+        discStyle: "position:relative;flex:none;width:44px;height:44px;border-radius:" + (t.kind === "direct" ? "50%" : "13px") + ";background:" + col + ";color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:700;font-size:14px;",
+        dotStyle: online ? "position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:#0E8F66;border:2px solid #fff;" : "display:none;",
+        nameStyle: "font-size:14px;line-height:1.3;color:var(--mr-navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:" + (un ? "800" : "600") + ";",
+        previewStyle: "font-size:12.5px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:" + (un ? "var(--mr-navy);font-weight:700;" : "#7A8899;"),
+        unreadDot: un ? "flex:none;width:10px;height:10px;border-radius:50%;background:var(--mr-teal);" : "display:none;",
+        rowStyle: "display:flex;gap:11px;align-items:center;padding:9px 10px;border-radius:12px;cursor:pointer;" + (un ? "background:#F1F7FB;" : ""),
+        go: () => { this.setState({ msgrOpen: false }); if (this.dockAvailable()) this.openDockThread(t.id); else this.openThread(t.id); }
+      };
+    });
+  }
+  ensureDirect(list, email) {
+    const me = this.state.me, key = [me.email, email].sort().join("|");
+    const ex = list.filter(t => t.kind === "direct" && t.key === key)[0];
+    if (ex) return { list: list, t: ex };
+    const who = this.acct(email);
+    const t = { id: "d" + sha256hex(key).slice(0, 16), key: key, kind: "direct", name: who ? who.name : email,
+      members: [me.email, email], msgs: [], created: today(), by: me.email, touched: Date.now() };
+    return { list: list.concat([t]), t: t };
+  }
+  forwardTo(target) {
+    const st = this.state, me = st.me, f = st.fwdMsg;
+    if (!f) return;
+    let list = (st.chat || []).slice(), t;
+    if (target.email) { const r = this.ensureDirect(list, target.email); list = r.list; t = r.t; }
+    else t = list.filter(x => x.id === target.id)[0];
+    if (!t) return;
+    const msg = { id: "m" + Date.now() + Math.random().toString(36).slice(2, 7), by: me.email, byName: me.name, text: f.text || "",
+      file: f.file || "", fileName: f.fileName || "", fwd: true, at: Date.now(), seen: [me.email] };
+    this.saveChat(list.map(x => x.id === t.id ? Object.assign({}, x, { msgs: (x.msgs || []).concat([msg]), touched: Date.now() }) : x));
+    const targets = t.kind === "channel" ? st.accounts.filter(a => a.role === t.channelOf && a.email !== me.email).map(a => a.email) : (t.members || []).filter(e => e !== me.email);
+    this.notify(targets.map(e => ({ to: e, kind: "chat", threadId: t.id, title: me.name + " forwarded a message", text: (f.text || f.fileName || "Attachment").slice(0, 90), route: "chat", read: false, date: today() })));
+    this.setState({ fwdMsg: null, fwdSearch: "" });
+    this.flash("Forwarded", "Sent to " + (target.name || t.name) + ".");
+  }
+  msgExtra(t, m, mine) {
+    const me = (this.state.me || {}).email;
+    const rp = m.reply;
+    return {
+      hasReply: !!rp, replyWho: rp ? (rp.who || "") : "", replyText: rp ? (rp.text || "") : "",
+      replyStyle: "border-left:3px solid " + (mine ? "rgba(255,255,255,0.75)" : "var(--mr-teal)") + ";padding:5px 9px;margin-bottom:7px;border-radius:6px;font-size:12.5px;line-height:1.45;background:" + (mine ? "rgba(255,255,255,0.16)" : "#F1F6F9") + ";",
+      isFwd: !!m.fwd,
+      fwdStyle: "font-size:11.5px;font-style:italic;margin-bottom:4px;opacity:0.8;",
+      colStyle: "display:flex;flex-direction:column;gap:3px;max-width:min(78%,520px);align-items:" + (mine ? "flex-end" : "flex-start") + ";",
+      actStyle: "display:flex;gap:12px;font-size:11.5px;font-weight:600;color:#8B97A8;padding:0 4px;",
+      openImg: () => this.setState({ lightbox: { src: m.file, name: m.fileName || "image" } }),
+      doReply: () => this.setState({ chatReply: { threadId: t.id, id: m.id, who: m.by === me ? "You" : m.byName, text: String(m.text || (m.fileName ? "📎 " + m.fileName : "Attachment")).slice(0, 140) } }),
+      doFwd: () => this.setState({ fwdMsg: { text: m.text || "", file: m.file || "", fileName: m.fileName || "" }, fwdSearch: "" })
+    };
   }
 
   startDirect(email) {
@@ -11387,11 +11575,12 @@ class Component extends DCLogic {
             text: m.text, when: clock(m.at), who: m.byName,
             whoStyle: cur.kind === "direct" || mine ? "display:none;" : "font-weight:700;font-size:12px;color:var(--mr-teal);margin-bottom:3px;",
             rowStyle: "display:flex;flex:none;justify-content:" + (mine ? "flex-end" : "flex-start") + ";",
-            bubbleStyle: "max-width:min(78%,520px);border-radius:16px;padding:11px 15px;font-size:14.5px;line-height:1.55;word-break:break-word;box-shadow:0 1px 2px rgba(24,24,72,0.08);background:" +
+            bubbleStyle: "max-width:100%;box-sizing:border-box;border-radius:16px;padding:11px 15px;font-size:14.5px;line-height:1.55;word-break:break-word;box-shadow:0 1px 2px rgba(24,24,72,0.08);background:" +
               (mine ? "var(--mr-teal);color:#fff;border-bottom-right-radius:5px;" : "#fff;color:var(--mr-ink);border:1px solid #E4EAF1;border-bottom-left-radius:5px;"),
             whenStyle: "font-size:11px;margin-top:5px;text-align:right;color:" + (mine ? "rgba(255,255,255,0.75)" : "#98A5B4") + ";",
             ...this.chatAtt(m, mine),
-            ...this.msgTick(cur, m)
+            ...this.msgTick(cur, m),
+            ...this.msgExtra(cur, m, mine)
           };
         }),
         empty: (cur.msgs || []).length === 0,
@@ -11407,6 +11596,10 @@ class Component extends DCLogic {
       hasChatFile: !!st.chatFile,
       clearChatFile: () => this.setState({ chatFile: null }),
       chatEmojiOpen: !!st.chatEmoji,
+      chatReplyOn: !!(st.chatReply && cur && st.chatReply.threadId === cur.id),
+      chatReplyWho: st.chatReply ? st.chatReply.who : "", chatReplyText: st.chatReply ? st.chatReply.text : "",
+      cancelReply: () => this.setState({ chatReply: null }),
+      chatScrollKey: cur ? cur.id + ":" + (cur.msgs || []).length : "none",
       toggleChatEmoji: () => this.setState({ chatEmoji: !st.chatEmoji }),
       chatEmojis: EMOJI_QUICK.map(em => ({ em: em, add: () => this.setState({ chatDraft: (this.state.chatDraft || "") + em }) })),
       onChatFile: e => {
@@ -14273,7 +14466,7 @@ class Component extends DCLogic {
     if (st.screen !== "app" || !me) {
       return {
         isLogin: true, signedIn: false,
-        hasModal: !!st.modal,
+        hasModal: !!st.modal, lbOpen: false, fwdOpen: false, fwdTargets: [], lbSrc: "", lbName: "", fwdPreview: "", fwdSearch: "",
         modalTwo: !!(st.modal && st.modal.kind === "ask"),
         modalOne: !(st.modal && st.modal.kind === "ask"),
         modalYesLabel: st.modal ? (st.modal.yesLabel || "Yes") : "",
@@ -14966,7 +15159,7 @@ class Component extends DCLogic {
       },
 
       notesOpen: st.notesOpen,
-      toggleNotes: () => this.setState({ notesOpen: !st.notesOpen }),
+      toggleNotes: () => this.setState({ notesOpen: !st.notesOpen, msgrOpen: false }),
       bellCount: myNotes.filter(n => !n.read).length ? String(myNotes.filter(n => !n.read).length) : "",
       bellStyle: "display:flex;align-items:center;gap:5px;padding:8px 10px;border-radius:9px;cursor:pointer;transition:background 0.2s ease;" + (st.notesOpen ? "background:rgba(255,255,255,0.14);" : ""),
       bellBadgeStyle: myNotes.filter(n => !n.read).length
@@ -15127,6 +15320,7 @@ class Component extends DCLogic {
       chatDraft: this._cp.chatDraft, onChatDraft: this._cp.onChatDraft, onChatKey: this._cp.onChatKey,
       sendChat: this._cp.sendChat, sendStyle: this._cp.sendStyle,
       hasChatFile: this._cp.hasChatFile, chatFileName: this._cp.chatFileName,
+      chatReplyOn: this._cp.chatReplyOn, chatReplyWho: this._cp.chatReplyWho, chatReplyText: this._cp.chatReplyText, cancelReply: this._cp.cancelReply, chatScrollKey: this._cp.chatScrollKey,
       clearChatFile: this._cp.clearChatFile, onChatFile: this._cp.onChatFile,
       chatEmojiOpen: this._cp.chatEmojiOpen, toggleChatEmoji: this._cp.toggleChatEmoji, chatEmojis: this._cp.chatEmojis,
       chatNew: this._cp.chatNew, toggleChatNew: this._cp.toggleChatNew,
@@ -15464,12 +15658,16 @@ class Component extends DCLogic {
               when: new Date(m.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
               whoStyle: t.kind === "direct" || mineM ? "display:none;" : "font-weight:700;font-size:11px;color:var(--mr-teal);margin-bottom:2px;",
               rowStyle: "display:flex;flex:none;justify-content:" + (mineM ? "flex-end" : "flex-start") + ";",
-              bubbleStyle: "max-width:82%;border-radius:14px;padding:9px 12px;font-size:13.5px;line-height:1.5;word-break:break-word;background:" +
+              bubbleStyle: "max-width:100%;box-sizing:border-box;border-radius:14px;padding:9px 12px;font-size:13.5px;line-height:1.5;word-break:break-word;background:" +
                 (mineM ? "var(--mr-teal);color:#fff;border-bottom-right-radius:4px;" : "#fff;color:var(--mr-ink);border:1px solid #E4EAF1;border-bottom-left-radius:4px;"),
               whenStyle: "font-size:10px;margin-top:3px;text-align:right;color:" + (mineM ? "rgba(255,255,255,0.72)" : "#98A5B4") + ";"
-            }, this.msgTick(t, m));
+            }, this.msgTick(t, m), this.msgExtra(t, m, mineM), { colStyle: "display:flex;flex-direction:column;gap:2px;max-width:84%;align-items:" + (mineM ? "flex-end" : "flex-start") + ";" });
           }),
           empty: (t.msgs || []).length === 0,
+          scrollKey: id + ":" + (t.msgs || []).length + ":" + (min ? 0 : 1),
+          replyOn: !!(st.chatReply && st.chatReply.threadId === id),
+          replyWho: st.chatReply ? st.chatReply.who : "", replyText: st.chatReply ? st.chatReply.text : "",
+          cancelReply: () => this.setState({ chatReply: null }),
           draft: draft,
           onDraft: e => this.setState({ dockDraft: Object.assign({}, st.dockDraft || {}, { [id]: e.target.value }) }),
           onKey: e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } },
@@ -15480,6 +15678,22 @@ class Component extends DCLogic {
       }).filter(Boolean),
 
       hasModal: !!st.modal,
+      lbOpen: !!st.lightbox, lbSrc: st.lightbox ? st.lightbox.src : "", lbName: st.lightbox ? st.lightbox.name : "",
+      closeLb: () => this.setState({ lightbox: null }),
+      fwdOpen: !!st.fwdMsg, fwdPreview: st.fwdMsg ? (st.fwdMsg.text || (st.fwdMsg.fileName ? "📎 " + st.fwdMsg.fileName : "")).slice(0, 160) : "",
+      fwdSearch: st.fwdSearch || "", onFwdSearch: e => this.setState({ fwdSearch: e.target.value }),
+      closeFwd: () => this.setState({ fwdMsg: null, fwdSearch: "" }),
+      fwdTargets: st.fwdMsg ? this.fwdTargets() : [],
+      msgrOn: this.routeAllowed("chat") && !st.candMode && !st.interviewMode,
+      msgrOpen: !!st.msgrOpen,
+      toggleMsgr: () => this.setState({ msgrOpen: !st.msgrOpen, notesOpen: false }),
+      msgrBadge: this._chatUnread ? String(this._chatUnread) : "",
+      msgrBadgeStyle: this._chatUnread ? "position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#E0413A;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;" : "display:none;",
+      msgrStyle: "position:relative;display:flex;align-items:center;justify-content:center;width:38px;height:36px;border-radius:9px;cursor:pointer;transition:background 0.2s ease;" + (st.msgrOpen ? "background:rgba(255,255,255,0.14);" : ""),
+      msgrList: this.msgrList(),
+      msgrEmpty: (this._threads || []).filter(t => (t.msgs || []).length).length === 0,
+      msgrAll: () => this.setState({ msgrOpen: false, route: "chat" }),
+      msgrNew: () => this.setState({ msgrOpen: false, route: "chat", chatNew: true }),
       modalTwo: !!(st.modal && st.modal.kind === "ask"),
       modalOne: !(st.modal && st.modal.kind === "ask"),
       modalYesLabel: st.modal ? (st.modal.yesLabel || "Yes") : "",
