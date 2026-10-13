@@ -145,6 +145,23 @@
       </sc-if>
 
       <div style="margin-top:24px;font-size:13px;color:#8B97A8;line-height:1.6;">Forgotten your password? Ask People &amp; Organisation to reset it for you.</div>
+      <sc-if value="{{ hasOnlineNow }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:22px;padding:14px 16px;border:1px solid #E4EAF1;border-radius:13px;background:#F7FAFC;">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:11px;">
+            <span style="flex:none;width:9px;height:9px;border-radius:50%;background:#0E8F66;box-shadow:0 0 0 4px rgba(14,143,102,0.16);"></span>
+            <span style="font-weight:700;font-size:13px;color:#2C3646;">{{ onlineNowLabel }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto;">
+            <sc-for list="{{ onlineNow }}" as="p" hint-placeholder-count="3">
+              <div style="display:flex;gap:10px;align-items:center;">
+                <span style="{{ p.discStyle }}">{{ p.initials }}</span>
+                <span style="flex:1;min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;line-height:1.3;">{{ p.name }}</span><span style="display:block;font-size:11.5px;color:#8B97A8;">{{ p.sub }}</span></span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-size:12px;color:#8B97A8;margin-top:8px;">{{ onlineMore }}</div>
+        </div>
+      </sc-if>
 
       <div style="margin-top:26px;padding-top:22px;border-top:1px solid #E4EAF1;">
         <sc-if value="{{ candGate }}" hint-placeholder-val="{{ false }}">
@@ -5785,8 +5802,14 @@
               <div style="{{ m.rowStyle }}">
                 <div style="{{ m.bubbleStyle }}">
                   <div style="{{ m.whoStyle }}">{{ m.who }}</div>
+                  <sc-if value="{{ m.isImg }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ m.file }}" target="_blank" style="display:block;margin-bottom:8px;"><img src="{{ m.file }}" alt="{{ m.fileName }}" style="display:block;max-width:100%;max-height:280px;border-radius:10px;object-fit:contain;background:rgba(0,0,0,0.06);"></a>
+                  </sc-if>
                   <sc-if value="{{ m.hasFile }}" hint-placeholder-val="{{ false }}">
                     <a href="{{ m.file }}" download="{{ m.fileName }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
+                  </sc-if>
+                  <sc-if value="{{ m.pending }}" hint-placeholder-val="{{ false }}">
+                    <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
                   </sc-if>
                   <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
                   <div style="{{ m.whenStyle }}">{{ m.when }}</div>
@@ -5804,7 +5827,15 @@
                 <span onClick="{{ clearChatFile }}" style="flex:none;color:#B4443A;font-weight:700;cursor:pointer;">×</span>
               </div>
             </sc-if>
+            <sc-if value="{{ chatEmojiOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:2px;margin-bottom:10px;">
+                <sc-for list="{{ chatEmojis }}" as="e" hint-placeholder-count="12">
+                  <span onClick="{{ e.add }}" style="font-size:21px;text-align:center;padding:5px 0;border-radius:8px;cursor:pointer;" style-hover="background:#F1F5F9;">{{ e.em }}</span>
+                </sc-for>
+              </div>
+            </sc-if>
             <div style="display:flex;gap:10px;align-items:flex-end;">
+              <span onClick="{{ toggleChatEmoji }}" title="Emoji" style="flex:none;width:44px;height:44px;border-radius:50%;border:1px solid #DCE2EA;background:#F7FAFC;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;">😊</span>
               <label data-fn="chatFiles" style="flex:none;width:44px;height:44px;border-radius:50%;border:1px solid #DCE2EA;background:#F7FAFC;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;color:#5C6B80;" style-hover="background:#EEF4F8;">
                 ⊕
                 <input type="file" onChange="{{ onChatFile }}" style="display:none;">
@@ -5894,6 +5925,12 @@
         </sc-if>
         <sc-if value="{{ ki.hasHtml }}" hint-placeholder-val="{{ false }}">
           <div style="margin-top:20px;border:1px solid #E4EAF1;border-radius:12px;overflow:hidden;">{{ ki.htmlBlock }}</div>
+        </sc-if>
+        <sc-if value="{{ ki.locked }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:13px;align-items:center;background:#FDF6EA;border:1px solid #EFD9AE;border-radius:13px;padding:15px 18px;margin-bottom:20px;">
+            <span style="flex:none;width:38px;height:38px;border-radius:50%;background:#C96A0F;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;">🔒</span>
+            <span style="flex:1;min-width:0;font-size:14px;color:#7A5518;line-height:1.55;font-weight:600;">{{ ki.lockedNote }}</span>
+          </div>
         </sc-if>
         <sc-if value="{{ ki.showEnrol }}" hint-placeholder-val="{{ false }}">
           <div style="background:#F7FAFC;border:1px solid #E4EAF1;border-radius:13px;padding:18px 20px;margin-bottom:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
@@ -7219,6 +7256,7 @@
               <div style="font-size:11px;opacity:0.75;">{{ d.sub }}</div>
             </div>
           </div>
+          <span onClick="{{ d.openFull }}" title="Open in Messages" style="flex:none;font-size:14px;cursor:pointer;padding:4px 6px;opacity:0.85;">⤢</span>
           <span onClick="{{ d.toggle }}" style="flex:none;font-size:12px;cursor:pointer;padding:4px 6px;opacity:0.8;">{{ d.caret }}</span>
           <span onClick="{{ d.close }}" style="flex:none;font-size:15px;font-weight:700;cursor:pointer;padding:4px 6px;opacity:0.8;">×</span>
         </div>
@@ -7229,6 +7267,15 @@
                 <div style="{{ m.rowStyle }}">
                   <div style="{{ m.bubbleStyle }}">
                     <div style="{{ m.whoStyle }}">{{ m.who }}</div>
+                    <sc-if value="{{ m.isImg }}" hint-placeholder-val="{{ false }}">
+                      <a href="{{ m.file }}" target="_blank" style="display:block;margin-bottom:6px;"><img src="{{ m.file }}" alt="{{ m.fileName }}" style="display:block;max-width:100%;max-height:180px;border-radius:9px;object-fit:contain;background:rgba(0,0,0,0.06);"></a>
+                    </sc-if>
+                    <sc-if value="{{ m.hasFile }}" hint-placeholder-val="{{ false }}">
+                      <a href="{{ m.file }}" download="{{ m.fileName }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
+                    </sc-if>
+                    <sc-if value="{{ m.pending }}" hint-placeholder-val="{{ false }}">
+                      <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
+                    </sc-if>
                     <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
                     <div style="{{ m.whenStyle }}">{{ m.when }}</div>
                   </div>
@@ -7238,7 +7285,24 @@
                 <div style="margin:auto;font-size:13px;color:#98A5B4;text-align:center;line-height:1.5;">No messages yet.</div>
               </sc-if>
             </div>
-            <div style="display:flex;gap:8px;align-items:flex-end;padding:11px 12px;border-top:1px solid #EDF1F6;">
+            <sc-if value="{{ d.emojiOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:2px;padding:8px 10px;border-top:1px solid #EDF1F6;background:#fff;">
+                <sc-for list="{{ d.emojis }}" as="e" hint-placeholder-count="8">
+                  <span onClick="{{ e.add }}" style="font-size:19px;text-align:center;padding:4px 0;border-radius:7px;cursor:pointer;" style-hover="background:#F1F5F9;">{{ e.em }}</span>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ d.hasFile }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:8px;align-items:center;margin:8px 12px 0;background:#F1F9FC;border:1px solid #B9DCEA;border-radius:9px;padding:7px 10px;font-size:12.5px;">
+                <span style="flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">⇧ {{ d.fileName }}</span>
+                <span onClick="{{ d.clearFile }}" style="flex:none;color:#B4443A;font-weight:700;cursor:pointer;">×</span>
+              </div>
+            </sc-if>
+            <div style="display:flex;gap:6px;align-items:flex-end;padding:11px 12px;border-top:1px solid #EDF1F6;">
+              <span onClick="{{ d.toggleEmoji }}" title="Emoji" style="flex:none;width:32px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;border-radius:9px;" style-hover="background:#F1F5F9;">😊</span>
+              <sc-if value="{{ d.canFiles }}" hint-placeholder-val="{{ true }}">
+                <label title="Attach a file or photo" style="flex:none;width:32px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;border-radius:9px;color:#5C6B80;" style-hover="background:#F1F5F9;">📎<input type="file" onChange="{{ d.onFile }}" style="display:none;"></label>
+              </sc-if>
               <textarea value="{{ d.draft }}" onInput="{{ d.onDraft }}" onKeyDown="{{ d.onKey }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:40px;max-height:110px;resize:none;font-size:14px;line-height:1.45;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:12px;padding:10px 12px;outline:none;color:var(--mr-navy);"></textarea>
               <div onClick="{{ d.send }}" style="{{ d.sendStyle }}">➤</div>
             </div>
@@ -7790,7 +7854,9 @@ const CLOUD_FIELDS = { policies: "policies", accounts: "accounts", depts: "depts
   video: "video", recog: "recog", know: "know", knowCats: "knowCats", exams: "exams", attempts: "attempts", chat: "chat", subs: "subs", certs: "certs",
   asks: "asks", events: "events", evKinds: "evKinds", titles: "titles", vacancies: "vacancies", checkins: "checkins", cases: "cases",
   benefits: "benefits", benCats: "benCats", cands: "cands",
-  compReg: "compReg", compAudits: "compAudits", compRounds: "compRounds", compReports: "compReports", compDecls: "compDecls", compAi: "compAi" };
+  compReg: "compReg", compAudits: "compAudits", compRounds: "compRounds", compReports: "compReports", compDecls: "compDecls", compAi: "compAi", presence: "presence" };
+K.presence = "mrhub-presence-v1";
+const EMOJI_QUICK = ["😀","😂","😊","😍","🥰","😎","🤔","😮","😢","🙏","👍","👏","🙌","💪","🤝","🎉","🔥","❤️","✅","⭐","☕","🎂","💡","👀"];
 const COMP_STAGES = ["Reported", "Triage", "Investigating", "Action", "Closed"];
 const COMP_INC_CATS = ["Data or privacy breach", "Health & safety", "Fraud or theft", "Regulatory breach", "Harassment or discrimination", "IT or security", "Other"];
 const COMP_WB_CATS = ["Fraud or corruption", "Bribery or kickbacks", "Misconduct by a manager", "Harassment or discrimination", "Breach of law or regulation", "Retaliation for speaking up", "Other"];
@@ -8046,7 +8112,7 @@ class Component extends DCLogic {
     depts: SEED_DEPTS.slice(), cats: SEED_CATS.slice(),
     userData: {}, inbox: [], notes: [], ackMsg: "", headerH: 66,
     notesOpen: false, toast: null, toasted: [], replyText: {}, expandAck: null, picked: [],
-    menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [],
+    menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [], presence: {}, ivDraft: {}, dockFile: {}, dockEmoji: null, chatEmoji: false,
     asks: [], askNote: {}, evKinds: [], titles: [], newEvType: "", newTitleDraft: "",
     vacancies: [], vacOpen: null, vacFilter: "open",
     askDraft: { kind: "hire", role: "", dept: "", count: 1, target: "", targetLabel: "", why: "", when: "" }, dockMin: [], dockDraft: {}, dockListOpen: false, tkDismissed: [], enrolCode: "", wishDraft: "", retakePick: [],
@@ -8181,7 +8247,8 @@ class Component extends DCLogic {
     this.startCloud();
     setTimeout(() => this.installFonts(), 60);
     this.touchPresence();
-    this._presence = setInterval(() => this.touchPresence(), 60000);
+    this._presence = setInterval(() => this.touchPresence(), 120000);
+    try { const pr = JSON.parse(localStorage.getItem(K.presence) || "{}"); if (pr && typeof pr === "object") this.setState({ presence: pr }); } catch (e) {}
     const tok = (location.search.match(/[?&]candidate=([a-z0-9]+)/i) || [])[1];
     if (tok) {
       const c = (patch.cands || []).filter(x => x.token === tok)[0];
@@ -8251,7 +8318,7 @@ class Component extends DCLogic {
     map[K.bencats] = "benCats";
     map[K.cand] = "cands";
     map[K.compReg] = "compReg"; map[K.compAudits] = "compAudits"; map[K.compRounds] = "compRounds";
-    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi";
+    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence";
       map[K.pol] = "policies"; map[K.acc] = "accounts"; map[K.dept] = "depts";
       map[K.cat] = "cats"; map[K.user] = "userData"; map[K.inbox] = "inbox"; map[K.notes] = "notes";
       map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "charMsgs";
@@ -8445,7 +8512,7 @@ class Component extends DCLogic {
     map[K.bencats] = "benCats";
     map[K.cand] = "cands";
     map[K.compReg] = "compReg"; map[K.compAudits] = "compAudits"; map[K.compRounds] = "compRounds";
-    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi";
+    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence";
     map[K.pol] = "policies"; map[K.acc] = "accounts"; map[K.dept] = "depts";
     map[K.cat] = "cats"; map[K.inbox] = "inbox"; map[K.notes] = "notes"; map[K.user] = "userdata";
     map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "chars";
@@ -9069,8 +9136,12 @@ class Component extends DCLogic {
       rec.token = candToken();
       rec.code = eventCode();
       rec.owner = rec.owner || me.email;
+      rec.addedBy = me.email;
       rec.log = [this.logLine("Added by " + me.name)];
       this.saveCands((this.state.cands || []).concat([rec]));
+      const po = (this.state.accounts || []).filter(a => (a.role === "P&O" || a.email === rec.owner) && a.status !== "suspended" && a.email !== me.email).map(a => a.email);
+      if (po.length) this.notify(po.filter((v, i, a) => a.indexOf(v) === i).map(e => ({ to: e, kind: "recruit", route: "recruit", candId: rec.id,
+        title: "New candidate: " + rec.name, text: "Added by " + me.name + (rec.role ? " · " + rec.role : "") })));
     } else {
       this.saveCands(this.state.cands.map(x => x.id === rec.id ? rec : x));
     }
@@ -9087,6 +9158,9 @@ class Component extends DCLogic {
     this.saveCands(st.cands.map(x => x.id === id ? Object.assign({}, x, {
       stage: next, log: (x.log || []).concat([this.logLine("Moved to " + CAND_STAGES[next])])
     }) : x));
+    const me0 = (st.me || {}).email;
+    const watch = [c.addedBy, c.owner].concat(c.shared || []).filter(Boolean).filter(e => e !== me0).filter((v, i, a) => a.indexOf(v) === i);
+    if (watch.length) this.notify(watch.map(e => ({ to: e, kind: "recruit", route: "recruit", candId: c.id, title: c.name + " moved to " + CAND_STAGES[next], text: "Recruitment update" })));
     this.flash(CAND_STAGES[next], c.name);
   }
 
@@ -9138,7 +9212,9 @@ class Component extends DCLogic {
     if (["recruit", "candedit", "interview", "candexam"].indexOf(st.route) < 0 && !st.interviewMode) return {};
     const all = (st.cands || []).slice().sort((a, b) => String(b.created).localeCompare(String(a.created)));
     const isPO = me.role === "P&O" || me.role === "Marketing";
-    const visible = isPO ? all : all.filter(c => (c.shared || []).indexOf(me.email) > -1 || c.owner === me.email);
+    const myVac = new Set((st.vacancies || []).filter(v => v.by === me.email).map(v => v.id));
+    const visible = isPO ? all : all.filter(c => (c.shared || []).indexOf(me.email) > -1 || c.owner === me.email || c.addedBy === me.email
+      || (c.interview || {}).withEmail === me.email || (c.vacancyId && myVac.has(c.vacancyId)));
     const pool = st.candFilter === "all" ? visible
       : st.candFilter === "hired" ? visible.filter(c => c.stage === 6)
       : st.candFilter === "closed" ? visible.filter(c => c.stage === 7)
@@ -9185,12 +9261,13 @@ class Component extends DCLogic {
           if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => this.flash("Code copied", "Give it to " + c.name + " when they arrive."), () => {});
           else this.flash("Candidate code", t);
         },
-        ivWhen: (c.interview || {}).when || "",
-        ivWith: (c.interview || {}).withEmail || "",
-        ivNote: (c.interview || {}).note || "",
-        onIvWhen: e => this.setInterview(c.id, { when: e.target.value }),
-        onIvWith: e => this.setInterview(c.id, { withEmail: e.target.value }),
-        onIvNote: e => this.setInterview(c.id, { note: e.target.value }),
+        ...(function (self) {
+          const iv = c.interview || {}, d = (st.ivDraft || {})[c.id] || {};
+          const pick = k => d[k] !== undefined ? d[k] : (iv[k] || "");
+          const set = (k, v) => self.setState(s0 => ({ ivDraft: Object.assign({}, s0.ivDraft || {}, { [c.id]: Object.assign({}, (s0.ivDraft || {})[c.id] || {}, { [k]: v }) }) }));
+          return { ivWhen: pick("when"), ivWith: pick("withEmail"), ivNote: pick("note"),
+            onIvWhen: e => set("when", e.target.value), onIvWith: e => set("withEmail", e.target.value), onIvNote: e => set("note", e.target.value) };
+        })(this),
         book: () => this.bookInterview(c.id),
         remind: () => this.remindInterview(c.id),
         ivBooked: !!(c.interview || {}).when,
@@ -11002,18 +11079,16 @@ class Component extends DCLogic {
     return chans.concat(own.filter(t => t.kind !== "channel"));
   }
 
-  touchPresence() {
+  touchPresence(off) {
     const me = this.state.me;
-    if (!me || !me.email) return;
-    try {
-      const raw = JSON.parse(localStorage.getItem("mrhub-presence-v1") || "{}");
-      raw[me.email] = Date.now();
-      localStorage.setItem("mrhub-presence-v1", JSON.stringify(raw));
-    } catch (e) {}
+    if (!me || !me.email || this.state.candMode) return;
+    const cur = Object.assign({}, this.state.presence || {});
+    const last = cur[me.email] || 0;
+    if (!off && Date.now() - last < 100000) return;
+    if (off) delete cur[me.email]; else cur[me.email] = Date.now();
+    this.save(K.presence, cur, "presence");
   }
-  presence() {
-    try { return JSON.parse(localStorage.getItem("mrhub-presence-v1") || "{}"); } catch (e) { return {}; }
-  }
+  presence() { return this.state.presence || {}; }
   isOnline(email) {
     const p = this.presence()[email];
     return !!p && (Date.now() - p) < 5 * 60 * 1000;
@@ -11039,6 +11114,25 @@ class Component extends DCLogic {
     this.setState({ chatOpen: id, chatDraft: "", route: "chat", menuOpen: null });
   }
 
+  chatAtt(m, mine) {
+    const f = String(m.file || ""), ready = !!f && f.slice(0, 7) !== "mrblob:";
+    const img = ready && (f.indexOf("data:image/") === 0 || /\.(png|jpe?g|gif|webp)$/i.test(m.fileName || ""));
+    return {
+      file: ready ? f : "", fileName: m.fileName || "file", isImg: img, hasFile: ready,
+      pending: !ready && !!(m.fileName || f),
+      pendingText: f ? "⏳ Loading " + (m.fileName || "attachment") + "…" : "⚠ " + (m.fileName || "Attachment") + " could not be shared — ask them to send it again.",
+      pendingStyle: "font-size:12.5px;font-weight:600;padding:8px 11px;border-radius:9px;margin-bottom:6px;background:" + (mine ? "rgba(255,255,255,0.18);color:#fff;" : "#F4F7FA;color:#5C6B80;"),
+      fileStyle: "display:inline-flex;gap:8px;align-items:center;margin-bottom:8px;font-weight:600;font-size:13px;padding:8px 12px;border-radius:10px;text-decoration:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:" +
+        (mine ? "rgba(255,255,255,0.18);color:#fff;" : "#F4F7FA;color:var(--mr-navy);")
+    };
+  }
+  openDockThread(id) {
+    const st = this.state;
+    const docks = (st.docks || []).filter(x => x !== id).concat([id]).slice(-2);
+    this.setState({ docks: docks, dockMin: (st.dockMin || []).filter(x => x !== id), dockListOpen: false, notesOpen: false, toast: null });
+    this.openThreadQuiet(id);
+  }
+  dockAvailable() { return this.fnOn("dock") && this.routeAllowed("chat") && (window.innerWidth || 1200) > 720; }
   sendChat() {
     const st = this.state, me = st.me;
     const body = st.chatDraft.trim();
@@ -11064,7 +11158,7 @@ class Component extends DCLogic {
       title: t.kind === "channel" ? "Message in " + t.name : (t.kind === "group" ? t.name : me.name),
       text: (t.kind === "group" ? me.name + ": " : "") + (body || "Sent a file").slice(0, 90),
       route: "chat", read: false, date: today() })));
-    this.setState({ chatDraft: "", chatFile: null, chatOpen: t.id });
+    this.setState({ chatDraft: "", chatFile: null, chatOpen: t.id, chatEmoji: false });
   }
 
   startDirect(email) {
@@ -11153,9 +11247,8 @@ class Component extends DCLogic {
             bubbleStyle: "max-width:min(78%,520px);border-radius:16px;padding:11px 15px;font-size:14.5px;line-height:1.55;word-break:break-word;box-shadow:0 1px 2px rgba(24,24,72,0.08);background:" +
               (mine ? "var(--mr-teal);color:#fff;border-bottom-right-radius:5px;" : "#fff;color:var(--mr-ink);border:1px solid #E4EAF1;border-bottom-left-radius:5px;"),
             whenStyle: "font-size:11px;margin-top:5px;text-align:right;color:" + (mine ? "rgba(255,255,255,0.75)" : "#98A5B4") + ";",
-            hasFile: !!m.file, file: m.file || "", fileName: m.fileName || "file",
-            fileStyle: "display:inline-flex;gap:8px;align-items:center;margin-bottom:8px;font-weight:600;font-size:13.5px;padding:9px 13px;border-radius:10px;text-decoration:none;background:" +
-              (mine ? "rgba(255,255,255,0.18);color:#fff;" : "#F4F7FA;color:var(--mr-navy);")
+            ...this.chatAtt(m, mine),
+            _att: 1
           };
         }),
         empty: (cur.msgs || []).length === 0,
@@ -11170,6 +11263,9 @@ class Component extends DCLogic {
       chatFileName: st.chatFile ? st.chatFile.name : "",
       hasChatFile: !!st.chatFile,
       clearChatFile: () => this.setState({ chatFile: null }),
+      chatEmojiOpen: !!st.chatEmoji,
+      toggleChatEmoji: () => this.setState({ chatEmoji: !st.chatEmoji }),
+      chatEmojis: EMOJI_QUICK.map(em => ({ em: em, add: () => this.setState({ chatDraft: (this.state.chatDraft || "") + em }) })),
       onChatFile: e => {
         const f = e.target.files && e.target.files[0];
         if (f) this.readFileData(f, (d, n) => this.setState({ chatFile: { data: d, name: n } }));
@@ -11213,6 +11309,7 @@ class Component extends DCLogic {
 
   commitKnow(status) {
     const kb = this.state.kb;
+    const wasLiveK = !!(kb && kb.id && ((this.state.know || []).filter(x => x.id === kb.id)[0] || {}).status === "live");
     if (!kb.title.trim()) return this.flash("Give it a title", "Staff need to know what they are opening.", "no");
     const rec = JSON.parse(JSON.stringify(kb));
     rec.status = status; rec.title = rec.title.trim();
@@ -11222,12 +11319,15 @@ class Component extends DCLogic {
       while (this.state.know.some(x => x.id === id)) { id = base + "-" + n; n++; }
       rec.id = id;
       this.saveKnow(this.state.know.concat([rec]));
-      if (status === "live") this.notify(this.staffEmails(this.state.me.email).map(e => ({
-        id: "n" + Date.now() + e, to: e, kind: "know", title: "New in the knowledge hub",
-        text: rec.title, route: "know", read: false, date: today()
-      })));
     } else {
       this.saveKnow(this.state.know.map(x => x.id === rec.id ? rec : x));
+    }
+    if (status === "live" && !wasLiveK) {
+      const tg = Object.assign({ mode: "all", emails: [], depts: [], roles: [] }, rec.target || {});
+      const to = (this.state.accounts || []).filter(a => a.status !== "suspended" && a.role !== "Candidate" && a.email !== this.state.me.email
+        && (!rec.audience || rec.audience === "all" || rec.audience === a.dept) && this.targetsForAccount(tg, a)).map(a => a.email);
+      this.notify(to.map(e => ({ to: e, kind: "know", route: "know", title: ((rec.lessons || []).length ? "New course: " : "New in the knowledge hub: ") + rec.title,
+        text: this.needsCode(rec) ? "You will need the enrolment code from the trainer." : (rec.desc || "").slice(0, 100) })));
     }
     this.flash(status === "live" ? "Published" : "Draft saved",
       status === "live" ? rec.title + " is in the knowledge hub." : "Saved as a draft — only admins can see it.");
@@ -11243,6 +11343,8 @@ class Component extends DCLogic {
 
   commitExam(status) {
     const xb = this.state.xb;
+    this._examWasLive = this._examWasLive || {};
+    if (xb && xb.id) this._examWasLive[xb.id] = ((this.state.exams || []).filter(x => x.id === xb.id)[0] || {}).status === "live";
     if (!xb.title.trim()) return this.flash("Give the exam a title", "", "no");
     const clean = JSON.parse(JSON.stringify(xb));
     clean.status = status; clean.title = clean.title.trim();
@@ -11255,6 +11357,13 @@ class Component extends DCLogic {
       this.saveExams(this.state.exams.concat([clean]));
     } else {
       this.saveExams(this.state.exams.map(x => x.id === clean.id ? clean : x));
+    }
+    const wasLive = ((this.state.exams || []).filter(x => x.id === clean.id)[0] || {}).status === "live" && xb.id;
+    if (status === "live" && !(xb.id && (this._examWasLive || {})[xb.id])) {
+      const tg = Object.assign({ mode: "all", emails: [], depts: [], roles: [] }, clean.target || {});
+      const to = (this.state.accounts || []).filter(a => a.status !== "suspended" && a.role !== "Candidate" && a.email !== this.state.me.email && this.targetsForAccount(tg, a)).map(a => a.email);
+      this.notify(to.map(e => ({ to: e, kind: "exam", route: "know", title: "New assessment: " + clean.title,
+        text: clean.closes ? "Open until " + clean.closes : clean.qs.length + " questions" })));
     }
     this.flash(status === "live" ? "Exam published" : "Draft saved",
       status === "live" ? clean.qs.length + " questions · staff can start it now." : "Saved as a draft — not visible to staff yet.");
@@ -11885,18 +11994,24 @@ class Component extends DCLogic {
     const st = this.state, me = st.me;
     const c = (st.cands || []).filter(x => x.id === id)[0];
     if (!c) return;
-    const iv = c.interview || {};
+    const iv = Object.assign({}, c.interview || {}, (st.ivDraft || {})[id] || {});
     if (!iv.when) return this.flash("Add the date and time first", "", "no");
+    if ((st.ivDraft || {})[id] && iv.withEmail !== (c.interview || {}).withEmail) iv.status = "";
+    const dr = Object.assign({}, st.ivDraft || {}); delete dr[id];
+    this.setState({ ivDraft: dr });
     this.saveCands(st.cands.map(x => x.id === id ? Object.assign({}, x, {
+      interview: iv,
       stage: Math.max(x.stage, 4),
       log: (x.log || []).concat([this.logLine("Interview booked for " + iv.when +
         (iv.withEmail ? " with " + ((this.acct(iv.withEmail) || {}).name || iv.withEmail) : ""))])
     }) : x));
-    const to = [iv.withEmail, c.owner].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i);
-    this.notify(to.map(e => ({ id: "n" + Date.now() + e, to: e, kind: "recruit",
-      title: "Interview booked", text: c.name + " · " + iv.when + (c.role ? " · " + c.role : ""),
-      route: "recruit", read: false, date: today() })));
-    this.flash("Interview booked", "The interviewer and the owner have been notified.");
+    const vac = (st.vacancies || []).filter(v => v.id === c.vacancyId)[0];
+    const to = [iv.withEmail, c.owner, c.addedBy, vac && vac.by].concat(c.shared || []).filter(Boolean).filter(e => e !== me.email).filter((v, i, a) => a.indexOf(v) === i);
+    this.notify(to.map(e => ({ to: e, kind: "recruit",
+      title: e === iv.withEmail ? "You are interviewing " + c.name : "Interview booked: " + c.name,
+      text: iv.when + (c.role ? " · " + c.role : "") + (iv.note ? " · " + iv.note.slice(0, 80) : ""),
+      route: "recruit", candId: c.id })));
+    this.flash("Interview booked", to.length + (to.length === 1 ? " person has" : " people have") + " been notified — the interviewer, the owner and whoever added the candidate.");
   }
 
   remindInterview(id) {
@@ -12075,10 +12190,13 @@ class Component extends DCLogic {
         this.flash("Removed", who.name + " is off " + k.title + ".");
       });
   }
+  needsCode(k) { return !!k && this.enrolWay(k, "code") && !!String(k.enrolCode || "").trim(); }
   enrol(id, viaCode) {
     const st = this.state, me = st.me;
     const k = (st.know || []).filter(x => x.id === id)[0];
     if (!k) return;
+    if (!viaCode && this.needsCode(k)) return this.flash("This course needs its enrolment code", "Type the code the trainer gave you to join.", "no");
+    if (!viaCode && !this.enrolWay(k, "open")) return this.flash("You cannot join this one yourself", "Request access and People & Organisation will decide.", "no");
     if (this.hasLeftCourse(k)) return this.flash("You left this course", "You cannot put yourself back on it — ask People & Organisation for access.", "no");
     if ((k.enrolled || []).indexOf(me.email) > -1) return this.flash("Already enrolled", "It is on your learning list.", "no");
     this.saveKnow(st.know.map(x => x.id === id
@@ -12241,7 +12359,9 @@ class Component extends DCLogic {
     const cur = (st.know || []).filter(k => k.id === st.knowOpen)[0] || visible[0] || blankKnow("", "");
     const curMeta = kindMeta(cur.kind), curCol = colOf(cur.kind);
     const curDone = done.indexOf(cur.id) > -1;
-    const ytSrc = cur.kind === "video" ? this.ytEmbed(cur.url) : "";
+    const curLocked = (cur.lessons || []).length > 0 && (cur.enrolled || []).indexOf(me.email) < 0 && cur.instructor !== me.email
+      && !(this.isAdmin() && this.can("know") && !st.asStaff);
+    const ytSrc = cur.kind === "video" && !curLocked ? this.ytEmbed(cur.url) : "";
 
     const myAtt = id => (st.attempts || []).filter(a => a.examId === id && a.email === me.email);
     const liveExams = (st.exams || []).filter(e => e.status === "live");
@@ -12258,11 +12378,11 @@ class Component extends DCLogic {
         title: cur.title, desc: cur.desc || "", cat: cur.cat, icon: curMeta[2], kindLabel: curMeta[1],
         headStyle: "background:linear-gradient(140deg," + curCol + " 0%,var(--mr-navy) 78%);padding:32px 30px 28px;",
         chipStyle: "font-family:var(--mr-comic);font-size:18px;letter-spacing:0.03em;color:" + curCol + ";background:#FFFDF6;border:2px solid var(--mr-ink);padding:2px 12px;border-radius:7px;",
-        hasLink: !!(cur.url && cur.kind === "link"), url: cur.url,
-        hasFile: !!cur.data, data: cur.data, fileName: cur.fileName || "file",
+        hasLink: !curLocked && !!(cur.url && cur.kind === "link"), url: curLocked ? "" : cur.url,
+        hasFile: !curLocked && !!cur.data, data: curLocked ? "" : cur.data, fileName: cur.fileName || "file",
         hasVideo: !!ytSrc,
         videoBlock: ytSrc ? React.createElement("iframe", { src: ytSrc, title: cur.title, allow: "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture", allowFullScreen: true, style: { width: "100%", height: "100%", border: "none", display: "block" } }) : null,
-        hasHtml: !!(cur.html && cur.html.trim()),
+        hasHtml: !curLocked && !!(cur.html && cur.html.trim()),
         htmlBlock: React.createElement("iframe", {
           key: cur.id + ":" + String(cur.html || "").length,
           srcDoc: '<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:18px;font-family:sans-serif;line-height:1.6;}</style></head><body>' + (cur.html || "") + "</body></html>",
@@ -12331,7 +12451,12 @@ class Component extends DCLogic {
           startExam: () => this.startExam(l.examId)
         })),
         showEnrol: (cur.lessons || []).length > 0 && (cur.enrolled || []).indexOf(me.email) < 0
-          && this.enrolWay(cur, "open") && !this.courseShut(cur) && !this.hasLeftCourse(cur),
+          && this.enrolWay(cur, "open") && !this.needsCode(cur) && !this.courseShut(cur) && !this.hasLeftCourse(cur),
+        locked: curLocked,
+        lockedNote: this.hasLeftCourse(cur) ? "You left this course. Ask People & Organisation to let you back in."
+          : this.needsCode(cur) ? "This course is locked. Enter the enrolment code below to open the material."
+          : this.courseShut(cur) ? "Enrolment is closed for this course."
+          : this.enrolWay(cur, "open") ? "Enrol to open the modules." : "You need to be given access to open the material.",
         enrolHead: "Join this course",
         enrolNote: (cur.lessons || []).length + " modules" + (cur.examId ? " and a final assessment" : "") +
           (cur.closes ? " · available until " + cur.closes : ""),
@@ -12432,7 +12557,7 @@ class Component extends DCLogic {
         })(),
         showClaim: this.courseDone(cur) && curDone && cur.award !== false && !this.certRec(cur.id),
         finished: this.courseDone(cur),
-        lessonsOpen: !this.courseDone(cur) && (cur.lessons || []).length > 0,
+        lessonsOpen: !curLocked && !this.courseDone(cur) && (cur.lessons || []).length > 0,
         finishedNote: "Every module and assessment on this course is complete. The material is closed — your results and certificate stay here.",
         results: (function (self) {
           const st2 = self.state, meE = (st2.me || {}).email;
@@ -13289,12 +13414,12 @@ class Component extends DCLogic {
     if (!n.read) this.save(K.notes, st.notes.map(x => x.id === n.id ? Object.assign({}, x, { read: true }) : x), "notes");
     this.setState({ notesOpen: false, toast: null });
     if (n.kind === "chat") {
-      if (n.threadId && (st.chat || []).some(t => t.id === n.threadId)) return this.openThread(n.threadId);
+      if (n.threadId && (st.chat || []).some(t => t.id === n.threadId)) return this.dockAvailable() && st.route !== "chat" ? this.openDockThread(n.threadId) : this.openThread(n.threadId);
       return this.setState({ route: "chat", chatOpen: n.threadId || st.chatOpen, chatWait: n.threadId || "", menuOpen: null });
     }
     if (n.recogId) return this.go("recog", { rxOpen: n.recogId });
     if (n.policyId) return this.openPolicy(n.policyId);
-    if (n.formId && (n.stats || /^New response/i.test(n.title || "")) && this.can("forms")) return this.openStats(n.formId);
+    if (n.formId && (n.stats || /^New response/i.test(n.title || "")) && (this.can("forms") || ((st.forms || []).filter(f => f.id === n.formId)[0] || {}).byEmail === (st.me || {}).email)) return this.openStats(n.formId);
     if (n.formId) return this.openFill(n.formId);
     if (n.route) return this.go(n.route);
     if (n.ref) return this.go("inbox");
@@ -13988,6 +14113,19 @@ class Component extends DCLogic {
         loginBlurb: this.T().loginBlurb, loginFoot: this.T().loginFoot,
         candGate: st.candGate === true,
         candGateClosed: st.candGate !== true,
+        ...(function (self) {
+          const pr = st.presence || {}, now = Date.now();
+          const on = (st.accounts || []).filter(a => a.status !== "suspended" && a.role !== "Candidate" && pr[a.email] && now - pr[a.email] < 5 * 60 * 1000)
+            .sort((a, b) => pr[b.email] - pr[a.email]);
+          const ago = t => { const m = Math.round((now - t) / 60000); return m < 1 ? "just now" : m + " min ago"; };
+          return {
+            hasOnlineNow: on.length > 0,
+            onlineNowLabel: on.length + (on.length === 1 ? " person is" : " people are") + " signed in now",
+            onlineNow: on.slice(0, 14).map(a => ({ name: a.name, sub: [a.dept, ago(pr[a.email])].filter(Boolean).join(" · "), initials: initials(a.name),
+              discStyle: "flex:none;width:30px;height:30px;border-radius:50%;background:" + self.roleColor(a.role) + ";color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;" })),
+            onlineMore: on.length > 14 ? "+ " + (on.length - 14) + " more" : ""
+          };
+        })(this),
         candCode: st.candCode || "",
         onCandCode: e => this.setState({ candCode: e.target.value.toUpperCase() }),
         onCandCodeKey: e => { if (e.key === "Enter") this.candSignIn(); },
@@ -14771,6 +14909,7 @@ class Component extends DCLogic {
       sendChat: this._cp.sendChat, sendStyle: this._cp.sendStyle,
       hasChatFile: this._cp.hasChatFile, chatFileName: this._cp.chatFileName,
       clearChatFile: this._cp.clearChatFile, onChatFile: this._cp.onChatFile,
+      chatEmojiOpen: this._cp.chatEmojiOpen, toggleChatEmoji: this._cp.toggleChatEmoji, chatEmojis: this._cp.chatEmojis,
       chatNew: this._cp.chatNew, toggleChatNew: this._cp.toggleChatNew,
       chatNewLabel: this._cp.chatNew ? "Close" : "+ New",
       chatSearch: this._cp.chatSearch, onChatSearch: this._cp.onChatSearch,
@@ -15070,12 +15209,14 @@ class Component extends DCLogic {
         const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : "var(--mr-teal)";
         const min = (st.dockMin || []).indexOf(id) > -1;
         const draft = (st.dockDraft || {})[id] || "";
+        const dfile = (st.dockFile || {})[id] || null;
         const send = () => {
-          if (!String(draft).trim()) return;
-          const drafts = Object.assign({}, st.dockDraft || {});
-          delete drafts[id];
-          this.setState({ chatOpen: id, chatDraft: draft, chatFile: null, dockDraft: drafts }, () => this.sendChat());
+          if (!String(draft).trim() && !dfile) return;
+          const drafts = Object.assign({}, st.dockDraft || {}); delete drafts[id];
+          const files = Object.assign({}, st.dockFile || {}); delete files[id];
+          this.setState({ chatOpen: id, chatDraft: draft, chatFile: dfile, dockDraft: drafts, dockFile: files, dockEmoji: null }, () => this.sendChat());
         };
+        const emojiOpen = st.dockEmoji === id;
         return {
           name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : initials(nm),
           sub: t.kind === "channel" ? "Team channel" : t.kind === "group" ? (t.members || []).length + " people" : "Direct message",
@@ -15085,9 +15226,21 @@ class Component extends DCLogic {
           open: !min, caret: min ? "▲" : "▼",
           toggle: () => this.setState({ dockMin: min ? (st.dockMin || []).filter(x => x !== id) : (st.dockMin || []).concat([id]) }),
           close: () => this.setState({ docks: (st.docks || []).filter(x => x !== id) }),
+          openFull: () => { this.setState({ docks: (st.docks || []).filter(x => x !== id) }); this.openThread(id); },
+          emojiOpen: emojiOpen,
+          toggleEmoji: () => this.setState({ dockEmoji: emojiOpen ? null : id }),
+          emojis: EMOJI_QUICK.map(em => ({ em: em, add: () => this.setState({ dockDraft: Object.assign({}, this.state.dockDraft || {}, { [id]: ((this.state.dockDraft || {})[id] || "") + em }) }) })),
+          hasFile: !!dfile, fileName: dfile ? dfile.name : "",
+          clearFile: () => { const f2 = Object.assign({}, st.dockFile || {}); delete f2[id]; this.setState({ dockFile: f2 }); },
+          onFile: e => {
+            const f = e.target.files && e.target.files[0];
+            if (f) this.readFileData(f, (d, n) => this.setState({ dockFile: Object.assign({}, this.state.dockFile || {}, { [id]: { data: d, name: n } }) }));
+            e.target.value = "";
+          },
+          canFiles: this.fnOn("chatFiles"),
           msgs: (t.msgs || []).slice(-40).map(m => {
             const mineM = m.by === meE;
-            return {
+            return Object.assign(this.chatAtt(m, mineM), {
               text: m.text, who: m.byName,
               when: new Date(m.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
               whoStyle: t.kind === "direct" || mineM ? "display:none;" : "font-weight:700;font-size:11px;color:var(--mr-teal);margin-bottom:2px;",
@@ -15095,7 +15248,7 @@ class Component extends DCLogic {
               bubbleStyle: "max-width:82%;border-radius:14px;padding:9px 12px;font-size:13.5px;line-height:1.5;word-break:break-word;background:" +
                 (mineM ? "var(--mr-teal);color:#fff;border-bottom-right-radius:4px;" : "#fff;color:var(--mr-ink);border:1px solid #E4EAF1;border-bottom-left-radius:4px;"),
               whenStyle: "font-size:10px;margin-top:3px;text-align:right;color:" + (mineM ? "rgba(255,255,255,0.72)" : "#98A5B4") + ";"
-            };
+            });
           }),
           empty: (t.msgs || []).length === 0,
           draft: draft,
@@ -15103,7 +15256,7 @@ class Component extends DCLogic {
           onKey: e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } },
           send: send,
           sendStyle: "flex:none;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;background:" +
-            (String(draft).trim() ? "var(--mr-teal)" : "#C6D0DC") + ";color:#fff;"
+            (String(draft).trim() || dfile ? "var(--mr-teal)" : "#C6D0DC") + ";color:#fff;"
         };
       }).filter(Boolean),
 
@@ -15685,6 +15838,7 @@ class Component extends DCLogic {
       return this.setState({ fbMsg: "err:At least one question needs a label." });
     }
     f.status = status;
+    f.byEmail = f.byEmail || this.state.me.email;
     const isNew = !f.id;
     if (isNew) f.id = uid(f.kind === "survey" ? "sv" : "fm");
     const list = isNew ? this.state.forms.concat([f]) : this.state.forms.map(x => x.id === f.id ? f : x);
@@ -15806,9 +15960,10 @@ class Component extends DCLogic {
       email: f.anon ? "" : st.me.email, name: f.anon ? "" : st.me.name, dept: f.anon ? "" : st.me.dept
     };
     this.saveResp(st.responses.concat([rec]));
-    if (f.handler && !f.anon) {
-      const staff = st.accounts.filter(a => a.role === f.handler).map(a => a.email);
-      this.notify(staff.map(e => ({ to: e, kind: "reply", title: "New response: " + f.title, text: st.me.name + " completed it.", formId: f.id, stats: true })));
+    {
+      const staff = (f.handler && !f.anon ? st.accounts.filter(a => a.role === f.handler).map(a => a.email) : [])
+        .concat(f.byEmail ? [f.byEmail] : []).filter(e => e && e !== st.me.email).filter((v, i, a) => a.indexOf(v) === i);
+      if (staff.length) this.notify(staff.map(e => ({ to: e, kind: "reply", title: "New response: " + f.title, text: f.anon ? "Someone answered (anonymous)." : st.me.name + " completed it.", formId: f.id, stats: true })));
     }
     this.go("forms", { fill: null, fillMsg: "", formTab: "open" });
   }
@@ -15852,8 +16007,9 @@ class Component extends DCLogic {
 
   formVals() {
     const st = this.state, me = st.me, V = {};
-    const mgrBuilder = this.isMgr();
-    const admin = (this.isAdmin() && this.can("forms")) || mgrBuilder, staffMode = !admin || st.asStaff;
+    const mgrBuilder = this.isMgr() && !(this.isAdmin() && this.can("forms"));
+    const admin = (this.isAdmin() && this.can("forms")) || mgrBuilder, staffMode = !admin || (st.asStaff && !mgrBuilder);
+    const mineScope = f => !mgrBuilder || f.by === me.name || f.byEmail === me.email || (f.target || {}).owner === me.email;
     const kindPill = k => k === "survey" ? this.pill("#F0E7FB", "#7433C6") : this.pill("#EAF4F9", "#1880A8");
 
     // ---- red pinned line
@@ -15883,16 +16039,16 @@ class Component extends DCLogic {
         go: () => { if (!done) this.openFill(f.id); }
       };
     });
-    V.noMyForms = staffMode && mineF.length === 0;
+    V.noMyForms = (staffMode || mgrBuilder) && mineF.length === 0;
 
     // ---- admin list
     const tab = st.formTab;
     let adminList = admin && !staffMode
       ? st.forms.filter(f => tab === "open" ? f.status === "live" : tab === "draft" ? f.status === "draft" : f.status === "closed")
       : [];
-    if (mgrBuilder) adminList = adminList.filter(f => f.by === me.name || (f.target || {}).owner === me.email);
+    adminList = adminList.filter(mineScope);
     V.formTabs = [["open", "Live"], ["draft", "Drafts"], ["closed", "Closed"]].map(t => ({
-      label: t[1] + " (" + st.forms.filter(f => t[0] === "open" ? f.status === "live" : t[0] === "draft" ? f.status === "draft" : f.status === "closed").length + ")",
+      label: t[1] + " (" + st.forms.filter(mineScope).filter(f => t[0] === "open" ? f.status === "live" : t[0] === "draft" ? f.status === "draft" : f.status === "closed").length + ")",
       style: this.chip(tab === t[0]),
       go: () => this.setState({ formTab: t[0] })
     }));
@@ -15915,7 +16071,7 @@ class Component extends DCLogic {
       };
     });
     V.noAdminForms = admin && !staffMode && adminList.length === 0;
-    V.formsEmployee = staffMode; V.formsAdmin = admin && !staffMode;
+    V.formsEmployee = staffMode || mgrBuilder; V.formsAdmin = admin && !staffMode;
     V.newForm = () => this.newForm("form");
     V.newSurvey = () => this.newForm("survey");
 
@@ -16843,6 +16999,7 @@ class Component extends DCLogic {
     this.save(K.video, nx, "video");
     this.setState({ vidDraft: null, vidPreview: false });
     if (mode === "publish") {
+      this.notify(this.staffEmails(this.state.me.email).map(e => ({ to: e, kind: "ann", route: "home", title: "New video: " + (d.title || "on the home page"), text: d.desc || "Watch it on the home page." })));
       if (!this.feat("video")) {
         return this.ask("Published — but the video block is switched off", "Turn on \"Video block on the home page\" so everyone can see it?", "Turn it on", "Leave it off",
           () => { this.setFeat("video", true); setTimeout(() => this.flash("Video is live", "It is on everyone's home page now."), 50); }, () => {});
