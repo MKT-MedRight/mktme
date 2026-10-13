@@ -175,7 +175,7 @@
 <div class="hb-noprint" onClick="{{ closeLb }}" style="position:fixed;inset:0;z-index:500;background:rgba(8,8,20,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 20px 24px;box-sizing:border-box;">
   <div style="position:absolute;top:12px;left:16px;right:16px;display:flex;gap:10px;align-items:center;color:#fff;">
     <span style="flex:1;min-width:0;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:0.85;">{{ lbName }}</span>
-    <a href="{{ lbSrc }}" download="{{ lbName }}" onClick="{{ stopProp }}" style="flex:none;color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:20px;background:rgba(255,255,255,0.14);">⇩ Download</a>
+    <a href="#" onClick="{{ lbDownload }}" style="flex:none;color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:20px;background:rgba(255,255,255,0.14);">⇩ Download</a>
     <span onClick="{{ closeLb }}" style="flex:none;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;">×</span>
   </div>
   <img onClick="{{ stopProp }}" src="{{ lbSrc }}" alt="{{ lbName }}" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,0.5);">
@@ -413,6 +413,14 @@
           <span style="font-size:19px;color:var(--mr-teal);">⌕</span>
           <input value="{{ query }}" onInput="{{ onQuery }}" onKeyDown="{{ onQueryKey }}" placeholder="Search every policy…" style="flex:1;min-width:0;border:none;outline:none;font-size:16px;color:var(--mr-navy);background:transparent;padding:10px 0;">
           <div onClick="{{ runSearch }}" style="background:var(--mr-teal);color:#fff;font-weight:600;font-size:14.5px;padding:12px 26px;border-radius:26px;cursor:pointer;white-space:nowrap;transition:transform 0.2s ease;" style-hover="transform:scale(1.04);">Search</div>
+        </div>
+        </sc-if>
+        <sc-if value="{{ showAarefHome }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;justify-content:inherit;margin-top:14px;">
+          <div onClick="{{ goAaref }}" style="display:inline-flex;gap:9px;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.28);color:#fff;font-weight:700;font-size:14.5px;padding:10px 20px 10px 12px;border-radius:24px;cursor:pointer;transition:background 0.2s ease,transform 0.2s ease;" style-hover="background:rgba(255,255,255,0.2);transform:translateY(-2px);">
+            <span style="width:28px;height:28px;border-radius:50%;background:#7433C6;display:flex;align-items:center;justify-content:center;font-size:14px;">✦</span>
+            Ask Aaref, your AI assistant
+          </div>
         </div>
         </sc-if>
       </div>
@@ -2118,6 +2126,19 @@
         <div style="display:flex;gap:8px;">
           <input value="{{ newDept }}" onInput="{{ onNewDept }}" onKeyDown="{{ onNewDeptKey }}" placeholder="New department" style="flex:1;min-width:0;box-sizing:border-box;font-size:14.5px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:10px;padding:12px 14px;outline:none;">
           <div onClick="{{ commitDept }}" style="flex:none;background:var(--mr-teal);color:#fff;font-weight:600;font-size:14px;padding:12px 20px;border-radius:22px;cursor:pointer;">Add</div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:22px 24px;margin-bottom:18px;">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+          <span style="width:30px;height:30px;border-radius:50%;background:#7433C6;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;">✦</span>
+          <span style="font-family:var(--mr-head);font-weight:700;font-size:18px;letter-spacing:-0.02em;">Aaref — AI assistant</span>
+          <span style="{{ aarefPill }}">{{ aarefState }}</span>
+        </div>
+        <p style="font-size:14px;color:#5C6B80;line-height:1.6;margin:0 0 14px;">Paste the address of your Aaref function (from the setup guide, AAREF-SETUP.md). It starts with https:// and ends in /aaref. Up to 100 messages per person per day; the Gemini free tier keeps it at $0.</p>
+        <div data-enter="1" style="display:flex;gap:9px;flex-wrap:wrap;">
+          <input value="{{ aarefUrlDraft }}" onInput="{{ onAarefUrl }}" placeholder="https://europe-west1-your-project.cloudfunctions.net/aaref" style="flex:1 1 320px;min-width:0;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:13px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:12px 14px;outline:none;">
+          <div data-enter-go="1" onClick="{{ saveAarefUrl }}" style="flex:none;background:var(--mr-navy);color:#fff;font-weight:700;font-size:14px;padding:12px 22px;border-radius:22px;cursor:pointer;">Save</div>
+          <div onClick="{{ testAaref }}" style="flex:none;border:1px solid #DCE2EA;background:#fff;font-weight:600;font-size:14px;padding:12px 20px;border-radius:22px;cursor:pointer;">Open Aaref</div>
         </div>
       </div>
       <div style="{{ cloudCardStyle }}">
@@ -4209,7 +4230,7 @@
 
   <sc-if value="{{ hasCharPop }}" hint-placeholder-val="{{ false }}">
   <div class="hb-noprint" data-mr="{{ charFloatHook }}" style="{{ charWrapStyle }}">
-    <div style="{{ charCardStyle }}">
+    <div data-mr="guide" style="{{ charCardStyle }}">
       <div style="position:absolute;top:-60%;right:-30%;width:90%;height:220%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(20,18,28,0.07) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 180s linear infinite;pointer-events:none;"></div>
       <div style="position:relative;display:flex;gap:15px;align-items:flex-start;">
         <div style="flex:none;">{{ charFace }}</div>
@@ -5254,7 +5275,7 @@
           <div style="font-family:var(--mr-head);font-weight:800;font-size:21px;letter-spacing:-0.025em;margin-bottom:5px;">Record your attendance</div>
           <p style="font-size:14px;color:#5C6B80;line-height:1.6;margin:0 0 20px;">{{ checkinNote }}</p>
           <sc-if value="{{ ev.needCode }}" hint-placeholder-val="{{ true }}">
-            <div style="margin-bottom:22px;">
+            <div data-enter="1" style="margin-bottom:22px;">
               <label style="display:block;font-weight:600;font-size:13px;margin-bottom:7px;">Attendance code from the organiser</label>
               <input value="{{ ciCode }}" onInput="{{ onCiCode }}" placeholder="ABC123" style="width:100%;max-width:260px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;letter-spacing:0.22em;text-align:center;border:2px solid #DCE2EA;background:#F7FAFC;border-radius:13px;padding:15px;outline:none;color:var(--mr-navy);">
             </div>
@@ -5289,7 +5310,7 @@
               </sc-if>
             </div>
           </sc-if>
-          <div onClick="{{ ev.submit }}" style="{{ ev.submitStyle }}" style-hover="filter:brightness(1.08);">Mark me present</div>
+          <div data-enter-go="1" onClick="{{ ev.submit }}" style="{{ ev.submitStyle }}" style-hover="filter:brightness(1.08);">Mark me present</div>
         </div>
         </sc-if>
       </div>
@@ -5864,6 +5885,7 @@
             <div style="min-width:0;">
               <div style="font-family:var(--mr-head);font-weight:800;font-size:17px;letter-spacing:-0.02em;">{{ ct.name }}</div>
               <div style="{{ ct.subStyle }}">{{ ct.sub }}</div>
+              <sc-if value="{{ ct.isAaref }}" hint-placeholder-val="{{ false }}"><span onClick="{{ ct.clear }}" style="font-size:12px;font-weight:600;color:#8B97A8;cursor:pointer;">Clear chat</span></sc-if>
             </div>
           </div>
           <div data-chatscroll="{{ chatScrollKey }}" style="flex:1;min-height:280px;max-height:52vh;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:11px;background:#F7FAFC;">
@@ -5880,7 +5902,7 @@
                     <img onClick="{{ m.openImg }}" src="{{ m.file }}" alt="{{ m.fileName }}" title="Open full screen" style="display:block;max-width:100%;max-height:280px;border-radius:10px;object-fit:contain;background:rgba(0,0,0,0.06);margin-bottom:8px;cursor:zoom-in;">
                   </sc-if>
                   <sc-if value="{{ m.hasFile }}" hint-placeholder-val="{{ false }}">
-                    <a href="{{ m.file }}" download="{{ m.fileName }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
+                    <a href="#" onClick="{{ m.dl }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
                   </sc-if>
                   <sc-if value="{{ m.pending }}" hint-placeholder-val="{{ false }}">
                     <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
@@ -5897,6 +5919,12 @@
             </sc-for>
             <sc-if value="{{ ct.empty }}" hint-placeholder-val="{{ false }}">
               <div style="margin:auto;text-align:center;font-size:14px;color:#8B97A8;max-width:280px;line-height:1.6;">{{ ct.emptyLabel }}</div>
+            </sc-if>
+            <sc-if value="{{ chatIsTyping }}" hint-placeholder-val="{{ false }}">
+              <div style="flex:none;align-self:flex-start;display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #E4EAF1;border-radius:16px;border-bottom-left-radius:5px;padding:10px 14px;font-size:13px;color:#7A8899;font-style:italic;">
+                <span style="display:flex;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#98A5B4;animation:hbFloat 1s ease-in-out infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:#98A5B4;animation:hbFloat 1s 0.15s ease-in-out infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:#98A5B4;animation:hbFloat 1s 0.3s ease-in-out infinite;"></span></span>
+                {{ chatTyping }}
+              </div>
             </sc-if>
           </div>
           <div style="padding:14px 16px;border-top:1px solid #EDF1F6;">
@@ -5925,7 +5953,7 @@
                 ⊕
                 <input type="file" onChange="{{ onChatFile }}" style="display:none;">
               </label>
-              <textarea value="{{ chatDraft }}" onInput="{{ onChatDraft }}" onKeyDown="{{ onChatKey }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:46px;max-height:150px;resize:vertical;font-size:15px;line-height:1.5;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:14px;padding:12px 15px;outline:none;color:var(--mr-navy);"></textarea>
+              <textarea value="{{ chatDraft }}" onInput="{{ onChatDraft }}" onKeyDown="{{ onChatKey }}" onFocus="{{ onChatFocus }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:46px;max-height:150px;resize:vertical;font-size:15px;line-height:1.5;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:14px;padding:12px 15px;outline:none;color:var(--mr-navy);"></textarea>
               <div onClick="{{ sendChat }}" style="{{ sendStyle }}" style-hover="filter:brightness(1.1);">➤</div>
             </div>
           </div>
@@ -5951,9 +5979,9 @@
           <div onClick="{{ c.go }}" style="{{ c.style }}">{{ c.label }}</div>
         </sc-for>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;flex:none;">
+      <div data-enter="1" style="display:flex;gap:8px;align-items:center;flex:none;">
         <input value="{{ enrolCode }}" onInput="{{ onEnrolCode }}" placeholder="Course code" style="width:140px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:0.12em;text-align:center;border:1px solid #DCE2EA;background:#fff;border-radius:11px;padding:10px 12px;outline:none;text-transform:uppercase;">
-        <div onClick="{{ joinByCode }}" style="background:var(--mr-navy);color:#fff;font-weight:700;font-size:13.5px;padding:11px 20px;border-radius:22px;cursor:pointer;white-space:nowrap;">Join</div>
+        <div data-enter-go="1" onClick="{{ joinByCode }}" style="background:var(--mr-navy);color:#fff;font-weight:700;font-size:13.5px;padding:11px 20px;border-radius:22px;cursor:pointer;white-space:nowrap;">Join</div>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:15px;">
@@ -6142,9 +6170,9 @@
           <div style="background:#F7FAFC;border:1px solid #E4EAF1;border-radius:13px;padding:18px 20px;margin-bottom:20px;">
             <div style="font-family:var(--mr-head);font-weight:700;font-size:17px;letter-spacing:-0.02em;">Have the enrolment code?</div>
             <div style="font-size:13.5px;color:#5C6B80;line-height:1.55;margin:3px 0 13px;">Enter it to join this course now.</div>
-            <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap;">
+            <div data-enter="1" style="display:flex;gap:9px;align-items:center;flex-wrap:wrap;">
               <input value="{{ ki.codeDraft }}" onInput="{{ ki.onCodeDraft }}" placeholder="ABC123" style="flex:0 0 190px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;letter-spacing:0.2em;text-align:center;border:2px solid #DCE2EA;background:#fff;border-radius:11px;padding:12px;outline:none;color:var(--mr-navy);">
-              <div onClick="{{ ki.joinWithCode }}" style="flex:none;background:var(--mr-teal);color:#fff;font-weight:700;font-size:14.5px;padding:13px 26px;border-radius:24px;cursor:pointer;" style-hover="filter:brightness(1.08);">Join with code</div>
+              <div data-enter-go="1" onClick="{{ ki.joinWithCode }}" style="flex:none;background:var(--mr-teal);color:#fff;font-weight:700;font-size:14.5px;padding:13px 26px;border-radius:24px;cursor:pointer;" style-hover="filter:brightness(1.08);">Join with code</div>
             </div>
           </div>
         </sc-if>
@@ -7363,7 +7391,7 @@
                       <img onClick="{{ m.openImg }}" src="{{ m.file }}" alt="{{ m.fileName }}" title="Open full screen" style="display:block;max-width:100%;max-height:180px;border-radius:9px;object-fit:contain;background:rgba(0,0,0,0.06);margin-bottom:6px;cursor:zoom-in;">
                     </sc-if>
                     <sc-if value="{{ m.hasFile }}" hint-placeholder-val="{{ false }}">
-                      <a href="{{ m.file }}" download="{{ m.fileName }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
+                      <a href="#" onClick="{{ m.dl }}" style="{{ m.fileStyle }}">⇩ {{ m.fileName }}</a>
                     </sc-if>
                     <sc-if value="{{ m.pending }}" hint-placeholder-val="{{ false }}">
                       <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
@@ -7380,6 +7408,12 @@
               </sc-for>
               <sc-if value="{{ d.empty }}" hint-placeholder-val="{{ false }}">
                 <div style="margin:auto;font-size:13px;color:#98A5B4;text-align:center;line-height:1.5;">No messages yet.</div>
+              </sc-if>
+              <sc-if value="{{ d.isTyping }}" hint-placeholder-val="{{ false }}">
+                <div style="flex:none;align-self:flex-start;display:flex;gap:7px;align-items:center;background:#fff;border:1px solid #E4EAF1;border-radius:14px;border-bottom-left-radius:4px;padding:8px 12px;font-size:12px;color:#7A8899;font-style:italic;">
+                  <span style="display:flex;gap:3px;"><span style="width:6px;height:6px;border-radius:50%;background:#98A5B4;animation:hbFloat 1s ease-in-out infinite;"></span><span style="width:6px;height:6px;border-radius:50%;background:#98A5B4;animation:hbFloat 1s 0.15s ease-in-out infinite;"></span><span style="width:6px;height:6px;border-radius:50%;background:#98A5B4;animation:hbFloat 1s 0.3s ease-in-out infinite;"></span></span>
+                  {{ d.typing }}
+                </div>
               </sc-if>
             </div>
             <sc-if value="{{ d.emojiOpen }}" hint-placeholder-val="{{ false }}">
@@ -7406,7 +7440,7 @@
               <sc-if value="{{ d.canFiles }}" hint-placeholder-val="{{ true }}">
                 <label title="Attach a file or photo" style="flex:none;width:32px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;border-radius:9px;color:#5C6B80;" style-hover="background:#F1F5F9;">📎<input type="file" onChange="{{ d.onFile }}" style="display:none;"></label>
               </sc-if>
-              <textarea value="{{ d.draft }}" onInput="{{ d.onDraft }}" onKeyDown="{{ d.onKey }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:40px;max-height:110px;resize:none;font-size:14px;line-height:1.45;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:12px;padding:10px 12px;outline:none;color:var(--mr-navy);"></textarea>
+              <textarea value="{{ d.draft }}" onInput="{{ d.onDraft }}" onKeyDown="{{ d.onKey }}" onFocus="{{ d.onFocus }}" onClick="{{ d.onFocus }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:40px;max-height:110px;resize:none;font-size:14px;line-height:1.45;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:12px;padding:10px 12px;outline:none;color:var(--mr-navy);"></textarea>
               <div onClick="{{ d.send }}" style="{{ d.sendStyle }}">➤</div>
             </div>
           </div>
@@ -7551,7 +7585,7 @@
       </div>
     </div>
     <sc-if value="{{ pwCanChange }}" hint-placeholder-val="{{ true }}">
-    <div style="background:#fff;border:1px solid #DCE2EA;border-radius:14px;padding:24px 26px;margin-top:18px;">
+    <div data-enter="1" style="background:#fff;border:1px solid #DCE2EA;border-radius:14px;padding:24px 26px;margin-top:18px;">
       <h2 style="font-family:var(--mr-head);font-weight:800;font-size:20px;letter-spacing:-0.025em;margin:0 0 4px;">Change my password</h2>
       <p style="font-size:14px;color:#5C6B80;margin:0 0 18px;line-height:1.6;">At least 8 characters. You stay signed in on this device.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
@@ -7567,7 +7601,7 @@
       </div>
       <div style="{{ pwHintStyle }}">{{ pwHint }}</div>
       <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px;">
-        <div onClick="{{ changeMyPw }}" style="background:var(--mr-navy);color:#fff;font-weight:700;font-size:14px;padding:12px 24px;border-radius:22px;cursor:pointer;" style-hover="filter:brightness(1.3);">Update password</div>
+        <div data-enter-go="1" onClick="{{ changeMyPw }}" style="background:var(--mr-navy);color:#fff;font-weight:700;font-size:14px;padding:12px 24px;border-radius:22px;cursor:pointer;" style-hover="filter:brightness(1.3);">Update password</div>
         <div onClick="{{ togglePwShow }}" style="color:#5C6B80;font-weight:600;font-size:14px;padding:12px 8px;cursor:pointer;">{{ pwShowLabel }}</div>
       </div>
     </div>
@@ -7918,6 +7952,7 @@ const SAFE_URL = /^(https?:|mailto:|tel:|blob:|data:(image|video|audio|applicati
 function safeUrl(u) {
   const v = String(u || "").trim();
   if (!v) return "";
+  if (/^data:/i.test(v)) return /^data:(text\/html|application\/xhtml|image\/svg|text\/javascript|application\/javascript|text\/xml|application\/xml)/i.test(v) ? "" : v;
   if (SAFE_URL.test(v)) return v;
   if (!/^[a-z][a-z0-9+.-]*:/i.test(v.replace(/[\s\u0000-\u001f]/g, ""))) return v;
   return "";
@@ -8012,8 +8047,9 @@ const CLOUD_FIELDS = { policies: "policies", accounts: "accounts", depts: "depts
   video: "video", recog: "recog", know: "know", knowCats: "knowCats", exams: "exams", attempts: "attempts", chat: "chat", subs: "subs", certs: "certs",
   asks: "asks", events: "events", evKinds: "evKinds", titles: "titles", vacancies: "vacancies", checkins: "checkins", cases: "cases",
   benefits: "benefits", benCats: "benCats", cands: "cands",
-  compReg: "compReg", compAudits: "compAudits", compRounds: "compRounds", compReports: "compReports", compDecls: "compDecls", compAi: "compAi", presence: "presence" };
-K.presence = "mrhub-presence-v1";
+  compReg: "compReg", compAudits: "compAudits", compRounds: "compRounds", compReports: "compReports", compDecls: "compDecls", compAi: "compAi", presence: "presence", typing: "typing" };
+K.presence = "mrhub-presence-v1"; K.typing = "mrhub-typing-v1";
+const AAREF_ID = "aaref@assistant";
 const EMOJI_QUICK = ["😀","😂","😊","😍","🥰","😎","🤔","😮","😢","🙏","👍","👏","🙌","💪","🤝","🎉","🔥","❤️","✅","⭐","☕","🎂","💡","👀"];
 const COMP_STAGES = ["Reported", "Triage", "Investigating", "Action", "Closed"];
 const COMP_INC_CATS = ["Data or privacy breach", "Health & safety", "Fraud or theft", "Regulatory breach", "Harassment or discrimination", "IT or security", "Other"];
@@ -8115,6 +8151,7 @@ const FEATURES = [
   ["video", "Video block on the home page", "Also needs a video set in Announcements"],
   ["quotes", "Quote card", "Rotating thoughts in the side column"],
   ["guidePop", "Guide popups", "The cartoon guides that appear in the corner"],
+  ["aaref", "Aaref AI assistant", "Gemini chat pinned in Messages, the 💬 list, the chat window and the home page"],
   ["bubble", "Guide bubble on the home page", "A guide speaking from the side column"],
   ["tasks", "Tasks column", "Everything waiting on this person"],
   ["guideCards", "Guide cards on All policies", "The four big character cards"],
@@ -8270,7 +8307,7 @@ class Component extends DCLogic {
     depts: SEED_DEPTS.slice(), cats: SEED_CATS.slice(),
     userData: {}, inbox: [], notes: [], ackMsg: "", headerH: 66,
     notesOpen: false, toast: null, toasted: [], replyText: {}, expandAck: null, picked: [],
-    menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [], presence: {}, ivDraft: {}, dockFile: {}, dockEmoji: null, chatEmoji: false,
+    menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [], presence: {}, typing: {}, aaref: [], aarefBusy: false, aarefUrlDraft: null, ivDraft: {}, dockFile: {}, dockEmoji: null, chatEmoji: false,
     asks: [], askNote: {}, evKinds: [], titles: [], newEvType: "", newTitleDraft: "",
     vacancies: [], vacOpen: null, vacFilter: "open",
     askDraft: { kind: "hire", role: "", dept: "", count: 1, target: "", targetLabel: "", why: "", when: "" }, dockMin: [], dockDraft: {}, dockListOpen: false, tkDismissed: [], enrolCode: "", wishDraft: "", retakePick: [],
@@ -8458,6 +8495,8 @@ class Component extends DCLogic {
       if (st.dockListOpen && !inside('[data-mr="dock"]')) close.dockListOpen = false;
       if (st.msgrOpen && !inside('[data-mr="msgr"]') && !inside('[data-mr="msgrbtn"]')) close.msgrOpen = false;
       if (st.toast && !inside('[data-mr="float"]')) close.toast = null;
+      if (st.charPop && !inside('[data-mr="guide"]') && Date.now() - (this._charAt || 0) > 600) { close.charPop = null; close.charSeen = (st.charSeen || []).concat([st.charPop.id]); }
+      if (st.dockEmoji && !inside('[data-mr="dock"]')) close.dockEmoji = null;
       if (Object.keys(close).length) this.setState(close);
     };
     window.addEventListener("click", this.onAnyClick);
@@ -8496,7 +8535,7 @@ class Component extends DCLogic {
     map[K.bencats] = "benCats";
     map[K.cand] = "cands";
     map[K.compReg] = "compReg"; map[K.compAudits] = "compAudits"; map[K.compRounds] = "compRounds";
-    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence";
+    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing";
       map[K.pol] = "policies"; map[K.acc] = "accounts"; map[K.dept] = "depts";
       map[K.cat] = "cats"; map[K.user] = "userData"; map[K.inbox] = "inbox"; map[K.notes] = "notes";
       map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "charMsgs";
@@ -8538,6 +8577,19 @@ class Component extends DCLogic {
     window.addEventListener("scroll", this.onScroll, { passive: true });
 
     this.onEsc = e => {
+      if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+        const st0 = this.state, tag = ((e.target && e.target.tagName) || "").toLowerCase();
+        if (tag === "textarea") return;
+        if (st0.modal) { e.preventDefault(); const m = st0.modal; this.closeModal(); if (m.kind === "ask" && m.onYes) m.onYes(); return; }
+        if (st0.lightbox) { e.preventDefault(); return this.setState({ lightbox: null }); }
+        if (st0.fwdMsg) { const tg = this.fwdTargets()[0]; if (tg) { e.preventDefault(); tg.go(); } return; }
+        if (tag === "input" && ["checkbox", "radio", "file", "date", "time"].indexOf(e.target.type) < 0) {
+          let box = e.target.closest("[data-enter]"), btn = null;
+          for (let i = 0; box && i < 4 && !btn; i++) { btn = box.querySelector("[data-enter-go]"); box = box.parentElement; }
+          if (btn) { e.preventDefault(); btn.click(); }
+        }
+        return;
+      }
       if (e.key !== "Escape") return;
       const st = this.state;
       if (st.lightbox) return this.setState({ lightbox: null });
@@ -8607,6 +8659,11 @@ class Component extends DCLogic {
     }, 9000);
   }
 
+  typingTick() {
+    const ty = this.state.typing || {}, now = Date.now();
+    const live = Object.keys(ty).some(k => now - ty[k] < 7000);
+    if (live && !this._tyTick) this._tyTick = setInterval(() => { const t2 = this.state.typing || {}; if (!Object.keys(t2).some(k => Date.now() - t2[k] < 7000)) { clearInterval(this._tyTick); this._tyTick = null; } this.forceUpdate(); }, 2000);
+  }
   scrollChats() {
     document.querySelectorAll("[data-chatscroll]").forEach(el => {
       const k = el.getAttribute("data-chatscroll");
@@ -8619,7 +8676,13 @@ class Component extends DCLogic {
   }
   componentDidUpdate() {
     const st = this.state;
+    if (st.me && st.me.email && this._aarefFor !== st.me.email) {
+      this._aarefFor = st.me.email;
+      let h = []; try { h = JSON.parse(localStorage.getItem("mrhub-aaref-v1:" + st.me.email) || "[]"); } catch (e) {}
+      this.setState({ aaref: Array.isArray(h) ? h : [] });
+    }
     this.scrollChats();
+    this.typingTick();
     this.applyFnCss();
     if (st.me && st.screen === "app" && !this._brandFixed) this.fixBrandOnce();
     if (st.me && st.screen === "app" && this.can("compliance") && this._compRemDay !== this.isoToday()) {
@@ -8705,7 +8768,7 @@ class Component extends DCLogic {
     map[K.bencats] = "benCats";
     map[K.cand] = "cands";
     map[K.compReg] = "compReg"; map[K.compAudits] = "compAudits"; map[K.compRounds] = "compRounds";
-    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence";
+    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing";
     map[K.pol] = "policies"; map[K.acc] = "accounts"; map[K.dept] = "depts";
     map[K.cat] = "cats"; map[K.inbox] = "inbox"; map[K.notes] = "notes"; map[K.user] = "userdata";
     map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "chars";
@@ -8720,8 +8783,8 @@ class Component extends DCLogic {
       this.setState({ accounts: sealed });
       lsSet(K.acc, sealed, false);
     }
-    import("./firebase-sync.js?v=3-" + Math.floor(Date.now() / 3600000).toString(36)).then(m => {
-      const oldSync = !m.VERSION || m.VERSION < 3;
+    import("./firebase-sync.js?v=4-" + Math.floor(Date.now() / 3600000).toString(36)).then(m => {
+      const oldSync = !m.VERSION || m.VERSION < 4;
       if (!m.enabled()) {
         this.setState({ cloud: "off", cloudMsg: "Not connected — this browser only. Add your Firebase keys to firebase-config.js (see GO-LIVE.md) so policies and questions reach everyone." });
         this.pullShared();
@@ -11261,7 +11324,20 @@ class Component extends DCLogic {
     };
   }
 
+  aarefUrl() { return String(this.T().aarefUrl || window.MRHUB_AAREF_URL || "").trim(); }
+  aarefOn() { return this.feat("aaref") && !!this.state.me && !this.state.candMode && !this.state.interviewMode && (!!this.aarefUrl() || this.isSuper()); }
+  aarefThread() {
+    const st = this.state, me = st.me || {};
+    const msgs = (st.aaref || []).map(m => ({ id: m.id, by: m.by === "me" ? me.email : AAREF_ID, byName: m.by === "me" ? me.name : "Aaref",
+      text: (m.err ? "⚠ " : "") + (m.text || ""), file: m.img || "", fileName: m.img ? "picture.jpg" : "", at: m.at, seen: [me.email, AAREF_ID],
+      reply: m.quote ? { who: "You", text: m.quote } : undefined }));
+    return { id: "aaref", kind: "direct", aaref: true, name: "Aaref", members: [me.email, AAREF_ID], msgs: msgs, touched: 9e15 };
+  }
   threadsFor(email) {
+    const base = this.threadsBase(email);
+    return this.state.me && email === this.state.me.email && this.aarefOn() ? [this.aarefThread()].concat(base) : base;
+  }
+  threadsBase(email) {
     const st = this.state, me = this.acct(email) || st.me;
     if (!me) return [];
     const own = (st.chat || []).filter(t => (t.members || []).indexOf(email) > -1);
@@ -11287,6 +11363,35 @@ class Component extends DCLogic {
     this.save(K.presence, cur, "presence");
   }
   presence() { return this.state.presence || {}; }
+  setTyping(threadId, on) {
+    const me = (this.state.me || {}).email;
+    if (!me || !threadId || threadId === "aaref") return;
+    const k = threadId + "|" + me, cur = this.state.typing || {}, now = Date.now();
+    if (on && cur[k] && now - cur[k] < 3000) return;
+    if (!on && !cur[k]) return;
+    const nx = {};
+    Object.keys(cur).forEach(x => { if (now - cur[x] < 60000 && x !== k) nx[x] = cur[x]; });
+    if (on) nx[k] = now;
+    this.save(K.typing, nx, "typing");
+    clearTimeout(this._typT);
+    if (on) this._typT = setTimeout(() => this.setTyping(threadId, false), 6000);
+  }
+  typingIn(t) {
+    const me = (this.state.me || {}).email, ty = this.state.typing || {}, now = Date.now();
+    if (!t) return "";
+    if (t.aaref) return this.state.aarefBusy ? "Aaref is thinking…" : "";
+    const who = Object.keys(ty).filter(k => k.indexOf(t.id + "|") === 0 && now - ty[k] < 6500).map(k => k.slice(t.id.length + 1)).filter(e => e !== me);
+    if (!who.length) return "";
+    if (t.kind === "direct") return "typing…";
+    const names = who.map(e => ((this.acct(e) || {}).name || e).split(" ")[0]);
+    return names.length === 1 ? names[0] + " is typing…" : names.slice(0, 2).join(" and ") + (names.length > 2 ? " and others" : "") + " are typing…";
+  }
+  markSeen(id) {
+    const st = this.state, me = (st.me || {}).email;
+    const t = (st.chat || []).filter(x => x.id === id)[0];
+    if (!t || !(t.msgs || []).some(m => m.by !== me && (m.seen || []).indexOf(me) < 0)) return;
+    this.openThreadQuiet(id);
+  }
   onlineVals() {
     const st = this.state, me = st.me || {}, pr = st.presence || {}, now = Date.now();
     const on = (st.accounts || []).filter(a => a.email !== me.email && a.status !== "suspended" && a.role !== "Candidate" && pr[a.email] && now - pr[a.email] < 5 * 60 * 1000)
@@ -11301,6 +11406,7 @@ class Component extends DCLogic {
     };
   }
   lastSeenLabel(email) {
+    if (email === AAREF_ID) return this.aarefUrl() ? "AI assistant · answers in seconds" : "AI assistant · not switched on yet";
     const p = this.presence()[email];
     if (!p) return "Offline";
     const m = Math.round((Date.now() - p) / 60000);
@@ -11341,6 +11447,7 @@ class Component extends DCLogic {
     if (changed) this.saveChat(next);
   }
   isOnline(email) {
+    if (email === AAREF_ID) return !!this.aarefUrl();
     const p = this.presence()[email];
     return !!p && (Date.now() - p) < 5 * 60 * 1000;
   }
@@ -11369,6 +11476,7 @@ class Component extends DCLogic {
     const f = String(m.file || ""), ready = !!f && f.slice(0, 7) !== "mrblob:";
     const img = ready && (f.indexOf("data:image/") === 0 || /\.(png|jpe?g|gif|webp)$/i.test(m.fileName || ""));
     return {
+      dl: e => { if (e) { e.preventDefault(); e.stopPropagation(); } this.downloadData(f, m.fileName || "file"); },
       file: ready ? f : "", fileName: m.fileName || "file", isImg: img, hasFile: ready,
       pending: !ready && !!(m.fileName || f),
       pendingText: f ? "⏳ Loading " + (m.fileName || "attachment") + "…" : "⚠ " + (m.fileName || "Attachment") + " could not be shared — ask them to send it again.",
@@ -11381,10 +11489,10 @@ class Component extends DCLogic {
     const st = this.state;
     const docks = (st.docks || []).filter(x => x !== id).concat([id]).slice(-2);
     this.setState({ docks: docks, dockMin: (st.dockMin || []).filter(x => x !== id), dockListOpen: false, notesOpen: false, toast: null });
-    this.openThreadQuiet(id);
   }
   dockAvailable() { return this.fnOn("dock") && this.routeAllowed("chat") && (window.innerWidth || 1200) > 720; }
   sendChat() {
+    if (this.state.chatOpen === "aaref") return this.askAaref();
     const st = this.state, me = st.me;
     const body = st.chatDraft.trim();
     if (!body && !st.chatFile) return;
@@ -11415,7 +11523,7 @@ class Component extends DCLogic {
   fwdTargets() {
     const st = this.state, me = (st.me || {}).email, q = String(st.fwdSearch || "").trim().toLowerCase();
     const disc = (bg, round) => "flex:none;width:36px;height:36px;border-radius:" + (round ? "50%" : "11px") + ";background:" + bg + ";color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:700;font-size:12.5px;";
-    const thr = (this._threads || []).filter(t => t.kind !== "direct").map(t => ({ name: t.name, sub: t.kind === "channel" ? "Team channel" : (t.members || []).length + " people", initials: t.kind === "channel" ? (t.icon || "◉") : initials(t.name),
+    const thr = (this._threads || []).filter(t => t.kind !== "direct").map(t => ({ name: t.name, sub: t.kind === "channel" ? "Team channel" : (t.members || []).length + " people", initials: t.kind === "channel" ? (t.icon || "◉") : t.aaref ? "✦" : initials(t.name),
       discStyle: disc(t.kind === "channel" ? (t.color || "#181848") : "#0E8F66", false), go: () => this.forwardTo({ id: t.id, name: t.name }) }));
     const recent = (this._threads || []).filter(t => t.kind === "direct").map(t => (t.members || []).filter(e => e !== me)[0]);
     const people = (st.accounts || []).filter(a => a.email !== me && a.status !== "suspended" && a.role !== "Candidate")
@@ -11427,15 +11535,15 @@ class Component extends DCLogic {
   msgrList() {
     const st = this.state, meE = (st.me || {}).email;
     const ago = ms => { const m = Math.round((Date.now() - ms) / 60000); if (m < 1) return "now"; if (m < 60) return m + "m"; const h = Math.round(m / 60); if (h < 24) return h + "h"; return Math.round(h / 24) + "d"; };
-    return (this._threads || []).filter(t => (t.msgs || []).length).slice(0, 12).map(t => {
-      const last = t.msgs[t.msgs.length - 1];
+    return (this._threads || []).filter(t => (t.msgs || []).length || (t.aaref && this.aarefUrl())).slice(0, 12).map(t => {
+      const last = t.msgs[t.msgs.length - 1] || { text: "Ask me anything", at: Date.now(), by: AAREF_ID };
       const un = t.msgs.filter(m => m.by !== meE && (m.seen || []).indexOf(meE) < 0).length;
       const other = (t.members || []).filter(e => e !== meE)[0];
       const nm = t.kind === "direct" ? ((this.acct(other) || {}).name || t.name) : t.name;
-      const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : "var(--mr-teal)";
+      const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : t.aaref ? "#7433C6" : "var(--mr-teal)";
       const online = t.kind === "direct" && this.isOnline(other);
       return {
-        name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : initials(nm),
+        name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : t.aaref ? "✦" : initials(nm),
         preview: (last.by === meE ? "You: " : t.kind === "direct" ? "" : (last.byName || "").split(" ")[0] + ": ") + String(last.text || (last.fileName ? "📎 " + last.fileName : "Sent a file")).slice(0, 60),
         when: ago(last.at || Date.now()),
         discStyle: "position:relative;flex:none;width:44px;height:44px;border-radius:" + (t.kind === "direct" ? "50%" : "13px") + ";background:" + col + ";color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:700;font-size:14px;",
@@ -11444,9 +11552,94 @@ class Component extends DCLogic {
         previewStyle: "font-size:12.5px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:" + (un ? "var(--mr-navy);font-weight:700;" : "#7A8899;"),
         unreadDot: un ? "flex:none;width:10px;height:10px;border-radius:50%;background:var(--mr-teal);" : "display:none;",
         rowStyle: "display:flex;gap:11px;align-items:center;padding:9px 10px;border-radius:12px;cursor:pointer;" + (un ? "background:#F1F7FB;" : ""),
-        go: () => { this.setState({ msgrOpen: false }); if (this.dockAvailable()) this.openDockThread(t.id); else this.openThread(t.id); }
+        go: () => { this.setState({ msgrOpen: false }); if (t.aaref) return this.openAaref(); if (this.dockAvailable()) this.openDockThread(t.id); else this.openThread(t.id); }
       };
     });
+  }
+  aarefSave(list) {
+    const me = (this.state.me || {}).email;
+    const keep = list.filter(m => !m.err).slice(-60).map(m => m.img ? Object.assign({}, m, { img: "", text: "📷 " + (m.text || "Picture") }) : m);
+    try { localStorage.setItem("mrhub-aaref-v1:" + me, JSON.stringify(keep)); } catch (e) {}
+  }
+  aarefRisk(text) {
+    const me = (this.state.me || {}).email, t = String(text || "");
+    if (/\b\d{14}\b/.test(t)) return "It looks like a national ID number.";
+    if (/(\+?20|\b0)1[0125]\d{8}\b/.test(t)) return "It looks like a phone number.";
+    if (/\bEG\d{2}[A-Z0-9]{10,}/i.test(t) || /\b\d{12,19}\b/.test(t)) return "It looks like a bank or card number.";
+    if (/password|passcode|\bpin\b|salary|payslip|diagnos|medical record|patient/i.test(t)) return "It mentions passwords, pay or medical details.";
+    const em = (t.match(/[\w.+-]+@[\w-]+\.[\w.]+/g) || []).filter(e => e.toLowerCase() !== me);
+    if (em.length) return "It includes someone's email address.";
+    return "";
+  }
+  shrinkImg(data, max) {
+    return new Promise(res => {
+      const im = new Image();
+      im.onload = () => {
+        const k = Math.min(1, max / Math.max(im.width, im.height));
+        const c = document.createElement("canvas"); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+        c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+        res(c.toDataURL("image/jpeg", 0.85));
+      };
+      im.onerror = () => res(data);
+      im.src = data;
+    });
+  }
+  async askAaref() {
+    const st = this.state, me = st.me || {};
+    const text = String(st.chatDraft || "").trim(), file = st.chatFile;
+    if (!text && !file) return;
+    if (st.aarefBusy) return this.flash("One moment", "Aaref is still answering your last message.", "no");
+    const url = this.aarefUrl();
+    if (!url) return this.flash("Aaref is not switched on yet", this.isSuper() ? "Add Aaref's address in Settings → Aaref (see AAREF-SETUP.md)." : "The super admin will switch it on soon.", "no");
+    if (file && !/^data:image\//.test(file.data || "")) return this.flash("Pictures only", "Aaref can read pictures (JPG, PNG). For documents, paste the text you want help with.", "no");
+    const okKey = "mrhub-aaref-ok:" + me.email;
+    let agreed = false; try { agreed = !!localStorage.getItem(okKey); } catch (e) {}
+    if (!agreed) {
+      const rules = String(((this.T().compCfg || {}).aiRules) || AI_RULES_DEFAULT);
+      return this.ask("Before you use Aaref", rules.slice(0, 700) + (rules.length > 700 ? "…" : "") + "\n\nAaref runs on Google Gemini. Never paste customer, patient, salary or personal data.", "I understand", "Cancel",
+        () => { try { localStorage.setItem(okKey, String(Date.now())); } catch (e) {} setTimeout(() => this.askAaref(), 30); }, () => {});
+    }
+    const risk = this.aarefRisk(text);
+    if (risk && !this._aarefRiskOk) return this.ask("This may be confidential", risk + " Company AI rules say personal and confidential data must not go to AI tools.", "Send anyway", "Let me edit it",
+      () => { this._aarefRiskOk = true; setTimeout(() => this.askAaref(), 30); }, () => {});
+    this._aarefRiskOk = false;
+    const img = file ? await this.shrinkImg(file.data, 1280) : "";
+    const rp = st.chatReply && st.chatReply.threadId === "aaref" ? st.chatReply : null;
+    const um = { id: uid("a"), by: "me", text: text, img: img, at: Date.now(), quote: rp ? rp.text : "" };
+    const hist = (this.state.aaref || []).concat([um]);
+    this.setState({ aaref: hist, chatDraft: "", chatFile: null, chatEmoji: false, chatReply: rp ? null : st.chatReply, aarefBusy: true });
+    this.aarefSave(hist);
+    const turns = hist.filter(m => !m.err).slice(-16).map((m, i, arr) => {
+      const o = { role: m.by === "me" ? "user" : "model", text: (m.quote ? "(Replying to: \"" + m.quote + "\")\n" : "") + (m.text || (m.img ? "What is in this picture?" : "")) };
+      if (i === arr.length - 1 && m.img) { const mm = /^data:([^;]+);base64,(.*)$/.exec(m.img); if (mm) o.image = { mime: mm[1], data: mm[2] }; }
+      return o;
+    });
+    let reply;
+    try {
+      const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 60000);
+      const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, signal: ctl.signal,
+        body: JSON.stringify({ email: me.email, name: me.name, messages: turns, rules: String(((this.T().compCfg || {}).aiRules) || AI_RULES_DEFAULT).slice(0, 2000) }) });
+      clearTimeout(to);
+      const d = await r.json().catch(() => ({}));
+      if (r.ok && d.text) reply = { id: uid("a"), by: "aaref", text: d.text, at: Date.now() };
+      else reply = { id: uid("a"), by: "aaref", err: true, at: Date.now(),
+        text: r.status === 429 ? (d.error || "You have used today's Aaref messages. It resets at midnight.") : r.status === 403 ? (d.error || "Aaref did not recognise your account.") : (d.error || "Aaref could not answer just now. Try again in a minute.") };
+    } catch (e) {
+      reply = { id: uid("a"), by: "aaref", err: true, at: Date.now(), text: "Aaref could not be reached. Check your connection and try again." };
+    }
+    const nx = (this.state.aaref || []).concat([reply]);
+    this.setState({ aaref: nx, aarefBusy: false });
+    this.aarefSave(nx);
+  }
+  openAaref() {
+    if (!this.aarefOn()) return;
+    if (this.dockAvailable()) this.openDockThread("aaref"); else this.setState({ chatOpen: "aaref", route: "chat", menuOpen: null });
+  }
+  clearAaref() {
+    this.ask("Clear your Aaref chat?", "This removes the conversation from this device.", "Clear", "Keep it", () => {
+      try { localStorage.removeItem("mrhub-aaref-v1:" + (this.state.me || {}).email); } catch (e) {}
+      this.setState({ aaref: [] }); this.flash("Cleared", "");
+    }, () => {});
   }
   ensureDirect(list, email) {
     const me = this.state.me, key = [me.email, email].sort().join("|");
@@ -11516,7 +11709,7 @@ class Component extends DCLogic {
   chatPack() {
     const st = this.state, me = st.me || {};
     const threads = this.threadsFor(me.email).slice().sort((a, b) => (b.touched || 0) - (a.touched || 0));
-    const cur = threads.filter(t => t.id === st.chatOpen)[0] || threads.filter(t => t.kind !== "channel" && (t.msgs || []).length)[0] || threads[0] || null;
+    const cur = threads.filter(t => t.id === st.chatOpen)[0] || threads.filter(t => t.kind !== "channel" && !t.aaref && (t.msgs || []).length)[0] || threads.filter(t => !t.aaref)[0] || threads[0] || null;
     if (st.chatWait && threads.some(t => t.id === st.chatWait)) setTimeout(() => { if (this.state.chatWait) this.openThread(this.state.chatWait); this.setState({ chatWait: "" }); }, 0);
     const clock = ms => {
       const d = new Date(ms), n = new Date();
@@ -11538,12 +11731,12 @@ class Component extends DCLogic {
         const last = (t.msgs || [])[(t.msgs || []).length - 1];
         const un = unreadOf(t);
         const on = cur && cur.id === t.id;
-        const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : "var(--mr-teal)";
+        const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : t.aaref ? "#7433C6" : "var(--mr-teal)";
         return {
           name: label(t),
           preview: last ? ((t.kind !== "direct" ? (last.by === me.email ? "You: " : (last.byName || "").split(" ")[0] + ": ") : "") + (last.text || "Sent a file")).slice(0, 62) : (t.kind === "channel" ? t.desc || "Start the conversation" : "No messages yet"),
           when: last ? clock(last.at) : "",
-          initials: t.kind === "channel" ? (t.icon || "◉") : initials(label(t)),
+          initials: t.kind === "channel" ? (t.icon || "◉") : t.aaref ? "✦" : initials(label(t)),
           discStyle: "flex:none;width:44px;height:44px;border-radius:" + (t.kind === "direct" ? "50%" : "13px") +
             ";background:" + col + ";color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:700;font-size:" + (t.kind === "channel" ? "18px" : "14px") + ";",
           badge: un ? String(un) : "",
@@ -11560,14 +11753,15 @@ class Component extends DCLogic {
       hasThread: !!cur,
       ct: cur ? {
         name: label(cur),
+        isAaref: !!cur.aaref, clear: () => this.clearAaref(),
         sub: cur.kind === "channel" ? (cur.desc || "Team channel · replies from " + cur.channelOf)
           : cur.kind === "group" ? (cur.members || []).map(e => (this.acct(e) || {}).name || e).join(", ")
-          : [this.lastSeenLabel((cur.members || []).filter(e => e !== me.email)[0]), (this.acct((cur.members || []).filter(e => e !== me.email)[0]) || {}).dept].filter(Boolean).join(" · "),
+          : this.typingIn(cur) ? this.typingIn(cur) : [this.lastSeenLabel((cur.members || []).filter(e => e !== me.email)[0]), (this.acct((cur.members || []).filter(e => e !== me.email)[0]) || {}).dept].filter(Boolean).join(" · "),
         subStyle: "font-size:12.5px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" +
           (cur.kind === "direct" && this.isOnline((cur.members || []).filter(e => e !== me.email)[0]) ? "font-weight:700;color:#0E8F66;" : "color:#7A8899;"),
-        initials: cur.kind === "channel" ? (cur.icon || "◉") : initials(label(cur)),
+        initials: cur.kind === "channel" ? (cur.icon || "◉") : cur.aaref ? "✦" : initials(label(cur)),
         discStyle: "flex:none;width:44px;height:44px;border-radius:" + (cur.kind === "direct" ? "50%" : "13px") + ";background:" +
-          (cur.kind === "channel" ? (cur.color || "#181848") : cur.kind === "group" ? "#0E8F66" : "var(--mr-teal)") +
+          (cur.kind === "channel" ? (cur.color || "#181848") : cur.kind === "group" ? "#0E8F66" : cur.aaref ? "#7433C6" : "var(--mr-teal)") +
           ";color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:700;font-size:" + (cur.kind === "channel" ? "18px" : "14px") + ";",
         msgs: (cur.msgs || []).map(m => {
           const mine = m.by === me.email;
@@ -11584,11 +11778,13 @@ class Component extends DCLogic {
           };
         }),
         empty: (cur.msgs || []).length === 0,
-        emptyLabel: cur.kind === "channel" ? "Write your question — " + cur.channelOf + " will see it and reply here." : "Say hello."
+        emptyLabel: cur.aaref ? (this.aarefUrl() ? "Ask Aaref anything — draft an email, summarise text you paste, explain a term, or send a picture. Do not share personal or confidential data." : "Aaref is not switched on yet. The super admin adds its address in Settings.") : cur.kind === "channel" ? "Write your question — " + cur.channelOf + " will see it and reply here." : "Say hello."
       } : null,
       chatDraft: st.chatDraft,
-      onChatDraft: e => this.setState({ chatDraft: e.target.value }),
-      onChatKey: e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); this.sendChat(); } },
+      onChatDraft: e => { this.setState({ chatDraft: e.target.value }); if (cur) { this.setTyping(cur.id, !!e.target.value); this.markSeen(cur.id); } },
+      onChatKey: e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); if (cur) this.setTyping(cur.id, false); this.sendChat(); } },
+      onChatFocus: () => { if (cur) this.markSeen(cur.id); },
+      chatTyping: this.typingIn(cur), chatIsTyping: !!this.typingIn(cur),
       sendChat: () => this.sendChat(),
       sendStyle: "flex:none;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:filter 0.2s ease;background:" +
         (st.chatDraft.trim() || st.chatFile ? "var(--mr-teal)" : "#C6D0DC") + ";color:#fff;",
@@ -11599,12 +11795,12 @@ class Component extends DCLogic {
       chatReplyOn: !!(st.chatReply && cur && st.chatReply.threadId === cur.id),
       chatReplyWho: st.chatReply ? st.chatReply.who : "", chatReplyText: st.chatReply ? st.chatReply.text : "",
       cancelReply: () => this.setState({ chatReply: null }),
-      chatScrollKey: cur ? cur.id + ":" + (cur.msgs || []).length : "none",
+      chatScrollKey: cur ? cur.id + ":" + (cur.msgs || []).length + ":" + (this.typingIn(cur) ? 1 : 0) : "none",
       toggleChatEmoji: () => this.setState({ chatEmoji: !st.chatEmoji }),
       chatEmojis: EMOJI_QUICK.map(em => ({ em: em, add: () => this.setState({ chatDraft: (this.state.chatDraft || "") + em }) })),
       onChatFile: e => {
         const f = e.target.files && e.target.files[0];
-        if (f) this.readFileData(f, (d, n) => this.setState({ chatFile: { data: d, name: n } }));
+        if (f) this.readFileData(f, (d, n) => this.setState({ chatFile: { data: d, name: n } }), 8);
         e.target.value = "";
       },
       chatNew: st.chatNew,
@@ -11633,12 +11829,29 @@ class Component extends DCLogic {
   saveExams(list) { this.save(K.exam, list, "exams"); }
   saveAttempts(list) { this.save(K.att, list, "attempts"); }
 
-  readFileData(file, cb) {
+  readFileData(file, cb, maxMb) {
     if (!file) return;
-    if (file.size > 4 * 1024 * 1024) { this.flash("That file is too large", "Keep uploads under 4 MB, or add it as a link instead.", "no"); return; }
+    const cap = (maxMb || 4) * 1024 * 1024;
+    if (file.size > cap) { this.flash("That file is too large", "Keep it under " + (maxMb || 4) + " MB, or share it as a link instead.", "no"); return; }
     const r = new FileReader();
-    r.onload = () => cb(String(r.result || ""), file.name);
+    r.onerror = () => this.flash("Could not read that file", "Try saving it again, or send it as PDF.", "no");
+    r.onload = () => {
+      let d = String(r.result || "");
+      if (/^data:(;|,)/.test(d) || /^data:text\/html/i.test(d) || /^data:image\/svg/i.test(d)) d = d.replace(/^data:[^;,]*/, "data:application/octet-stream");
+      cb(d, file.name);
+    };
     r.readAsDataURL(file);
+  }
+  downloadData(data, name) {
+    try {
+      const m = /^data:([^;,]*)(;base64)?,([\s\S]*)$/.exec(data || "");
+      if (!m) { if (/^https?:/i.test(data || "")) window.open(data, "_blank", "noopener"); return; }
+      const bin = m[2] ? atob(m[3]) : decodeURIComponent(m[3]);
+      const arr = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+      const url = URL.createObjectURL(new Blob([arr], { type: m[1] || "application/octet-stream" }));
+      const a = document.createElement("a"); a.href = url; a.download = name || "file"; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+    } catch (e) { this.flash("Download failed", "The file may still be arriving. Try again in a moment.", "no"); }
   }
 
   setKb(k, v) { const kb = Object.assign({}, this.state.kb); kb[k] = v; this.setState({ kb: kb, kbMsg: "" }); }
@@ -14142,6 +14355,7 @@ class Component extends DCLogic {
     let next = (!st.welcomeShown && welcome) || pool.filter(c => c.mode === "corner")[0];
     if (!next) next = this.autoChar();
     if (!next) return;
+    this._charAt = Date.now();
     this.setState({ charPop: next, welcomeShown: st.welcomeShown || next.mode === "welcome" });
   }
   autoChar() {
@@ -15316,8 +15530,8 @@ class Component extends DCLogic {
       _cp: (this._cp = this.chatPack()),
       vChat: st.route === "chat",
       chatThreads: this._cp.chatThreads, hasThread: this._cp.hasThread, noThread: !this._cp.hasThread,
-      ct: this._cp.ct || { msgs: [], name: "", sub: "", initials: "", discStyle: "display:none;", empty: true, emptyLabel: "" },
-      chatDraft: this._cp.chatDraft, onChatDraft: this._cp.onChatDraft, onChatKey: this._cp.onChatKey,
+      ct: this._cp.ct || { msgs: [], name: "", sub: "", initials: "", discStyle: "display:none;", empty: true, emptyLabel: "", isAaref: false },
+      chatDraft: this._cp.chatDraft, onChatDraft: this._cp.onChatDraft, onChatKey: this._cp.onChatKey, onChatFocus: this._cp.onChatFocus, chatTyping: this._cp.chatTyping, chatIsTyping: this._cp.chatIsTyping,
       sendChat: this._cp.sendChat, sendStyle: this._cp.sendStyle,
       hasChatFile: this._cp.hasChatFile, chatFileName: this._cp.chatFileName,
       chatReplyOn: this._cp.chatReplyOn, chatReplyWho: this._cp.chatReplyWho, chatReplyText: this._cp.chatReplyText, cancelReply: this._cp.cancelReply, chatScrollKey: this._cp.chatScrollKey,
@@ -15599,9 +15813,9 @@ class Component extends DCLogic {
         const last = (t.msgs || [])[(t.msgs || []).length - 1];
         const un = (t.msgs || []).filter(m => m.by !== meE && (m.seen || []).indexOf(meE) < 0).length;
         const nm = t.kind === "direct" ? ((this.acct((t.members || []).filter(e => e !== meE)[0]) || {}).name || t.name) : t.name;
-        const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : "var(--mr-teal)";
+        const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : t.aaref ? "#7433C6" : "var(--mr-teal)";
         return {
-          name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : initials(nm),
+          name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : t.aaref ? "✦" : initials(nm),
           preview: last ? String(last.text || "Sent a file").slice(0, 40) : "No messages yet",
           discStyle: "flex:none;width:38px;height:38px;border-radius:" + (t.kind === "direct" ? "50%" : "11px") +
             ";background:" + col + ";color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:700;font-size:13px;",
@@ -15610,7 +15824,6 @@ class Component extends DCLogic {
           open: () => {
             const docks = (st.docks || []).indexOf(t.id) > -1 ? st.docks : (st.docks || []).concat([t.id]).slice(-2);
             this.setState({ dockListOpen: false, docks: docks });
-            this.openThreadQuiet(t.id);
           }
         };
       }),
@@ -15619,7 +15832,7 @@ class Component extends DCLogic {
         const t = (this._threads || []).filter(x => x.id === id)[0];
         if (!t) return null;
         const nm = t.kind === "direct" ? ((this.acct((t.members || []).filter(e => e !== meE)[0]) || {}).name || t.name) : t.name;
-        const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : "var(--mr-teal)";
+        const col = t.kind === "channel" ? (t.color || "#181848") : t.kind === "group" ? "#0E8F66" : t.aaref ? "#7433C6" : "var(--mr-teal)";
         const min = (st.dockMin || []).indexOf(id) > -1;
         const draft = (st.dockDraft || {})[id] || "";
         const dfile = (st.dockFile || {})[id] || null;
@@ -15631,8 +15844,8 @@ class Component extends DCLogic {
         };
         const emojiOpen = st.dockEmoji === id;
         return {
-          name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : initials(nm),
-          sub: t.kind === "channel" ? "Team channel" : t.kind === "group" ? (t.members || []).length + " people" : this.lastSeenLabel((t.members || []).filter(e => e !== meE)[0]),
+          name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : t.aaref ? "✦" : initials(nm),
+          sub: this.typingIn(t) || (t.kind === "channel" ? "Team channel" : t.kind === "group" ? (t.members || []).length + " people" : this.lastSeenLabel((t.members || []).filter(e => e !== meE)[0])),
           headStyle: "display:flex;gap:8px;align-items:center;padding:10px 12px;background:" + col + ";color:#fff;",
           discStyle: "flex:none;width:30px;height:30px;border-radius:" + (t.kind === "direct" ? "50%" : "9px") +
             ";background:rgba(255,255,255,0.2);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11.5px;",
@@ -15647,7 +15860,7 @@ class Component extends DCLogic {
           clearFile: () => { const f2 = Object.assign({}, st.dockFile || {}); delete f2[id]; this.setState({ dockFile: f2 }); },
           onFile: e => {
             const f = e.target.files && e.target.files[0];
-            if (f) this.readFileData(f, (d, n) => this.setState({ dockFile: Object.assign({}, this.state.dockFile || {}, { [id]: { data: d, name: n } }) }));
+            if (f) this.readFileData(f, (d, n) => this.setState({ dockFile: Object.assign({}, this.state.dockFile || {}, { [id]: { data: d, name: n } }) }), 8);
             e.target.value = "";
           },
           canFiles: this.fnOn("chatFiles"),
@@ -15664,13 +15877,15 @@ class Component extends DCLogic {
             }, this.msgTick(t, m), this.msgExtra(t, m, mineM), { colStyle: "display:flex;flex-direction:column;gap:2px;max-width:84%;align-items:" + (mineM ? "flex-end" : "flex-start") + ";" });
           }),
           empty: (t.msgs || []).length === 0,
-          scrollKey: id + ":" + (t.msgs || []).length + ":" + (min ? 0 : 1),
+          scrollKey: id + ":" + (t.msgs || []).length + ":" + (min ? 0 : 1) + ":" + (this.typingIn(t) ? 1 : 0),
           replyOn: !!(st.chatReply && st.chatReply.threadId === id),
           replyWho: st.chatReply ? st.chatReply.who : "", replyText: st.chatReply ? st.chatReply.text : "",
           cancelReply: () => this.setState({ chatReply: null }),
           draft: draft,
-          onDraft: e => this.setState({ dockDraft: Object.assign({}, st.dockDraft || {}, { [id]: e.target.value }) }),
-          onKey: e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } },
+          onDraft: e => { this.setState({ dockDraft: Object.assign({}, this.state.dockDraft || {}, { [id]: e.target.value }) }); this.setTyping(id, !!e.target.value); this.markSeen(id); },
+          onKey: e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); this.setTyping(id, false); send(); } },
+          onFocus: () => this.markSeen(id),
+          typing: this.typingIn(t), isTyping: !!this.typingIn(t),
           send: send,
           sendStyle: "flex:none;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;background:" +
             (String(draft).trim() || dfile ? "var(--mr-teal)" : "#C6D0DC") + ";color:#fff;"
@@ -15680,6 +15895,7 @@ class Component extends DCLogic {
       hasModal: !!st.modal,
       lbOpen: !!st.lightbox, lbSrc: st.lightbox ? st.lightbox.src : "", lbName: st.lightbox ? st.lightbox.name : "",
       closeLb: () => this.setState({ lightbox: null }),
+      lbDownload: e => { if (e) { e.preventDefault(); e.stopPropagation(); } if (st.lightbox) this.downloadData(st.lightbox.src, st.lightbox.name); },
       fwdOpen: !!st.fwdMsg, fwdPreview: st.fwdMsg ? (st.fwdMsg.text || (st.fwdMsg.fileName ? "📎 " + st.fwdMsg.fileName : "")).slice(0, 160) : "",
       fwdSearch: st.fwdSearch || "", onFwdSearch: e => this.setState({ fwdSearch: e.target.value }),
       closeFwd: () => this.setState({ fwdMsg: null, fwdSearch: "" }),
@@ -16110,6 +16326,17 @@ class Component extends DCLogic {
       goSettings: () => this.go(po ? "settings" : "home"),
       cloudLive: st.cloud === "live",
       cloudOff: st.cloud === "off",
+      aarefUrlDraft: st.aarefUrlDraft !== null && st.aarefUrlDraft !== undefined ? st.aarefUrlDraft : this.aarefUrl(),
+      onAarefUrl: e => this.setState({ aarefUrlDraft: e.target.value }),
+      saveAarefUrl: () => {
+        const v = String(st.aarefUrlDraft !== null && st.aarefUrlDraft !== undefined ? st.aarefUrlDraft : this.aarefUrl()).trim();
+        if (v && !/^https:\/\/[^\s]+$/.test(v)) return this.flash("That is not a web address", "It should start with https://", "no");
+        this.setTheme("aarefUrl", v); this.setState({ aarefUrlDraft: null });
+        this.flash(v ? "Aaref is switched on" : "Aaref is switched off", v ? "Everyone now sees Aaref pinned in Messages." : "");
+      },
+      testAaref: () => this.openAaref(),
+      aarefState: this.aarefUrl() ? (this.feat("aaref") ? "On for everyone" : "Address saved · switched off in Functions") : "Not set up",
+      aarefPill: this.pill(this.aarefUrl() ? "#E6F5EE" : "#EDEFF3", this.aarefUrl() ? "#0E6B4E" : "#4A5567") + "margin-left:auto;",
       cloudLabel: st.cloud === "live" ? "Live" : st.cloud === "connecting" ? "Connecting" : st.cloud === "error" ? "Sync problem" : "This browser only",
       cloudReach: st.cloud === "live" ? "Receiving " + Object.keys(this._rx || {}).length + " of " + Object.keys(CLOUD_FIELDS).length + " data types from Firebase." : "",
       cloudMsg: st.cloudMsg || "Everything stays in this browser until Firebase is connected.",
@@ -18104,6 +18331,8 @@ class Component extends DCLogic {
     V.heroInnerStyle = "position:relative;max-width:" + (heroLeft ? "1180px" : "760px") + ";margin:0 auto;text-align:" + (heroLeft ? "left" : "center") + ";";
     V.heroBlurbStyle = "font-size:16px;line-height:1.65;color:#C3D5E6;margin:0 " + (heroLeft ? "0" : "auto") + " 24px;max-width:620px;text-wrap:pretty;";
     V.showHeroSearch = this.feat("search");
+    V.showAarefHome = this.aarefOn() && !!this.aarefUrl();
+    V.goAaref = () => this.openAaref();
     V.showStreak = this.feat("streak");
     V.showTiles = this.feat("tiles");
     V.showTopCard = V.showStreak || V.showTiles;
