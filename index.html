@@ -145,23 +145,6 @@
       </sc-if>
 
       <div style="margin-top:24px;font-size:13px;color:#8B97A8;line-height:1.6;">Forgotten your password? Ask People &amp; Organisation to reset it for you.</div>
-      <sc-if value="{{ hasOnlineNow }}" hint-placeholder-val="{{ false }}">
-        <div style="margin-top:22px;padding:14px 16px;border:1px solid #E4EAF1;border-radius:13px;background:#F7FAFC;">
-          <div style="display:flex;gap:8px;align-items:center;margin-bottom:11px;">
-            <span style="flex:none;width:9px;height:9px;border-radius:50%;background:#0E8F66;box-shadow:0 0 0 4px rgba(14,143,102,0.16);"></span>
-            <span style="font-weight:700;font-size:13px;color:#2C3646;">{{ onlineNowLabel }}</span>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto;">
-            <sc-for list="{{ onlineNow }}" as="p" hint-placeholder-count="3">
-              <div style="display:flex;gap:10px;align-items:center;">
-                <span style="{{ p.discStyle }}">{{ p.initials }}</span>
-                <span style="flex:1;min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;line-height:1.3;">{{ p.name }}</span><span style="display:block;font-size:11.5px;color:#8B97A8;">{{ p.sub }}</span></span>
-              </div>
-            </sc-for>
-          </div>
-          <div style="font-size:12px;color:#8B97A8;margin-top:8px;">{{ onlineMore }}</div>
-        </div>
-      </sc-if>
 
       <div style="margin-top:26px;padding-top:22px;border-top:1px solid #E4EAF1;">
         <sc-if value="{{ candGate }}" hint-placeholder-val="{{ false }}">
@@ -1226,6 +1209,27 @@
         <p style="font-size:14.5px;color:#5C6B80;margin:0;line-height:1.55;">{{ dashLead }}</p>
       </div>
       <div style="font-size:13px;color:#8B97A8;font-weight:600;letter-spacing:0.02em;">{{ dashDate }}</div>
+    </div>
+
+    <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:18px 20px;margin-bottom:18px;">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
+        <span style="flex:none;width:10px;height:10px;border-radius:50%;background:#0E8F66;box-shadow:0 0 0 4px rgba(14,143,102,0.16);"></span>
+        <span style="font-family:var(--mr-head);font-weight:800;font-size:17px;letter-spacing:-0.02em;">{{ dashOnlineLabel }}</span>
+        <span style="font-size:12.5px;color:#8B97A8;margin-left:auto;">Active in the last 5 minutes · only admins see this</span>
+      </div>
+      <sc-if value="{{ dashHasOnline }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;">
+          <sc-for list="{{ dashOnline }}" as="p" hint-placeholder-count="4">
+            <div onClick="{{ p.chat }}" title="Send a message" style="display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:11px;cursor:pointer;" style-hover="background:#F4F7FA;">
+              <span style="{{ p.discStyle }}">{{ p.initials }}<span style="position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;background:#0E8F66;border:2px solid #fff;"></span></span>
+              <span style="flex:1;min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ p.name }}</span><span style="display:block;font-size:11.5px;color:#8B97A8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ p.sub }}</span></span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ dashNoOnline }}" hint-placeholder-val="{{ true }}">
+        <div style="font-size:13.5px;color:#8B97A8;">Nobody else is signed in right now.</div>
+      </sc-if>
     </div>
 
     <div data-mr="grid2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;">
@@ -5773,7 +5777,7 @@
         <div style="display:flex;flex-direction:column;gap:2px;overflow-y:auto;max-height:62vh;">
           <sc-for list="{{ chatThreads }}" as="t" hint-placeholder-count="4">
             <div onClick="{{ t.go }}" style="{{ t.rowStyle }}" style-hover="background:#F4F7FA;">
-              <div style="{{ t.discStyle }}">{{ t.initials }}</div>
+              <div style="position:relative;flex:none;"><div style="{{ t.discStyle }}">{{ t.initials }}</div><span style="{{ t.dotStyle }}"></span></div>
               <div style="flex:1;min-width:0;">
                 <div style="display:flex;gap:8px;align-items:baseline;">
                   <span style="font-weight:700;font-size:14.5px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ t.name }}</span>
@@ -5794,7 +5798,7 @@
             <div style="{{ ct.discStyle }}">{{ ct.initials }}</div>
             <div style="min-width:0;">
               <div style="font-family:var(--mr-head);font-weight:800;font-size:17px;letter-spacing:-0.02em;">{{ ct.name }}</div>
-              <div style="font-size:12.5px;color:#7A8899;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ ct.sub }}</div>
+              <div style="{{ ct.subStyle }}">{{ ct.sub }}</div>
             </div>
           </div>
           <div style="flex:1;min-height:280px;max-height:52vh;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:11px;background:#F7FAFC;">
@@ -5812,7 +5816,7 @@
                     <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
                   </sc-if>
                   <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
-                  <div style="{{ m.whenStyle }}">{{ m.when }}</div>
+                  <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                 </div>
               </div>
             </sc-for>
@@ -7279,7 +7283,7 @@
                       <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
                     </sc-if>
                     <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
-                    <div style="{{ m.whenStyle }}">{{ m.when }}</div>
+                    <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                   </div>
                 </div>
               </sc-for>
@@ -7663,8 +7667,8 @@ function lsSet(key, value, cloudLive) {
 function makePass() {
   const a = "abcdefghjkmnpqrstuvwxyz", n = "23456789";
   let out = "MR-";
-  for (let i = 0; i < 4; i++) out += a[Math.floor(Math.random() * a.length)];
-  for (let i = 0; i < 3; i++) out += n[Math.floor(Math.random() * n.length)];
+  for (let i = 0; i < 4; i++) out += a[rndIdx(a.length)];
+  for (let i = 0; i < 3; i++) out += n[rndIdx(n.length)];
   return out;
 }
 function slug(s) {
@@ -7802,10 +7806,43 @@ function blankCand(by) {
     stage: 0, owner: by || "", examIds: [], notes: "", created: today(), log: [], shared: [], token: "", code: "",
     interview: { when: "", withEmail: "", note: "" }, verdict: null, formIds: [] };
 }
+function cleanBrand(t) {
+  if (!t || typeof t !== "object") return t;
+  const o = Object.assign({}, t);
+  Object.keys(o).forEach(k => { if (typeof o[k] === "string" && /\bMESH\b/i.test(o[k])) o[k] = o[k].replace(/\bMESH\b/gi, "ME"); });
+  if (/Employees Service Hub/i.test(o.brandTagline || "")) o.brandTagline = "Med Right Employees";
+  if (/Employees Service Hub/i.test(o.brandLine || "")) o.brandLine = "Med Right Employees";
+  return o;
+}
+function rndIdx(n) {
+  try { const b = new Uint32Array(1); crypto.getRandomValues(b); return b[0] % n; } catch (e) { return Math.floor(Math.random() * n); }
+}
+const SAFE_URL = /^(https?:|mailto:|tel:|blob:|data:(image|video|audio|application\/pdf|application\/octet-stream|application\/vnd|application\/msword|text\/plain|text\/csv)|mrblob:|#|\/|\.\/|\.\.\/)/i;
+function safeUrl(u) {
+  const v = String(u || "").trim();
+  if (!v) return "";
+  if (SAFE_URL.test(v)) return v;
+  if (!/^[a-z][a-z0-9+.-]*:/i.test(v.replace(/[\s\u0000-\u001f]/g, ""))) return v;
+  return "";
+}
+const LOCK_KEY = "mrhub-lock-v1";
+function lockInfo(id) { try { const all = JSON.parse(localStorage.getItem(LOCK_KEY) || "{}"); return all[id] || { n: 0, until: 0 }; } catch (e) { return { n: 0, until: 0 }; } }
+function lockSet(id, v) { try { const all = JSON.parse(localStorage.getItem(LOCK_KEY) || "{}"); if (v) all[id] = v; else delete all[id]; localStorage.setItem(LOCK_KEY, JSON.stringify(all)); } catch (e) {} }
+function lockFail(id) { const L = lockInfo(id); const n = L.n + 1; const until = n >= 5 ? Date.now() + Math.min(60, 10 * Math.pow(2, n - 5)) * 60000 : 0; lockSet(id, { n: n, until: until }); return { n: n, until: until }; }
+function lockLeft(id) { const L = lockInfo(id); return L.until > Date.now() ? Math.ceil((L.until - Date.now()) / 60000) : 0; }
+function deviceSalt() {
+  try {
+    let d = localStorage.getItem("mrhub-dev-v1");
+    if (!d) { d = ""; for (let i = 0; i < 24; i++) d += "abcdefghijklmnopqrstuvwxyz0123456789"[rndIdx(36)]; localStorage.setItem("mrhub-dev-v1", d); }
+    return d;
+  } catch (e) { return "nodev"; }
+}
+function sessTok(a) { return sha256hex("ses|" + String(a.email || "").toLowerCase() + "|" + (a.ph || a.pass || "") + "|" + (a.pwChangedAt || 0) + "|" + deviceSalt()); }
+const SESSION_DAYS = 14;
 function candToken() {
   const a = "abcdefghjkmnpqrstuvwxyz23456789";
   let out = "";
-  for (let i = 0; i < 10; i++) out += a[Math.floor(Math.random() * a.length)];
+  for (let i = 0; i < 10; i++) out += a[rndIdx(a.length)];
   return out;
 }
 
@@ -7853,8 +7890,8 @@ const EVENT_KINDS = [
 function eventCode() {
   const a = "ABCDEFGHJKLMNPQRSTUVWXYZ", n = "23456789";
   let out = "";
-  for (let i = 0; i < 3; i++) out += a[Math.floor(Math.random() * a.length)];
-  for (let i = 0; i < 3; i++) out += n[Math.floor(Math.random() * n.length)];
+  for (let i = 0; i < 3; i++) out += a[rndIdx(a.length)];
+  for (let i = 0; i < 3; i++) out += n[rndIdx(n.length)];
   return out;
 }
 function blankEvent(by) {
@@ -7953,7 +7990,7 @@ const DEFAULT_THEME = {
   brandShort: "ME",
   brandTagline: "Med Right Employees",
   brandWord: "ME",
-  brandLine: "Med Right Employees Service Hub",
+  brandLine: "Med Right Employees",
   company: "Med Right Group",
   logoTop: "assets/logo-group.png",
   logoLogin: "assets/logo-group.png",
@@ -8200,7 +8237,7 @@ class Component extends DCLogic {
         return Object.assign({}, t, { unreadBy: parties.filter(p => p !== last.by) });
       }),
       notes: get(K.notes, []),
-      theme: Object.assign({}, DEFAULT_THEME, get(K.theme, {})),
+      theme: cleanBrand(Object.assign({}, DEFAULT_THEME, get(K.theme, {}))),
       ann: get(K.ann, SEED_ANN.slice()),
       quotes: get(K.quotes, SEED_QUOTES.slice()),
       charMsgs: get(K.chars, SEED_CHARMSGS.slice()),
@@ -8230,7 +8267,13 @@ class Component extends DCLogic {
       compReg: get(K.compReg, []), compAudits: get(K.compAudits, []), compRounds: get(K.compRounds, []),
       compReports: get(K.compReports, []), compDecls: get(K.compDecls, []), compAi: get(K.compAi, [])
     };
-    const ses = get(K.ses, null);
+    let ses = get(K.ses, null);
+    if (ses && ses.email) {
+      const a0 = patch.accounts.filter(x => x.email === ses.email)[0];
+      let tabAlive = false; try { tabAlive = !!sessionStorage.getItem("mrhub-tab-v1"); } catch (e) {}
+      const expired = !ses.at || Date.now() - ses.at > SESSION_DAYS * 864e5 || (!ses.keep && !tabAlive);
+      if (!a0 || !ses.t || ses.t !== sessTok(a0) || expired) { try { localStorage.removeItem(K.ses); } catch (e) {} ses = null; }
+    }
     if (ses && ses.email) {
       const acct = patch.accounts.filter(x => x.email === ses.email)[0];
       if (acct && acct.status !== "suspended") {
@@ -8287,12 +8330,25 @@ class Component extends DCLogic {
 
     this.onMsg = e => {
       const d = e.data;
-      if (d && d.t === "hbH" && d.h) {
-        const f = document.getElementById("hb-html-frame");
-        if (f) f.style.height = (d.h + 10) + "px";
+      if (d && d.t === "hbH" && typeof d.h === "number" && d.h > 0) {
+        const h = Math.min(Math.round(d.h), 60000);
+        const f = Array.from(document.querySelectorAll("iframe")).filter(x => x.contentWindow === e.source)[0];
+        if (f && (f.id === "hb-html-frame" || f.getAttribute("data-fit"))) f.style.height = Math.max(f.getAttribute("data-fit") ? 420 : 0, h + 10) + "px";
       }
     };
     window.addEventListener("message", this.onMsg);
+    this.onLinkGuard = e => {
+      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a) return;
+      const raw = a.getAttribute("href") || "";
+      if (raw && !safeUrl(raw)) { e.preventDefault(); e.stopPropagation(); this.flash("Link blocked", "This link could run code inside the portal, so it was not opened.", "no"); }
+      else if (a.target === "_blank") a.setAttribute("rel", "noopener noreferrer");
+    };
+    document.addEventListener("click", this.onLinkGuard, true);
+    if (window.top !== window.self && /^https?:/.test(location.protocol) && !/claudeusercontent|localhost|127\.0\.0\.1/.test(location.host)) {
+      let sameTop = false; try { sameTop = window.top.location.host === location.host; } catch (e) {}
+      if (!sameTop) { try { window.top.location = window.location.href; } catch (e) { document.documentElement.style.display = "none"; } }
+    }
 
     try { window.history.replaceState({ hb: true, route: patch.route || "home", id: patch.id || null }, ""); } catch (e) {}
 
@@ -8348,7 +8404,7 @@ class Component extends DCLogic {
       map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "charMsgs";
       map[K.forms] = "forms"; map[K.resp] = "responses"; map[K.svc] = "svc";
       const field = map[e.key];
-      if (e.key === K.theme) { try { this.applyTheme(JSON.parse(e.newValue)); } catch (er) {} }
+      if (e.key === K.theme) { try { this.applyTheme(cleanBrand(JSON.parse(e.newValue))); } catch (er) {} }
       if (!field) return;
       try {
         const value = lbInject(JSON.parse(e.newValue));
@@ -8453,6 +8509,7 @@ class Component extends DCLogic {
   componentDidUpdate() {
     const st = this.state;
     this.applyFnCss();
+    if (st.me && st.screen === "app" && !this._brandFixed) this.fixBrandOnce();
     if (st.me && st.screen === "app" && this.can("compliance") && this._compRemDay !== this.isoToday()) {
       this._compRemDay = this.isoToday();
       setTimeout(() => this.runCompReminders(), 4000);
@@ -8591,12 +8648,16 @@ class Component extends DCLogic {
       clearTimeout(this._lsT[storeKey]);
       this._lsT[storeKey] = setTimeout(() => lsSet(storeKey, this.state[field], true), 2500);
     }
+    if (field === "theme") value = cleanBrand(value);
+    if (field === "chat") { clearTimeout(this._dlvT); this._dlvT = setTimeout(() => this.markDelivered(), 1500); }
     const patch = {}; patch[field] = value;
     if (field === "accounts" && this.state.me) {
       const fresh = value.filter(a => a.email === this.state.me.email)[0];
-      if (!fresh || fresh.status === "suspended") {
+      let sesNow = null; try { sesNow = JSON.parse(localStorage.getItem(K.ses) || "null"); } catch (e) {}
+      const pwMoved = !this.state.candMode && sesNow && sesNow.t && fresh && (fresh.ph || fresh.pass) && sesNow.t !== sessTok(fresh) && !this._pwJustChanged;
+      if (!fresh || fresh.status === "suspended" || pwMoved) {
         try { localStorage.removeItem(K.ses); } catch (e) {}
-        this.setState(Object.assign(patch, { screen: "login", me: null, pass: "", loginError: "Your account has changed. Please sign in again." }));
+        this.setState(Object.assign(patch, { screen: "login", me: null, pass: "", loginError: pwMoved ? "Your password was changed. Please sign in with the new one." : "Your account has changed. Please sign in again." }));
         return;
       }
       patch.me = fresh;
@@ -8652,7 +8713,7 @@ class Component extends DCLogic {
 
       if (d.depts) this.saveLocal(K.dept, d.depts, "depts");
       if (d.cats) this.saveLocal(K.cat, d.cats, "cats");
-      if (d.theme) { const t = Object.assign({}, DEFAULT_THEME, d.theme); this.applyTheme(t); this.saveLocal(K.theme, t, "theme"); }
+      if (d.theme) { const t = cleanBrand(Object.assign({}, DEFAULT_THEME, d.theme)); this.applyTheme(t); this.saveLocal(K.theme, t, "theme"); }
       if (d.ann) this.saveLocal(K.ann, d.ann, "ann");
       if (d.quotes) this.saveLocal(K.quotes, d.quotes, "quotes");
       if (d.chars) this.saveLocal(K.chars, d.chars, "charMsgs");
@@ -9542,13 +9603,13 @@ class Component extends DCLogic {
   }
   benHtmlBlock(html, key) {
     if (!String(html || "").trim()) return null;
-    const fit = e => { try { const f = e.target, d = f.contentDocument; const h = Math.max(d.documentElement.scrollHeight, d.body ? d.body.scrollHeight : 0); f.style.height = Math.max(520, h + 8) + "px"; } catch (er) {} };
     return React.createElement("iframe", {
-      key: key, srcDoc: this.benDoc(html), title: "Benefit detail", onLoad: fit,
+      key: key, srcDoc: this.benDoc(html, true), title: "Benefit detail", sandbox: "allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms allow-modals allow-downloads", "data-fit": "1",
       style: { width: "100%", height: "70vh", minHeight: "520px", border: "1px solid #E4EAF1", borderRadius: "13px", background: "#fff", display: "block" }
     });
   }
-  benDoc(html) {
+  benDoc(html, fit) {
+    if (fit) { const d = this.benDoc(html, false); return /<\/body>/i.test(d) ? d.replace(/<\/body>/i, heightScript() + "</body>") : d + heightScript(); }
     const full = /<html[\s>]|<body[\s>]/i.test(html);
     if (full) return /<meta[^>]+viewport/i.test(html) ? html : html.replace(/<head([^>]*)>/i, "<head$1><meta name='viewport' content='width=device-width,initial-scale=1'>");
     return "<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><style>body{margin:0;padding:22px 26px;font-family:'Work Sans',system-ui,sans-serif;color:#14121C;line-height:1.65;font-size:15.5px;}img{max-width:100%;height:auto;}table{border-collapse:collapse;width:100%;}td,th{border:1px solid #DCE2EA;padding:8px 10px;text-align:left;}h1,h2,h3{font-family:'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:-0.02em;}</style></head><body>" + html + "</body></html>";
@@ -9894,7 +9955,7 @@ class Component extends DCLogic {
   blankDecl() { return { kind: "coi", mode: "ask", none: true, party: "", relation: "", nature: "", details: "", giver: "", what: "", value: "", date: this.isoToday(), outcome: "Accepted",
     tool: "", toolOther: "", purpose: "", classes: [], org: "", role: "", hours: "", recipient: "", method: "" }; }
   blankReport(kind) { return { kind: kind || "incident", cat: "", title: "", details: "", when: this.isoToday(), where: "", anon: kind === "whistle" }; }
-  compCode() { const c = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let x = ""; for (let i = 0; i < 8; i++) x += c[Math.floor(Math.random() * c.length)]; return x.slice(0, 4) + "-" + x.slice(4); }
+  compCode() { const c = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let x = ""; for (let i = 0; i < 8; i++) x += c[rndIdx(c.length)]; return x.slice(0, 4) + "-" + x.slice(4); }
   myCodes() { try { return JSON.parse(localStorage.getItem("mrhub-mycodes-v1") || "[]"); } catch (e) { return []; } }
   compDeclSummary(x) {
     const cls = (x.classes || []).join(", ");
@@ -11114,6 +11175,59 @@ class Component extends DCLogic {
     this.save(K.presence, cur, "presence");
   }
   presence() { return this.state.presence || {}; }
+  onlineVals() {
+    const st = this.state, me = st.me || {}, pr = st.presence || {}, now = Date.now();
+    const on = (st.accounts || []).filter(a => a.email !== me.email && a.status !== "suspended" && a.role !== "Candidate" && pr[a.email] && now - pr[a.email] < 5 * 60 * 1000)
+      .sort((a, b) => pr[b.email] - pr[a.email]);
+    const ago = t => { const m = Math.round((now - t) / 60000); return m < 1 ? "active now" : m + " min ago"; };
+    return {
+      dashOnlineLabel: on.length ? on.length + (on.length === 1 ? " person is" : " people are") + " signed in now" : "Signed in now",
+      dashHasOnline: on.length > 0, dashNoOnline: on.length === 0,
+      dashOnline: on.map(a => ({ name: a.name, initials: initials(a.name), sub: [a.role, a.dept, ago(pr[a.email])].filter(Boolean).join(" · "),
+        discStyle: "flex:none;position:relative;width:32px;height:32px;border-radius:50%;background:" + this.roleColor(a.role) + ";color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11.5px;",
+        chat: () => this.startDirect(a.email) }))
+    };
+  }
+  lastSeenLabel(email) {
+    const p = this.presence()[email];
+    if (!p) return "Offline";
+    const m = Math.round((Date.now() - p) / 60000);
+    if (m < 5) return "Online now";
+    if (m < 60) return "Last seen " + m + " min ago";
+    const h = Math.round(m / 60);
+    if (h < 24) return "Last seen " + h + " h ago";
+    return "Last seen " + new Date(p).toLocaleDateString([], { day: "numeric", month: "short" });
+  }
+  msgTick(t, m) {
+    const me = (this.state.me || {}).email;
+    if (m.by !== me) return { tick: "", tickStyle: "display:none;", tickTitle: "" };
+    const others = (t.members || []).filter(e => e && e !== me);
+    const seen = (m.seen || []).filter(e => e !== me), dl = (m.dlv || []).filter(e => e !== me);
+    const allSeen = others.length > 0 && others.every(e => seen.indexOf(e) > -1);
+    const anyDl = seen.length > 0 || dl.length > 0;
+    const blue = allSeen || (t.kind === "channel" && seen.length > 0);
+    const label = blue ? (t.kind === "direct" ? "Seen" : "Seen by " + seen.length) : anyDl ? "Delivered" : "Sent";
+    return {
+      tick: (anyDl || blue ? "✓✓" : "✓") + " " + label, tickTitle: label,
+      tickStyle: "margin-left:6px;font-weight:700;letter-spacing:-0.02em;color:" + (blue ? "#BFF0FF" : "rgba(255,255,255,0.78)") + ";"
+    };
+  }
+  markDelivered() {
+    const st = this.state, me = (st.me || {}).email;
+    if (!me || !this._cloud) return;
+    let changed = false;
+    const next = (st.chat || []).map(t => {
+      if ((t.members || []).indexOf(me) < 0) return t;
+      let hit = false;
+      const msgs = (t.msgs || []).map(m => {
+        if (m.by === me || (m.dlv || []).indexOf(me) > -1 || (m.seen || []).indexOf(me) > -1) return m;
+        hit = true; return Object.assign({}, m, { dlv: (m.dlv || []).concat([me]) });
+      });
+      if (!hit) return t;
+      changed = true; return Object.assign({}, t, { msgs: msgs });
+    });
+    if (changed) this.saveChat(next);
+  }
   isOnline(email) {
     const p = this.presence()[email];
     return !!p && (Date.now() - p) < 5 * 60 * 1000;
@@ -11249,6 +11363,8 @@ class Component extends DCLogic {
           kindLabel: t.kind === "channel" ? "Team channel" : t.kind === "group" ? (t.members || []).length + " people" : "",
           kindStyle: t.kind === "direct" ? "display:none;" : "font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#8B97A8;",
           rowStyle: "display:flex;gap:12px;align-items:center;padding:13px 15px;cursor:pointer;border-radius:12px;transition:background 0.18s ease;background:" + (on ? "#EEF4F8;" : "transparent;"),
+          dotStyle: t.kind !== "direct" ? "display:none;" : "position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;border:2px solid #fff;background:" +
+            (this.isOnline((t.members || []).filter(e => e !== me.email)[0]) ? "#0E8F66;" : "#C6D0DC;"),
           go: () => this.openThread(t.id)
         };
       }),
@@ -11258,7 +11374,9 @@ class Component extends DCLogic {
         name: label(cur),
         sub: cur.kind === "channel" ? (cur.desc || "Team channel · replies from " + cur.channelOf)
           : cur.kind === "group" ? (cur.members || []).map(e => (this.acct(e) || {}).name || e).join(", ")
-          : ((this.acct((cur.members || []).filter(e => e !== me.email)[0]) || {}).dept || ""),
+          : [this.lastSeenLabel((cur.members || []).filter(e => e !== me.email)[0]), (this.acct((cur.members || []).filter(e => e !== me.email)[0]) || {}).dept].filter(Boolean).join(" · "),
+        subStyle: "font-size:12.5px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" +
+          (cur.kind === "direct" && this.isOnline((cur.members || []).filter(e => e !== me.email)[0]) ? "font-weight:700;color:#0E8F66;" : "color:#7A8899;"),
         initials: cur.kind === "channel" ? (cur.icon || "◉") : initials(label(cur)),
         discStyle: "flex:none;width:44px;height:44px;border-radius:" + (cur.kind === "direct" ? "50%" : "13px") + ";background:" +
           (cur.kind === "channel" ? (cur.color || "#181848") : cur.kind === "group" ? "#0E8F66" : "var(--mr-teal)") +
@@ -11273,7 +11391,7 @@ class Component extends DCLogic {
               (mine ? "var(--mr-teal);color:#fff;border-bottom-right-radius:5px;" : "#fff;color:var(--mr-ink);border:1px solid #E4EAF1;border-bottom-left-radius:5px;"),
             whenStyle: "font-size:11px;margin-top:5px;text-align:right;color:" + (mine ? "rgba(255,255,255,0.75)" : "#98A5B4") + ";",
             ...this.chatAtt(m, mine),
-            _att: 1
+            ...this.msgTick(cur, m)
           };
         }),
         empty: (cur.msgs || []).length === 0,
@@ -11958,8 +12076,11 @@ class Component extends DCLogic {
   candSignIn() {
     const code = String(this.state.candCode || "").trim().toUpperCase();
     if (code.length < 4) return this.setState({ loginError: "Enter the code People & Organisation gave you." });
+    const cl = lockLeft("cand");
+    if (cl) return this.setState({ loginError: "Too many wrong codes. Try again in " + cl + " minute" + (cl === 1 ? "" : "s") + "." });
     const c = (this.state.cands || []).filter(x => String(x.code || "").toUpperCase() === code)[0];
-    if (!c) return this.setState({ loginError: "That code is not recognised. Check it with People & Organisation." });
+    if (!c) { const f = lockFail("cand"); return this.setState({ loginError: f.until ? "Too many wrong codes. Locked for a few minutes." : "That code is not recognised. Check it with People & Organisation." }); }
+    lockSet("cand", null);
     const me = { email: c.email || ("candidate+" + c.id), name: c.name, dept: c.dept || "", role: "Candidate" };
     this.setState({
       candMode: true, candSelf: c, me: me, screen: "app", route: "candexam",
@@ -12431,7 +12552,8 @@ class Component extends DCLogic {
         hasHtml: !curLocked && !!(cur.html && cur.html.trim()),
         htmlBlock: React.createElement("iframe", {
           key: cur.id + ":" + String(cur.html || "").length,
-          srcDoc: '<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:18px;font-family:sans-serif;line-height:1.6;}</style></head><body>' + (cur.html || "") + "</body></html>",
+          sandbox: "allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms allow-modals allow-downloads", "data-fit": "1",
+          srcDoc: '<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:18px;font-family:sans-serif;line-height:1.6;}</style></head><body>' + (cur.html || "") + heightScript() + "</body></html>",
           title: cur.title, style: { width: "100%", minHeight: "420px", border: "none", display: "block", background: "#fff" }
         }),
         lessons: (cur.lessons || []).map((l, i) => ({
@@ -13482,6 +13604,12 @@ class Component extends DCLogic {
     if (n !== st.pwNew2) return this.flash("Passwords do not match", "Type the new password the same way twice.", "no");
     if (n === st.pwOld) return this.flash("That is your current password", "Choose a new one.", "no");
     this.save(K.acc, st.accounts.map(x => x.email === me.email ? sealAccount(Object.assign({}, x, { pass: n, pwChangedAt: Date.now() })) : x), "accounts");
+    this._pwJustChanged = true;
+    setTimeout(() => {
+      const a2 = this.acct(me.email);
+      try { const o = JSON.parse(localStorage.getItem(K.ses) || "null"); if (o && a2) localStorage.setItem(K.ses, JSON.stringify(Object.assign(o, { t: sessTok(a2), at: Date.now() }))); } catch (e) {}
+      this._pwJustChanged = false;
+    }, 0);
     this.setState({ pwOld: "", pwNew: "", pwNew2: "", pwShow: false });
     this.flash("Password updated", "Use the new password next time you sign in, on any device.");
   }
@@ -13621,7 +13749,19 @@ class Component extends DCLogic {
     this.save(K.theme, t, "theme");
     this.setState({ mkMsg: "Saved — every signed-in person sees this." });
   }
-  T() { return Object.assign({}, DEFAULT_THEME, this.state.theme || {}); }
+  T() {
+    return cleanBrand(Object.assign({}, DEFAULT_THEME, this.state.theme || {}));
+  }
+  fixBrandOnce() {
+    const th = this.state.theme;
+    if (!th || this._brandFixed || !this.isSuper()) return;
+    const bad = Object.keys(th).filter(k => typeof th[k] === "string" && /\bMESH\b/i.test(th[k]));
+    this._brandFixed = true;
+    if (!bad.length) return;
+    const nx = Object.assign({}, th);
+    bad.forEach(k => { nx[k] = nx[k].replace(/\bMESH\b/gi, "ME"); });
+    this.save(K.theme, nx, "theme");
+  }
   feat(k) { return (this.T().features || {})[k] !== false; }
   setFeat(k, on) {
     const f = Object.assign({}, this.T().features || {});
@@ -13920,15 +14060,22 @@ class Component extends DCLogic {
     if (email.indexOf("@") < 0) return this.setState({ loginError: "That is not a valid email address." });
     if (DOMAINS.indexOf(email.split("@")[1]) < 0) return this.setState({ loginError: "Only Med Right accounts can sign in. Use your name@med-right.com address." });
     if (!st.pass) return this.setState({ loginError: "Enter your password." });
+    const left = lockLeft("u:" + email);
+    if (left) return this.setState({ loginError: "Too many wrong passwords. Try again in " + left + " minute" + (left === 1 ? "" : "s") + ", or ask People & Organisation to reset it." });
     const acct = st.accounts.filter(a => a.email === email)[0];
     if (!acct) return this.setState({ loginError: "No account found for " + email + ". Ask People & Organisation to create one." });
     if (acct.status === "suspended") return this.setState({ loginError: "This account is suspended. Contact People & Organisation." });
-    if (acct.ph ? hashPw(email, st.pass) !== acct.ph : (acct.pass && st.pass !== acct.pass)) return this.setState({ loginError: "That password does not match the account on file." });
+    if (acct.ph ? hashPw(email, st.pass) !== acct.ph : (acct.pass && st.pass !== acct.pass)) {
+      const f = lockFail("u:" + email);
+      return this.setState({ pass: "", loginError: f.until ? "Too many wrong passwords. This account is locked on this device for " + Math.ceil((f.until - Date.now()) / 60000) + " minutes." : "That password does not match the account on file." + (f.n >= 3 ? " " + (5 - f.n) + " tr" + (5 - f.n === 1 ? "y" : "ies") + " left before a short lock." : "") });
+    }
     if (!acct.ph && acct.pass) setTimeout(() => this.save(K.acc, this.state.accounts, "accounts"), 0);
     if (acct.status === "invited") {
       this.save(K.acc, st.accounts.map(x => x.email === email ? Object.assign({}, x, { status: "active" }) : x), "accounts");
     }
-    if (st.remember) { try { localStorage.setItem(K.ses, JSON.stringify({ email: email })); } catch (e) {} }
+    lockSet("u:" + email, null);
+    try { localStorage.setItem(K.ses, JSON.stringify({ email: email, t: sessTok(sealAccount(this.acct(email) || acct)), at: Date.now(), keep: !!st.remember })); } catch (e) {}
+    try { sessionStorage.setItem("mrhub-tab-v1", "1"); } catch (e) {}
     this.setState({ me: acct, screen: "app", pass: "", loginError: "", route: acct.role === "Employee" ? "home" : "library" });
     setTimeout(() => this.recheckRecurring(), 60);
     window.scrollTo(0, 0);
@@ -14179,7 +14326,7 @@ class Component extends DCLogic {
             .sort((a, b) => pr[b.email] - pr[a.email]);
           const ago = t => { const m = Math.round((now - t) / 60000); return m < 1 ? "just now" : m + " min ago"; };
           return {
-            hasOnlineNow: on.length > 0,
+            hasOnlineNow: false,
             onlineNowLabel: on.length + (on.length === 1 ? " person is" : " people are") + " signed in now",
             onlineNow: on.slice(0, 14).map(a => ({ name: a.name, sub: [a.dept, ago(pr[a.email])].filter(Boolean).join(" · "), initials: initials(a.name),
               discStyle: "flex:none;width:30px;height:30px;border-radius:50%;background:" + self.roleColor(a.role) + ";color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;" })),
@@ -15291,7 +15438,7 @@ class Component extends DCLogic {
         const emojiOpen = st.dockEmoji === id;
         return {
           name: nm, initials: t.kind === "channel" ? (t.icon || "◉") : initials(nm),
-          sub: t.kind === "channel" ? "Team channel" : t.kind === "group" ? (t.members || []).length + " people" : "Direct message",
+          sub: t.kind === "channel" ? "Team channel" : t.kind === "group" ? (t.members || []).length + " people" : this.lastSeenLabel((t.members || []).filter(e => e !== meE)[0]),
           headStyle: "display:flex;gap:8px;align-items:center;padding:10px 12px;background:" + col + ";color:#fff;",
           discStyle: "flex:none;width:30px;height:30px;border-radius:" + (t.kind === "direct" ? "50%" : "9px") +
             ";background:rgba(255,255,255,0.2);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11.5px;",
@@ -15320,7 +15467,7 @@ class Component extends DCLogic {
               bubbleStyle: "max-width:82%;border-radius:14px;padding:9px 12px;font-size:13.5px;line-height:1.5;word-break:break-word;background:" +
                 (mineM ? "var(--mr-teal);color:#fff;border-bottom-right-radius:4px;" : "#fff;color:var(--mr-ink);border:1px solid #E4EAF1;border-bottom-left-radius:4px;"),
               whenStyle: "font-size:10px;margin-top:3px;text-align:right;color:" + (mineM ? "rgba(255,255,255,0.72)" : "#98A5B4") + ";"
-            });
+            }, this.msgTick(t, m));
           }),
           empty: (t.msgs || []).length === 0,
           draft: draft,
@@ -15459,11 +15606,12 @@ class Component extends DCLogic {
         htmlBlock: React.createElement("iframe", {
           key: cur.id + ":" + String(cur.html || "").length + ":" + Object.keys(cur.assets || {}).length,
           id: "hb-html-frame",
+          sandbox: "allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms allow-modals allow-downloads",
           srcDoc: applyAssets(frameDoc(cur.html), cur.assets),
           title: cur.title || "Policy document",
           style: { width: "100%", minWidth: "1024px", minHeight: "560px", border: "none", display: "block", background: "#fff" }
         }),
-        hasLink: !!(cur.link && cur.link.trim()), link: cur.link,
+        hasLink: !!safeUrl(cur.link), link: safeUrl(cur.link),
         hasExtras: (cur.extras || []).length > 0,
         extras: (cur.extras || []).map(x => ({ label: x.label, value: x.value })),
         metaStyle: (cur.htmlOnly && cur.html && cur.html.trim())
@@ -17488,6 +17636,7 @@ class Component extends DCLogic {
     V.dashGreeting = (hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening") + ", " + (me.name || "").split(" ")[0];
     V.dashLead = "Everything that needs a person, in one place.";
     V.dashDate = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
+    Object.assign(V, this.onlineVals());
 
     V.dashTiles = [
       ["Live policies", String(live.length), drafts.length ? drafts.length + " in draft" : "Nothing in draft", "#1880A8", () => this.go("library")],
