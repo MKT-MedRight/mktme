@@ -5896,7 +5896,7 @@
                   <div style="{{ m.whoStyle }}">{{ m.who }}</div>
                   <sc-if value="{{ m.isFwd }}" hint-placeholder-val="{{ false }}"><div style="{{ m.fwdStyle }}">↪ Forwarded</div></sc-if>
                   <sc-if value="{{ m.hasReply }}" hint-placeholder-val="{{ false }}">
-                    <div style="{{ m.replyStyle }}"><div style="font-weight:700;">{{ m.replyWho }}</div><div style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;opacity:0.9;">{{ m.replyText }}</div></div>
+                    <div style="{{ m.replyStyle }}"><div style="font-weight:700;">{{ m.replyWho }}</div><div dir="auto" style="unicode-bidi:plaintext;text-align:start;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;opacity:0.9;">{{ m.replyText }}</div></div>
                   </sc-if>
                   <sc-if value="{{ m.isImg }}" hint-placeholder-val="{{ false }}">
                     <img onClick="{{ m.openImg }}" src="{{ m.file }}" alt="{{ m.fileName }}" title="Open full screen" style="display:block;max-width:100%;max-height:280px;border-radius:10px;object-fit:contain;background:rgba(0,0,0,0.06);margin-bottom:8px;cursor:zoom-in;">
@@ -5907,7 +5907,7 @@
                   <sc-if value="{{ m.pending }}" hint-placeholder-val="{{ false }}">
                     <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
                   </sc-if>
-                  <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
+                  <div dir="auto" style="white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;text-align:start;">{{ m.text }}</div>
                   <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                 </div>
                 <div style="{{ m.actStyle }}">
@@ -5953,7 +5953,7 @@
                 ⊕
                 <input type="file" onChange="{{ onChatFile }}" style="display:none;">
               </label>
-              <textarea value="{{ chatDraft }}" onInput="{{ onChatDraft }}" onKeyDown="{{ onChatKey }}" onFocus="{{ onChatFocus }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:46px;max-height:150px;resize:vertical;font-size:15px;line-height:1.5;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:14px;padding:12px 15px;outline:none;color:var(--mr-navy);"></textarea>
+              <textarea dir="auto" value="{{ chatDraft }}" onInput="{{ onChatDraft }}" onKeyDown="{{ onChatKey }}" onFocus="{{ onChatFocus }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:46px;max-height:150px;resize:vertical;font-size:15px;line-height:1.5;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:14px;padding:12px 15px;outline:none;color:var(--mr-navy);"></textarea>
               <div onClick="{{ sendChat }}" style="{{ sendStyle }}" style-hover="filter:brightness(1.1);">➤</div>
             </div>
           </div>
@@ -7385,7 +7385,7 @@
                     <div style="{{ m.whoStyle }}">{{ m.who }}</div>
                     <sc-if value="{{ m.isFwd }}" hint-placeholder-val="{{ false }}"><div style="{{ m.fwdStyle }}">↪ Forwarded</div></sc-if>
                     <sc-if value="{{ m.hasReply }}" hint-placeholder-val="{{ false }}">
-                      <div style="{{ m.replyStyle }}"><div style="font-weight:700;">{{ m.replyWho }}</div><div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:0.9;">{{ m.replyText }}</div></div>
+                      <div style="{{ m.replyStyle }}"><div style="font-weight:700;">{{ m.replyWho }}</div><div dir="auto" style="unicode-bidi:plaintext;text-align:start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:0.9;">{{ m.replyText }}</div></div>
                     </sc-if>
                     <sc-if value="{{ m.isImg }}" hint-placeholder-val="{{ false }}">
                       <img onClick="{{ m.openImg }}" src="{{ m.file }}" alt="{{ m.fileName }}" title="Open full screen" style="display:block;max-width:100%;max-height:180px;border-radius:9px;object-fit:contain;background:rgba(0,0,0,0.06);margin-bottom:6px;cursor:zoom-in;">
@@ -7396,7 +7396,7 @@
                     <sc-if value="{{ m.pending }}" hint-placeholder-val="{{ false }}">
                       <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
                     </sc-if>
-                    <div style="white-space:pre-wrap;word-break:break-word;">{{ m.text }}</div>
+                    <div dir="auto" style="white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;text-align:start;">{{ m.text }}</div>
                     <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                   </div>
                   <div style="{{ m.actStyle }}">
@@ -7440,7 +7440,7 @@
               <sc-if value="{{ d.canFiles }}" hint-placeholder-val="{{ true }}">
                 <label title="Attach a file or photo" style="flex:none;width:32px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;border-radius:9px;color:#5C6B80;" style-hover="background:#F1F5F9;">📎<input type="file" onChange="{{ d.onFile }}" style="display:none;"></label>
               </sc-if>
-              <textarea value="{{ d.draft }}" onInput="{{ d.onDraft }}" onKeyDown="{{ d.onKey }}" onFocus="{{ d.onFocus }}" onClick="{{ d.onFocus }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:40px;max-height:110px;resize:none;font-size:14px;line-height:1.45;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:12px;padding:10px 12px;outline:none;color:var(--mr-navy);"></textarea>
+              <textarea dir="auto" value="{{ d.draft }}" onInput="{{ d.onDraft }}" onKeyDown="{{ d.onKey }}" onFocus="{{ d.onFocus }}" onClick="{{ d.onFocus }}" placeholder="Write a message…" style="flex:1;min-width:0;box-sizing:border-box;min-height:40px;max-height:110px;resize:none;font-size:14px;line-height:1.45;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:12px;padding:10px 12px;outline:none;color:var(--mr-navy);"></textarea>
               <div onClick="{{ d.send }}" style="{{ d.sendStyle }}">➤</div>
             </div>
           </div>
