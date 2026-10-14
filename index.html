@@ -204,6 +204,55 @@
 </div>
 </sc-if>
 
+<sc-if value="{{ callIncoming }}" hint-placeholder-val="{{ false }}">
+<div class="hb-noprint" style="position:fixed;inset:0;z-index:420;background:rgba(12,12,36,0.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div style="width:100%;max-width:360px;background:var(--mr-navy);color:#fff;border:3px solid var(--mr-ink);border-radius:26px;box-shadow:8px 8px 0 var(--mr-ink);padding:34px 26px 28px;text-align:center;animation:hbPop 0.4s cubic-bezier(0.34,1.4,0.64,1) both;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-70%;left:-30%;width:160%;height:240%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.22) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 90s linear infinite;pointer-events:none;"></div>
+    <div style="position:relative;width:104px;height:104px;margin:0 auto;border-radius:50%;background:var(--mr-teal);border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:800;font-size:34px;box-shadow:0 0 0 10px rgba(24,128,168,0.3),0 0 0 22px rgba(24,128,168,0.14);animation:hbFloat 1.6s ease-in-out infinite;">{{ incInitials }}</div>
+    <div style="position:relative;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#CFE6F5;margin-top:30px;">{{ incIcon }} {{ incKind }}</div>
+    <div style="position:relative;font-family:var(--mr-head);font-weight:800;font-size:26px;letter-spacing:-0.02em;margin-top:6px;">{{ incName }}</div>
+    <div style="position:relative;display:flex;gap:44px;justify-content:center;margin-top:30px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div onClick="{{ declineCall }}" title="Decline" style="width:66px;height:66px;border-radius:50%;background:#D93A2F;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;transform:rotate(135deg);transition:filter 0.15s ease;" style-hover="filter:brightness(1.12);">📞</div>
+        <span style="font-size:13px;font-weight:600;color:#DCE8F3;">Decline</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div onClick="{{ acceptCall }}" title="Accept" style="width:66px;height:66px;border-radius:50%;background:#1FA463;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;animation:hbPop 1.2s ease-in-out infinite alternate;transition:filter 0.15s ease;" style-hover="filter:brightness(1.12);">{{ incIcon }}</div>
+        <span style="font-size:13px;font-weight:600;color:#DCE8F3;">Accept</span>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ callOn }}" hint-placeholder-val="{{ false }}">
+<div class="hb-noprint" style="position:fixed;inset:0;z-index:410;background:radial-gradient(circle at 50% 35%,#24246A 0%,#181848 55%,#0E0E2E 100%);color:#fff;display:flex;flex-direction:column;overflow:hidden;">
+  <video data-call="remote" autoPlay="{{ true }}" playsInline="{{ true }}" style="{{ remoteStyle }}"></video>
+  <video data-call="local" autoPlay="{{ true }}" playsInline="{{ true }}" style="{{ callLocalStyle }}"></video>
+  <sc-if value="{{ callVoice }}" hint-placeholder-val="{{ true }}">
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;text-align:center;position:relative;">
+      <div style="width:150px;height:150px;border-radius:50%;background:var(--mr-teal);border:4px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:800;font-size:50px;box-shadow:0 0 0 14px rgba(24,128,168,0.25),0 0 0 32px rgba(24,128,168,0.1);animation:hbFloat 2.4s ease-in-out infinite;">{{ callInitials }}</div>
+      <div style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.02em;margin-top:18px;">{{ callName }}</div>
+      <div style="font-size:15px;color:#CFE6F5;font-variant-numeric:tabular-nums;">{{ callKindLbl }} · {{ callStatus }}</div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ callIsVideo }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:20px;top:20px;z-index:2;background:rgba(12,12,36,0.55);backdrop-filter:blur(6px);border-radius:14px;padding:10px 14px;">
+      <div style="font-weight:700;font-size:15px;">{{ callName }}</div>
+      <div style="font-size:12.5px;color:#CFE6F5;font-variant-numeric:tabular-nums;">{{ callStatus }}</div>
+    </div>
+  </sc-if>
+  <div style="position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;gap:16px;justify-content:center;align-items:center;padding:22px 20px 30px;background:linear-gradient(transparent,rgba(8,8,28,0.7));">
+    <div onClick="{{ toggleMute }}" title="{{ muteTip }}" style="{{ muteStyle }}" style-hover="transform:translateY(-2px);">{{ muteIcon }}</div>
+    <sc-if value="{{ callIsVideo }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ toggleCam }}" title="{{ camTip }}" style="{{ camStyle }}" style-hover="transform:translateY(-2px);">📷</div>
+      <div onClick="{{ toggleShare }}" title="{{ shareTip }}" style="{{ shareStyle }}" style-hover="transform:translateY(-2px);">🖥</div>
+    </sc-if>
+    <div onClick="{{ hangUp }}" title="Hang up" style="{{ hangStyle }}" style-hover="transform:translateY(-2px);"><span style="display:inline-block;transform:rotate(135deg);">📞</span></div>
+  </div>
+</div>
+</sc-if>
+
 <sc-if value="{{ bdayPop }}" hint-placeholder-val="{{ false }}">
 <div class="hb-noprint" onClick="{{ closeBdayPop }}" style="position:fixed;inset:0;z-index:390;background:rgba(12,12,36,0.6);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;">
   <div onClick="{{ stopProp }}" style="width:100%;max-width:460px;background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:22px;box-shadow:8px 8px 0 var(--mr-ink);overflow:hidden;text-align:center;animation:hbPop 0.5s cubic-bezier(0.34,1.4,0.64,1) both;">
@@ -5972,11 +6021,17 @@
         <sc-if value="{{ hasThread }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;gap:12px;align-items:center;padding:16px 20px;border-bottom:1px solid #EDF1F6;background:#FCFDFE;">
             <div style="{{ ct.discStyle }}">{{ ct.initials }}</div>
-            <div style="min-width:0;">
+            <div style="min-width:0;flex:1;">
               <div style="font-family:var(--mr-head);font-weight:800;font-size:17px;letter-spacing:-0.02em;">{{ ct.name }}</div>
               <div style="{{ ct.subStyle }}">{{ ct.sub }}</div>
               <sc-if value="{{ ct.isAaref }}" hint-placeholder-val="{{ false }}"><span onClick="{{ ct.clear }}" style="font-size:12px;font-weight:600;color:#8B97A8;cursor:pointer;">Clear chat</span></sc-if>
             </div>
+            <sc-if value="{{ ct.canCall }}" hint-placeholder-val="{{ false }}">
+              <div style="flex:none;display:flex;gap:8px;">
+                <div onClick="{{ ct.callA }}" title="Voice call" style="width:42px;height:42px;border-radius:50%;background:#E7F3F8;color:var(--mr-teal);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:transform 0.15s ease;" style-hover="transform:translateY(-2px);background:#D4EAF3;">📞</div>
+                <div onClick="{{ ct.callV }}" title="Video call" style="width:42px;height:42px;border-radius:50%;background:#E7F3F8;color:var(--mr-teal);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:transform 0.15s ease;" style-hover="transform:translateY(-2px);background:#D4EAF3;">🎥</div>
+              </div>
+            </sc-if>
           </div>
           <div data-chatscroll="{{ chatScrollKey }}" style="flex:1;min-height:280px;max-height:52vh;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:11px;background:#F7FAFC;">
             <sc-for list="{{ ct.msgs }}" as="m" hint-placeholder-count="3">
@@ -7524,6 +7579,7 @@
               <div style="font-size:11px;opacity:0.75;">{{ d.sub }}</div>
             </div>
           </div>
+          <sc-if value="{{ d.canCall }}" hint-placeholder-val="{{ false }}"><span onClick="{{ d.callA }}" title="Voice call" style="flex:none;font-size:14px;cursor:pointer;padding:4px 5px;">📞</span><span onClick="{{ d.callV }}" title="Video call" style="flex:none;font-size:14px;cursor:pointer;padding:4px 5px;">🎥</span></sc-if>
           <span onClick="{{ d.openFull }}" title="Open in Messages" style="flex:none;font-size:14px;cursor:pointer;padding:4px 6px;opacity:0.85;">⤢</span>
           <span onClick="{{ d.toggle }}" style="flex:none;font-size:12px;cursor:pointer;padding:4px 6px;opacity:0.8;">{{ d.caret }}</span>
           <span onClick="{{ d.close }}" style="flex:none;font-size:15px;font-weight:700;cursor:pointer;padding:4px 6px;opacity:0.8;">×</span>
@@ -8203,8 +8259,9 @@ const CLOUD_FIELDS = { policies: "policies", accounts: "accounts", depts: "depts
   video: "video", recog: "recog", know: "know", knowCats: "knowCats", exams: "exams", attempts: "attempts", chat: "chat", subs: "subs", certs: "certs",
   asks: "asks", events: "events", evKinds: "evKinds", titles: "titles", vacancies: "vacancies", checkins: "checkins", cases: "cases",
   benefits: "benefits", benCats: "benCats", cands: "cands",
-  compReg: "compReg", compAudits: "compAudits", compRounds: "compRounds", compReports: "compReports", compDecls: "compDecls", compAi: "compAi", presence: "presence", typing: "typing" };
-K.presence = "mrhub-presence-v1"; K.typing = "mrhub-typing-v1";
+  compReg: "compReg", compAudits: "compAudits", compRounds: "compRounds", compReports: "compReports", compDecls: "compDecls", compAi: "compAi", presence: "presence", typing: "typing", calls: "calls" };
+K.presence = "mrhub-presence-v1"; K.typing = "mrhub-typing-v1"; K.calls = "mrhub-calls-v1";
+const ICE = [{ urls: ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302", "stun:stun.cloudflare.com:3478"] }];
 const AAREF_ID = "aaref@assistant";
 const EMOJI_QUICK = ["😀","😂","😊","😍","🥰","😎","🤔","😮","😢","🙏","👍","👏","🙌","💪","🤝","🎉","🔥","❤️","✅","⭐","☕","🎂","💡","👀"];
 const COMP_STAGES = ["Reported", "Triage", "Investigating", "Action", "Closed"];
@@ -8928,7 +8985,7 @@ class Component extends DCLogic {
     depts: SEED_DEPTS.slice(), cats: SEED_CATS.slice(),
     userData: {}, inbox: [], notes: [], ackMsg: "", headerH: 66,
     notesOpen: false, toast: null, toasted: [], replyText: {}, expandAck: null, picked: [],
-    menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [], presence: {}, typing: {}, aaref: [], aarefBusy: false, aarefUrlDraft: null, ivDraft: {}, dockFile: {}, dockEmoji: null, chatEmoji: false,
+    menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [], presence: {}, typing: {}, calls: {}, call: null, callTick: 0, incomingId: null, aaref: [], aarefBusy: false, aarefUrlDraft: null, ivDraft: {}, dockFile: {}, dockEmoji: null, chatEmoji: false,
     asks: [], askNote: {}, evKinds: [], titles: [], newEvType: "", newTitleDraft: "",
     vacancies: [], vacOpen: null, vacFilter: "open",
     askDraft: { kind: "hire", role: "", dept: "", count: 1, target: "", targetLabel: "", why: "", when: "" }, dockMin: [], dockDraft: {}, dockListOpen: false, tkDismissed: [], enrolCode: "", rxPick: null, helpOpen: (() => { try { return JSON.parse(localStorage.getItem("mrhub-help-v1") || "[]"); } catch (e) { return []; } })(), wishDrafts: {}, bdayClosed: false, wishDraft: "", retakePick: [],
@@ -9156,7 +9213,7 @@ class Component extends DCLogic {
     map[K.bencats] = "benCats";
     map[K.cand] = "cands";
     map[K.compReg] = "compReg"; map[K.compAudits] = "compAudits"; map[K.compRounds] = "compRounds";
-    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing";
+    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing"; map[K.calls] = "calls";
       map[K.pol] = "policies"; map[K.acc] = "accounts"; map[K.dept] = "depts";
       map[K.cat] = "cats"; map[K.user] = "userData"; map[K.inbox] = "inbox"; map[K.notes] = "notes";
       map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "charMsgs";
@@ -9252,6 +9309,7 @@ class Component extends DCLogic {
   applyUpdate() { location.reload(); }
   componentWillUnmount() {
     clearInterval(this._verTimer);
+    if (this.state.call) this.hangUp();
     document.removeEventListener("visibilitychange", this.onVis);
     window.removeEventListener("keydown", this.onEsc);
     clearTimeout(this._charTimer); clearInterval(this._quoteTimer); clearInterval(this._slideTimer);
@@ -9297,6 +9355,7 @@ class Component extends DCLogic {
   }
   componentDidUpdate() {
     const st = this.state;
+    this.attachMedia();
     if (st.me && st.me.email && this._aarefFor !== st.me.email) {
       this._aarefFor = st.me.email;
       let h = []; try { h = JSON.parse(localStorage.getItem("mrhub-aaref-v1:" + st.me.email) || "[]"); } catch (e) {}
@@ -9402,7 +9461,7 @@ class Component extends DCLogic {
     map[K.bencats] = "benCats";
     map[K.cand] = "cands";
     map[K.compReg] = "compReg"; map[K.compAudits] = "compAudits"; map[K.compRounds] = "compRounds";
-    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing";
+    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing"; map[K.calls] = "calls";
     map[K.pol] = "policies"; map[K.acc] = "accounts"; map[K.dept] = "depts";
     map[K.cat] = "cats"; map[K.inbox] = "inbox"; map[K.notes] = "notes"; map[K.user] = "userdata";
     map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "chars";
@@ -9483,6 +9542,7 @@ class Component extends DCLogic {
       this._lsT[storeKey] = setTimeout(() => lsSet(storeKey, this.state[field], true), 2500);
     }
     if (field === "theme") value = cleanBrand(value);
+    if (field === "calls") setTimeout(() => this.checkCalls(), 0);
     if (field === "chat") { clearTimeout(this._dlvT); this._dlvT = setTimeout(() => this.markDelivered(), 1500); }
     const patch = {}; patch[field] = value;
     if (field === "accounts" && this.state.me) {
@@ -12339,6 +12399,229 @@ class Component extends DCLogic {
     this.setState({ rxPick: null });
     if (author && author !== me.email) this.notify([{ to: author, kind: "react", threadId: threadId, title: me.name + " reacted " + em + " to your message", text: String(mt).slice(0, 90), route: "chat" }]);
   }
+  callRec(id) { return (this.state.calls || {})[id] || null; }
+  writeCall(rec) {
+    const cur = this.state.calls || {}, now = Date.now(), nx = {};
+    Object.keys(cur).forEach(k => { if (now - (cur[k].t || 0) < 86400000) nx[k] = cur[k]; });
+    nx[rec.id] = rec;
+    this.save(K.calls, nx, "calls");
+  }
+  patchCall(id, patch) { const r = this.callRec(id); if (r) this.writeCall(Object.assign({}, r, patch)); }
+  async gathered(pc) {
+    if (pc.iceGatheringState === "complete") return;
+    await new Promise(res => {
+      const done = () => { if (pc.iceGatheringState === "complete") { pc.removeEventListener("icegatheringstatechange", done); res(); } };
+      pc.addEventListener("icegatheringstatechange", done);
+      setTimeout(res, 3000);
+    });
+  }
+  makePeer() {
+    const pc = new RTCPeerConnection({ iceServers: ICE });
+    this._remote = new MediaStream();
+    pc.ontrack = e => { this._remote.addTrack(e.track); this.forceUpdate(); };
+    pc.onconnectionstatechange = () => {
+      const c = this.state.call;
+      if (!c) return;
+      if (pc.connectionState === "connected" && !c.connected) this.setState({ call: Object.assign({}, c, { connected: true, startedAt: Date.now() }) });
+      if (pc.connectionState === "failed") { this.flash("Call could not connect", "The network blocked the connection. Try again, or from another network.", "no"); this.hangUp(); }
+    };
+    this._pc = pc;
+    return pc;
+  }
+  async getMedia(kind) {
+    try { return await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true }, video: kind === "video" ? { width: { ideal: 1280 }, height: { ideal: 720 } } : false }); }
+    catch (e) { this.flash("Camera or microphone blocked", "Allow " + (kind === "video" ? "the camera and microphone" : "the microphone") + " for this site in your browser, then try again.", "no"); return null; }
+  }
+  async startCall(threadId, kind) {
+    const st = this.state, me = st.me;
+    if (!me || st.call) return;
+    if (!window.RTCPeerConnection || !navigator.mediaDevices) return this.flash("Calls not supported", "Open the hub in an up-to-date Chrome, Edge or Safari to make calls.", "no");
+    if (!this._cloud) return this.flash("Calls need live sync", "Calls only work when the hub is connected to Firebase (green pill at the top).", "no");
+    const t = (this._threads || []).filter(x => x.id === threadId)[0] || (st.chat || []).filter(x => x.id === threadId)[0];
+    const peer = t && (t.members || []).filter(e => e !== me.email)[0];
+    if (!peer || peer === AAREF_ID) return;
+    const pa = this.acct(peer) || { name: peer };
+    if (!this.isOnline(peer)) return this.flash(pa.name + " is not online", "You can only call someone who has the hub open. Leave them a message instead.", "no");
+    const stream = await this.getMedia(kind);
+    if (!stream) return;
+    this._local = stream;
+    const pc = this.makePeer();
+    stream.getTracks().forEach(tr => pc.addTrack(tr, stream));
+    const id = "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    this.setState({ call: { id: id, threadId: threadId, peer: peer, peerName: pa.name, kind: kind, role: "caller", status: "ringing", muted: false, camOff: false, sharing: false } });
+    this.startTick();
+    await pc.setLocalDescription(await pc.createOffer());
+    await this.gathered(pc);
+    if (!this.state.call || this.state.call.id !== id) return;
+    this.writeCall({ id: id, threadId: threadId, from: me.email, fromName: me.name, to: peer, kind: kind, status: "ringing", offer: JSON.stringify(pc.localDescription), t: Date.now() });
+    clearTimeout(this._ringT);
+    this._ringT = setTimeout(() => {
+      const c = this.state.call;
+      if (c && c.id === id && c.status === "ringing") {
+        this.patchCall(id, { status: "missed", endedAt: Date.now() });
+        this.callLine(threadId, (kind === "video" ? "🎥" : "📞") + " Missed " + (kind === "video" ? "video" : "voice") + " call", peer);
+        this.cleanupCall();
+        this.flash("No answer", pa.name + " did not pick up. They will see a missed call.");
+      }
+    }, 40000);
+  }
+  checkCalls() {
+    const st = this.state, me = (st.me || {}).email;
+    if (!me) return;
+    const calls = st.calls || {}, c = st.call, now = Date.now();
+    if (c) {
+      const r = calls[c.id];
+      if (r && c.role === "caller" && c.status === "ringing" && r.status === "active" && r.answer && this._pc && !this._answered) {
+        this._answered = true;
+        clearTimeout(this._ringT);
+        this._pc.setRemoteDescription(JSON.parse(r.answer)).catch(() => {});
+        this.setState({ call: Object.assign({}, c, { status: "active", startedAt: Date.now() }) });
+      }
+      if (r && ["ended", "declined", "missed", "busy"].indexOf(r.status) > -1) {
+        if (c.role === "caller") {
+          if (r.status === "declined" || r.status === "busy") {
+            this.flash(r.status === "busy" ? c.peerName + " is on another call" : c.peerName + " can't talk right now", "Try again later or send a message.");
+            this.callLine(c.threadId, (c.kind === "video" ? "🎥" : "📞") + " " + (c.kind === "video" ? "Video" : "Voice") + " call · not answered", null);
+          } else if (r.status === "ended") this.callLine(c.threadId, this.callSummary(c), null);
+        } else this.flash("Call ended", c.peerName + " hung up.");
+        this.cleanupCall();
+      }
+      Object.keys(calls).forEach(k => { const x = calls[k]; if (k !== c.id && x.to === me && x.status === "ringing" && now - x.t < 45000) this.patchCall(k, { status: "busy" }); });
+      return;
+    }
+    const inc = Object.keys(calls).map(k => calls[k]).filter(x => x.to === me && x.status === "ringing" && now - (x.t || 0) < 45000).sort((a, b) => b.t - a.t)[0];
+    if (inc && st.incomingId !== inc.id) {
+      this.setState({ incomingId: inc.id });
+      this.ring(true);
+      clearTimeout(this._incT);
+      this._incT = setTimeout(() => this.checkCalls(), 46000);
+    }
+    if (!inc && st.incomingId) { this.ring(false); this.setState({ incomingId: null }); }
+  }
+  ring(on) {
+    clearInterval(this._ringI);
+    if (!on) return;
+    const beep = () => { try { const A = this._ac || (this._ac = new (window.AudioContext || window.webkitAudioContext)()); [0, 0.45].forEach(d => { const o = A.createOscillator(), g = A.createGain(); o.frequency.value = 520; g.gain.setValueAtTime(0.0001, A.currentTime + d); g.gain.exponentialRampToValueAtTime(0.18, A.currentTime + d + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, A.currentTime + d + 0.35); o.connect(g); g.connect(A.destination); o.start(A.currentTime + d); o.stop(A.currentTime + d + 0.4); }); } catch (e) {} };
+    beep(); this._ringI = setInterval(() => { if (!this.state.incomingId) return clearInterval(this._ringI); beep(); }, 2600);
+  }
+  async acceptCall() {
+    const st = this.state, r = this.callRec(st.incomingId);
+    this.ring(false);
+    if (!r || r.status !== "ringing") { this.setState({ incomingId: null }); return; }
+    const stream = await this.getMedia(r.kind);
+    if (!stream) { this.patchCall(r.id, { status: "declined" }); this.setState({ incomingId: null }); return; }
+    this._local = stream;
+    const pc = this.makePeer();
+    stream.getTracks().forEach(tr => pc.addTrack(tr, stream));
+    this.setState({ incomingId: null, call: { id: r.id, threadId: r.threadId, peer: r.from, peerName: r.fromName || (this.acct(r.from) || {}).name || r.from, kind: r.kind, role: "callee", status: "connecting", muted: false, camOff: false, sharing: false, startedAt: Date.now() } });
+    this.startTick();
+    await pc.setRemoteDescription(JSON.parse(r.offer));
+    await pc.setLocalDescription(await pc.createAnswer());
+    await this.gathered(pc);
+    if (!this.state.call || this.state.call.id !== r.id) return;
+    this.patchCall(r.id, { status: "active", answer: JSON.stringify(pc.localDescription), answeredAt: Date.now() });
+    this.setState(s2 => ({ call: s2.call ? Object.assign({}, s2.call, { status: "active", startedAt: Date.now() }) : null }));
+  }
+  declineCall() {
+    const id = this.state.incomingId;
+    this.ring(false);
+    if (id) this.patchCall(id, { status: "declined", endedAt: Date.now() });
+    this.setState({ incomingId: null });
+  }
+  hangUp() {
+    const c = this.state.call;
+    if (!c) return;
+    clearTimeout(this._ringT);
+    const wasRinging = c.status === "ringing";
+    this.patchCall(c.id, { status: wasRinging ? "missed" : "ended", endedAt: Date.now() });
+    if (c.role === "caller") this.callLine(c.threadId, wasRinging ? (c.kind === "video" ? "🎥" : "📞") + " Missed " + (c.kind === "video" ? "video" : "voice") + " call" : this.callSummary(c), wasRinging ? c.peer : null);
+    this.cleanupCall();
+  }
+  callSummary(c) {
+    const sec = c.startedAt ? Math.round((Date.now() - c.startedAt) / 1000) : 0;
+    const d = sec < 60 ? sec + " sec" : Math.floor(sec / 60) + " min" + (sec % 60 ? " " + (sec % 60) + " sec" : "");
+    return (c.kind === "video" ? "🎥 Video call · " : "📞 Voice call · ") + d;
+  }
+  callLine(threadId, text, missedFor) {
+    const st = this.state, me = st.me;
+    if (!me) return;
+    const msg = { id: "m" + Date.now() + Math.random().toString(36).slice(2, 7), by: me.email, byName: me.name, text: text, isCall: true, at: Date.now(), seen: [me.email] };
+    const list = (st.chat || []).map(x => x.id === threadId ? Object.assign({}, x, { msgs: (x.msgs || []).concat([msg]), touched: Date.now() }) : x);
+    this.saveChat(list);
+    if (missedFor) this.notify([{ to: missedFor, kind: "chat", threadId: threadId, title: "Missed call from " + me.name, text: "Call them back from the chat.", route: "chat", read: false, date: today() }]);
+  }
+  cleanupCall() {
+    clearTimeout(this._ringT); clearInterval(this._tickI);
+    this._answered = false;
+    try { (this._local ? this._local.getTracks() : []).forEach(t => t.stop()); } catch (e) {}
+    try { (this._screen ? this._screen.getTracks() : []).forEach(t => t.stop()); } catch (e) {}
+    try { if (this._pc) this._pc.close(); } catch (e) {}
+    this._pc = null; this._local = null; this._remote = null; this._screen = null;
+    this.setState({ call: null });
+  }
+  startTick() { clearInterval(this._tickI); this._tickI = setInterval(() => this.setState(s2 => ({ callTick: (s2.callTick || 0) + 1 })), 1000); }
+  attachMedia() {
+    const rv = document.querySelector('[data-call="remote"]'), lv = document.querySelector('[data-call="local"]');
+    if (rv && this._remote && rv.srcObject !== this._remote) { rv.srcObject = this._remote; const p = rv.play && rv.play(); if (p && p.catch) p.catch(() => {}); }
+    const loc = this._screen || this._local;
+    if (lv && loc && lv.srcObject !== loc) { lv.muted = true; lv.srcObject = loc; const p = lv.play && lv.play(); if (p && p.catch) p.catch(() => {}); }
+  }
+  toggleMute() {
+    const c = this.state.call; if (!c || !this._local) return;
+    this._local.getAudioTracks().forEach(t => { t.enabled = c.muted; });
+    this.setState({ call: Object.assign({}, c, { muted: !c.muted }) });
+  }
+  toggleCam() {
+    const c = this.state.call; if (!c || !this._local) return;
+    this._local.getVideoTracks().forEach(t => { t.enabled = c.camOff; });
+    this.setState({ call: Object.assign({}, c, { camOff: !c.camOff }) });
+  }
+  async toggleShare() {
+    const c = this.state.call; if (!c || !this._pc) return;
+    const sender = this._pc.getSenders().filter(x => x.track && x.track.kind === "video")[0];
+    if (!sender) return;
+    if (c.sharing) {
+      (this._screen ? this._screen.getTracks() : []).forEach(t => t.stop()); this._screen = null;
+      const cam = this._local && this._local.getVideoTracks()[0]; if (cam) sender.replaceTrack(cam);
+      this.setState({ call: Object.assign({}, this.state.call, { sharing: false }) });
+      return;
+    }
+    try {
+      const scr = await navigator.mediaDevices.getDisplayMedia({ video: true });
+      this._screen = scr;
+      const tr = scr.getVideoTracks()[0];
+      sender.replaceTrack(tr);
+      tr.onended = () => { if (this.state.call && this.state.call.sharing) this.toggleShare(); };
+      this.setState({ call: Object.assign({}, this.state.call, { sharing: true }) });
+    } catch (e) {}
+  }
+  callVals() {
+    const st = this.state, c = st.call, inc = st.incomingId ? this.callRec(st.incomingId) : null;
+    const ctl = bg => "flex:none;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:transform 0.15s ease;border:2px solid rgba(255,255,255,0.18);background:" + bg + ";color:#fff;";
+    const out = {
+      callIncoming: !!inc && !c, callOn: !!c,
+      incName: inc ? (inc.fromName || inc.from) : "", incInitials: inc ? initials(inc.fromName || inc.from) : "",
+      incKind: inc ? (inc.kind === "video" ? "Incoming video call" : "Incoming voice call") : "",
+      incIcon: inc && inc.kind === "video" ? "🎥" : "📞",
+      acceptCall: () => this.acceptCall(), declineCall: () => this.declineCall()
+    };
+    if (!c) return Object.assign(out, { remoteStyle: "display:none;", callLocalStyle: "display:none;", callVoice: false, callIsVideo: false });
+    const sec = c.startedAt && c.status === "active" ? Math.floor((Date.now() - c.startedAt) / 1000) : 0;
+    const vid = c.kind === "video" && c.status === "active" && !!(this._remote && this._remote.getVideoTracks().length);
+    return Object.assign(out, {
+      callName: c.peerName, callInitials: initials(c.peerName),
+      callStatus: c.status === "ringing" ? "Ringing…" : c.status === "connecting" || !c.connected ? "Connecting…" : String(Math.floor(sec / 60)).padStart(2, "0") + ":" + String(sec % 60).padStart(2, "0"),
+      callKindLbl: c.kind === "video" ? "Video call" : "Voice call",
+      remoteStyle: vid ? "position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;" : "position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;",
+      callVoice: !vid, callIsVideo: c.kind === "video", callPulse: c.status === "ringing" || !c.connected,
+      callLocalStyle: c.kind === "video" && !c.camOff ? "position:absolute;right:20px;top:20px;z-index:2;width:220px;max-width:34vw;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:2px solid rgba(255,255,255,0.7);background:#000;box-shadow:0 10px 30px -10px rgba(0,0,0,0.6);" + (c.sharing ? "" : "transform:scaleX(-1);") : "display:none;",
+      muteStyle: ctl(c.muted ? "#B4443A" : "rgba(255,255,255,0.14)"), muteIcon: c.muted ? "🔇" : "🎙", muteTip: c.muted ? "Unmute" : "Mute",
+      camStyle: ctl(c.camOff ? "#B4443A" : "rgba(255,255,255,0.14)"), camTip: c.camOff ? "Turn camera on" : "Turn camera off",
+      shareStyle: ctl(c.sharing ? "#1880A8" : "rgba(255,255,255,0.14)"), shareTip: c.sharing ? "Stop sharing" : "Share your screen",
+      hangStyle: ctl("#D93A2F") + "width:66px;height:66px;font-size:24px;",
+      toggleMute: () => this.toggleMute(), toggleCam: () => this.toggleCam(), toggleShare: () => this.toggleShare(), hangUp: () => this.hangUp()
+    });
+  }
   helpVals() {
     const st = this.state;
     const key = HELP_BY_ROUTE[st.route];
@@ -12461,6 +12744,8 @@ class Component extends DCLogic {
       hasThread: !!cur,
       ct: cur ? {
         name: label(cur),
+        canCall: cur.kind === "direct" && !cur.aaref && !st.call,
+        callA: () => this.startCall(cur.id, "audio"), callV: () => this.startCall(cur.id, "video"),
         isAaref: !!cur.aaref, clear: () => this.clearAaref(),
         sub: cur.kind === "channel" ? (cur.desc || "Team channel · replies from " + cur.channelOf)
           : cur.kind === "group" ? (cur.members || []).map(e => (this.acct(e) || {}).name || e).join(", ")
@@ -15412,7 +15697,7 @@ class Component extends DCLogic {
     if (st.screen !== "app" || !me) {
       return {
         isLogin: true, signedIn: false,
-        hasModal: !!st.modal, bdayPop: false, helpShow: false, helpOpen: false, lbOpen: false, fwdOpen: false, fwdTargets: [], lbSrc: "", lbName: "", fwdPreview: "", fwdSearch: "",
+        hasModal: !!st.modal, bdayPop: false, helpShow: false, helpOpen: false, callIncoming: false, callOn: false, lbOpen: false, fwdOpen: false, fwdTargets: [], lbSrc: "", lbName: "", fwdPreview: "", fwdSearch: "",
         modalTwo: !!(st.modal && st.modal.kind === "ask"),
         modalOne: !(st.modal && st.modal.kind === "ask"),
         modalYesLabel: st.modal ? (st.modal.yesLabel || "Yes") : "",
@@ -16594,6 +16879,8 @@ class Component extends DCLogic {
           toggle: () => this.setState({ dockMin: min ? (st.dockMin || []).filter(x => x !== id) : (st.dockMin || []).concat([id]) }),
           close: () => this.setState({ docks: (st.docks || []).filter(x => x !== id) }),
           openFull: () => { this.setState({ docks: (st.docks || []).filter(x => x !== id) }); this.openThread(id); },
+          canCall: t.kind === "direct" && !t.aaref && !st.call,
+          callA: () => this.startCall(id, "audio"), callV: () => this.startCall(id, "video"),
           emojiOpen: emojiOpen,
           toggleEmoji: () => this.setState({ dockEmoji: emojiOpen ? null : id }),
           emojis: EMOJI_QUICK.map(em => ({ em: em, add: () => this.setState({ dockDraft: Object.assign({}, this.state.dockDraft || {}, { [id]: ((this.state.dockDraft || {})[id] || "") + em }) }) })),
@@ -16633,7 +16920,7 @@ class Component extends DCLogic {
         };
       }).filter(Boolean),
 
-      ...this.helpVals(),
+      ...this.helpVals(), ...this.callVals(),
       hasModal: !!st.modal,
       bdayPop: !!st.me && !st.candMode && !st.interviewMode && !st.bdayClosed && this.isBday(st.me) && localStorage.getItem("mrhub-bdayseen-v1:" + st.me.email) !== today(),
       closeBdayPop: () => { try { localStorage.setItem("mrhub-bdayseen-v1:" + st.me.email, today()); } catch (e) {} this.setState({ bdayClosed: true }); },
