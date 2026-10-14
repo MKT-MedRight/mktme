@@ -18,7 +18,7 @@
 
 import "./firebase-config.js";
 
-export const VERSION = 3;
+export const VERSION = 4;
 
 const CFG = () => window.MRHUB_FIREBASE || {};
 const ROOT = () => window.MRHUB_ROOT || "medright-policy-hub";
@@ -27,10 +27,10 @@ const KEYS = () => window.MRHUB_KEYS || ["policies", "accounts", "depts", "cats"
 const SDK = "https://www.gstatic.com/firebasejs/10.12.2/";
 
 // Shards per data type. NEVER change a number once live — records are placed by it.
-const SHARDS = { notes: 24, userdata: 8, chat: 8, responses: 8, attempts: 8, checkins: 6, accounts: 6,
+const SHARDS = { typing: 4, notes: 24, userdata: 8, chat: 8, responses: 8, attempts: 8, checkins: 6, accounts: 6,
   inbox: 4, recog: 4, know: 4, policies: 4, cands: 4, subs: 4, certs: 4, compDecls: 4, compReports: 4,
   compRounds: 4, events: 4, forms: 4, asks: 4, cases: 4, svc: 4, exams: 4, ann: 2, benefits: 2,
-  theme: 1, video: 1, depts: 1, cats: 1, titles: 1, evKinds: 1, knowCats: 1, benCats: 1, quotes: 1, chars: 1, handlers: 1 };
+  presence: 16, theme: 1, video: 1, depts: 1, cats: 1, titles: 1, evKinds: 1, knowCats: 1, benCats: 1, quotes: 1, chars: 1, handlers: 1 };
 const shardsOf = k => SHARDS[k] || 2;
 const BLOB_MIN = 6000;       // strings longer than this that start with "data:" become blobs
 const SHARD_MAX = 850000;    // a shard document that would grow past this spills its biggest records into their own documents
