@@ -204,6 +204,25 @@
 </div>
 </sc-if>
 
+<sc-if value="{{ bdayPop }}" hint-placeholder-val="{{ false }}">
+<div class="hb-noprint" onClick="{{ closeBdayPop }}" style="position:fixed;inset:0;z-index:390;background:rgba(12,12,36,0.6);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div onClick="{{ stopProp }}" style="width:100%;max-width:460px;background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:22px;box-shadow:8px 8px 0 var(--mr-ink);overflow:hidden;text-align:center;animation:hbPop 0.5s cubic-bezier(0.34,1.4,0.64,1) both;">
+    <div style="background:#C96A0F;padding:30px 20px 24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-60%;left:-25%;width:150%;height:220%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,0.16) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 120s linear infinite;pointer-events:none;"></div>
+      <div style="position:relative;font-size:64px;line-height:1;animation:hbFloat 3s ease-in-out infinite;">🎂</div>
+      <div style="position:relative;font-family:var(--mr-comic);font-size:42px;line-height:1;color:#fff;text-shadow:3px 3px 0 var(--mr-ink);margin-top:12px;">Happy birthday, {{ bdayFirst }}!</div>
+    </div>
+    <div style="padding:22px 26px 26px;">
+      <p style="font-size:15px;line-height:1.65;color:#3A4453;margin:0;text-wrap:pretty;">Everyone at Med Right Group wishes you a wonderful year ahead. Your birthday card is on the home page today, and colleagues can leave you good wishes.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
+        <div onClick="{{ seeMyWishes }}" style="background:#C96A0F;color:#fff;font-weight:700;font-size:15px;padding:12px 26px;border-radius:24px;cursor:pointer;" style-hover="filter:brightness(1.1);">See my wishes</div>
+        <div onClick="{{ closeBdayPop }}" style="background:#fff;border:2px solid var(--mr-ink);color:var(--mr-ink);font-weight:700;font-size:15px;padding:10px 24px;border-radius:24px;cursor:pointer;" style-hover="background:#F4F7FA;">Thank you</div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
 <sc-if value="{{ hasModal }}" hint-placeholder-val="{{ false }}">
 <div class="hb-noprint" onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:400;background:rgba(12,12,36,0.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:26px;animation:hbRise 0.18s ease both;">
   <div onClick="{{ stopProp }}" style="{{ modalCard }}">
@@ -393,6 +412,68 @@
   </div>
   </sc-if>
 
+  <sc-if value="{{ helpShow }}" hint-placeholder-val="{{ false }}">
+  <div class="hb-noprint" data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1280px;margin:0 auto;padding:14px 26px 0;">
+    <sc-if value="{{ helpOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);padding:22px 24px 24px;position:relative;overflow:hidden;animation:hbRise 0.3s ease both;margin-bottom:6px;">
+        <div style="position:absolute;top:-80%;right:-15%;width:60%;height:260%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.09) 0deg 8deg,transparent 8deg 16deg);pointer-events:none;"></div>
+        <div style="position:relative;display:flex;gap:14px;align-items:flex-start;">
+          <span style="flex:none;width:46px;height:46px;border-radius:14px;background:var(--mr-teal);color:#fff;border:2px solid var(--mr-ink);display:flex;align-items:center;justify-content:center;font-size:21px;transform:rotate(-6deg);">{{ helpIcon }}</span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:var(--mr-comic);font-size:28px;line-height:1;letter-spacing:0.02em;color:var(--mr-ink);">How {{ helpName }} works</div>
+            <div style="font-size:14.5px;color:#4A5567;line-height:1.55;margin-top:6px;text-wrap:pretty;">{{ helpIntro }}</div>
+          </div>
+          <div onClick="{{ toggleHelp }}" title="Close" style="flex:none;width:34px;height:34px;border-radius:50%;background:#fff;border:2px solid var(--mr-ink);display:flex;align-items:center;justify-content:center;font-weight:800;cursor:pointer;" style-hover="background:#F4F7FA;">✕</div>
+        </div>
+        <div style="{{ helpGrid }}">
+          <div style="position:relative;background:#fff;border:1px solid #E4DFC9;border-radius:14px;padding:16px 18px;">
+            <div style="font-weight:800;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6B80;margin-bottom:12px;">{{ helpStepsHead }}</div>
+            <div style="display:flex;flex-direction:column;gap:11px;">
+              <sc-for list="{{ helpSteps }}" as="h" hint-placeholder-count="3">
+                <div style="display:flex;gap:11px;align-items:flex-start;">
+                  <span style="flex:none;width:26px;height:26px;border-radius:50%;background:var(--mr-teal);color:#fff;font-family:var(--mr-head);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;border:2px solid var(--mr-ink);">{{ h.n }}</span>
+                  <div style="flex:1;min-width:0;font-size:14px;line-height:1.6;color:#2C3646;text-wrap:pretty;">{{ h.text }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <sc-if value="{{ hasHelpAdmin }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative;background:#fff;border:1px solid #E4DFC9;border-radius:14px;padding:16px 18px;">
+            <div style="font-weight:800;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6B80;margin-bottom:12px;">For P&amp;O and admins</div>
+            <div style="display:flex;flex-direction:column;gap:11px;">
+              <sc-for list="{{ helpAdmin }}" as="h" hint-placeholder-count="3">
+                <div style="display:flex;gap:11px;align-items:flex-start;">
+                  <span style="flex:none;width:26px;height:26px;border-radius:50%;background:var(--mr-navy);color:#fff;font-family:var(--mr-head);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;border:2px solid var(--mr-ink);">{{ h.n }}</span>
+                  <div style="flex:1;min-width:0;font-size:14px;line-height:1.6;color:#2C3646;text-wrap:pretty;">{{ h.text }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          </sc-if>
+          <sc-if value="{{ hasHelpTips }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative;background:#FFF4E4;border:1px solid #F0D7AE;border-radius:14px;padding:16px 18px;">
+            <div style="font-weight:800;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6B80;margin-bottom:12px;">Good to know</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <sc-for list="{{ helpTips }}" as="h" hint-placeholder-count="1">
+                <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.6;color:#4A3A1C;"><span style="flex:none;font-size:15px;">💡</span><span style="flex:1;min-width:0;text-wrap:pretty;">{{ h.text }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ helpClosed }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;justify-content:flex-end;">
+        <div onClick="{{ toggleHelp }}" style="display:inline-flex;gap:8px;align-items:center;background:#fff;border:2px solid var(--mr-ink);border-radius:22px;box-shadow:3px 3px 0 var(--mr-ink);padding:7px 15px 7px 8px;font-weight:700;font-size:13px;color:var(--mr-ink);cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease;" style-hover="transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--mr-ink);">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mr-teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;">?</span>
+          How {{ helpName }} works
+        </div>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ vHome }}" hint-placeholder-val="{{ false }}">
   <div>
     <div data-mr="hero" style="background:var(--mr-navy);color:#fff;padding:54px 26px 72px;position:relative;overflow:hidden;">
@@ -533,38 +614,47 @@
       </sc-if>
 
       <sc-if value="{{ hasBirthdays }}" hint-placeholder-val="{{ false }}">
-      <div style="margin-top:34px;">
-        <h2 style="font-family:var(--mr-head);font-weight:800;font-size:24px;letter-spacing:-0.03em;margin:0 0 15px;">Birthdays today</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;">
+      <div style="margin-top:34px;background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);padding:24px 24px 26px;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(#C96A0F 1.6px,transparent 2.2px) 0 0/34px 34px,radial-gradient(#1F5FD0 1.6px,transparent 2.2px) 17px 17px/34px 34px;opacity:0.16;pointer-events:none;"></div>
+        <div style="position:absolute;top:-80%;right:-20%;width:70%;height:260%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.13) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 200s linear infinite;pointer-events:none;"></div>
+        <div style="position:relative;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px;">
+          <span style="font-size:38px;line-height:1;animation:hbFloat 3s ease-in-out infinite;">🎂</span>
+          <div style="flex:1;min-width:200px;">
+            <div style="font-family:var(--mr-comic);font-size:36px;line-height:1;letter-spacing:0.02em;color:var(--mr-ink);">{{ bdayHead }}</div>
+            <div style="font-size:14px;color:#5C6B80;margin-top:6px;">{{ bdaySub }}</div>
+          </div>
+        </div>
+        <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:18px;align-items:stretch;">
           <sc-for list="{{ birthdays }}" as="b" hint-placeholder-count="1">
-            <div style="background:#FFFDF6;border:2px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:5px 5px 0 var(--mr-ink);overflow:hidden;animation:hbPop 0.5s cubic-bezier(0.34,1.4,0.64,1) both;">
-              <div style="background:#C96A0F;color:#fff;padding:11px 18px;display:flex;gap:9px;align-items:center;font-weight:800;font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;">
-                <span style="font-size:16px;">🎂</span><span>Happy birthday</span>
-              </div>
-              <div style="padding:19px 20px 20px;">
-                <div style="display:flex;gap:12px;align-items:center;">
-                  <div style="{{ b.discStyle }}">{{ b.initials }}</div>
-                  <div style="min-width:0;">
-                    <div style="font-family:var(--mr-head);font-weight:800;font-size:19px;letter-spacing:-0.02em;">{{ b.name }}</div>
-                    <div style="font-size:12.5px;color:#7A8899;margin-top:2px;">{{ b.dept }}</div>
-                  </div>
+            <div style="background:#fff;border:2px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:5px 5px 0 #C96A0F;padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0;animation:hbPop 0.5s cubic-bezier(0.34,1.4,0.64,1) both;">
+              <div style="display:flex;gap:14px;align-items:center;">
+                <div style="flex:none;position:relative;"><div style="{{ b.discStyle }}">{{ b.initials }}</div><span style="position:absolute;right:-8px;top:-12px;font-size:22px;transform:rotate(14deg);">🎉</span></div>
+                <div style="min-width:0;flex:1;">
+                  <div style="font-family:var(--mr-head);font-weight:800;font-size:19px;letter-spacing:-0.02em;line-height:1.2;">{{ b.name }}</div>
+                  <div style="font-size:12.5px;color:#7A8899;margin-top:3px;">{{ b.dept }} · {{ b.wishCount }}</div>
                 </div>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:15px;">
-                  <sc-for list="{{ b.gifts }}" as="g" hint-placeholder-count="6">
-                    <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <sc-for list="{{ b.gifts }}" as="g" hint-placeholder-count="6">
+                  <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ b.hasWishes }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <sc-for list="{{ b.wishes }}" as="w" hint-placeholder-count="1">
+                    <div style="display:flex;gap:9px;align-items:flex-start;">
+                      <span style="flex:none;width:28px;height:28px;border-radius:50%;background:#FDF0DC;color:#9A5A0B;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;">{{ w.initials }}</span>
+                      <div style="flex:1;min-width:0;background:#FFF8EC;border-radius:4px 12px 12px 12px;padding:8px 12px;font-size:13.5px;line-height:1.5;color:#3A4453;"><strong style="font-weight:700;display:block;font-size:12px;color:#9A5A0B;">{{ w.who }}</strong><span dir="auto" style="unicode-bidi:plaintext;">{{ w.text }}</span></div>
+                    </div>
                   </sc-for>
                 </div>
-                <sc-for list="{{ b.wishes }}" as="w" hint-placeholder-count="0">
-                  <div style="display:flex;gap:9px;align-items:flex-start;margin-top:11px;">
-                    <span style="flex:none;width:6px;height:6px;border-radius:50%;background:#C96A0F;margin-top:7px;"></span>
-                    <div style="flex:1;min-width:0;font-size:13.5px;line-height:1.55;color:#3A4453;"><strong style="font-weight:700;">{{ w.who }}</strong> {{ w.text }}</div>
-                  </div>
-                </sc-for>
-                <div style="display:flex;gap:8px;align-items:flex-end;margin-top:14px;">
-                  <input value="{{ wishDraft }}" onInput="{{ onWishDraft }}" placeholder="Add your good wishes…" style="flex:1;min-width:0;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#fff;border-radius:11px;padding:11px 13px;outline:none;">
-                  <div onClick="{{ b.send }}" style="flex:none;background:#C96A0F;color:#fff;font-weight:700;font-size:13.5px;padding:11px 20px;border-radius:22px;cursor:pointer;">Send</div>
+              </sc-if>
+              <sc-if value="{{ b.notMe }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;gap:8px;align-items:center;margin-top:auto;">
+                  <input dir="auto" value="{{ b.draft }}" onInput="{{ b.onDraft }}" onKeyDown="{{ b.onKey }}" placeholder="Write a good wish…" style="flex:1;min-width:0;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:22px;padding:11px 15px;outline:none;">
+                  <div onClick="{{ b.send }}" style="flex:none;background:#C96A0F;color:#fff;font-weight:700;font-size:13.5px;padding:11px 20px;border-radius:22px;cursor:pointer;" style-hover="filter:brightness(1.1);">Send</div>
                 </div>
-              </div>
+              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -5910,7 +6000,10 @@
                   <div dir="auto" style="white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;text-align:start;">{{ m.text }}</div>
                   <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                 </div>
+                <sc-if value="{{ m.hasRx }}" hint-placeholder-val="{{ false }}"><div style="{{ m.rxRowStyle }}"><sc-for list="{{ m.rxChips }}" as="x" hint-placeholder-count="1"><span onClick="{{ x.tap }}" title="{{ x.tip }}" style="{{ x.style }}">{{ x.em }}<span style="font-size:11px;font-weight:700;color:#3A4453;">{{ x.n }}</span></span></sc-for></div></sc-if>
+                <sc-if value="{{ m.rxPickOpen }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:2px;background:#fff;border:1px solid #DCE2EA;border-radius:22px;padding:4px 6px;box-shadow:0 10px 24px -12px rgba(24,24,72,0.45);animation:hbPop 0.2s ease both;"><sc-for list="{{ m.rxPicks }}" as="x" hint-placeholder-count="6"><span onClick="{{ x.tap }}" style="font-size:20px;line-height:1;padding:4px 5px;border-radius:50%;cursor:pointer;transition:transform 0.15s ease;" style-hover="transform:scale(1.3);">{{ x.em }}</span></sc-for></div></sc-if>
                 <div style="{{ m.actStyle }}">
+                  <sc-if value="{{ m.canRx }}" hint-placeholder-val="{{ false }}"><span onClick="{{ m.toggleRxPick }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">☺ React</span></sc-if>
                   <span onClick="{{ m.doReply }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↩ Reply</span>
                   <span onClick="{{ m.doFwd }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↪ Forward</span>
                 </div>
@@ -6367,10 +6460,70 @@
 
   <sc-if value="{{ vRecog }}" hint-placeholder-val="{{ false }}">
   <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
-    <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">Recognition wall</h1>
-    <p style="font-size:15px;color:#5C6B80;margin:0 0 26px;line-height:1.6;">{{ recogSub }}</p>
+    <div style="background:var(--mr-navy);color:#fff;border:3px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);padding:34px 32px 32px;position:relative;overflow:hidden;margin-bottom:28px;animation:hbRise 0.45s ease both;">
+      <div style="position:absolute;top:-90%;left:40%;width:120%;height:280%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.22) 0deg 7deg,transparent 7deg 14deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,0.09) 1px,transparent 1.6px) 0 0/22px 22px;pointer-events:none;"></div>
+      <div style="position:relative;display:flex;gap:22px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+        <div style="min-width:0;flex:1 1 320px;">
+          <div style="font-weight:700;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:#CFE6F5;">Med Right Group · Recognition</div>
+          <h1 data-mr="comic" style="font-family:var(--mr-comic);font-weight:400;font-size:56px;line-height:0.98;letter-spacing:0.015em;margin:10px 0 10px;color:var(--mr-warm);text-shadow:4px 4px 0 var(--mr-ink);">Recognition wall</h1>
+          <p style="font-size:15px;color:#DCE8F3;margin:0;line-height:1.6;max-width:560px;">{{ recogSub }}</p>
+        </div>
+        <div style="flex:none;display:flex;gap:10px;font-size:40px;line-height:1;">
+          <span style="animation:hbFloat 3.2s ease-in-out infinite;">🏆</span><span style="animation:hbFloat 3.8s 0.4s ease-in-out infinite;">🌟</span><span style="animation:hbFloat 3.4s 0.8s ease-in-out infinite;">👏</span>
+        </div>
+      </div>
+    </div>
 
-    <div data-fn="kudos" style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:24px;margin-bottom:30px;animation:hbRise 0.45s ease both;">
+    <sc-if value="{{ hasBirthdays }}" hint-placeholder-val="{{ false }}">
+    <div style="margin-bottom:30px;background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);padding:24px 24px 26px;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(#C96A0F 1.6px,transparent 2.2px) 0 0/34px 34px,radial-gradient(#1F5FD0 1.6px,transparent 2.2px) 17px 17px/34px 34px;opacity:0.16;pointer-events:none;"></div>
+        <div style="position:absolute;top:-80%;right:-20%;width:70%;height:260%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.13) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 200s linear infinite;pointer-events:none;"></div>
+        <div style="position:relative;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px;">
+          <span style="font-size:38px;line-height:1;animation:hbFloat 3s ease-in-out infinite;">🎂</span>
+          <div style="flex:1;min-width:200px;">
+            <div style="font-family:var(--mr-comic);font-size:36px;line-height:1;letter-spacing:0.02em;color:var(--mr-ink);">{{ bdayHead }}</div>
+            <div style="font-size:14px;color:#5C6B80;margin-top:6px;">{{ bdaySub }}</div>
+          </div>
+        </div>
+        <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:18px;align-items:stretch;">
+          <sc-for list="{{ birthdays }}" as="b" hint-placeholder-count="1">
+            <div style="background:#fff;border:2px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:5px 5px 0 #C96A0F;padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0;animation:hbPop 0.5s cubic-bezier(0.34,1.4,0.64,1) both;">
+              <div style="display:flex;gap:14px;align-items:center;">
+                <div style="flex:none;position:relative;"><div style="{{ b.discStyle }}">{{ b.initials }}</div><span style="position:absolute;right:-8px;top:-12px;font-size:22px;transform:rotate(14deg);">🎉</span></div>
+                <div style="min-width:0;flex:1;">
+                  <div style="font-family:var(--mr-head);font-weight:800;font-size:19px;letter-spacing:-0.02em;line-height:1.2;">{{ b.name }}</div>
+                  <div style="font-size:12.5px;color:#7A8899;margin-top:3px;">{{ b.dept }} · {{ b.wishCount }}</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <sc-for list="{{ b.gifts }}" as="g" hint-placeholder-count="6">
+                  <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ b.hasWishes }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <sc-for list="{{ b.wishes }}" as="w" hint-placeholder-count="1">
+                    <div style="display:flex;gap:9px;align-items:flex-start;">
+                      <span style="flex:none;width:28px;height:28px;border-radius:50%;background:#FDF0DC;color:#9A5A0B;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;">{{ w.initials }}</span>
+                      <div style="flex:1;min-width:0;background:#FFF8EC;border-radius:4px 12px 12px 12px;padding:8px 12px;font-size:13.5px;line-height:1.5;color:#3A4453;"><strong style="font-weight:700;display:block;font-size:12px;color:#9A5A0B;">{{ w.who }}</strong><span dir="auto" style="unicode-bidi:plaintext;">{{ w.text }}</span></div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ b.notMe }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;gap:8px;align-items:center;margin-top:auto;">
+                  <input dir="auto" value="{{ b.draft }}" onInput="{{ b.onDraft }}" onKeyDown="{{ b.onKey }}" placeholder="Write a good wish…" style="flex:1;min-width:0;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:22px;padding:11px 15px;outline:none;">
+                  <div onClick="{{ b.send }}" style="flex:none;background:#C96A0F;color:#fff;font-weight:700;font-size:13.5px;padding:11px 20px;border-radius:22px;cursor:pointer;" style-hover="filter:brightness(1.1);">Send</div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <div data-fn="kudos" style="background:#fff;border:2px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:5px 5px 0 var(--mr-teal);padding:24px 26px 26px;margin-bottom:34px;animation:hbRise 0.45s ease both;">
       <div style="font-family:var(--mr-head);font-weight:700;font-size:19px;letter-spacing:-0.02em;">Send a compliment</div>
       <div style="font-size:13.5px;color:#5C6B80;line-height:1.55;margin:4px 0 16px;">Say thank you to a colleague. They are told straight away, and it appears on the wall for everyone.</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;">
@@ -6470,7 +6623,7 @@
       <h2 style="font-family:var(--mr-head);font-weight:800;font-size:23px;letter-spacing:-0.03em;margin:0 0 14px;">Promotions</h2>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <sc-for list="{{ promos }}" as="r" hint-placeholder-count="2">
-          <div style="background:#fff;border:1px solid #DCE2EA;border-left:5px solid #0E8F66;border-radius:var(--mr-r);padding:18px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;animation:hbRise 0.4s ease both;">
+          <div style="background:#fff;border:2px solid var(--mr-ink);box-shadow:4px 4px 0 #0E8F66;border-radius:var(--mr-r-lg);padding:18px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;animation:hbRise 0.4s ease both;">
             <div style="{{ r.discStyle }}">{{ r.initials }}</div>
             <div style="flex:1 1 240px;min-width:0;">
               <div style="font-family:var(--mr-head);font-weight:800;font-size:18px;letter-spacing:-0.02em;">{{ r.toName }}</div>
@@ -6526,20 +6679,20 @@
     <h2 style="font-family:var(--mr-head);font-weight:800;font-size:23px;letter-spacing:-0.03em;margin:0 0 14px;">Compliments from colleagues</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;">
       <sc-for list="{{ kudosWall }}" as="r" hint-placeholder-count="3">
-        <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r);padding:18px 19px;animation:hbRise 0.4s ease both;">
+        <div style="background:#fff;border:2px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:4px 4px 0 var(--mr-ink);padding:20px 20px 18px;animation:hbRise 0.4s ease both;transition:transform 0.2s ease,box-shadow 0.2s ease;" style-hover="transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--mr-ink);">
           <div style="display:flex;gap:11px;align-items:center;">
             <div style="{{ r.discStyle }}">{{ r.initials }}</div>
             <div style="min-width:0;flex:1;">
               <div style="font-weight:700;font-size:15px;line-height:1.3;">{{ r.toName }}</div>
               <div style="font-size:12px;color:#8B97A8;margin-top:2px;">{{ r.sub }}</div>
             </div>
-            <span style="flex:none;font-size:22px;">{{ r.gift }}</span>
+            <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#FFF4E4;border:2px solid var(--mr-ink);display:flex;align-items:center;justify-content:center;font-size:21px;transform:rotate(-8deg);">{{ r.gift }}</span>
           </div>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;">
             <span style="font-size:12.5px;font-weight:700;color:#3A4453;">{{ r.fromTo }}</span>
             <span style="{{ r.tagStyle }}">{{ r.tag }}</span>
           </div>
-          <p style="font-size:14.5px;line-height:1.6;color:#3A4453;margin:12px 0 0;text-wrap:pretty;">{{ r.text }}</p>
+          <p dir="auto" style="font-family:var(--mr-head);font-weight:600;font-size:15.5px;line-height:1.55;letter-spacing:-0.01em;color:var(--mr-ink);margin:12px 0 0;text-wrap:pretty;unicode-bidi:plaintext;">“{{ r.text }}”</p>
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:13px;">
             <sc-for list="{{ r.gifts }}" as="g" hint-placeholder-count="4">
               <div data-fn="gifts" onClick="{{ g.tap }}" title="{{ g.tip }}" style="{{ g.style }}" style-hover="transform:translateY(-2px);">{{ g.emoji }}<span style="{{ g.countStyle }}">{{ g.count }}</span></div>
@@ -7399,8 +7552,11 @@
                     <div dir="auto" style="white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;text-align:start;">{{ m.text }}</div>
                     <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                   </div>
-                  <div style="{{ m.actStyle }}">
-                    <span onClick="{{ m.doReply }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↩ Reply</span>
+                  <sc-if value="{{ m.hasRx }}" hint-placeholder-val="{{ false }}"><div style="{{ m.rxRowStyle }}"><sc-for list="{{ m.rxChips }}" as="x" hint-placeholder-count="1"><span onClick="{{ x.tap }}" title="{{ x.tip }}" style="{{ x.style }}">{{ x.em }}<span style="font-size:11px;font-weight:700;color:#3A4453;">{{ x.n }}</span></span></sc-for></div></sc-if>
+                <sc-if value="{{ m.rxPickOpen }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:2px;background:#fff;border:1px solid #DCE2EA;border-radius:22px;padding:4px 6px;box-shadow:0 10px 24px -12px rgba(24,24,72,0.45);animation:hbPop 0.2s ease both;"><sc-for list="{{ m.rxPicks }}" as="x" hint-placeholder-count="6"><span onClick="{{ x.tap }}" style="font-size:20px;line-height:1;padding:4px 5px;border-radius:50%;cursor:pointer;transition:transform 0.15s ease;" style-hover="transform:scale(1.3);">{{ x.em }}</span></sc-for></div></sc-if>
+                <div style="{{ m.actStyle }}">
+                    <sc-if value="{{ m.canRx }}" hint-placeholder-val="{{ false }}"><span onClick="{{ m.toggleRxPick }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">☺ React</span></sc-if>
+                  <span onClick="{{ m.doReply }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↩ Reply</span>
                     <span onClick="{{ m.doFwd }}" style="cursor:pointer;" style-hover="color:var(--mr-teal);">↪ Forward</span>
                   </div>
                   </div>
@@ -8100,6 +8256,7 @@ const RECOG_KINDS = [
   ["team", "Team shout-out", "🎉"],
   ["kudos", "Compliment", "👏"]
 ];
+const RX_QUICK = ["👍", "❤️", "😂", "😮", "😢", "🙏"];
 const GIFTS = ["👏", "🌹", "💐", "🎉", "🏆", "❤️", "⭐", "🙌"];
 
 const FONT_CHOICES = [
@@ -8160,6 +8317,470 @@ const FEATURES = [
   ["comic", "Comic styling", "Heavy outlines, hard shadows, the comic font"]
 ];
 
+const HELP = {
+ "home": {
+  "name": "Home",
+  "icon": "⌂",
+  "routes": [
+   "home"
+  ],
+  "intro": "Your starting point. Everything that needs you today shows here first, then news, recognition and events.",
+  "staff": [
+   "Red and amber blocks at the top are actions: a notice, an assessment that is due, attendance to record. Click one to finish it.",
+   "“Yours” shows how many policies you still need to read and sign. Click a tile to open that list.",
+   "Use the search bar to find any policy by a word in its title or text.",
+   "Scroll for announcements, birthdays, recognition and upcoming events. Use the arrows to move through the news."
+  ],
+  "admin": [
+   "Switch to Admin view (top right) to land on the dashboard instead.",
+   "Every block on this page can be turned off for everyone in Marketing mode → Switches; the page re-arranges itself."
+  ],
+  "tips": [
+   "Blocks disappear once you clear them, so an empty page means you are up to date.",
+   "The bell shows every notification; the chat icon shows your messages."
+  ]
+ },
+ "dash": {
+  "name": "Admin dashboard",
+  "icon": "▦",
+  "routes": [
+   "dash"
+  ],
+  "intro": "The P&O control room: what needs a person, how each department is reading, and what happened recently.",
+  "staff": [],
+  "admin": [
+   "The four tiles give live counts. Click any tile to open that console.",
+   "“Needs a person” lists items waiting on an admin: questions, requests, marking, approvals. Work top to bottom.",
+   "Read-through by department shows who is behind on must-acknowledge policies.",
+   "Use the quick actions to start a policy, form, announcement or person in one click."
+  ],
+  "tips": [
+   "Switch to Staff view to see the hub exactly as an employee does."
+  ]
+ },
+ "policies": {
+  "name": "Policies",
+  "icon": "▤",
+  "routes": [
+   "library",
+   "list",
+   "policy",
+   "me"
+  ],
+  "intro": "Every live Med Right policy in plain language, with what you must read and sign.",
+  "staff": [
+   "Open “My policies” to see what you still need to read. Items marked “Must acknowledge” need your signature.",
+   "Open a policy, read it through, then press Acknowledge at the end. It counts straight away.",
+   "Bookmark (☆) a policy to keep it at the top of your list. Print gives a clean paper copy.",
+   "Not sure about something? Use “Ask a question” on the policy. The answer comes back to My questions."
+  ],
+  "admin": [
+   "Use the filters to find policies by category, publisher or guide.",
+   "Open a policy and press Edit to change it; every field, section and point is editable."
+  ],
+  "tips": [
+   "The coloured guide on each policy tells you its area: the colour follows it through the page.",
+   "A new version may ask you to sign again."
+  ]
+ },
+ "editor": {
+  "name": "Policy editor",
+  "icon": "✎",
+  "routes": [
+   "editor"
+  ],
+  "intro": "Write and update a policy, then decide how it goes out.",
+  "staff": [],
+  "admin": [
+   "Fill in title, summary, category, guide and owner first; they decide where the policy appears.",
+   "Add at-a-glance points, then sections with bullets. Use the arrows to reorder. You can also paste HTML or add a link.",
+   "Tick “Must acknowledge” if staff must sign, and choose who it applies to (everyone, a department, a role or named people).",
+   "Finish with one of: Save draft (only admins see it), Send for management review (board votes first), or Publish (live for everyone).",
+   "After review comes back, launch version 2 in the same policy, edit, then review again or publish."
+  ],
+  "tips": [
+   "Publishing notifies everyone in the audience.",
+   "Drafts are safe to leave; nobody else sees them."
+  ]
+ },
+ "acks": {
+  "name": "Acknowledgements",
+  "icon": "✓",
+  "routes": [
+   "acks"
+  ],
+  "intro": "Who has signed each must-acknowledge policy, and who still has to.",
+  "staff": [],
+  "admin": [
+   "Pick a policy to see signed, outstanding and percentage by department.",
+   "Send a reminder to everyone outstanding in one click, or to one person.",
+   "Export the list to CSV for audits."
+  ],
+  "tips": [
+   "Counts only include the audience the policy was targeted at."
+  ]
+ },
+ "mgmt": {
+  "name": "Management review",
+  "icon": "⚖",
+  "routes": [
+   "mgmt"
+  ],
+  "intro": "Board review of policies before they go live.",
+  "staff": [
+   "If you are a manager, open each round and choose Approve, Approve with changes or Reject, with a comment.",
+   "Rounds have a deadline; your participation is recorded."
+  ],
+  "admin": [
+   "Start a round from the policy editor with “Send for management review”.",
+   "Track votes here, send reminders, and close the round when everyone has voted.",
+   "Then launch the next version in the policy, or publish."
+  ],
+  "tips": [
+   "Participation per manager is kept permanently."
+  ]
+ },
+ "benefits": {
+  "name": "Benefits",
+  "icon": "♡",
+  "routes": [
+   "benefits",
+   "benefit",
+   "benefitadmin",
+   "benefitedit"
+  ],
+  "intro": "Everything Med Right offers you, explained in one place.",
+  "staff": [
+   "Browse by category and open any benefit for the full details.",
+   "Use “Open full screen” for long documents."
+  ],
+  "admin": [
+   "Add or edit a benefit in the benefits console: summary, category, details or uploaded HTML.",
+   "Publish to make it visible; drafts stay hidden."
+  ],
+  "tips": []
+ },
+ "forms": {
+  "name": "Forms & surveys",
+  "icon": "☰",
+  "routes": [
+   "forms",
+   "formfill",
+   "formbuild",
+   "stats"
+  ],
+  "intro": "Fill in forms and surveys sent to you, or build your own and see the answers.",
+  "staff": [
+   "Open a form, answer each page, then press Submit. Required questions are marked.",
+   "Required forms show a red line under the header until you finish them.",
+   "Submitted answers cannot be edited. If you need to change one, ask P&O to reopen it from Requests."
+  ],
+  "admin": [
+   "Press New form or New survey. Add questions (14 types), split into pages, and use “Show if” to show a question only after a certain answer.",
+   "Choose who receives it, an optional deadline and a handler. Anonymous mode stores no names.",
+   "Open Stats to see charts, every answer, who answered and who has not. Send a reminder or export CSV."
+  ],
+  "tips": [
+   "Managers who build a form see its answers too."
+  ]
+ },
+ "services": {
+  "name": "Suggestion box",
+  "icon": "✉",
+  "routes": [
+   "services"
+  ],
+  "intro": "Send an idea or a concern, named or anonymous, and follow it to a decision.",
+  "staff": [
+   "Write your suggestion, pick named or anonymous, and send.",
+   "Follow its progress: Open → Under review → Approved or Declined. Reply in the thread if you are asked something.",
+   "Anonymous suggestions stay linked to this browser so you can still follow up."
+  ],
+  "admin": [
+   "Assign a handler, reply in the thread, then Approve or Decline (a decline needs a reason).",
+   "Reopen a closed suggestion if it comes back."
+  ],
+  "tips": []
+ },
+ "asks": {
+  "name": "Requests to P&O",
+  "icon": "➜",
+  "routes": [
+   "myasks",
+   "poqueue"
+  ],
+  "intro": "Formal requests to People & Organisation: hiring someone, or reopening something already submitted.",
+  "staff": [
+   "Choose the request type, fill in the details and why, then send.",
+   "Track it on the 3-step bar. You are notified when P&O decide, with their note."
+  ],
+  "admin": [
+   "Staff requests arrive here. Approve or decline, with a note back.",
+   "Approving a hiring request opens a vacancy in Recruitment; approving a reopen lets the person redo their form or assignment."
+  ],
+  "tips": []
+ },
+ "know": {
+  "name": "Knowledge hub & courses",
+  "icon": "✦",
+  "routes": [
+   "know",
+   "knowitem",
+   "knowadmin",
+   "knowedit"
+  ],
+  "intro": "Courses, guides, videos and links, with modules, assignments, exams and certificates.",
+  "staff": [
+   "Open a course and press Enrol me. Some courses need an enrolment code from P&O; enter it to get in.",
+   "Work through each module. Files and videos open inside the hub.",
+   "Submit assignments where asked; the instructor accepts or returns them with feedback.",
+   "When everything is done, press “I've finished”. The instructor signs off, P&O approve, and your certificate becomes downloadable.",
+   "You can drop a course; to come back you will need to request access from P&O."
+  ],
+  "admin": [
+   "New item → choose course, document, link or video. Add modules, lessons, files, an assignment and an exam per module.",
+   "Set the audience, opening/closing dates, self-enrol or a code, and the instructor.",
+   "At the top of the console: access requests, assignments to mark and certificates to approve.",
+   "Remove anyone's access from the course's people list."
+  ],
+  "tips": [
+   "Instructors can add content and sign certificates; only P&O issue them."
+  ]
+ },
+ "exams": {
+  "name": "Assessments",
+  "icon": "✍",
+  "routes": [
+   "exams",
+   "examrun",
+   "examdone",
+   "examadmin",
+   "exambuild",
+   "examresults"
+  ],
+  "intro": "Timed assessments and exams.",
+  "staff": [
+   "Assessments due for you show on the home page with days left. Press Start when ready.",
+   "Watch the timer at the top; some questions have their own time limit. It submits automatically at zero.",
+   "Use the question map to jump around if the exam allows going back.",
+   "Results show straight away, after review, or when P&O release them."
+  ],
+  "admin": [
+   "New exam → add questions (5 types), times, pass mark, attempts and shuffle.",
+   "Choose the audience and the window it is open.",
+   "Results: tiles, every answer, mark written answers, flag, release, export CSV, and remind people who haven't sat it.",
+   "Allow a retake for one person or everyone who failed."
+  ],
+  "tips": []
+ },
+ "events": {
+  "name": "Events & attendance",
+  "icon": "◷",
+  "routes": [
+   "events",
+   "eventcheck",
+   "eventadmin",
+   "eventedit"
+  ],
+  "intro": "Company events and recording your attendance.",
+  "staff": [
+   "Upcoming events show here and on the home page.",
+   "At the event, press Record my attendance. Enter the code you are given and take a live selfie if asked.",
+   "If the event has a form (lunch vote, rating), it opens straight after check-in."
+  ],
+  "admin": [
+   "New event → type, date and time, place, audience, code and selfie options, optional form.",
+   "Watch attendance live: photos, the face check, and who is missing. Re-issue the code or export CSV."
+  ],
+  "tips": [
+   "The selfie must be taken live; uploads from the gallery are not accepted."
+  ]
+ },
+ "recog": {
+  "name": "Recognition",
+  "icon": "★",
+  "routes": [
+   "recog",
+   "recogadmin"
+  ],
+  "intro": "Thank colleagues, celebrate winners and promotions, and wish people a happy birthday.",
+  "staff": [
+   "Send a compliment: choose a colleague, pick something to send, write why, press Send. They are told straight away.",
+   "React with an emoji on any card. On birthdays, write a good wish in the card's box and press Enter.",
+   "Only the person recognised sees the full list of who reacted."
+  ],
+  "admin": [
+   "In the Recognition console, name Employee of the month or quarter, a promotion or a team award, with a photo.",
+   "Published awards appear on the home page for everyone and notify them."
+  ],
+  "tips": [
+   "Birthdays come from each account's date of birth."
+  ]
+ },
+ "chat": {
+  "name": "Chat",
+  "icon": "✆",
+  "routes": [
+   "chat"
+  ],
+  "intro": "Message colleagues one-to-one, in groups, or the P&O and Marketing team channels. Aaref, the AI assistant, is pinned at the top.",
+  "staff": [
+   "Press New to start a direct message or group. Team channels reach the whole P&O or Marketing team.",
+   "Enter sends, Shift+Enter makes a new line. Attach files with 📎 and add emojis with 😊.",
+   "Hover a message to React, Reply or Forward. Click a picture to see it full screen.",
+   "Ticks: ✓ sent, ✓✓ delivered, blue ✓✓ seen. A green dot means the person is online."
+  ],
+  "admin": [],
+  "tips": [
+   "New messages pop up in a small chat box at the bottom of any page.",
+   "Never share IDs, salaries or medical details with Aaref."
+  ]
+ },
+ "inbox": {
+  "name": "My questions",
+  "icon": "?",
+  "routes": [
+   "inbox"
+  ],
+  "intro": "Questions you asked P&O about a policy, and their answers.",
+  "staff": [
+   "Ask from any policy with “Ask a question”, then follow the reply here.",
+   "You are notified when someone answers."
+  ],
+  "admin": [
+   "Every staff question lands here. Reply, and it goes back to the person who asked."
+  ],
+  "tips": []
+ },
+ "cases": {
+  "name": "Notices & investigations",
+  "icon": "◉",
+  "routes": [
+   "mycases",
+   "caseadmin",
+   "caseedit"
+  ],
+  "intro": "Formal notices, document requests and investigations, with a clear status bar.",
+  "staff": [
+   "Anything open for you is pinned on the home page until it is closed.",
+   "Open it to read the details, reply in the box, and see which stage it has reached."
+  ],
+  "admin": [
+   "New case → notice, document request or investigation, the person and details.",
+   "Move it forward or back a stage; every step is logged. Investigations end with a decision and reasons."
+  ],
+  "tips": []
+ },
+ "recruit": {
+  "name": "Recruitment",
+  "icon": "⚑",
+  "routes": [
+   "recruit",
+   "candedit",
+   "interview"
+  ],
+  "intro": "Vacancies, candidate files, interviews and assessments.",
+  "staff": [
+   "If a candidate file is shared with you, you will see it here and be notified at each stage.",
+   "If you are named as interviewer, accept the time or suggest another, then record your verdict."
+  ],
+  "admin": [
+   "Vacancies open from approved hiring requests. Expand one to see its candidates and choose what the requesting manager can see.",
+   "Add a candidate: CV, assigned exams, owner. Move them through the 8 stages.",
+   "Book an interview with a colleague; they accept or suggest a slot.",
+   "Interview mode registers a walk-in and hands them the exam on this screen."
+  ],
+  "tips": [
+   "Candidates sign in with their 6-character code on the login page."
+  ]
+ },
+ "comply": {
+  "name": "Compliance",
+  "icon": "⛨",
+  "routes": [
+   "comply",
+   "compadmin"
+  ],
+  "intro": "What you owe, declarations, and a safe way to speak up.",
+  "staff": [
+   "“What I owe” lists policies to sign, required forms and attestations, with your score.",
+   "Declarations: report a conflict of interest, a gift, AI tool use, outside work or data sharing. Some need approval first.",
+   "Speak up: report an incident, named or anonymous. Anonymous reports give you a code to follow up."
+  ],
+  "admin": [
+   "Overview shows scores by department. Run attestation rounds, review declarations, and keep the regulatory register and audits up to date.",
+   "AI tools: list approved or banned tools and what data each may receive.",
+   "Confidential reports need the Confidential reports privilege."
+  ],
+  "tips": [
+   "Reminders go out automatically 7, 3 and 0 days before a deadline."
+  ]
+ },
+ "ann": {
+  "name": "Announcements",
+  "icon": "📣",
+  "routes": [
+   "ann"
+  ],
+  "intro": "News and announcements on the home page slider, and the home video.",
+  "staff": [],
+  "admin": [
+   "New announcement → title, text, importance and an optional link. More important posts show first.",
+   "Turn the home video on, then paste a YouTube link or upload a short clip, and press Save.",
+   "Every new active post notifies everyone."
+  ],
+  "tips": []
+ },
+ "accounts": {
+  "name": "People & accounts",
+  "icon": "☺",
+  "routes": [
+   "accounts"
+  ],
+  "intro": "Every account, role, department and privilege.",
+  "staff": [],
+  "admin": [
+   "Add one person with the form, or paste/upload a CSV: name, email, department, role, password.",
+   "On each row: change role, title, team, date of birth, privileges or password.",
+   "Invited accounts become Active on first sign-in."
+  ],
+  "tips": [
+   "Unknown departments are added automatically; wrong domains and duplicates are skipped and reported."
+  ]
+ },
+ "marketing": {
+  "name": "Marketing mode",
+  "icon": "✺",
+  "routes": [
+   "marketing"
+  ],
+  "intro": "Brand, colours, words, navigation, guides and switches for the whole hub.",
+  "staff": [],
+  "admin": [
+   "Brand & logos, colours & type: changes apply live for everyone.",
+   "Switches: set each section or block to On, Test (named accounts only), Hide (out of the menu) or Disable.",
+   "Words and navigation: rename or hide any menu item."
+  ],
+  "tips": [
+   "Reset restores the default ME look."
+  ]
+ },
+ "profile": {
+  "name": "My profile",
+  "icon": "◐",
+  "routes": [
+   "profile"
+  ],
+  "intro": "Your details and password.",
+  "staff": [
+   "Change your password here: type the new one twice and save."
+  ],
+  "admin": [],
+  "tips": []
+ }
+};
+const HELP_BY_ROUTE = {};
+Object.keys(HELP).forEach(k => HELP[k].routes.forEach(r => { HELP_BY_ROUTE[r] = k; }));
 const SECTIONS = [
   ["forms", "Forms & surveys", "Form builder, surveys, answers and analytics", ["forms", "formbuild", "formfill", "stats"]],
   ["services", "Suggestion box", "Suggestions and requests from staff", ["services"]],
@@ -8310,7 +8931,7 @@ class Component extends DCLogic {
     menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [], presence: {}, typing: {}, aaref: [], aarefBusy: false, aarefUrlDraft: null, ivDraft: {}, dockFile: {}, dockEmoji: null, chatEmoji: false,
     asks: [], askNote: {}, evKinds: [], titles: [], newEvType: "", newTitleDraft: "",
     vacancies: [], vacOpen: null, vacFilter: "open",
-    askDraft: { kind: "hire", role: "", dept: "", count: 1, target: "", targetLabel: "", why: "", when: "" }, dockMin: [], dockDraft: {}, dockListOpen: false, tkDismissed: [], enrolCode: "", wishDraft: "", retakePick: [],
+    askDraft: { kind: "hire", role: "", dept: "", count: 1, target: "", targetLabel: "", why: "", when: "" }, dockMin: [], dockDraft: {}, dockListOpen: false, tkDismissed: [], enrolCode: "", rxPick: null, helpOpen: (() => { try { return JSON.parse(localStorage.getItem("mrhub-help-v1") || "[]"); } catch (e) { return []; } })(), wishDrafts: {}, bdayClosed: false, wishDraft: "", retakePick: [],
     know: [], exams: [], attempts: [], chat: [], subs: [], certs: [],
     subDraft: {}, subFile: {}, gradeNote: {}, lessonLink: {},
     chatOpen: null, chatDraft: "", chatSearch: "", chatNew: false,
@@ -8690,6 +9311,7 @@ class Component extends DCLogic {
       setTimeout(() => this.runCompReminders(), 4000);
     }
     if (st.me && !this._ambient) this.startAmbient();
+    if (st.me && this._bdayFor !== st.me.email) { this._bdayFor = st.me.email; setTimeout(() => this.bdayGreet(), 2500); }
     if (!st.me || st.toast || st.modal) return;
     if (!this._sessAt) this._sessAt = Date.now() - 120000;
     if (this._tSetSrc !== st.toasted) { this._tSetSrc = st.toasted; this._tSet = new Set(st.toasted); }
@@ -11702,10 +12324,59 @@ class Component extends DCLogic {
     this.setState({ fwdMsg: null, fwdSearch: "" });
     this.flash("Forwarded", "Sent to " + (target.name || t.name) + ".");
   }
+  reactMsg(threadId, msgId, em) {
+    const st = this.state, me = st.me;
+    if (!me) return;
+    let author = null, mt = "";
+    const list = (st.chat || []).map(t => t.id !== threadId ? t : Object.assign({}, t, { msgs: (t.msgs || []).map(m => {
+      if (m.id !== msgId) return m;
+      const rx = Object.assign({}, m.rx || {}), who = (rx[em] || []).slice(), i = who.indexOf(me.email);
+      if (i > -1) who.splice(i, 1); else { who.push(me.email); author = m.by; mt = m.text || m.fileName || "your message"; }
+      if (who.length) rx[em] = who; else delete rx[em];
+      return Object.assign({}, m, { rx: rx });
+    }) }));
+    this.saveChat(list);
+    this.setState({ rxPick: null });
+    if (author && author !== me.email) this.notify([{ to: author, kind: "react", threadId: threadId, title: me.name + " reacted " + em + " to your message", text: String(mt).slice(0, 90), route: "chat" }]);
+  }
+  helpVals() {
+    const st = this.state;
+    const key = HELP_BY_ROUTE[st.route];
+    const h = key && HELP[key];
+    if (!h || !st.me || st.candMode || st.interviewMode) return { helpShow: false, helpOpen: false };
+    const admin = this.isAdmin && this.isAdmin() && !st.asStaff;
+    const staff = h.staff || [], adm = admin ? (h.admin || []) : [];
+    const primary = staff.length ? staff : adm;
+    const second = staff.length ? adm : [];
+    const num = (t, i) => ({ n: String(i + 1), text: t });
+    return {
+      helpShow: !!(primary.length || (h.tips || []).length),
+      helpOpen: (st.helpOpen || []).indexOf(key) > -1, helpClosed: (st.helpOpen || []).indexOf(key) < 0,
+      helpName: h.name, helpIcon: h.icon, helpIntro: h.intro,
+      helpSteps: primary.map(num), helpStepsHead: staff.length ? "Step by step" : "How to run it",
+      helpAdmin: second.map(num), hasHelpAdmin: second.length > 0,
+      helpTips: (h.tips || []).map(t => ({ text: t })), hasHelpTips: (h.tips || []).length > 0,
+      helpGrid: "display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:18px;margin-top:18px;",
+      toggleHelp: () => this.setState(s2 => { const L = (s2.helpOpen || []).slice(), i = L.indexOf(key); if (i > -1) L.splice(i, 1); else L.push(key); try { localStorage.setItem("mrhub-help-v1", JSON.stringify(L)); } catch (e) {} return { helpOpen: L }; })
+    };
+  }
   msgExtra(t, m, mine) {
     const me = (this.state.me || {}).email;
     const rp = m.reply;
+    const rxObj = m.rx || {}, rxKeys = Object.keys(rxObj).filter(k => (rxObj[k] || []).length);
     return {
+      canRx: t.id !== "aaref", hasRx: rxKeys.length > 0,
+      rxChips: rxKeys.map(em => {
+        const who = rxObj[em], mineR = who.indexOf(me) > -1;
+        return { em: em, n: who.length > 1 ? String(who.length) : "",
+          tip: who.map(e => e === me ? "You" : ((this.acct(e) || {}).name || e)).join(", "),
+          style: "display:inline-flex;gap:3px;align-items:center;font-size:13px;line-height:1;padding:3px 7px;border-radius:12px;cursor:pointer;box-shadow:0 1px 3px rgba(24,24,72,0.15);border:1px solid " + (mineR ? "var(--mr-teal);background:#E7F3F8;" : "#E4EAF1;background:#fff;"),
+          tap: () => this.reactMsg(t.id, m.id, em) };
+      }),
+      rxRowStyle: "display:flex;gap:4px;flex-wrap:wrap;margin-top:-9px;padding:0 8px;position:relative;z-index:1;justify-content:" + (mine ? "flex-end" : "flex-start") + ";",
+      rxPickOpen: this.state.rxPick === m.id,
+      rxPicks: RX_QUICK.map(em => ({ em: em, tap: () => this.reactMsg(t.id, m.id, em) })),
+      toggleRxPick: () => this.setState(s2 => ({ rxPick: s2.rxPick === m.id ? null : m.id })),
       hasReply: !!rp, replyWho: rp ? (rp.who || "") : "", replyText: rp ? (rp.text || "") : "",
       replyStyle: "border-left:3px solid " + (mine ? "rgba(255,255,255,0.75)" : "var(--mr-teal)") + ";padding:5px 9px;margin-bottom:7px;border-radius:6px;font-size:12.5px;line-height:1.45;background:" + (mine ? "rgba(255,255,255,0.16)" : "#F1F6F9") + ";",
       isFwd: !!m.fwd,
@@ -12886,8 +13557,32 @@ class Component extends DCLogic {
     const st = this.state, me = st.me || {};
     const now = new Date();
     const key = String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
-    return (st.accounts || []).filter(a => a.status !== "suspended" && a.dob && String(a.dob).slice(5) === key
-      && (a.dept === me.dept || a.email === me.email));
+    return (st.accounts || []).filter(a => a.status !== "suspended" && a.dob && String(a.dob).slice(5) === key)
+      .sort((a, b) => (b.email === me.email) - (a.email === me.email));
+  }
+  isBday(a) {
+    if (!a) return false;
+    const full = this.acct(a.email) || a;
+    const now = new Date();
+    const key = String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+    return !!full.dob && String(full.dob).slice(5) === key;
+  }
+  bdayGreet() {
+    const st = this.state, me = st.me;
+    if (!me || st.candMode || st.interviewMode || !this.isBday(me)) return;
+    this.ensureWish(this.acct(me.email) || me);
+    const tag = "bday-" + me.email + "-" + new Date().getFullYear();
+    if ((st.notes || []).some(n => n.tag === tag)) return;
+    setTimeout(() => this.notify([{ to: me.email, kind: "recog", tag: tag, title: "Happy birthday from Med Right Group 🎂", text: "Your colleagues can see your birthday card today and leave you good wishes.", route: "recog" }]), 700);
+  }
+  bdayHeadText() {
+    const L = this.birthdaysToday(), me = (this.state.me || {}).email;
+    if (L.length === 1) return L[0].email === me ? "It's your birthday!" : "It's " + String(L[0].name).split(" ")[0] + "'s birthday!";
+    return L.length + " birthdays today";
+  }
+  bdaySubText() {
+    const L = this.birthdaysToday(), me = (this.state.me || {}).email;
+    return L.length === 1 && L[0].email === me ? "Here is what your colleagues are saying today." : "Leave a good wish. It goes on their card and they are told straight away.";
   }
   wishId(email) { return "bday-" + email + "-" + new Date().getFullYear(); }
   ensureWish(a) {
@@ -12902,7 +13597,7 @@ class Component extends DCLogic {
       date: today(), stamp: Date.now(), reactions: {}, wishes: []
     }]));
   }
-  addWish(recId, text) {
+  addWish(recId, text, email) {
     const st = this.state, me = st.me;
     if (!String(text || "").trim()) return;
     this.saveRecog((st.recog || []).map(r => r.id === recId
@@ -12911,7 +13606,7 @@ class Component extends DCLogic {
     const rec = (st.recog || []).filter(r => r.id === recId)[0];
     if (rec) this.notify([{ id: "n" + Date.now(), to: rec.to, kind: "recog",
       title: "A birthday message", text: me.name + ": " + text.trim().slice(0, 90), route: "recog", read: false, date: today() }]);
-    this.setState({ wishDraft: "" });
+    this.setState(s2 => ({ wishDraft: "", wishDrafts: Object.assign({}, s2.wishDrafts || {}, email ? { [email]: "" } : {}) }));
     this.flash("Sent", "Your message is on their birthday card.");
   }
 
@@ -14717,7 +15412,7 @@ class Component extends DCLogic {
     if (st.screen !== "app" || !me) {
       return {
         isLogin: true, signedIn: false,
-        hasModal: !!st.modal, lbOpen: false, fwdOpen: false, fwdTargets: [], lbSrc: "", lbName: "", fwdPreview: "", fwdSearch: "",
+        hasModal: !!st.modal, bdayPop: false, helpShow: false, helpOpen: false, lbOpen: false, fwdOpen: false, fwdTargets: [], lbSrc: "", lbName: "", fwdPreview: "", fwdSearch: "",
         modalTwo: !!(st.modal && st.modal.kind === "ask"),
         modalOne: !(st.modal && st.modal.kind === "ask"),
         modalYesLabel: st.modal ? (st.modal.yesLabel || "Yes") : "",
@@ -15745,9 +16440,11 @@ class Component extends DCLogic {
       birthdays: this.birthdaysToday().map(a => {
         const rid = this.wishId(a.email);
         const rec = (st.recog || []).filter(r => r.id === rid)[0];
+        const sendW = () => { const tx = (this.state.wishDrafts || {})[a.email] || ""; if (!tx.trim()) return; this.ensureWish(a); setTimeout(() => this.addWish(rid, tx, a.email), 40); };
+        const allW = (rec || {}).wishes || [];
         return {
           name: a.name, dept: a.dept, initials: initials(a.name),
-          discStyle: "flex:none;width:48px;height:48px;border-radius:50%;background:#C96A0F;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:800;font-size:16px;",
+          discStyle: "flex:none;width:58px;height:58px;border-radius:50%;background:#C96A0F;color:#fff;border:3px solid var(--mr-ink);display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:800;font-size:19px;",
           gifts: ["🎂", "🎉", "💐", "🌹", "👏", "❤️"].map(em => {
             const who = ((rec || {}).reactions || {})[em] || [];
             const mineR = who.indexOf((st.me || {}).email) > -1;
@@ -15759,11 +16456,18 @@ class Component extends DCLogic {
               tap: () => { this.ensureWish(a); setTimeout(() => this.react(rid, em), 40); }
             };
           }),
-          wishes: ((rec || {}).wishes || []).slice(-4).map(w => ({ who: w.byName, text: w.text })),
-          send: () => { this.ensureWish(a); setTimeout(() => this.addWish(rid, this.state.wishDraft), 40); }
+          wishes: allW.slice(-3).reverse().map(w => ({ who: w.by === (st.me || {}).email ? "You" : w.byName, text: w.text, initials: initials(w.byName) })),
+          hasWishes: allW.length > 0,
+          wishCount: allW.length ? allW.length + (allW.length === 1 ? " wish so far" : " wishes so far") : "Be the first to wish them well",
+          isMe: a.email === (st.me || {}).email, notMe: a.email !== (st.me || {}).email,
+          draft: (st.wishDrafts || {})[a.email] || "",
+          onDraft: e => { const v = e.target.value; this.setState(s2 => ({ wishDrafts: Object.assign({}, s2.wishDrafts || {}, { [a.email]: v }) })); },
+          onKey: e => { if (e.key === "Enter" && !e.isComposing) { e.preventDefault(); sendW(); } },
+          send: sendW
         };
       }),
       hasBirthdays: this.birthdaysToday().length > 0 && this.routeAllowed("recog"),
+      bdayHead: this.bdayHeadText(), bdaySub: this.bdaySubText(),
       wishDraft: st.wishDraft,
       onWishDraft: e => this.setState({ wishDraft: e.target.value }),
 
@@ -15929,7 +16633,12 @@ class Component extends DCLogic {
         };
       }).filter(Boolean),
 
+      ...this.helpVals(),
       hasModal: !!st.modal,
+      bdayPop: !!st.me && !st.candMode && !st.interviewMode && !st.bdayClosed && this.isBday(st.me) && localStorage.getItem("mrhub-bdayseen-v1:" + st.me.email) !== today(),
+      closeBdayPop: () => { try { localStorage.setItem("mrhub-bdayseen-v1:" + st.me.email, today()); } catch (e) {} this.setState({ bdayClosed: true }); },
+      seeMyWishes: () => { try { localStorage.setItem("mrhub-bdayseen-v1:" + st.me.email, today()); } catch (e) {} this.setState({ bdayClosed: true }); this.go("home"); },
+      bdayFirst: st.me ? String(st.me.name || "").split(" ")[0] : "",
       lbOpen: !!st.lightbox, lbSrc: st.lightbox ? st.lightbox.src : "", lbName: st.lightbox ? st.lightbox.name : "",
       closeLb: () => this.setState({ lightbox: null }),
       lbDownload: e => { if (e) { e.preventDefault(); e.stopPropagation(); } if (st.lightbox) this.downloadData(st.lightbox.src, st.lightbox.name); },
@@ -16017,7 +16726,7 @@ class Component extends DCLogic {
       goLibrary: () => this.go("library"),
       goBack: () => this.go(st.back === "policy" ? "home" : st.back),
 
-      heroKicker: live.length + (live.length === 1 ? " live policy" : " live policies") + " · P&O and Marketing",
+      heroKicker: (st.me && this.isBday(st.me)) ? "🎂 Your special day" : live.length + (live.length === 1 ? " live policy" : " live policies") + " · P&O and Marketing",
       countLive: live.length,
       query: st.query,
       onQuery: e => this.setState({ query: e.target.value, route: "list" }),
@@ -18364,6 +19073,11 @@ class Component extends DCLogic {
     V.logoLoginStyle = "width:" + (th.logoLoginW || 252) + "px;height:auto;max-height:" + Math.round((th.logoLoginW || 252) * 0.142) + "px;object-fit:contain;display:block;";
     V.loginBlurb = th.loginBlurb; V.loginFoot = th.loginFoot;
     V.heroA = th.heroA; V.heroB = th.heroB; V.heroBlurb = th.heroBlurb;
+    if (this.state.me && !this.state.candMode && this.isBday(this.state.me)) {
+      V.heroA = "Happy birthday, " + String(this.state.me.name || "").split(" ")[0] + "!";
+      V.heroB = "Today is all about you";
+      V.heroBlurb = "Everyone at Med Right Group can see your birthday card today. Scroll down to read their wishes.";
+    }
     const heroLeft = (th.heroAlign || "center") === "left";
     V.heroInnerStyle = "position:relative;max-width:" + (heroLeft ? "1180px" : "760px") + ";margin:0 auto;text-align:" + (heroLeft ? "left" : "center") + ";";
     V.heroBlurbStyle = "font-size:16px;line-height:1.65;color:#C3D5E6;margin:0 " + (heroLeft ? "0" : "auto") + " 24px;max-width:620px;text-wrap:pretty;";
