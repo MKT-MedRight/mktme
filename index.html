@@ -7739,7 +7739,7 @@ function sealAccount(a) {
   delete c.pass;
   return c;
 }
-const LS_DROPPABLE = ["mrhub-notes-v1", "mrhub-chat-v1", "mrhub-resp-v1", "mrhub-attempts-v1", "mrhub-checkin-v1", "mrhub-know-v1", "mrhub-candidates-v1",
+const LS_DROPPABLE = ["mrhub-notes-v1", "mrhub-resp-v1", "mrhub-attempts-v1", "mrhub-checkin-v1", "mrhub-know-v1", "mrhub-candidates-v1",
   "mrhub-recog-v1", "mrhub-submissions-v1", "mrhub-certs-v1", "mrhub-events-v1", "mrhub-compreports-v1", "mrhub-compdecls-v1", "mrhub-inbox-v1", "mrhub-userdata-v1"];
 let _lbDb = null;
 const _lbMem = new Map(), _lbIds = new Map();
@@ -8701,6 +8701,18 @@ class Component extends DCLogic {
     const viewing = n => n.kind === "chat" && n.threadId && ((st.route === "chat" && st.chatOpen === n.threadId) ||
       ((st.docks || []).indexOf(n.threadId) > -1 && (st.dockMin || []).indexOf(n.threadId) < 0));
     const quiet = fresh.filter(viewing);
+    const pops = fresh.filter(n => !viewing(n) && n.kind === "chat" && n.threadId && (st.chat || []).some(t => t.id === n.threadId));
+    const canPop = pops.length && this.dockAvailable() && st.route !== "chat" && !st.candMode && !st.interviewMode;
+    if (canPop) {
+      const ids = pops.sort((a, b) => ts(a) - ts(b)).map(n => n.threadId).filter((v, i, a) => a.indexOf(v) === i);
+      let docks = (st.docks || []).slice(), dm = (st.dockMin || []).slice();
+      ids.forEach(id => { docks = docks.filter(x => x !== id).concat([id]).slice(-2); dm = dm.filter(x => x !== id); });
+      const seen0 = st.toasted.concat(stale.map(n => n.id), quiet.map(n => n.id), pops.map(n => n.id)).slice(-600);
+      this.setState({ docks: docks, dockMin: dm, toasted: seen0, dockListOpen: false });
+      lsSet(K.seen, seen0, true);
+      if (document.visibilityState !== "hidden") this.beep();
+      return;
+    }
     const next = fresh.filter(n => !viewing(n)).sort((a, b) => ts(b) - ts(a))[0];
     const seen = st.toasted.concat(stale.map(n => n.id), quiet.map(n => n.id), next ? [next.id] : []).slice(-600);
     const patch = { toasted: seen };
@@ -8809,10 +8821,33 @@ class Component extends DCLogic {
     });
   }
 
+  mergeChat(local, remote) {
+    const L = Array.isArray(local) ? local : [], Rm = Array.isArray(remote) ? remote : [];
+    const gone = new Set(this._chatGone || []);
+    const byId = new Map(Rm.map(t => [t.id, t]));
+    let extra = false;
+    const out = Rm.map(t => {
+      const lt = L.filter(x => x.id === t.id)[0];
+      if (!lt) return t;
+      const ids = new Set((t.msgs || []).map(m => m.id));
+      const add = (lt.msgs || []).filter(m => m.id && !ids.has(m.id) && !gone.has(m.id));
+      if (!add.length) return t;
+      extra = true;
+      const msgs = (t.msgs || []).concat(add).sort((a, b) => (a.at || 0) - (b.at || 0));
+      return Object.assign({}, t, { msgs: msgs, touched: Math.max(t.touched || 0, lt.touched || 0) });
+    });
+    L.forEach(t => { if (t.id && !byId.has(t.id) && !gone.has(t.id) && (t.msgs || []).length) { out.push(t); extra = true; } });
+    return { list: out, extra: extra };
+  }
   applyRemote(key, value) {
     if (value === null || value === undefined) return;
     const field = CLOUD_FIELDS[key];
     if (!field) return;
+    if (field === "chat" && Array.isArray(value)) {
+      const mg = this.mergeChat(this.state.chat, value);
+      value = mg.list;
+      if (mg.extra) { clearTimeout(this._chatHeal); this._chatHeal = setTimeout(() => this.save(K.chat, this.state.chat, "chat"), 1200); }
+    }
     if (key === "theme") this.applyTheme(value);
     if (field === "accounts" && Array.isArray(value) && value.some(a => a && a.pass)) {
       const sealed = value.map(sealAccount);
