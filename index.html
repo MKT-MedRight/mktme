@@ -204,6 +204,105 @@
 </div>
 </sc-if>
 
+<sc-if value="{{ meetPopShow }}" hint-placeholder-val="{{ false }}">
+<div class="hb-noprint" style="position:fixed;right:20px;bottom:20px;z-index:400;width:340px;max-width:calc(100vw - 40px);background:var(--mr-navy);color:#fff;border:3px solid var(--mr-ink);border-radius:20px;box-shadow:6px 6px 0 var(--mr-ink);padding:18px 18px 16px;animation:hbPop 0.4s cubic-bezier(0.34,1.4,0.64,1) both;">
+  <div style="display:flex;gap:12px;align-items:center;">
+    <span style="flex:none;width:46px;height:46px;border-radius:50%;background:var(--mr-teal);border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:20px;animation:hbFloat 1.6s ease-in-out infinite;">🎥</span>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#CFE6F5;">Meeting starting</div>
+      <div style="font-family:var(--mr-head);font-weight:800;font-size:17px;line-height:1.25;margin-top:2px;">{{ meetPopTitle }}</div>
+      <div style="font-size:12.5px;color:#DCE8F3;margin-top:2px;">{{ meetPopHost }}</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:14px;">
+    <div onClick="{{ meetPopJoin }}" style="flex:1;text-align:center;background:#1FA463;color:#fff;font-weight:700;font-size:14px;padding:10px;border-radius:20px;cursor:pointer;" style-hover="filter:brightness(1.1);">Join now</div>
+    <div onClick="{{ meetPopLater }}" style="flex:1;text-align:center;background:rgba(255,255,255,0.12);color:#fff;font-weight:700;font-size:14px;padding:10px;border-radius:20px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.2);">Not now</div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ roomWait }}" hint-placeholder-val="{{ false }}">
+<div class="hb-noprint" style="position:fixed;inset:0;z-index:410;background:radial-gradient(circle at 50% 35%,#24246A 0%,#181848 55%,#0E0E2E 100%);color:#fff;display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div style="text-align:center;max-width:420px;">
+    <div style="width:110px;height:110px;margin:0 auto;border-radius:50%;background:var(--mr-teal);border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 0 0 12px rgba(24,128,168,0.25),0 0 0 28px rgba(24,128,168,0.1);animation:hbFloat 2.2s ease-in-out infinite;">⏳</div>
+    <div style="font-family:var(--mr-head);font-weight:800;font-size:26px;letter-spacing:-0.02em;margin-top:34px;">Waiting to be let in</div>
+    <div style="font-size:15px;color:#CFE6F5;line-height:1.6;margin-top:8px;">{{ roomHostName }} or a co-host will let you into <strong>{{ roomTitle }}</strong> shortly.</div>
+    <div onClick="{{ leaveRoom }}" style="display:inline-block;margin-top:26px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:#fff;font-weight:700;font-size:14px;padding:11px 26px;border-radius:24px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.2);">Leave</div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ roomOn }}" hint-placeholder-val="{{ false }}">
+<div class="hb-noprint" style="position:fixed;inset:0;z-index:410;background:radial-gradient(circle at 50% 30%,#22225E 0%,#141440 60%,#0B0B26 100%);color:#fff;display:flex;flex-direction:column;overflow:hidden;">
+  <div style="position:absolute;left:0;right:0;top:0;z-index:3;display:flex;gap:12px;align-items:center;padding:16px 20px;background:linear-gradient(rgba(8,8,28,0.7),transparent);">
+    <span style="flex:none;width:10px;height:10px;border-radius:50%;background:#2BD17E;box-shadow:0 0 0 4px rgba(43,209,126,0.25);"></span>
+    <div style="flex:1;min-width:0;">
+      <div style="font-family:var(--mr-head);font-weight:800;font-size:17px;letter-spacing:-0.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ roomTitle }}</div>
+      <div style="font-size:12.5px;color:#CFE6F5;font-variant-numeric:tabular-nums;">{{ roomTime }}</div>
+    </div>
+  </div>
+  <div style="{{ roomGrid }}">
+    <sc-for list="{{ roomTiles }}" as="t" hint-placeholder-count="2">
+      <div style="position:relative;min-height:0;border-radius:16px;overflow:hidden;background:#1E1E52;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;">
+        <div style="width:84px;height:84px;border-radius:50%;background:var(--mr-teal);border:3px solid rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:800;font-size:28px;">{{ t.initials }}</div>
+        <video data-room="{{ t.key }}" autoPlay="{{ true }}" playsInline="{{ true }}" style="{{ t.vidStyle }}"></video>
+        <div style="position:absolute;left:10px;bottom:10px;display:flex;gap:6px;align-items:center;background:rgba(8,8,28,0.6);backdrop-filter:blur(4px);border-radius:10px;padding:5px 10px;font-size:12.5px;font-weight:600;">{{ t.name }}<span style="color:#F6C76B;font-weight:600;">{{ t.sub }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+  <sc-if value="{{ roomHasWait }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:20px;top:78px;z-index:4;width:300px;max-width:calc(100vw - 40px);display:flex;flex-direction:column;gap:8px;">
+      <sc-for list="{{ roomWaitList }}" as="w" hint-placeholder-count="1">
+        <div style="background:#fff;color:var(--mr-ink);border-radius:14px;padding:12px 14px;box-shadow:0 14px 30px -12px rgba(0,0,0,0.55);animation:hbPop 0.3s ease both;">
+          <div style="font-size:13.5px;line-height:1.4;"><strong>{{ w.name }}</strong> wants to join</div>
+          <div style="display:flex;gap:8px;margin-top:9px;">
+            <div onClick="{{ w.admit }}" style="flex:1;text-align:center;background:#0E8F66;color:#fff;font-weight:700;font-size:13px;padding:8px;border-radius:14px;cursor:pointer;">Let in</div>
+            <div onClick="{{ w.refuse }}" style="flex:1;text-align:center;background:#FDECEC;color:#8C2B2B;font-weight:700;font-size:13px;padding:8px;border-radius:14px;cursor:pointer;">Refuse</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ roomPanel }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;right:16px;top:70px;bottom:100px;z-index:4;width:300px;max-width:calc(100vw - 32px);background:#fff;color:var(--mr-ink);border-radius:16px;box-shadow:0 20px 40px -14px rgba(0,0,0,0.6);display:flex;flex-direction:column;overflow:hidden;animation:hbRise 0.2s ease both;">
+      <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid #EDF1F6;"><span style="flex:1;font-family:var(--mr-head);font-weight:800;font-size:15px;">In the meeting</span><span onClick="{{ closePanel }}" style="cursor:pointer;font-weight:800;padding:2px 6px;">✕</span></div>
+      <div style="flex:1;overflow-y:auto;padding:8px;">
+        <sc-for list="{{ roomPresent }}" as="p" hint-placeholder-count="2">
+          <div style="display:flex;gap:9px;align-items:center;padding:8px;border-radius:9px;">
+            <span style="flex:1;min-width:0;font-weight:600;font-size:13.5px;">{{ p.name }}</span>
+            <span style="font-size:11px;font-weight:700;color:#5C6B80;">{{ p.tag }}</span>
+            <sc-if value="{{ p.canRemove }}" hint-placeholder-val="{{ false }}"><span onClick="{{ p.remove }}" style="font-size:12px;font-weight:600;color:#B4443A;cursor:pointer;">Remove</span></sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ roomInvite }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;right:16px;top:70px;bottom:100px;z-index:4;width:320px;max-width:calc(100vw - 32px);background:#fff;color:var(--mr-ink);border-radius:16px;box-shadow:0 20px 40px -14px rgba(0,0,0,0.6);display:flex;flex-direction:column;overflow:hidden;animation:hbRise 0.2s ease both;">
+      <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid #EDF1F6;"><span style="flex:1;font-family:var(--mr-head);font-weight:800;font-size:15px;">Invite to this meeting</span><span onClick="{{ closePanel }}" style="cursor:pointer;font-weight:800;padding:2px 6px;">✕</span></div>
+      <div style="padding:10px 12px 4px;"><input value="{{ roomInvQ }}" onInput="{{ onRoomInvQ }}" placeholder="Search colleagues…" style="width:100%;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:10px;padding:9px 12px;outline:none;"></div>
+      <div style="flex:1;overflow-y:auto;padding:6px 8px 10px;">
+        <sc-for list="{{ roomInvPeople }}" as="p" hint-placeholder-count="3">
+          <div style="display:flex;gap:9px;align-items:center;padding:8px;border-radius:9px;" style-hover="background:#F4F7FA;">
+            <div style="flex:1;min-width:0;"><div style="font-weight:600;font-size:13.5px;">{{ p.name }}</div><div style="font-size:11.5px;color:#8B97A8;">{{ p.meta }}</div></div>
+            <div onClick="{{ p.go }}" style="flex:none;background:var(--mr-teal);color:#fff;font-weight:700;font-size:12px;padding:6px 12px;border-radius:14px;cursor:pointer;">{{ p.btn }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+  <div style="position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;padding:20px 16px 26px;background:linear-gradient(transparent,rgba(8,8,28,0.75));">
+    <div onClick="{{ roomMute }}" title="Mute / unmute" style="{{ rMuteStyle }}" style-hover="transform:translateY(-2px);">{{ rMuteIcon }}</div>
+    <div onClick="{{ roomCam }}" title="Camera on / off" style="{{ rCamStyle }}" style-hover="transform:translateY(-2px);">📷</div>
+    <div onClick="{{ roomShare }}" title="Share your screen" style="{{ rShareStyle }}" style-hover="transform:translateY(-2px);">🖥</div>
+    <div onClick="{{ togglePeople }}" title="People" style="{{ rPeopleStyle }}" style-hover="transform:translateY(-2px);">👥<sc-if value="{{ roomHasWait }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;border-radius:9px;background:#F6A623;color:#14121C;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;">{{ roomWaitBadge }}</span></sc-if></div>
+    <div onClick="{{ toggleRoomInvite }}" title="Invite people" style="{{ rInvStyle }}" style-hover="transform:translateY(-2px);">➕</div>
+    <div onClick="{{ leaveRoom }}" style="{{ rLeaveStyle }}" style-hover="filter:brightness(1.1);"><span style="display:inline-block;transform:rotate(135deg);">📞</span>Leave</div>
+    <sc-if value="{{ roomIsHost }}" hint-placeholder-val="{{ false }}"><div onClick="{{ endMeeting }}" style="{{ rEndStyle }}" style-hover="background:#FDECEC;">End for everyone</div></sc-if>
+  </div>
+</div>
+</sc-if>
+
 <sc-if value="{{ callIncoming }}" hint-placeholder-val="{{ false }}">
 <div class="hb-noprint" style="position:fixed;inset:0;z-index:420;background:rgba(12,12,36,0.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;">
   <div style="width:100%;max-width:360px;background:var(--mr-navy);color:#fff;border:3px solid var(--mr-ink);border-radius:26px;box-shadow:8px 8px 0 var(--mr-ink);padding:34px 26px 28px;text-align:center;animation:hbPop 0.4s cubic-bezier(0.34,1.4,0.64,1) both;position:relative;overflow:hidden;">
@@ -5973,8 +6072,75 @@
       <div style="flex:1 1 320px;min-width:0;max-width:380px;background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:14px;display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;padding:4px 4px 0;">
           <div style="font-family:var(--mr-head);font-weight:800;font-size:20px;letter-spacing:-0.025em;">Messages</div>
-          <div onClick="{{ toggleChatNew }}" style="background:var(--mr-teal);color:#fff;font-weight:700;font-size:13px;padding:9px 16px;border-radius:20px;cursor:pointer;white-space:nowrap;" style-hover="filter:brightness(1.1);">{{ chatNewLabel }}</div>
+          <div style="display:flex;gap:6px;">
+            <div onClick="{{ toggleMeetNew }}" title="Start or book a video meeting" style="background:#fff;border:1.5px solid var(--mr-teal);color:var(--mr-teal);font-weight:700;font-size:13px;padding:8px 13px;border-radius:20px;cursor:pointer;white-space:nowrap;" style-hover="background:#E7F3F8;">🎥 Meeting</div>
+            <div onClick="{{ toggleChatNew }}" style="background:var(--mr-teal);color:#fff;font-weight:700;font-size:13px;padding:9px 16px;border-radius:20px;cursor:pointer;white-space:nowrap;" style-hover="filter:brightness(1.1);">{{ chatNewLabel }}</div>
+          </div>
         </div>
+        <sc-if value="{{ meetNewOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#F7FAFC;border:1px solid #E4EAF1;border-radius:12px;padding:13px;display:flex;flex-direction:column;gap:10px;animation:hbRise 0.2s ease both;">
+            <div style="font-family:var(--mr-head);font-weight:800;font-size:15px;">New video meeting</div>
+            <input value="{{ mdTitle }}" onInput="{{ onMdTitle }}" onKeyDown="{{ onMdKey }}" placeholder="Meeting title" style="width:100%;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#fff;border-radius:10px;padding:10px 13px;outline:none;">
+            <div style="display:flex;gap:6px;">
+              <span onClick="{{ setMdNow }}" style="{{ mdNowStyle }}">Now</span>
+              <span onClick="{{ setMdLater }}" style="{{ mdLaterStyle }}">Schedule</span>
+            </div>
+            <sc-if value="{{ mdLater }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:8px;">
+                <input type="date" value="{{ mdDate }}" onInput="{{ onMdDate }}" style="flex:1;min-width:0;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#fff;border-radius:10px;padding:9px 11px;outline:none;">
+                <input type="time" value="{{ mdTime }}" onInput="{{ onMdTime }}" style="flex:none;width:118px;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#fff;border-radius:10px;padding:9px 11px;outline:none;">
+              </div>
+            </sc-if>
+            <div style="font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5C6B80;">Who can come in</div>
+            <div style="display:flex;gap:6px;">
+              <div onClick="{{ setLobInv }}" style="{{ mdLobInvStyle }}"><strong style="display:block;">Invited join directly</strong>Anyone else waits for a host</div>
+              <div onClick="{{ setLobAll }}" style="{{ mdLobAllStyle }}"><strong style="display:block;">Everyone waits</strong>A host lets each person in</div>
+            </div>
+            <input value="{{ mdQ }}" onInput="{{ onMdQ }}" placeholder="Search colleagues to invite…" style="width:100%;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#fff;border-radius:10px;padding:10px 13px;outline:none;">
+            <div style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:2px;">
+              <sc-for list="{{ mdPeople }}" as="p" hint-placeholder-count="3">
+                <div style="display:flex;gap:9px;align-items:center;padding:6px 6px;border-radius:9px;" style-hover="background:#EEF4F8;">
+                  <div onClick="{{ p.toggle }}" style="{{ p.tickStyle }}">{{ p.tick }}</div>
+                  <div onClick="{{ p.toggle }}" style="flex:1;min-width:0;cursor:pointer;">
+                    <div style="font-weight:600;font-size:13.5px;line-height:1.3;">{{ p.name }}</div>
+                    <div style="font-size:11.5px;color:#8B97A8;">{{ p.meta }}</div>
+                  </div>
+                  <sc-if value="{{ p.on }}" hint-placeholder-val="{{ false }}"><span onClick="{{ p.toggleCo }}" title="Co-hosts can let people in" style="{{ p.coStyle }}">{{ p.coLbl }}</span></sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;border-top:1px solid #E4EAF1;padding-top:10px;">
+              <span style="font-size:12px;color:#5C6B80;">{{ mdCount }}</span>
+              <div onClick="{{ createMeet }}" style="background:var(--mr-teal);color:#fff;font-weight:700;font-size:13.5px;padding:10px 16px;border-radius:20px;cursor:pointer;" style-hover="filter:brightness(1.1);">{{ mdCreateLbl }}</div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ hasMeets }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5C6B80;padding:2px 4px 0;">Meetings</div>
+            <sc-for list="{{ meetCards }}" as="c" hint-placeholder-count="1">
+              <div style="{{ c.cardStyle }}">
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                  <span style="flex:none;width:34px;height:34px;border-radius:10px;background:#181848;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;">🎥</span>
+                  <div style="flex:1;min-width:0;">
+                    <div style="font-weight:700;font-size:14px;line-height:1.3;">{{ c.title }}</div>
+                    <div style="font-size:12px;color:#5C6B80;margin-top:2px;">{{ c.whenLbl }}</div>
+                    <div style="font-size:11.5px;color:#8B97A8;margin-top:1px;">{{ c.hostLbl }}</div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+                  <sc-if value="{{ c.live }}" hint-placeholder-val="{{ false }}"><div onClick="{{ c.join }}" style="background:#0E8F66;color:#fff;font-weight:700;font-size:13px;padding:7px 16px;border-radius:16px;cursor:pointer;" style-hover="filter:brightness(1.1);">Join now</div></sc-if>
+                  <sc-if value="{{ c.hasRsvp }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;font-weight:700;color:#17654E;">{{ c.rsvpLbl }}</span></sc-if>
+                  <sc-if value="{{ c.canRsvp }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ c.accept }}" style="background:#fff;border:1px solid #BFE3D3;color:#17654E;font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:14px;cursor:pointer;" style-hover="background:#EAF6F1;">Accept</div>
+                    <div onClick="{{ c.decline }}" style="background:#fff;border:1px solid #F0C9C4;color:#8C2B2B;font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:14px;cursor:pointer;" style-hover="background:#FDECEC;">Decline</div>
+                  </sc-if>
+                  <sc-if value="{{ c.isHost }}" hint-placeholder-val="{{ false }}"><span onClick="{{ c.cancel }}" style="margin-left:auto;font-size:12px;font-weight:600;color:#B4443A;cursor:pointer;">Cancel</span></sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
         <sc-if value="{{ chatNew }}" hint-placeholder-val="{{ false }}">
           <div style="background:#F7FAFC;border:1px solid #E4EAF1;border-radius:12px;padding:13px;animation:hbRise 0.2s ease both;">
             <input value="{{ chatSearch }}" onInput="{{ onChatSearch }}" placeholder="Search colleagues…" style="width:100%;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#fff;border-radius:10px;padding:10px 13px;outline:none;margin-bottom:10px;">
@@ -6026,6 +6192,9 @@
               <div style="{{ ct.subStyle }}">{{ ct.sub }}</div>
               <sc-if value="{{ ct.isAaref }}" hint-placeholder-val="{{ false }}"><span onClick="{{ ct.clear }}" style="font-size:12px;font-weight:600;color:#8B97A8;cursor:pointer;">Clear chat</span></sc-if>
             </div>
+            <sc-if value="{{ ct.canMeet }}" hint-placeholder-val="{{ false }}">
+              <div onClick="{{ ct.meetNow }}" title="Start a group video call" style="flex:none;display:flex;gap:7px;align-items:center;background:#E7F3F8;color:var(--mr-teal);font-weight:700;font-size:13px;padding:9px 15px;border-radius:21px;cursor:pointer;" style-hover="background:#D4EAF3;">🎥 Meet now</div>
+            </sc-if>
             <sc-if value="{{ ct.canCall }}" hint-placeholder-val="{{ false }}">
               <div style="flex:none;display:flex;gap:8px;">
                 <div onClick="{{ ct.callA }}" title="Voice call" style="width:42px;height:42px;border-radius:50%;background:#E7F3F8;color:var(--mr-teal);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:transform 0.15s ease;" style-hover="transform:translateY(-2px);background:#D4EAF3;">📞</div>
@@ -6052,7 +6221,7 @@
                   <sc-if value="{{ m.pending }}" hint-placeholder-val="{{ false }}">
                     <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
                   </sc-if>
-                  <div dir="auto" style="white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;text-align:start;">{{ m.text }}</div>
+                  <div dir="auto" style="white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;text-align:start;">{{ m.text }}</div><sc-if value="{{ m.hasLinks }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;"><sc-for list="{{ m.links }}" as="l" hint-placeholder-count="1"><div onClick="{{ l.go }}" style="display:flex;gap:9px;align-items:center;background:#F3EEFB;border:1px solid #DCCDF3;color:#5A2A9E;border-radius:10px;padding:8px 11px;font-weight:700;font-size:13px;line-height:1.35;cursor:pointer;" style-hover="background:#EAE0F8;"><span style="flex:none;width:22px;height:22px;border-radius:6px;background:#7433C6;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;">{{ l.icon }}</span><span style="flex:1;min-width:0;">{{ l.label }}</span><span style="flex:none;">→</span></div></sc-for></div></sc-if>
                   <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                 </div>
                 <sc-if value="{{ m.hasRx }}" hint-placeholder-val="{{ false }}"><div style="{{ m.rxRowStyle }}"><sc-for list="{{ m.rxChips }}" as="x" hint-placeholder-count="1"><span onClick="{{ x.tap }}" title="{{ x.tip }}" style="{{ x.style }}">{{ x.em }}<span style="font-size:11px;font-weight:700;color:#3A4453;">{{ x.n }}</span></span></sc-for></div></sc-if>
@@ -7605,7 +7774,7 @@
                     <sc-if value="{{ m.pending }}" hint-placeholder-val="{{ false }}">
                       <div style="{{ m.pendingStyle }}">{{ m.pendingText }}</div>
                     </sc-if>
-                    <div dir="auto" style="white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;text-align:start;">{{ m.text }}</div>
+                    <div dir="auto" style="white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;text-align:start;">{{ m.text }}</div><sc-if value="{{ m.hasLinks }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;"><sc-for list="{{ m.links }}" as="l" hint-placeholder-count="1"><div onClick="{{ l.go }}" style="display:flex;gap:9px;align-items:center;background:#F3EEFB;border:1px solid #DCCDF3;color:#5A2A9E;border-radius:10px;padding:8px 11px;font-weight:700;font-size:13px;line-height:1.35;cursor:pointer;" style-hover="background:#EAE0F8;"><span style="flex:none;width:22px;height:22px;border-radius:6px;background:#7433C6;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;">{{ l.icon }}</span><span style="flex:1;min-width:0;">{{ l.label }}</span><span style="flex:none;">→</span></div></sc-for></div></sc-if>
                     <div style="{{ m.whenStyle }}">{{ m.when }}<span title="{{ m.tickTitle }}" style="{{ m.tickStyle }}">{{ m.tick }}</span></div>
                   </div>
                   <sc-if value="{{ m.hasRx }}" hint-placeholder-val="{{ false }}"><div style="{{ m.rxRowStyle }}"><sc-for list="{{ m.rxChips }}" as="x" hint-placeholder-count="1"><span onClick="{{ x.tap }}" title="{{ x.tip }}" style="{{ x.style }}">{{ x.em }}<span style="font-size:11px;font-weight:700;color:#3A4453;">{{ x.n }}</span></span></sc-for></div></sc-if>
@@ -8259,8 +8428,8 @@ const CLOUD_FIELDS = { policies: "policies", accounts: "accounts", depts: "depts
   video: "video", recog: "recog", know: "know", knowCats: "knowCats", exams: "exams", attempts: "attempts", chat: "chat", subs: "subs", certs: "certs",
   asks: "asks", events: "events", evKinds: "evKinds", titles: "titles", vacancies: "vacancies", checkins: "checkins", cases: "cases",
   benefits: "benefits", benCats: "benCats", cands: "cands",
-  compReg: "compReg", compAudits: "compAudits", compRounds: "compRounds", compReports: "compReports", compDecls: "compDecls", compAi: "compAi", presence: "presence", typing: "typing", calls: "calls" };
-K.presence = "mrhub-presence-v1"; K.typing = "mrhub-typing-v1"; K.calls = "mrhub-calls-v1";
+  compReg: "compReg", compAudits: "compAudits", compRounds: "compRounds", compReports: "compReports", compDecls: "compDecls", compAi: "compAi", presence: "presence", typing: "typing", calls: "calls", meetings: "meetings" };
+K.presence = "mrhub-presence-v1"; K.typing = "mrhub-typing-v1"; K.calls = "mrhub-calls-v1"; K.meet = "mrhub-meetings-v1";
 const ICE = [{ urls: ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302", "stun:stun.cloudflare.com:3478"] }];
 const AAREF_ID = "aaref@assistant";
 const EMOJI_QUICK = ["😀","😂","😊","😍","🥰","😎","🤔","😮","😢","🙏","👍","👏","🙌","💪","🤝","🎉","🔥","❤️","✅","⭐","☕","🎂","💡","👀"];
@@ -8685,7 +8854,11 @@ const HELP = {
    "Press New to start a direct message or group. Team channels reach the whole P&O or Marketing team.",
    "Enter sends, Shift+Enter makes a new line. Attach files with 📎 and add emojis with 😊.",
    "Hover a message to React, Reply or Forward. Click a picture to see it full screen.",
-   "Ticks: ✓ sent, ✓✓ delivered, blue ✓✓ seen. A green dot means the person is online."
+   "Ticks: ✓ sent, ✓✓ delivered, blue ✓✓ seen. A green dot means the person is online.",
+   "📞 / 🎥 at the top of a direct chat calls that person. In a group, “Meet now” starts a group video call.",
+   "🎥 Meeting: give it a title, choose Now or a date and time, tick who to invite, and pick who can come in. Invitees get a notification and can Accept or Decline.",
+   "In a meeting: mute, camera, screen share, 👥 people (let in or refuse anyone waiting) and ➕ invite more people while you talk.",
+   "Ask Aaref about anything in ME — it answers from the portal first and gives you a button that takes you straight there."
   ],
   "admin": [],
   "tips": [
@@ -8985,7 +9158,7 @@ class Component extends DCLogic {
     depts: SEED_DEPTS.slice(), cats: SEED_CATS.slice(),
     userData: {}, inbox: [], notes: [], ackMsg: "", headerH: 66,
     notesOpen: false, toast: null, toasted: [], replyText: {}, expandAck: null, picked: [],
-    menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [], presence: {}, typing: {}, calls: {}, call: null, callTick: 0, incomingId: null, aaref: [], aarefBusy: false, aarefUrlDraft: null, ivDraft: {}, dockFile: {}, dockEmoji: null, chatEmoji: false,
+    menuOpen: null, recog: [], rgDrag: false, modal: null, docks: [], presence: {}, typing: {}, calls: {}, call: null, callTick: 0, incomingId: null, meetings: [], room: null, meetDraft: null, meetTick: 0, meetDis: (() => { try { return JSON.parse(localStorage.getItem("mrhub-meetdis-v1") || "[]"); } catch (e) { return []; } })(), aaref: [], aarefBusy: false, aarefUrlDraft: null, ivDraft: {}, dockFile: {}, dockEmoji: null, chatEmoji: false,
     asks: [], askNote: {}, evKinds: [], titles: [], newEvType: "", newTitleDraft: "",
     vacancies: [], vacOpen: null, vacFilter: "open",
     askDraft: { kind: "hire", role: "", dept: "", count: 1, target: "", targetLabel: "", why: "", when: "" }, dockMin: [], dockDraft: {}, dockListOpen: false, tkDismissed: [], enrolCode: "", rxPick: null, helpOpen: (() => { try { return JSON.parse(localStorage.getItem("mrhub-help-v1") || "[]"); } catch (e) { return []; } })(), wishDrafts: {}, bdayClosed: false, wishDraft: "", retakePick: [],
@@ -9213,7 +9386,7 @@ class Component extends DCLogic {
     map[K.bencats] = "benCats";
     map[K.cand] = "cands";
     map[K.compReg] = "compReg"; map[K.compAudits] = "compAudits"; map[K.compRounds] = "compRounds";
-    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing"; map[K.calls] = "calls";
+    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing"; map[K.calls] = "calls"; map[K.meet] = "meetings";
       map[K.pol] = "policies"; map[K.acc] = "accounts"; map[K.dept] = "depts";
       map[K.cat] = "cats"; map[K.user] = "userData"; map[K.inbox] = "inbox"; map[K.notes] = "notes";
       map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "charMsgs";
@@ -9310,6 +9483,8 @@ class Component extends DCLogic {
   componentWillUnmount() {
     clearInterval(this._verTimer);
     if (this.state.call) this.hangUp();
+    if (this._room) this.leaveRoom(true);
+    clearInterval(this._meetI);
     document.removeEventListener("visibilitychange", this.onVis);
     window.removeEventListener("keydown", this.onEsc);
     clearTimeout(this._charTimer); clearInterval(this._quoteTimer); clearInterval(this._slideTimer);
@@ -9356,6 +9531,7 @@ class Component extends DCLogic {
   componentDidUpdate() {
     const st = this.state;
     this.attachMedia();
+    if (st.me && !this._meetI) this._meetI = setInterval(() => this.setState(s2 => ({ meetTick: (s2.meetTick || 0) + 1 })), 20000);
     if (st.me && st.me.email && this._aarefFor !== st.me.email) {
       this._aarefFor = st.me.email;
       let h = []; try { h = JSON.parse(localStorage.getItem("mrhub-aaref-v1:" + st.me.email) || "[]"); } catch (e) {}
@@ -9461,7 +9637,7 @@ class Component extends DCLogic {
     map[K.bencats] = "benCats";
     map[K.cand] = "cands";
     map[K.compReg] = "compReg"; map[K.compAudits] = "compAudits"; map[K.compRounds] = "compRounds";
-    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing"; map[K.calls] = "calls";
+    map[K.compReports] = "compReports"; map[K.compDecls] = "compDecls"; map[K.compAi] = "compAi"; map[K.presence] = "presence"; map[K.typing] = "typing"; map[K.calls] = "calls"; map[K.meet] = "meetings";
     map[K.pol] = "policies"; map[K.acc] = "accounts"; map[K.dept] = "depts";
     map[K.cat] = "cats"; map[K.inbox] = "inbox"; map[K.notes] = "notes"; map[K.user] = "userdata";
     map[K.theme] = "theme"; map[K.ann] = "ann"; map[K.quotes] = "quotes"; map[K.chars] = "chars";
@@ -9543,6 +9719,7 @@ class Component extends DCLogic {
     }
     if (field === "theme") value = cleanBrand(value);
     if (field === "calls") setTimeout(() => this.checkCalls(), 0);
+    if (field === "meetings") setTimeout(() => this.syncRoom(), 0);
     if (field === "chat") { clearTimeout(this._dlvT); this._dlvT = setTimeout(() => this.markDelivered(), 1500); }
     const patch = {}; patch[field] = value;
     if (field === "accounts" && this.state.me) {
@@ -12333,6 +12510,7 @@ class Component extends DCLogic {
       if (i === arr.length - 1 && m.img) { const mm = /^data:([^;]+);base64,(.*)$/.exec(m.img); if (mm) o.image = { mime: mm[1], data: mm[2] }; }
       return o;
     });
+    try { const last = turns[turns.length - 1]; if (last && last.role === "user") last.text = this.aarefContext(text) + "\n\nQUESTION FROM " + (me.name || "the employee") + ":\n" + String(last.text).slice(0, 900); } catch (e) {}
     let reply;
     try {
       const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 60000);
@@ -12435,6 +12613,7 @@ class Component extends DCLogic {
   async startCall(threadId, kind) {
     const st = this.state, me = st.me;
     if (!me || st.call) return;
+    if (this._room) return this.flash("You are in a meeting", "Leave the meeting first, then call.", "no");
     if (!window.RTCPeerConnection || !navigator.mediaDevices) return this.flash("Calls not supported", "Open the hub in an up-to-date Chrome, Edge or Safari to make calls.", "no");
     if (!this._cloud) return this.flash("Calls need live sync", "Calls only work when the hub is connected to Firebase (green pill at the top).", "no");
     const t = (this._threads || []).filter(x => x.id === threadId)[0] || (st.chat || []).filter(x => x.id === threadId)[0];
@@ -12563,6 +12742,11 @@ class Component extends DCLogic {
   attachMedia() {
     const rv = document.querySelector('[data-call="remote"]'), lv = document.querySelector('[data-call="local"]');
     if (rv && this._remote && rv.srcObject !== this._remote) { rv.srcObject = this._remote; const p = rv.play && rv.play(); if (p && p.catch) p.catch(() => {}); }
+    const RM = this._room;
+    if (RM) document.querySelectorAll("[data-room]").forEach(v => {
+      const k = v.getAttribute("data-room"), sm = k === "me" ? (RM.screen || RM.local) : RM.streams[k];
+      if (sm && v.srcObject !== sm) { if (k === "me") v.muted = true; v.srcObject = sm; const p = v.play && v.play(); if (p && p.catch) p.catch(() => {}); }
+    });
     const loc = this._screen || this._local;
     if (lv && loc && lv.srcObject !== loc) { lv.muted = true; lv.srcObject = loc; const p = lv.play && lv.play(); if (p && p.catch) p.catch(() => {}); }
   }
@@ -12622,6 +12806,399 @@ class Component extends DCLogic {
       toggleMute: () => this.toggleMute(), toggleCam: () => this.toggleCam(), toggleShare: () => this.toggleShare(), hangUp: () => this.hangUp()
     });
   }
+  meets() { return this.state.meetings || []; }
+  meetById(id) { return this.meets().filter(m => m.id === id)[0] || null; }
+  patchMeet(id, fn) {
+    const base = this._mPend && Date.now() - this._mPendAt < 900 ? this._mPend : this.meets();
+    const list = base.map(m => m.id === id ? Object.assign({}, m, fn(m) || {}) : m);
+    this._mPend = list; this._mPendAt = Date.now();
+    this.save(K.meet, list, "meetings");
+  }
+  meetLive(m) { const now = Date.now(); return !!m && !m.ended && now >= (m.when || 0) - 600000 && now - (m.when || 0) < 12 * 3600000; }
+  canAdmit(m, e) { return !!m && (m.host === e || (m.admins || []).indexOf(e) > -1); }
+  meetWhen(ms) { return new Date(ms).toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
+  createMeeting(o) {
+    const me = this.state.me;
+    if (!me) return null;
+    if (!this._cloud) { this.flash("Meetings need live sync", "Meetings only work when the hub is connected to Firebase (green pill at the top).", "no"); return null; }
+    const now = Date.now(), inv = Array.from(new Set((o.invited || []).filter(e => e && e !== me.email)));
+    if (!inv.length) { this.flash("Invite someone first", "Tick at least one colleague to invite.", "no"); return null; }
+    const invAt = {}; inv.forEach(e => { invAt[e] = now; });
+    const rec = { id: uid("mt"), title: String(o.title || "").trim() || "Meeting", host: me.email, hostName: me.name, when: o.when || now, created: now,
+      invited: inv, invAt: invAt, rsvp: {}, admins: (o.admins || []).filter(e => inv.indexOf(e) > -1), lobby: o.lobby === "all" ? "all" : "invited",
+      room: {}, wait: {}, denied: {}, sig: {}, ended: false, threadId: o.threadId || "" };
+    const keep = (this._mPend && now - this._mPendAt < 900 ? this._mPend : this.meets()).filter(m => now - Math.max(m.when || 0, m.endedAt || 0) < 30 * 86400000);
+    const list = keep.concat([rec]);
+    this._mPend = list; this._mPendAt = now;
+    this.save(K.meet, list, "meetings");
+    const instant = rec.when <= now + 60000;
+    this.notify(inv.map(e => ({ to: e, kind: "meet", meetId: rec.id, route: "chat", read: false, date: today(),
+      title: instant ? me.name + " started a meeting" : me.name + " invited you to a meeting",
+      text: rec.title + " · " + (instant ? "now" : this.meetWhen(rec.when)) })));
+    return rec;
+  }
+  rsvpMeet(id, ans) {
+    const me = this.state.me, m = this.meetById(id);
+    if (!me || !m) return;
+    this.patchMeet(id, x => ({ rsvp: Object.assign({}, x.rsvp || {}, { [me.email]: ans }) }));
+    this.notify([{ to: m.host, kind: "meet", meetId: id, route: "chat", read: false, date: today(), title: me.name + (ans === "yes" ? " will join " : " can't make ") + m.title, text: this.meetWhen(m.when) }]);
+    this.flash(ans === "yes" ? "See you there" : "Declined", ans === "yes" ? m.hostName + " has been told you will join." : m.hostName + " has been told.");
+  }
+  cancelMeet(id) {
+    const m = this.meetById(id);
+    if (!m) return;
+    this.ask("Cancel this meeting?", "Everyone invited to " + m.title + " will be told.", "Cancel meeting", "Keep it", () => {
+      this.patchMeet(id, () => ({ ended: true, cancelled: true, endedAt: Date.now(), room: {}, wait: {}, sig: {} }));
+      this.notify((m.invited || []).map(e => ({ to: e, kind: "meet", route: "chat", read: false, date: today(), title: "Cancelled: " + m.title, text: "The meeting on " + this.meetWhen(m.when) + " was cancelled." })));
+      this.flash("Meeting cancelled", "Everyone invited has been told.");
+    }, () => {});
+  }
+  dismissMeet(id) {
+    const L = (this.state.meetDis || []).concat([id]).slice(-60);
+    try { localStorage.setItem("mrhub-meetdis-v1", JSON.stringify(L)); } catch (e) {}
+    this.setState({ meetDis: L });
+  }
+  async joinMeeting(id) {
+    const st = this.state, me = st.me && st.me.email;
+    if (!me) return;
+    if (st.call || this._room) return this.flash("You are already on a call", "Hang up first, then join.", "no");
+    const m = this.meetById(id);
+    if (!m || !this.meetLive(m)) return this.flash("Not open yet", m && !m.ended ? "You can join from 10 minutes before " + this.meetWhen(m.when) + "." : "This meeting has ended.", "no");
+    if (!window.RTCPeerConnection || !navigator.mediaDevices) return this.flash("Meetings not supported", "Open the hub in an up-to-date Chrome, Edge or Safari.", "no");
+    if (!this._cloud) return this.flash("Meetings need live sync", "Meetings only work when the hub is connected to Firebase.", "no");
+    let stream = null, hasCam = true;
+    try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true }, video: { width: { ideal: 960 }, height: { ideal: 540 } } }); }
+    catch (e) { hasCam = false; try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e2) {} }
+    if (!stream) return this.flash("Microphone blocked", "Allow the microphone (and camera) for this site in your browser, then join again.", "no");
+    const direct = this.canAdmit(m, me) || (m.lobby !== "all" && (m.invited || []).indexOf(me) > -1);
+    this._room = { id: id, local: stream, screen: null, pcs: {}, streams: {}, role: {}, peerTs: {}, offN: {}, remoteSet: {}, handled: {}, since: Date.now(), waiting: !direct };
+    this.dismissMeet(id);
+    if (direct) this.patchMeet(id, x => ({ room: Object.assign({}, x.room || {}, { [me]: Date.now() }), wait: Object.assign({}, x.wait || {}, { [me]: 0 }) }));
+    else {
+      this.patchMeet(id, x => ({ wait: Object.assign({}, x.wait || {}, { [me]: Date.now() }) }));
+      this.notify([m.host].concat(m.admins || []).map(e => ({ to: e, kind: "meet", route: "chat", read: false, date: today(), title: st.me.name + " is waiting to join", text: m.title })));
+    }
+    this.setState({ room: { id: id, waiting: !direct, muted: false, camOff: !hasCam, hasCam: hasCam, sharing: false, panel: "", invQ: "", start: Date.now() } });
+    clearInterval(this._roomT);
+    let n = 0;
+    this._roomT = setInterval(() => { n++; this.setState(s2 => ({ meetTick: (s2.meetTick || 0) + 1 })); if (n % 4 === 0) this.syncRoom(); }, 1000);
+    setTimeout(() => this.syncRoom(), 400);
+  }
+  roomPeer(o) {
+    const RM = this._room, pc = new RTCPeerConnection({ iceServers: ICE });
+    const vt = RM.screen ? RM.screen.getVideoTracks()[0] : null;
+    RM.local.getTracks().forEach(t => pc.addTrack(t.kind === "video" && vt ? vt : t, RM.local));
+    const ms = new MediaStream();
+    RM.streams[o] = ms; RM.pcs[o] = pc; RM.remoteSet[o] = false;
+    pc.ontrack = e => { ms.addTrack(e.track); this.forceUpdate(); };
+    pc.onconnectionstatechange = () => this.forceUpdate();
+    return pc;
+  }
+  dropPeer(o) {
+    const RM = this._room;
+    if (!RM) return;
+    try { if (RM.pcs[o]) RM.pcs[o].close(); } catch (e) {}
+    delete RM.pcs[o]; delete RM.streams[o]; delete RM.remoteSet[o]; delete RM.role[o];
+  }
+  async syncRoom() {
+    const RM = this._room;
+    if (!RM) return;
+    if (RM.busy) { RM.again = true; return; }
+    RM.busy = true;
+    try { await this.syncRoomNow(RM); } catch (e) {}
+    RM.busy = false;
+    if (RM.again && this._room === RM) { RM.again = false; setTimeout(() => this.syncRoom(), 60); }
+  }
+  async syncRoomNow(RM) {
+    const me = (this.state.me || {}).email, m = this.meetById(RM.id);
+    if (!m || m.ended) { this.leaveRoom(true); this.flash("Meeting ended", m && m.ended ? m.hostName + " ended the meeting." : ""); return; }
+    if (RM.waiting) {
+      if (((m.denied || {})[me] || 0) > RM.since) { this.leaveRoom(true); this.flash("Not let in", "The host did not let you into " + m.title + ".", "no"); return; }
+      if (!(m.room || {})[me]) return;
+      RM.waiting = false;
+      this.setState(s2 => ({ room: s2.room ? Object.assign({}, s2.room, { waiting: false, start: Date.now() }) : null }));
+    }
+    const room = m.room || {}, myTs = room[me];
+    if (!myTs) { this.leaveRoom(true); this.flash("You were removed", "The host removed you from " + m.title + "."); return; }
+    const others = Object.keys(room).filter(e => e !== me && room[e] && this.isOnline(e));
+    Object.keys(RM.pcs).forEach(e => { if (others.indexOf(e) < 0) this.dropPeer(e); });
+    const sig = m.sig || {};
+    for (const o of others) {
+      if (this._room !== RM) return;
+      const iOffer = myTs > room[o] || (myTs === room[o] && me > o);
+      if (iOffer) {
+        const k = me + ">" + o;
+        if (!RM.pcs[o] || RM.role[o] !== "off" || RM.peerTs[o] !== room[o]) {
+          this.dropPeer(o);
+          const pc = this.roomPeer(o), nn = uid("n");
+          RM.role[o] = "off"; RM.peerTs[o] = room[o]; RM.offN[o] = nn;
+          await pc.setLocalDescription(await pc.createOffer());
+          await this.gathered(pc);
+          if (this._room !== RM) return;
+          const desc = JSON.stringify(pc.localDescription);
+          this.patchMeet(RM.id, x => ({ sig: Object.assign({}, x.sig || {}, { [k]: { o: desc, n: nn } }) }));
+          continue;
+        }
+        const sg = sig[k];
+        if (sg && sg.a && sg.n === RM.offN[o] && !RM.remoteSet[o]) { RM.remoteSet[o] = true; await RM.pcs[o].setRemoteDescription(JSON.parse(sg.a)).catch(() => {}); }
+      } else {
+        const k = o + ">" + me, sg = sig[k];
+        if (sg && sg.o && !sg.a && RM.handled[o] !== sg.n) {
+          RM.handled[o] = sg.n;
+          this.dropPeer(o);
+          const pc = this.roomPeer(o);
+          RM.role[o] = "ans";
+          await pc.setRemoteDescription(JSON.parse(sg.o));
+          await pc.setLocalDescription(await pc.createAnswer());
+          await this.gathered(pc);
+          if (this._room !== RM) return;
+          const desc = JSON.stringify(pc.localDescription), nn = sg.n;
+          this.patchMeet(RM.id, x => { const cur = (x.sig || {})[k]; if (!cur || cur.n !== nn) return {}; return { sig: Object.assign({}, x.sig, { [k]: Object.assign({}, cur, { a: desc }) }) }; });
+        }
+      }
+    }
+    this.forceUpdate();
+  }
+  leaveRoom(silent) {
+    const RM = this._room, me = (this.state.me || {}).email;
+    if (!RM) return;
+    const m = this.meetById(RM.id);
+    if (m && !m.ended && me) this.patchMeet(RM.id, x => ({ room: Object.assign({}, x.room || {}, { [me]: 0 }), wait: Object.assign({}, x.wait || {}, { [me]: 0 }) }));
+    Object.keys(RM.pcs).forEach(o => { try { RM.pcs[o].close(); } catch (e) {} });
+    try { RM.local.getTracks().forEach(t => t.stop()); } catch (e) {}
+    try { if (RM.screen) RM.screen.getTracks().forEach(t => t.stop()); } catch (e) {}
+    this._room = null;
+    clearInterval(this._roomT);
+    this.setState({ room: null });
+  }
+  endMeeting() {
+    const RM = this._room;
+    if (!RM) return;
+    this.ask("End the meeting for everyone?", "Everyone in the meeting will be disconnected.", "End for everyone", "Stay", () => {
+      this.patchMeet(RM.id, () => ({ ended: true, endedAt: Date.now(), room: {}, wait: {}, sig: {} }));
+      this.leaveRoom(true);
+      this.flash("Meeting ended", "");
+    }, () => {});
+  }
+  admitRoom(e, ok) {
+    const RM = this._room;
+    if (!RM) return;
+    if (ok) this.patchMeet(RM.id, x => ({ room: Object.assign({}, x.room || {}, { [e]: Date.now() }), wait: Object.assign({}, x.wait || {}, { [e]: 0 }) }));
+    else this.patchMeet(RM.id, x => ({ denied: Object.assign({}, x.denied || {}, { [e]: Date.now() }), wait: Object.assign({}, x.wait || {}, { [e]: 0 }) }));
+  }
+  removeFromRoom(e) {
+    const RM = this._room;
+    if (RM) this.patchMeet(RM.id, x => ({ room: Object.assign({}, x.room || {}, { [e]: 0 }) }));
+  }
+  inviteToRoom(e) {
+    const RM = this._room, me = this.state.me, m = RM && this.meetById(RM.id);
+    if (!m || !me) return;
+    this.patchMeet(RM.id, x => ({ invited: Array.from(new Set((x.invited || []).concat([e]))), invAt: Object.assign({}, x.invAt || {}, { [e]: Date.now() }) }));
+    this.notify([{ to: e, kind: "meet", meetId: m.id, route: "chat", read: false, date: today(), title: me.name + " is asking you to join a meeting", text: m.title + " · now" }]);
+    this.flash("Invitation sent", ((this.acct(e) || {}).name || e) + " has been asked to join.");
+  }
+  roomMute() {
+    const RM = this._room, r = this.state.room;
+    if (!RM || !r) return;
+    RM.local.getAudioTracks().forEach(t => { t.enabled = r.muted; });
+    this.setState({ room: Object.assign({}, r, { muted: !r.muted }) });
+  }
+  roomCam() {
+    const RM = this._room, r = this.state.room;
+    if (!RM || !r || !r.hasCam) return;
+    RM.local.getVideoTracks().forEach(t => { t.enabled = r.camOff; });
+    this.setState({ room: Object.assign({}, r, { camOff: !r.camOff }) });
+  }
+  async roomShare() {
+    const RM = this._room, r = this.state.room;
+    if (!RM || !r) return;
+    const setV = tr => Object.keys(RM.pcs).forEach(o => { const sd = RM.pcs[o].getSenders().filter(x => x.track && x.track.kind === "video")[0]; if (sd) sd.replaceTrack(tr); });
+    if (r.sharing) {
+      try { RM.screen.getTracks().forEach(t => t.stop()); } catch (e) {}
+      RM.screen = null;
+      const cam = RM.local.getVideoTracks()[0]; if (cam) setV(cam);
+      this.setState({ room: Object.assign({}, this.state.room, { sharing: false }) });
+      return;
+    }
+    if (!r.hasCam) return this.flash("Screen sharing needs a camera track", "Join with your camera allowed to share your screen.", "no");
+    try {
+      const scr = await navigator.mediaDevices.getDisplayMedia({ video: true });
+      RM.screen = scr;
+      const tr = scr.getVideoTracks()[0];
+      setV(tr);
+      tr.onended = () => { if (this.state.room && this.state.room.sharing) this.roomShare(); };
+      this.setState({ room: Object.assign({}, this.state.room, { sharing: true }) });
+    } catch (e) {}
+  }
+  meetVals() {
+    const st = this.state, me = (st.me || {}).email, now = Date.now();
+    const out = {};
+    const mine = this.meets().filter(m => !m.ended && (m.host === me || (m.invited || []).indexOf(me) > -1) && now - (m.when || 0) < 12 * 3600000)
+      .sort((a, b) => a.when - b.when);
+    out.meetCards = mine.slice(0, 8).map(m => {
+      const live = this.meetLive(m), host = m.host === me, rs = (m.rsvp || {})[me] || "";
+      const inRoom = Object.keys(m.room || {}).filter(e => m.room[e]).length;
+      const yes = Object.keys(m.rsvp || {}).filter(e => m.rsvp[e] === "yes").length, no = Object.keys(m.rsvp || {}).filter(e => m.rsvp[e] === "no").length;
+      return {
+        title: m.title, whenLbl: live ? (inRoom ? "Live now · " + inRoom + " in the meeting" : "Open now") : this.meetWhen(m.when),
+        hostLbl: host ? "You are hosting · " + (m.invited || []).length + " invited" + (yes ? " · " + yes + " going" : "") + (no ? " · " + no + " declined" : "") : "Host: " + m.hostName,
+        live: live, notLive: !live, isHost: host, canRsvp: !host && !live,
+        rsvpLbl: rs === "yes" ? "✓ Going" : rs === "no" ? "Declined" : "",
+        hasRsvp: !!rs && !host,
+        cardStyle: "background:" + (live ? "#EAF6F1" : "#F7FAFC") + ";border:1px solid " + (live ? "#BFE3D3" : "#E4EAF1") + ";border-radius:12px;padding:12px 13px;display:flex;flex-direction:column;gap:8px;",
+        join: () => this.joinMeeting(m.id), accept: () => this.rsvpMeet(m.id, "yes"), decline: () => this.rsvpMeet(m.id, "no"), cancel: () => this.cancelMeet(m.id)
+      };
+    });
+    out.hasMeets = out.meetCards.length > 0;
+    const d = st.meetDraft;
+    out.meetNewOpen = !!d;
+    out.toggleMeetNew = () => this.setState({ meetDraft: st.meetDraft ? null : { title: "", now: true, date: today(), time: "", q: "", invited: [], admins: [], lobby: "invited" }, chatNew: false });
+    if (d) {
+      const setD = p => this.setState(s2 => ({ meetDraft: Object.assign({}, s2.meetDraft, p) }));
+      const q = String(d.q || "").toLowerCase().trim();
+      out.mdTitle = d.title; out.onMdTitle = e => setD({ title: e.target.value });
+      out.mdNow = d.now; out.mdLater = !d.now;
+      out.mdNowStyle = this.pill(d.now ? "var(--mr-teal)" : "#fff", d.now ? "#fff" : "#3A4453") + "cursor:pointer;padding:8px 14px;font-size:13px;border:1px solid " + (d.now ? "var(--mr-teal)" : "#DCE2EA") + ";";
+      out.mdLaterStyle = this.pill(!d.now ? "var(--mr-teal)" : "#fff", !d.now ? "#fff" : "#3A4453") + "cursor:pointer;padding:8px 14px;font-size:13px;border:1px solid " + (!d.now ? "var(--mr-teal)" : "#DCE2EA") + ";";
+      out.setMdNow = () => setD({ now: true }); out.setMdLater = () => setD({ now: false });
+      out.mdDate = d.date; out.mdTime = d.time; out.onMdDate = e => setD({ date: e.target.value }); out.onMdTime = e => setD({ time: e.target.value });
+      out.mdQ = d.q; out.onMdQ = e => setD({ q: e.target.value });
+      out.mdPeople = (st.accounts || []).filter(a => a.email !== me && a.status !== "suspended" && a.role !== "Candidate" && (!q || (a.name + " " + (a.dept || "")).toLowerCase().indexOf(q) > -1))
+        .sort((a, b) => ((d.invited.indexOf(b.email) > -1) - (d.invited.indexOf(a.email) > -1)) || (this.isOnline(b.email) - this.isOnline(a.email)) || String(a.name).localeCompare(b.name)).slice(0, 30)
+        .map(a => { const on = d.invited.indexOf(a.email) > -1, co = d.admins.indexOf(a.email) > -1; return {
+          name: a.name, meta: [a.dept, this.isOnline(a.email) ? "Online" : ""].filter(Boolean).join(" · "), on: on,
+          tick: on ? "✓" : "", tickStyle: "flex:none;width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;cursor:pointer;" + (on ? "background:var(--mr-teal);color:#fff;" : "background:#fff;border:1.5px solid #C9D3DF;"),
+          toggle: () => setD({ invited: on ? d.invited.filter(x => x !== a.email) : d.invited.concat([a.email]), admins: on ? d.admins.filter(x => x !== a.email) : d.admins }),
+          coLbl: co ? "Can let people in" : "Make co-host", coStyle: "flex:none;font-size:11px;font-weight:700;cursor:pointer;padding:4px 8px;border-radius:10px;" + (co ? "background:#181848;color:#fff;" : "background:#EEF2F6;color:#5C6B80;"),
+          toggleCo: () => setD({ admins: co ? d.admins.filter(x => x !== a.email) : d.admins.concat([a.email]) })
+        }; });
+      out.mdCount = d.invited.length ? d.invited.length + " invited" : "Tick the people to invite";
+      out.mdLobbyAll = d.lobby === "all";
+      const lob = on => "flex:1;min-width:0;cursor:pointer;border-radius:10px;padding:9px 11px;font-size:12.5px;line-height:1.4;border:1.5px solid " + (on ? "var(--mr-teal);background:#E7F3F8;color:#12607F;" : "#DCE2EA;background:#fff;color:#3A4453;");
+      out.mdLobInvStyle = lob(d.lobby !== "all"); out.mdLobAllStyle = lob(d.lobby === "all");
+      out.setLobInv = () => setD({ lobby: "invited" }); out.setLobAll = () => setD({ lobby: "all" });
+      const create = () => {
+        let when = Date.now();
+        if (!d.now) { if (!d.date || !d.time) return this.flash("Pick a date and time", "Or choose Now to start straight away.", "no"); when = new Date(d.date + "T" + d.time).getTime(); if (!(when > Date.now() - 60000)) return this.flash("That time has passed", "Pick a time in the future.", "no"); }
+        const rec = this.createMeeting({ title: d.title, when: when, invited: d.invited, admins: d.admins, lobby: d.lobby });
+        if (!rec) return;
+        this.setState({ meetDraft: null });
+        if (d.now) setTimeout(() => this.joinMeeting(rec.id), 200);
+        else this.flash("Meeting booked", "Invitations sent to " + rec.invited.length + (rec.invited.length === 1 ? " person." : " people."));
+      };
+      out.createMeet = create;
+      out.onMdKey = e => { if (e.key === "Enter" && !e.isComposing) { e.preventDefault(); create(); } };
+      out.mdCreateLbl = d.now ? "Start the meeting" : "Send invitations";
+    } else Object.assign(out, { mdPeople: [], mdNow: true, mdLater: false });
+    // popup
+    const pop = st.room || st.call ? null : this.meets().filter(m => this.meetLive(m) && m.host !== me && (m.invited || []).indexOf(me) > -1 && !((m.room || {})[me]) && (st.meetDis || []).indexOf(m.id) < 0
+      && (m.rsvp || {})[me] !== "no" && now >= (m.when || 0) - 60000 && now - Math.max(m.when || 0, (m.invAt || {})[me] || 0) < 15 * 60000)[0];
+    out.meetPopShow = !!pop;
+    out.meetPopTitle = pop ? pop.title : ""; out.meetPopHost = pop ? pop.hostName + " is waiting for you" : "";
+    out.meetPopJoin = () => pop && this.joinMeeting(pop.id); out.meetPopLater = () => pop && this.dismissMeet(pop.id);
+    // room
+    const r = st.room, RM = this._room, m = r && this.meetById(r.id);
+    out.roomOn = !!(r && !r.waiting && RM); out.roomWait = !!(r && r.waiting);
+    if (!r || !m) return Object.assign(out, { roomTiles: [], roomWaitList: [], roomInvPeople: [], roomPresent: [] });
+    out.roomTitle = m.title; out.roomHostName = m.hostName;
+    const sec = Math.floor((now - (r.start || now)) / 1000);
+    out.roomTime = String(Math.floor(sec / 60)).padStart(2, "0") + ":" + String(sec % 60).padStart(2, "0");
+    const roomE = Object.keys(m.room || {}).filter(e => m.room[e] && e !== me && this.isOnline(e));
+    const tile = (key, name, vid, sub) => ({ key: key, name: name, initials: initials(name), sub: sub,
+      vidStyle: vid ? "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent;" + (key === "me" && !r.sharing ? "transform:scaleX(-1);" : "") : "position:absolute;width:1px;height:1px;opacity:0;" });
+    out.roomTiles = [tile("me", "You", r.hasCam && !r.camOff, r.muted ? "🔇 Muted" : "")].concat(roomE.map(e => {
+      const pc = RM && RM.pcs[e], ms = RM && RM.streams[e];
+      const stt = pc ? pc.connectionState : "new";
+      return tile(e, (this.acct(e) || {}).name || e, !!(ms && ms.getVideoTracks().length), stt === "connected" ? "" : stt === "failed" ? "Could not connect" : "Connecting…");
+    }));
+    const n = out.roomTiles.length;
+    out.roomGrid = "flex:1;min-height:0;display:grid;gap:12px;padding:76px 18px 112px;box-sizing:border-box;grid-template-columns:repeat(" + (n <= 1 ? 1 : n <= 4 ? 2 : 3) + ",minmax(0,1fr));grid-auto-rows:minmax(0,1fr);";
+    const iAdmin = this.canAdmit(m, me);
+    out.roomIsHost = m.host === me; out.roomCanAdmit = iAdmin;
+    out.roomWaitList = iAdmin ? Object.keys(m.wait || {}).filter(e => m.wait[e] && this.isOnline(e)).map(e => ({ name: (this.acct(e) || {}).name || e, admit: () => this.admitRoom(e, true), refuse: () => this.admitRoom(e, false) })) : [];
+    out.roomHasWait = out.roomWaitList.length > 0;
+    out.roomWaitBadge = out.roomWaitList.length ? String(out.roomWaitList.length) : "";
+    out.roomPresent = [{ name: "You", tag: m.host === me ? "Host" : iAdmin ? "Co-host" : "", canRemove: false, remove: () => {} }].concat(roomE.map(e => ({
+      name: (this.acct(e) || {}).name || e, tag: m.host === e ? "Host" : (m.admins || []).indexOf(e) > -1 ? "Co-host" : "", canRemove: iAdmin && m.host !== e, remove: () => this.removeFromRoom(e) })));
+    out.roomPanel = r.panel === "people"; out.roomInvite = r.panel === "invite";
+    const setR = p => this.setState(s2 => ({ room: s2.room ? Object.assign({}, s2.room, p) : null }));
+    out.togglePeople = () => setR({ panel: r.panel === "people" ? "" : "people" });
+    out.toggleRoomInvite = () => setR({ panel: r.panel === "invite" ? "" : "invite" });
+    out.closePanel = () => setR({ panel: "" });
+    out.roomInvQ = r.invQ; out.onRoomInvQ = e => setR({ invQ: e.target.value });
+    const iq = String(r.invQ || "").toLowerCase().trim();
+    out.roomInvPeople = (st.accounts || []).filter(a => a.email !== me && a.status !== "suspended" && a.role !== "Candidate" && roomE.indexOf(a.email) < 0 && (!iq || (a.name + " " + (a.dept || "")).toLowerCase().indexOf(iq) > -1))
+      .sort((a, b) => (this.isOnline(b.email) - this.isOnline(a.email)) || String(a.name).localeCompare(b.name)).slice(0, 25)
+      .map(a => { const inv = (m.invited || []).indexOf(a.email) > -1; return { name: a.name, meta: [a.dept, this.isOnline(a.email) ? "Online" : "Offline"].filter(Boolean).join(" · "),
+        btn: inv ? "Ask again" : "Invite", go: () => this.inviteToRoom(a.email) }; });
+    const ctl = bg => "flex:none;position:relative;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:transform 0.15s ease;border:2px solid rgba(255,255,255,0.18);background:" + bg + ";color:#fff;";
+    out.rMuteStyle = ctl(r.muted ? "#B4443A" : "rgba(255,255,255,0.14)"); out.rMuteIcon = r.muted ? "🔇" : "🎙";
+    out.rCamStyle = ctl(r.camOff ? "#B4443A" : "rgba(255,255,255,0.14)") + (r.hasCam ? "" : "opacity:0.4;cursor:default;");
+    out.rShareStyle = ctl(r.sharing ? "#1880A8" : "rgba(255,255,255,0.14)");
+    out.rPeopleStyle = ctl(r.panel === "people" ? "#1880A8" : "rgba(255,255,255,0.14)");
+    out.rInvStyle = ctl(r.panel === "invite" ? "#1880A8" : "rgba(255,255,255,0.14)");
+    out.rLeaveStyle = "flex:none;height:54px;padding:0 22px;border-radius:27px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;cursor:pointer;background:#D93A2F;color:#fff;";
+    out.rEndStyle = "flex:none;height:54px;padding:0 18px;border-radius:27px;display:flex;align-items:center;font-weight:700;font-size:13.5px;cursor:pointer;background:#fff;color:#B4443A;";
+    out.roomMute = () => this.roomMute(); out.roomCam = () => this.roomCam(); out.roomShare = () => this.roomShare();
+    out.leaveRoom = () => this.leaveRoom(); out.endMeeting = () => this.endMeeting();
+    return out;
+  }
+  aarefContext(q) {
+    const st = this.state, me = st.me || {};
+    const STOP = { the: 1, and: 1, for: 1, what: 1, how: 1, can: 1, you: 1, are: 1, with: 1, this: 1, that: 1, from: 1, about: 1, does: 1, have: 1, where: 1, when: 1, who: 1, our: 1, any: 1, there: 1, tell: 1, please: 1, need: 1, want: 1, get: 1 };
+    const words = String(q || "").toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(w => w.length > 2 && !STOP[w]);
+    const flat = x => typeof x === "string" ? (/^data:|^mrblob:/.test(x) ? "" : x) : Array.isArray(x) ? x.map(flat).join(" ") : x && typeof x === "object" ? Object.keys(x).filter(k => !/^(id|data|file|files|photo|img|image|ph|pass|guide|color|by|status|created|updated|acked|views)$/i.test(k)).map(k => flat(x[k])).join(" ") : "";
+    const clean = t => String(t || "").replace(/<[^>]+>/g, " ").replace(/&[a-z#0-9]+;/gi, " ").replace(/\s+/g, " ").trim();
+    const items = [];
+    const add = (tok, kind, title, body) => items.push({ tok: tok, kind: kind, title: String(title || "Untitled"), body: clean(body) });
+    (st.policies || []).filter(p => p.status === "live").forEach(p => add("policy:" + p.id, "Policy", p.title, flat(p)));
+    (st.benefits || []).filter(b => b.status === "live").forEach(b => add("benefit:" + b.id, "Benefit", b.title, flat({ s: b.summary, c: b.cat, d: b.details, b: b.body, h: b.html, t: b.text })));
+    (st.know || []).filter(k => k.status === "live" && (!this.courseMine || this.courseMine(k))).forEach(k => add("know:" + k.id, (k.lessons || []).length ? "Course" : "Learning item", k.title, flat({ s: k.summary, d: k.desc, c: k.cat, l: (k.lessons || []).map(l => l.title) })));
+    (this.myForms ? this.myForms() : []).forEach(f => add("form:" + f.id, f.kind === "survey" ? "Survey" : "Form", f.title, flat({ d: f.desc, i: f.intro, due: f.due })));
+    (st.events || []).filter(e => this.eventMine && this.eventMine(e)).forEach(e => add("event:" + e.id, "Event", e.title, flat({ w: e.when, d: e.day, p: e.place, x: e.desc, n: e.note })));
+    (st.ann || []).filter(a => a.active !== false).slice(0, 12).forEach(a => add("route:home", "Announcement", a.title, flat({ t: a.text, b: a.body })));
+    const adminV = this.isAdmin && this.isAdmin() && !st.asStaff;
+    Object.keys(HELP).forEach(k => { const h = HELP[k]; if (!h.routes.some(rt => this.routeAllowed(rt))) return; if (!(h.staff || []).length && !adminV) return; add("help:" + k, "Section of ME", h.name, [h.intro].concat(h.staff || [], adminV ? (h.admin || []) : [], h.tips || []).join(" ")); });
+    items.forEach(it => {
+      const T = it.title.toLowerCase(), B = it.body.toLowerCase();
+      it.score = words.reduce((n, w) => n + (T.indexOf(w) > -1 ? 4 : 0) + Math.min(4, B.split(w).length - 1), 0);
+    });
+    const top = items.filter(i => i.score > 0).sort((a, b) => b.score - a.score).slice(0, 5);
+    let out = "PORTAL EXCERPTS — live content from ME that " + (me.name || "this person") + " can see. Answer from these first. Whenever you point to something, end your answer with its link token copied exactly, one per line, like [[policy:abc|Employee Rehire Policy]]. Never invent tokens. If the portal has nothing on the question, say it is not in ME yet, then help in general.\n";
+    top.forEach(i => { out += "\n### " + i.kind + ": " + i.title + "  [[" + i.tok + "|" + i.title + "]]\n" + i.body.slice(0, 900) + "\n"; });
+    const cat = items.filter(i => top.indexOf(i) < 0 && i.kind !== "Announcement").map(i => "- " + i.kind + ": [[" + i.tok + "|" + i.title + "]]");
+    let catTxt = "";
+    for (const ln of cat) { if (out.length + catTxt.length + ln.length > 6800) break; catTxt += ln + "\n"; }
+    if (catTxt) out += "\nOTHER THINGS IN ME:\n" + catTxt;
+    return out;
+  }
+  aarefLinks(t, m) {
+    const tx = m && typeof m.text === "string" ? m.text : "";
+    if (!t || t.id !== "aaref" || tx.indexOf("[[") < 0) return { hasLinks: false, links: [] };
+    const links = [], seen = {};
+    const ICO = { policy: "▤", benefit: "♡", know: "✦", form: "☰", event: "◷", route: "⌂", help: "?" };
+    const text = tx.replace(/\[\[(policy|benefit|know|form|event|route|help):([^|\]]+)\|([^\]]+)\]\]/g, (all, kind, id, label) => {
+      const key = kind + ":" + id;
+      if (!seen[key]) { seen[key] = 1; links.push({ label: label.trim(), icon: ICO[kind] || "→", go: () => this.aarefGo(kind, id.trim()) }); }
+      return label.trim();
+    }).replace(/[ \t]+$/gm, "").replace(/\n{3,}/g, "\n\n").trim();
+    return { text: text, hasLinks: links.length > 0, links: links };
+  }
+  aarefGo(kind, id) {
+    const st = this.state;
+    if (kind === "policy") { if ((st.policies || []).some(p => p.id === id)) return this.openPolicy(id); }
+    else if (kind === "benefit") return this.go("benefit", { id: id });
+    else if (kind === "know") { if (!this.routeAllowed("know")) return this.go("know"); return this.setState({ route: "knowitem", knowOpen: id, menuOpen: null }, () => window.scrollTo(0, 0)); }
+    else if (kind === "form") return this.go("formfill", { fill: { formId: id, answers: {} }, fillPage: 0, fillMsg: "" });
+    else if (kind === "event") return this.go("eventcheck", { id: id });
+    else if (kind === "route") return this.go(id);
+    else if (kind === "help" && HELP[id]) {
+      const rt = HELP[id].routes.filter(x => this.routeAllowed(x))[0] || HELP[id].routes[0];
+      this.go(rt);
+      return this.setState(s2 => { const L = (s2.helpOpen || []).filter(x => x !== id).concat([id]); try { localStorage.setItem("mrhub-help-v1", JSON.stringify(L)); } catch (e) {} return { helpOpen: L }; }, () => window.scrollTo(0, 0));
+    }
+    this.flash("Not found", "That item is no longer in ME.", "no");
+  }
   helpVals() {
     const st = this.state;
     const key = HELP_BY_ROUTE[st.route];
@@ -12648,6 +13225,7 @@ class Component extends DCLogic {
     const rp = m.reply;
     const rxObj = m.rx || {}, rxKeys = Object.keys(rxObj).filter(k => (rxObj[k] || []).length);
     return {
+      ...this.aarefLinks(t, m),
       canRx: t.id !== "aaref", hasRx: rxKeys.length > 0,
       rxChips: rxKeys.map(em => {
         const who = rxObj[em], mineR = who.indexOf(me) > -1;
@@ -12745,6 +13323,8 @@ class Component extends DCLogic {
       ct: cur ? {
         name: label(cur),
         canCall: cur.kind === "direct" && !cur.aaref && !st.call,
+        canMeet: cur.kind === "group" && !st.call && !st.room,
+        meetNow: () => { const rec = this.createMeeting({ title: cur.name, invited: cur.members || [], lobby: "invited", threadId: cur.id }); if (rec) setTimeout(() => this.joinMeeting(rec.id), 200); },
         callA: () => this.startCall(cur.id, "audio"), callV: () => this.startCall(cur.id, "video"),
         isAaref: !!cur.aaref, clear: () => this.clearAaref(),
         sub: cur.kind === "channel" ? (cur.desc || "Team channel · replies from " + cur.channelOf)
@@ -15697,7 +16277,7 @@ class Component extends DCLogic {
     if (st.screen !== "app" || !me) {
       return {
         isLogin: true, signedIn: false,
-        hasModal: !!st.modal, bdayPop: false, helpShow: false, helpOpen: false, callIncoming: false, callOn: false, lbOpen: false, fwdOpen: false, fwdTargets: [], lbSrc: "", lbName: "", fwdPreview: "", fwdSearch: "",
+        hasModal: !!st.modal, bdayPop: false, helpShow: false, helpOpen: false, callIncoming: false, callOn: false, roomOn: false, roomWait: false, meetPopShow: false, lbOpen: false, fwdOpen: false, fwdTargets: [], lbSrc: "", lbName: "", fwdPreview: "", fwdSearch: "",
         modalTwo: !!(st.modal && st.modal.kind === "ask"),
         modalOne: !(st.modal && st.modal.kind === "ask"),
         modalYesLabel: st.modal ? (st.modal.yesLabel || "Yes") : "",
@@ -16920,7 +17500,7 @@ class Component extends DCLogic {
         };
       }).filter(Boolean),
 
-      ...this.helpVals(), ...this.callVals(),
+      ...this.helpVals(), ...this.callVals(), ...this.meetVals(),
       hasModal: !!st.modal,
       bdayPop: !!st.me && !st.candMode && !st.interviewMode && !st.bdayClosed && this.isBday(st.me) && localStorage.getItem("mrhub-bdayseen-v1:" + st.me.email) !== today(),
       closeBdayPop: () => { try { localStorage.setItem("mrhub-bdayseen-v1:" + st.me.email, today()); } catch (e) {} this.setState({ bdayClosed: true }); },
