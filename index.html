@@ -2134,7 +2134,7 @@
           <span style="font-family:var(--mr-head);font-weight:700;font-size:18px;letter-spacing:-0.02em;">Aaref — AI assistant</span>
           <span style="{{ aarefPill }}">{{ aarefState }}</span>
         </div>
-        <p style="font-size:14px;color:#5C6B80;line-height:1.6;margin:0 0 14px;">Paste the address of your Aaref function (from the setup guide, AAREF-SETUP.md). It starts with https:// and ends in /aaref. Up to 100 messages per person per day; the Gemini free tier keeps it at $0.</p>
+        <p style="font-size:14px;color:#5C6B80;line-height:1.6;margin:0 0 14px;">Paste your Aaref worker address from the setup guide (AAREF-SETUP.md) — it looks like https://aaref.yourname.workers.dev. Free: Cloudflare's free plan plus Gemini's free tier, no card. Up to 100 messages per person per day.</p>
         <div data-enter="1" style="display:flex;gap:9px;flex-wrap:wrap;">
           <input value="{{ aarefUrlDraft }}" onInput="{{ onAarefUrl }}" placeholder="https://europe-west1-your-project.cloudfunctions.net/aaref" style="flex:1 1 320px;min-width:0;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;font-size:13px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:12px 14px;outline:none;">
           <div data-enter-go="1" onClick="{{ saveAarefUrl }}" style="flex:none;background:var(--mr-navy);color:#fff;font-weight:700;font-size:14px;padding:12px 22px;border-radius:22px;cursor:pointer;">Save</div>
@@ -8783,7 +8783,9 @@ class Component extends DCLogic {
       this.setState({ accounts: sealed });
       lsSet(K.acc, sealed, false);
     }
-    import("./firebase-sync.js?v=4-" + Math.floor(Date.now() / 3600000).toString(36)).then(m => {
+    const loadSync = () => import("./firebase-sync.js?v=4-" + Date.now().toString(36)).then(m => (!m.VERSION || m.VERSION < 4)
+      ? import("./firebase-sync.js?fresh=" + Math.random().toString(36).slice(2)).catch(() => m) : m);
+    loadSync().then(m => {
       const oldSync = !m.VERSION || m.VERSION < 4;
       if (!m.enabled()) {
         this.setState({ cloud: "off", cloudMsg: "Not connected — this browser only. Add your Firebase keys to firebase-config.js (see GO-LIVE.md) so policies and questions reach everyone." });
