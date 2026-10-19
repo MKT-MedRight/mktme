@@ -85,7 +85,7 @@
 <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
 <div style="min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;">
   <div style="background:var(--mr-navy);padding:56px 60px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;position:relative;overflow:hidden;min-height:560px;">
-    <div style="position:absolute;top:-70%;left:20%;width:150%;height:260%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.18) 0deg 7deg,transparent 7deg 14deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
+    <div style="position:absolute;left:95%;top:60%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.18) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
     <div style="position:absolute;top:-25%;right:-20%;width:65%;height:80%;background:radial-gradient(circle,rgba(24,128,168,0.55),transparent 62%);animation:hbDrift 24s ease-in-out infinite;pointer-events:none;"></div>
     <div style="position:absolute;bottom:-40%;left:-20%;width:70%;height:85%;background:radial-gradient(circle,rgba(116,51,198,0.3),transparent 62%);animation:hbDrift 30s ease-in-out infinite reverse;pointer-events:none;"></div>
     <div style="position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,0.07) 1px,transparent 1.6px) 0 0/22px 22px;pointer-events:none;"></div>
@@ -298,7 +298,7 @@
     <div onClick="{{ togglePeople }}" title="People" style="{{ rPeopleStyle }}" style-hover="transform:translateY(-2px);">👥<sc-if value="{{ roomHasWait }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;border-radius:9px;background:#F6A623;color:#14121C;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;">{{ roomWaitBadge }}</span></sc-if></div>
     <div onClick="{{ toggleRoomInvite }}" title="Invite people" style="{{ rInvStyle }}" style-hover="transform:translateY(-2px);">➕</div>
     <div onClick="{{ leaveRoom }}" style="{{ rLeaveStyle }}" style-hover="filter:brightness(1.1);"><span style="display:inline-block;transform:rotate(135deg);">📞</span>Leave</div>
-    <sc-if value="{{ roomIsHost }}" hint-placeholder-val="{{ false }}"><div onClick="{{ endMeeting }}" style="{{ rEndStyle }}" style-hover="background:#FDECEC;">End for everyone</div></sc-if>
+    <sc-if value="{{ roomIsHost }}" hint-placeholder-val="{{ false }}"><div onClick="{{ endMeeting }}" style="{{ rEndStyle }}" style-hover="filter:brightness(0.96);">{{ endLbl }}</div></sc-if>
   </div>
 </div>
 </sc-if>
@@ -306,7 +306,7 @@
 <sc-if value="{{ callIncoming }}" hint-placeholder-val="{{ false }}">
 <div class="hb-noprint" style="position:fixed;inset:0;z-index:420;background:rgba(12,12,36,0.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;">
   <div style="width:100%;max-width:360px;background:var(--mr-navy);color:#fff;border:3px solid var(--mr-ink);border-radius:26px;box-shadow:8px 8px 0 var(--mr-ink);padding:34px 26px 28px;text-align:center;animation:hbPop 0.4s cubic-bezier(0.34,1.4,0.64,1) both;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:-70%;left:-30%;width:160%;height:240%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.22) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 90s linear infinite;pointer-events:none;"></div>
+    <div style="position:absolute;left:50%;top:50%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.22) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 90s linear infinite;pointer-events:none;"></div>
     <div style="position:relative;width:104px;height:104px;margin:0 auto;border-radius:50%;background:var(--mr-teal);border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:800;font-size:34px;box-shadow:0 0 0 10px rgba(24,128,168,0.3),0 0 0 22px rgba(24,128,168,0.14);animation:hbFloat 1.6s ease-in-out infinite;">{{ incInitials }}</div>
     <div style="position:relative;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#CFE6F5;margin-top:30px;">{{ incIcon }} {{ incKind }}</div>
     <div style="position:relative;font-family:var(--mr-head);font-weight:800;font-size:26px;letter-spacing:-0.02em;margin-top:6px;">{{ incName }}</div>
@@ -356,7 +356,7 @@
 <div class="hb-noprint" onClick="{{ closeBdayPop }}" style="position:fixed;inset:0;z-index:390;background:rgba(12,12,36,0.6);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;">
   <div onClick="{{ stopProp }}" style="width:100%;max-width:460px;background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:22px;box-shadow:8px 8px 0 var(--mr-ink);overflow:hidden;text-align:center;animation:hbPop 0.5s cubic-bezier(0.34,1.4,0.64,1) both;">
     <div style="background:#C96A0F;padding:30px 20px 24px;position:relative;overflow:hidden;">
-      <div style="position:absolute;top:-60%;left:-25%;width:150%;height:220%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,0.16) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 120s linear infinite;pointer-events:none;"></div>
+      <div style="position:absolute;left:50%;top:50%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,0.16) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 120s linear infinite;pointer-events:none;"></div>
       <div style="position:relative;font-size:64px;line-height:1;animation:hbFloat 3s ease-in-out infinite;">🎂</div>
       <div style="position:relative;font-family:var(--mr-comic);font-size:42px;line-height:1;color:#fff;text-shadow:3px 3px 0 var(--mr-ink);margin-top:12px;">Happy birthday, {{ bdayFirst }}!</div>
     </div>
@@ -372,7 +372,7 @@
 </sc-if>
 
 <sc-if value="{{ hasModal }}" hint-placeholder-val="{{ false }}">
-<div class="hb-noprint" onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:400;background:rgba(12,12,36,0.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:26px;animation:hbRise 0.18s ease both;">
+<div class="hb-noprint" onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:450;background:rgba(12,12,36,0.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:26px;animation:hbRise 0.18s ease both;">
   <div onClick="{{ stopProp }}" style="{{ modalCard }}">
     <img src="{{ modalMarkSrc }}" alt="" style="{{ modalMarkStyle }}">
     <div style="{{ modalIconStyle }}">{{ modalIcon }}</div>
@@ -503,7 +503,7 @@
 
     <div style="border-top:1px solid rgba(255,255,255,0.09);">
       <div data-mr="navrow" style="width:100%;padding:0 34px;box-sizing:border-box;display:flex;align-items:center;gap:16px;">
-        <div data-mr="nav" onMouseLeave="{{ closeMenu }}" style="display:flex;gap:2px;align-items:stretch;flex:1;min-width:0;">
+        <div data-mr="nav" onMouseLeave="{{ closeMenu }}" style="display:flex;flex-wrap:wrap;gap:0 2px;align-items:stretch;flex:1;min-width:0;">
           <sc-for list="{{ navMenus }}" as="m" hint-placeholder-count="5">
             <div onMouseEnter="{{ m.hover }}" style="position:relative;flex:none;">
               <div onClick="{{ m.toggle }}" style="{{ m.style }}" style-hover="color:#fff;">
@@ -564,7 +564,7 @@
   <div class="hb-noprint" data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1280px;margin:0 auto;padding:14px 26px 0;">
     <sc-if value="{{ helpOpen }}" hint-placeholder-val="{{ false }}">
       <div style="background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);padding:22px 24px 24px;position:relative;overflow:hidden;animation:hbRise 0.3s ease both;margin-bottom:6px;">
-        <div style="position:absolute;top:-80%;right:-15%;width:60%;height:260%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.09) 0deg 8deg,transparent 8deg 16deg);pointer-events:none;"></div>
+        <div style="position:absolute;left:85%;top:50%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.09) 0deg 7.5deg,transparent 7.5deg 15deg);pointer-events:none;"></div>
         <div style="position:relative;display:flex;gap:14px;align-items:flex-start;">
           <span style="flex:none;width:46px;height:46px;border-radius:14px;background:var(--mr-teal);color:#fff;border:2px solid var(--mr-ink);display:flex;align-items:center;justify-content:center;font-size:21px;transform:rotate(-6deg);">{{ helpIcon }}</span>
           <div style="flex:1;min-width:0;">
@@ -625,7 +625,7 @@
   <sc-if value="{{ vHome }}" hint-placeholder-val="{{ false }}">
   <div>
     <div data-mr="hero" style="background:var(--mr-navy);color:#fff;padding:54px 26px 72px;position:relative;overflow:hidden;">
-      <div style="position:absolute;top:-70%;left:50%;width:150%;height:260%;margin-left:-75%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.18) 0deg 7deg,transparent 7deg 14deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
+      <div style="position:absolute;left:50%;top:60%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.18) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
       <div style="position:absolute;top:-25%;left:-10%;width:55%;height:80%;background:radial-gradient(circle,rgba(24,128,168,0.5),transparent 62%);animation:hbDrift 24s ease-in-out infinite;pointer-events:none;"></div>
       <div style="position:absolute;bottom:-40%;right:-12%;width:60%;height:90%;background:radial-gradient(circle,rgba(116,51,198,0.32),transparent 62%);animation:hbDrift 30s ease-in-out infinite reverse;pointer-events:none;"></div>
       <div style="position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,0.08) 1px,transparent 1.6px) 0 0/24px 24px;pointer-events:none;"></div>
@@ -764,7 +764,7 @@
       <sc-if value="{{ hasBirthdays }}" hint-placeholder-val="{{ false }}">
       <div style="margin-top:34px;background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);padding:24px 24px 26px;position:relative;overflow:hidden;">
         <div style="position:absolute;inset:0;background:radial-gradient(#C96A0F 1.6px,transparent 2.2px) 0 0/34px 34px,radial-gradient(#1F5FD0 1.6px,transparent 2.2px) 17px 17px/34px 34px;opacity:0.16;pointer-events:none;"></div>
-        <div style="position:absolute;top:-80%;right:-20%;width:70%;height:260%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.13) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 200s linear infinite;pointer-events:none;"></div>
+        <div style="position:absolute;left:85%;top:50%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.13) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 200s linear infinite;pointer-events:none;"></div>
         <div style="position:relative;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px;">
           <span style="font-size:38px;line-height:1;animation:hbFloat 3s ease-in-out infinite;">🎂</span>
           <div style="flex:1;min-width:200px;">
@@ -1035,7 +1035,7 @@
 
           <sc-if value="{{ hasQuote }}" hint-placeholder-val="{{ false }}">
           <div onClick="{{ newQuoteClick }}" style="background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:16px;box-shadow:6px 6px 0 var(--mr-ink);padding:20px 22px;cursor:pointer;position:relative;overflow:hidden;" style-hover="transform:translate(-2px,-2px);box-shadow:9px 9px 0 var(--mr-ink);">
-            <div style="position:absolute;top:-60%;right:-30%;width:90%;height:220%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.1) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 200s linear infinite;pointer-events:none;"></div>
+            <div style="position:absolute;left:85%;top:50%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.1) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 200s linear infinite;pointer-events:none;"></div>
             <div style="position:relative;font-weight:700;font-size:11px;letter-spacing:0.13em;text-transform:uppercase;color:#7A7488;">{{ quoteHeading }}</div>
             <div style="position:relative;font-family:var(--mr-comic);font-size:24px;line-height:1.22;letter-spacing:0.01em;color:var(--mr-ink);margin-top:9px;">{{ quoteText }}</div>
             <div style="position:relative;font-size:12.5px;font-weight:600;color:#7A7488;margin-top:9px;">{{ quoteBy }}</div>
@@ -3181,6 +3181,104 @@
   </div>
   </sc-if>
 
+  <sc-if value="{{ vPeople }}" hint-placeholder-val="{{ false }}">
+  <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1240px;margin:0 auto;padding:34px 26px 90px;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px;">
+      <div>
+        <h1 style="font-family:var(--mr-head);font-weight:800;font-size:32px;letter-spacing:-0.035em;margin:0 0 5px;">People</h1>
+        <p style="font-size:15px;color:#5C6B80;margin:0;line-height:1.6;">{{ ppLead }}</p>
+      </div>
+      <div style="display:flex;gap:4px;background:#fff;border:1px solid #DCE2EA;border-radius:22px;padding:4px;">
+        <span onClick="{{ ppTabDir }}" style="{{ ppTabDirStyle }}">Directory</span>
+        <span onClick="{{ ppTabOrg }}" style="{{ ppTabOrgStyle }}">Org chart</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;">
+      <sc-if value="{{ ppDir }}" hint-placeholder-val="{{ true }}">
+        <input value="{{ ppQ }}" onInput="{{ onPpQ }}" placeholder="Search by name, department or job title…" style="flex:1 1 320px;min-width:0;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:11px 13px;outline:none;background:#fff;">
+      </sc-if>
+      <select value="{{ ppDept }}" onChange="{{ onPpDept }}" style="flex:0 1 260px;min-width:0;box-sizing:border-box;font-size:14px;border:1px solid #DCE2EA;background:#F7FAFC;border-radius:11px;padding:11px 13px;outline:none;background:#fff;cursor:pointer;">
+        <sc-for list="{{ ppDeptOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+      </select>
+    </div>
+    <sc-if value="{{ ppDir }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;">
+        <sc-for list="{{ ppCards }}" as="p" hint-placeholder-count="8">
+          <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:22px 16px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;transition:transform 0.2s ease,box-shadow 0.2s ease;animation:hbRise 0.35s ease both;" style-hover="transform:translateY(-3px);box-shadow:0 16px 32px -20px rgba(24,24,72,0.4);">
+            <div style="position:relative;">
+              <div style="{{ p.avStyle }}">{{ p.avText }}</div>
+              <sc-if value="{{ p.online }}" hint-placeholder-val="{{ false }}"><span title="Online" style="position:absolute;right:3px;bottom:3px;width:14px;height:14px;border-radius:50%;background:#0E8F66;border:3px solid #fff;"></span></sc-if>
+            </div>
+            <div style="min-width:0;width:100%;">
+              <div style="font-family:var(--mr-head);font-weight:800;font-size:16px;letter-spacing:-0.015em;line-height:1.25;">{{ p.name }}</div>
+              <div style="font-size:13px;color:#3A4453;margin-top:3px;">{{ p.title }}</div>
+              <div style="font-size:12.5px;color:#8B97A8;margin-top:1px;">{{ p.dept }}</div>
+              <sc-if value="{{ p.hasMgr }}" hint-placeholder-val="{{ false }}"><div style="font-size:11.5px;color:#8B97A8;margin-top:6px;">Reports to {{ p.mgrName }}</div></sc-if>
+            </div>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:auto;padding-top:4px;">
+              <sc-if value="{{ p.notMe }}" hint-placeholder-val="{{ true }}">
+                <div onClick="{{ p.msg }}" title="Message" style="flex:none;width:36px;height:36px;border-radius:50%;background:#E7F3F8;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;" style-hover="background:#D4EAF3;">💬</div>
+                <div onClick="{{ p.callA }}" title="Voice call" style="flex:none;width:36px;height:36px;border-radius:50%;background:#E7F3F8;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;" style-hover="background:#D4EAF3;">📞</div>
+                <div onClick="{{ p.callV }}" title="Video call" style="flex:none;width:36px;height:36px;border-radius:50%;background:#E7F3F8;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;" style-hover="background:#D4EAF3;">🎥</div>
+              </sc-if>
+            </div>
+            <sc-if value="{{ p.canPhoto }}" hint-placeholder-val="{{ false }}">
+              <label style="font-size:12px;font-weight:700;color:var(--mr-teal);cursor:pointer;">{{ p.photoLbl }}<input type="file" accept="image/*" onChange="{{ p.onPhoto }}" style="display:none;"></label>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ ppNone }}" hint-placeholder-val="{{ false }}"><div style="text-align:center;padding:50px 20px;color:#8B97A8;font-size:14.5px;">Nobody matches that search.</div></sc-if>
+    </sc-if>
+    <sc-if value="{{ ppOrg }}" hint-placeholder-val="{{ false }}">
+      <p style="font-size:13px;color:#8B97A8;margin:-8px 0 18px;">Teams come from each manager's team list, set by People &amp; Organisation on the Accounts page.</p>
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <sc-for list="{{ ppDepts }}" as="d" hint-placeholder-count="2">
+          <div style="background:#fff;border:1px solid #DCE2EA;border-radius:var(--mr-r-lg);padding:20px 22px 22px;">
+            <div style="display:flex;gap:10px;align-items:baseline;margin-bottom:16px;">
+              <span style="font-family:var(--mr-head);font-weight:800;font-size:19px;letter-spacing:-0.02em;">{{ d.name }}</span>
+              <span style="font-size:12.5px;color:#8B97A8;">{{ d.count }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:18px;">
+              <sc-for list="{{ d.leads }}" as="l" hint-placeholder-count="1">
+                <div>
+                  <div onClick="{{ l.msg }}" style="display:inline-flex;gap:12px;align-items:center;padding:8px 16px 8px 8px;border-radius:30px;background:var(--mr-navy);color:#fff;cursor:pointer;" style-hover="filter:brightness(1.15);">
+                    <div style="{{ l.avSm }}">{{ l.avText }}</div>
+                    <div style="min-width:0;"><div style="font-weight:700;font-size:14.5px;line-height:1.25;">{{ l.name }}</div><div style="font-size:12px;color:#CFE6F5;">{{ l.title }} · {{ l.teamCount }}</div></div>
+                  </div>
+                  <div style="margin:0 0 0 29px;padding:12px 0 0 22px;border-left:2px solid #DCE2EA;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;">
+                    <sc-for list="{{ l.team }}" as="t" hint-placeholder-count="3">
+                      <div onClick="{{ t.msg }}" title="Send a message" style="display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;border:1px solid #E4EAF1;cursor:pointer;" style-hover="background:#F4F7FA;">
+                        <div style="{{ t.avSm }}">{{ t.avText }}</div>
+                        <div style="min-width:0;flex:1;"><div style="font-weight:600;font-size:13.5px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ t.name }}</div><div style="font-size:11.5px;color:#8B97A8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ t.title }}</div></div>
+                        <sc-if value="{{ t.online }}" hint-placeholder-val="{{ false }}"><span style="flex:none;width:9px;height:9px;border-radius:50%;background:#0E8F66;"></span></sc-if>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+              <sc-if value="{{ d.hasOthers }}" hint-placeholder-val="{{ false }}">
+                <div>
+                  <div style="font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8B97A8;margin-bottom:8px;">{{ d.othersLbl }}</div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;">
+                    <sc-for list="{{ d.others }}" as="t" hint-placeholder-count="3">
+                      <div onClick="{{ t.msg }}" title="Send a message" style="display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;border:1px solid #E4EAF1;cursor:pointer;" style-hover="background:#F4F7FA;">
+                        <div style="{{ t.avSm }}">{{ t.avText }}</div>
+                        <div style="min-width:0;flex:1;"><div style="font-weight:600;font-size:13.5px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ t.name }}</div><div style="font-size:11.5px;color:#8B97A8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ t.title }}</div></div>
+                        <sc-if value="{{ t.online }}" hint-placeholder-val="{{ false }}"><span style="flex:none;width:9px;height:9px;border-radius:50%;background:#0E8F66;"></span></sc-if>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ vComply }}" hint-placeholder-val="{{ false }}">
   <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1040px;margin:0 auto;padding:34px 26px 90px;">
     <h1 style="font-family:var(--mr-head);font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0 0 4px;">My compliance</h1>
@@ -4469,7 +4567,7 @@
   <sc-if value="{{ hasCharPop }}" hint-placeholder-val="{{ false }}">
   <div class="hb-noprint" data-mr="{{ charFloatHook }}" style="{{ charWrapStyle }}">
     <div data-mr="guide" style="{{ charCardStyle }}">
-      <div style="position:absolute;top:-60%;right:-30%;width:90%;height:220%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(20,18,28,0.07) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 180s linear infinite;pointer-events:none;"></div>
+      <div style="position:absolute;left:85%;top:50%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(20,18,28,0.07) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 180s linear infinite;pointer-events:none;"></div>
       <div style="position:relative;display:flex;gap:15px;align-items:flex-start;">
         <div style="flex:none;">{{ charFace }}</div>
         <div style="flex:1;min-width:0;">
@@ -4500,7 +4598,7 @@
 
   <sc-if value="{{ vCandExam }}" hint-placeholder-val="{{ false }}">
   <div style="min-height:88vh;background:var(--mr-navy);padding:44px 26px 80px;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:-60%;left:50%;width:150%;height:250%;margin-left:-75%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.16) 0deg 7deg,transparent 7deg 14deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
+    <div style="position:absolute;left:50%;top:65%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.16) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
     <div style="max-width:700px;margin:0 auto;position:relative;">
       <div style="background:#fff;border-radius:14px;padding:14px 20px;display:inline-block;margin-bottom:26px;">
         <img src="{{ cxLogoSrc }}" alt="Med Right Group" style="{{ cxLogoStyle }}">
@@ -4565,7 +4663,7 @@
 
   <sc-if value="{{ vCandThanks }}" hint-placeholder-val="{{ false }}">
   <div style="min-height:88vh;background:var(--mr-navy);padding:60px 26px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:-60%;left:50%;width:150%;height:250%;margin-left:-75%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.16) 0deg 7deg,transparent 7deg 14deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
+    <div style="position:absolute;left:50%;top:65%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.16) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
     <div style="position:relative;background:#FFFDF6;border:2px solid var(--mr-ink);border-radius:20px;box-shadow:7px 7px 0 var(--mr-ink);padding:44px 40px;max-width:520px;width:100%;text-align:center;animation:hbPop 0.4s cubic-bezier(0.34,1.4,0.64,1) both;">
       <div style="width:72px;height:72px;margin:0 auto;border-radius:50%;background:#0E8F66;color:#fff;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;">✓</div>
       <div style="font-family:var(--mr-comic);font-size:38px;line-height:1.05;color:var(--mr-navy);margin-top:20px;">Thank you</div>
@@ -4954,7 +5052,7 @@
 
   <sc-if value="{{ vInterview }}" hint-placeholder-val="{{ false }}">
   <div style="min-height:80vh;background:var(--mr-navy);margin:-1px 0 0;padding:40px 26px 70px;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:-60%;left:50%;width:150%;height:250%;margin-left:-75%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.16) 0deg 7deg,transparent 7deg 14deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
+    <div style="position:absolute;left:50%;top:65%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(24,128,168,0.16) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
     <div style="max-width:720px;margin:0 auto;position:relative;">
       <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:26px;">
         <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:22px;padding:7px 16px;">
@@ -6685,7 +6783,7 @@
   <sc-if value="{{ vRecog }}" hint-placeholder-val="{{ false }}">
   <div data-mr="pad" style="width:100%;box-sizing:border-box;max-width:1180px;margin:0 auto;padding:34px 26px 90px;">
     <div style="background:var(--mr-navy);color:#fff;border:3px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);padding:34px 32px 32px;position:relative;overflow:hidden;margin-bottom:28px;animation:hbRise 0.45s ease both;">
-      <div style="position:absolute;top:-90%;left:40%;width:120%;height:280%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.22) 0deg 7deg,transparent 7deg 14deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
+      <div style="position:absolute;left:100%;top:50%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.22) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 240s linear infinite;pointer-events:none;"></div>
       <div style="position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,0.09) 1px,transparent 1.6px) 0 0/22px 22px;pointer-events:none;"></div>
       <div style="position:relative;display:flex;gap:22px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
         <div style="min-width:0;flex:1 1 320px;">
@@ -6702,7 +6800,7 @@
     <sc-if value="{{ hasBirthdays }}" hint-placeholder-val="{{ false }}">
     <div style="margin-bottom:30px;background:var(--mr-cream);border:3px solid var(--mr-ink);border-radius:var(--mr-r-lg);box-shadow:6px 6px 0 var(--mr-ink);padding:24px 24px 26px;position:relative;overflow:hidden;">
         <div style="position:absolute;inset:0;background:radial-gradient(#C96A0F 1.6px,transparent 2.2px) 0 0/34px 34px,radial-gradient(#1F5FD0 1.6px,transparent 2.2px) 17px 17px/34px 34px;opacity:0.16;pointer-events:none;"></div>
-        <div style="position:absolute;top:-80%;right:-20%;width:70%;height:260%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.13) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 200s linear infinite;pointer-events:none;"></div>
+        <div style="position:absolute;left:85%;top:50%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(201,106,15,0.13) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 200s linear infinite;pointer-events:none;"></div>
         <div style="position:relative;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px;">
           <span style="font-size:38px;line-height:1;animation:hbFloat 3s ease-in-out infinite;">🎂</span>
           <div style="flex:1;min-width:200px;">
@@ -8544,6 +8642,11 @@ const FEATURES = [
 ];
 
 const HELP = {
+ "people": { "name": "People directory", "icon": "☺", "routes": ["people"],
+  "intro": "Everyone at Med Right Group in one place, with their photo, job title and department, plus an org chart built from each manager's team.",
+  "staff": ["Search by name, department or job title, or pick a department.", "Use 💬 to message someone, 📞 for a voice call or 🎥 for a video call. A green dot means they are online.", "Add your own photo with “Add my photo” on your card.", "Switch to Org chart to see each manager and the people in their team."],
+  "admin": ["P&O can add or change anyone's photo from their card.", "The org chart comes from each manager's team list, set on the Accounts page."],
+  "tips": ["Calls only connect when the other person has ME open."] },
  "home": {
   "name": "Home",
   "icon": "⌂",
@@ -9028,7 +9131,8 @@ const SECTIONS = [
   ["mine", "My policies", "The staff reading list and their progress", ["me"]],
   ["acks", "Acknowledgements", "The signature-chasing console", ["acks"]],
   ["inbox", "Questions & messages to P&O", "The questions inbox and staff replies", ["inbox"]],
-  ["comply", "Compliance", "Tracker, attestations, declarations, regulatory register, audits, incidents and speak-up", ["comply", "compadmin"]]
+  ["comply", "Compliance", "Tracker, attestations, declarations, regulatory register, audits, incidents and speak-up", ["comply", "compadmin"]],
+  ["people", "People directory", "Everyone's photo, title, department and the org chart", ["people"]]
 ];
 const NAV_GROUPS = [
   ["Home", ["home", "dash"]],
@@ -9042,9 +9146,11 @@ const NAV_GROUPS = [
   ["Investigations", ["mycases", "caseadmin"]],
   ["Recruitment", ["recruit"]],
   ["Compliance", ["comply", "compadmin"]],
+  ["People", ["people"]],
   ["Admin", ["ann", "accounts", "marketing", "settings"]]
 ];
 const NAV_LABELS = {
+  people: "People directory",
   home: "Home", dash: "Dashboard", all: "All policies (staff)", library: "Library (admin)", me: "My policies", acks: "Acknowledgements",
   mgmt: "Management review / Policy voting", benefits: "Benefits (staff)", benefitadmin: "Benefits console", forms: "Forms & surveys",
   services: "Suggestion box / Requests", myasks: "Requests to P&O", poqueue: "Staff requests", know: "Knowledge hub", knowadmin: "Knowledge hub console / Teaching",
@@ -12734,6 +12840,9 @@ class Component extends DCLogic {
     this._answered = false;
     try { (this._local ? this._local.getTracks() : []).forEach(t => t.stop()); } catch (e) {}
     try { (this._screen ? this._screen.getTracks() : []).forEach(t => t.stop()); } catch (e) {}
+    try { (this._screenRaw ? this._screenRaw.getTracks() : []).forEach(t => t.stop()); } catch (e) {}
+    if (this._mix) { this._mix.stop(); this._mix = null; }
+    this._screenRaw = null;
     try { if (this._pc) this._pc.close(); } catch (e) {}
     this._pc = null; this._local = null; this._remote = null; this._screen = null;
     this.setState({ call: null });
@@ -12766,15 +12875,19 @@ class Component extends DCLogic {
     if (!sender) return;
     if (c.sharing) {
       (this._screen ? this._screen.getTracks() : []).forEach(t => t.stop()); this._screen = null;
+      if (this._mix) { this._mix.stop(); this._mix = null; }
+      try { (this._screenRaw ? this._screenRaw.getTracks() : []).forEach(t => t.stop()); } catch (e) {} this._screenRaw = null;
       const cam = this._local && this._local.getVideoTracks()[0]; if (cam) sender.replaceTrack(cam);
       this.setState({ call: Object.assign({}, this.state.call, { sharing: false }) });
       return;
     }
     try {
       const scr = await navigator.mediaDevices.getDisplayMedia({ video: true });
-      this._screen = scr;
       const tr = scr.getVideoTracks()[0];
-      sender.replaceTrack(tr);
+      this._mix = this.shareMix(scr, this._local && this._local.getVideoTracks()[0]);
+      this._screen = this._mix.stream;
+      this._screenRaw = scr;
+      sender.replaceTrack(this._mix.track);
       tr.onended = () => { if (this.state.call && this.state.call.sharing) this.toggleShare(); };
       this.setState({ call: Object.assign({}, this.state.call, { sharing: true }) });
     } catch (e) {}
@@ -12798,13 +12911,40 @@ class Component extends DCLogic {
       callKindLbl: c.kind === "video" ? "Video call" : "Voice call",
       remoteStyle: vid ? "position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;" : "position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;",
       callVoice: !vid, callIsVideo: c.kind === "video", callPulse: c.status === "ringing" || !c.connected,
-      callLocalStyle: c.kind === "video" && !c.camOff ? "position:absolute;right:20px;top:20px;z-index:2;width:220px;max-width:34vw;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:2px solid rgba(255,255,255,0.7);background:#000;box-shadow:0 10px 30px -10px rgba(0,0,0,0.6);" + (c.sharing ? "" : "transform:scaleX(-1);") : "display:none;",
+      callLocalStyle: c.kind === "video" && !c.camOff ? "position:absolute;right:20px;top:20px;z-index:2;width:220px;max-width:34vw;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:2px solid rgba(255,255,255,0.7);background:#000;box-shadow:0 10px 30px -10px rgba(0,0,0,0.6);" + (c.sharing ? "" : "transform:scaleX(-1);") : (c.sharing ? "position:absolute;right:20px;top:20px;z-index:2;width:220px;max-width:34vw;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:2px solid rgba(255,255,255,0.7);background:#000;" : "display:none;"),
       muteStyle: ctl(c.muted ? "#B4443A" : "rgba(255,255,255,0.14)"), muteIcon: c.muted ? "🔇" : "🎙", muteTip: c.muted ? "Unmute" : "Mute",
       camStyle: ctl(c.camOff ? "#B4443A" : "rgba(255,255,255,0.14)"), camTip: c.camOff ? "Turn camera on" : "Turn camera off",
       shareStyle: ctl(c.sharing ? "#1880A8" : "rgba(255,255,255,0.14)"), shareTip: c.sharing ? "Stop sharing" : "Share your screen",
       hangStyle: ctl("#D93A2F") + "width:66px;height:66px;font-size:24px;",
       toggleMute: () => this.toggleMute(), toggleCam: () => this.toggleCam(), toggleShare: () => this.toggleShare(), hangUp: () => this.hangUp()
     });
+  }
+  shareMix(scr, cam) {
+    const sv = document.createElement("video"), cv = document.createElement("video");
+    sv.muted = cv.muted = true; sv.playsInline = cv.playsInline = true;
+    sv.srcObject = scr; sv.play().catch(() => {});
+    const camOn = () => !!(cam && cam.enabled !== false && cam.readyState === "live");
+    if (cam) { cv.srcObject = new MediaStream([cam]); cv.play().catch(() => {}); }
+    const c = document.createElement("canvas"); c.width = 1280; c.height = 720;
+    const g = c.getContext("2d");
+    const draw = () => {
+      g.fillStyle = "#0B0B26"; g.fillRect(0, 0, 1280, 720);
+      const w = sv.videoWidth || 16, h = sv.videoHeight || 9, k = Math.min(1280 / w, 720 / h);
+      if (sv.readyState >= 2) g.drawImage(sv, (1280 - w * k) / 2, (720 - h * k) / 2, w * k, h * k);
+      if (camOn() && cv.readyState >= 2) {
+        const R0 = 112, cx = 1280 - R0 - 26, cy = 720 - R0 - 26, vw = cv.videoWidth || 4, vh = cv.videoHeight || 3, kk = (R0 * 2) / Math.min(vw, vh);
+        g.save(); g.beginPath(); g.arc(cx, cy, R0 + 5, 0, Math.PI * 2); g.fillStyle = "#fff"; g.fill();
+        g.beginPath(); g.arc(cx, cy, R0, 0, Math.PI * 2); g.clip();
+        g.translate(cx, cy); g.scale(-1, 1);
+        g.drawImage(cv, -vw * kk / 2, -vh * kk / 2, vw * kk, vh * kk); g.restore();
+      }
+    };
+    let wk = null;
+    try { wk = new Worker(URL.createObjectURL(new Blob(["setInterval(()=>postMessage(0),66)"], { type: "text/javascript" }))); wk.onmessage = draw; }
+    catch (e) { wk = { iv: setInterval(draw, 66), terminate() { clearInterval(this.iv); } }; }
+    const out = c.captureStream(15), tr = out.getVideoTracks()[0];
+    const stop = () => { try { wk.terminate(); } catch (e) {} try { tr.stop(); } catch (e) {} };
+    return { stream: out, track: tr, stop: stop };
   }
   meets() { return this.state.meetings || []; }
   meetById(id) { return this.meets().filter(m => m.id === id)[0] || null; }
@@ -12966,19 +13106,34 @@ class Component extends DCLogic {
     if (m && !m.ended && me) this.patchMeet(RM.id, x => ({ room: Object.assign({}, x.room || {}, { [me]: 0 }), wait: Object.assign({}, x.wait || {}, { [me]: 0 }) }));
     Object.keys(RM.pcs).forEach(o => { try { RM.pcs[o].close(); } catch (e) {} });
     try { RM.local.getTracks().forEach(t => t.stop()); } catch (e) {}
-    try { if (RM.screen) RM.screen.getTracks().forEach(t => t.stop()); } catch (e) {}
+    try { if (RM.screenRaw) RM.screenRaw.getTracks().forEach(t => t.stop()); } catch (e) {}
+    if (RM.mix) RM.mix.stop();
     this._room = null;
     clearInterval(this._roomT);
     this.setState({ room: null });
   }
   endMeeting() {
-    const RM = this._room;
-    if (!RM) return;
-    this.ask("End the meeting for everyone?", "Everyone in the meeting will be disconnected.", "End for everyone", "Stay", () => {
-      this.patchMeet(RM.id, () => ({ ended: true, endedAt: Date.now(), room: {}, wait: {}, sig: {} }));
-      this.leaveRoom(true);
-      this.flash("Meeting ended", "");
-    }, () => {});
+    const RM = this._room, r = this.state.room, me = this.state.me;
+    if (!RM || !r) return;
+    if (!r.endArm || Date.now() - r.endArm > 5000) {
+      this.setState({ room: Object.assign({}, r, { endArm: Date.now() }) });
+      clearTimeout(this._endArmT);
+      this._endArmT = setTimeout(() => this.setState(s2 => ({ room: s2.room ? Object.assign({}, s2.room, { endArm: 0 }) : null })), 5000);
+      return;
+    }
+    const m = this.meetById(RM.id), id = RM.id;
+    this._mPend = null;
+    const list = this.meets().map(x => x.id === id ? Object.assign({}, x, { ended: true, endedAt: Date.now(), room: {}, wait: {}, sig: {} }) : x);
+    this._room = null;
+    Object.keys(RM.pcs).forEach(o => { try { RM.pcs[o].close(); } catch (e) {} });
+    try { RM.local.getTracks().forEach(t => t.stop()); } catch (e) {}
+    try { if (RM.screenRaw) RM.screenRaw.getTracks().forEach(t => t.stop()); } catch (e) {}
+    if (RM.mix) RM.mix.stop();
+    clearInterval(this._roomT);
+    this.save(K.meet, list, "meetings");
+    this.setState({ room: null });
+    if (m && me) this.notify(Object.keys(m.room || {}).concat(m.invited || []).filter((e, i, a) => e !== me.email && a.indexOf(e) === i).map(e => ({ to: e, kind: "meet", route: "chat", read: false, date: today(), title: "Meeting ended: " + m.title, text: me.name + " ended the meeting for everyone." })));
+    this.flash("Meeting ended", "Everyone has been disconnected.");
   }
   admitRoom(e, ok) {
     const RM = this._room;
@@ -13014,8 +13169,9 @@ class Component extends DCLogic {
     if (!RM || !r) return;
     const setV = tr => Object.keys(RM.pcs).forEach(o => { const sd = RM.pcs[o].getSenders().filter(x => x.track && x.track.kind === "video")[0]; if (sd) sd.replaceTrack(tr); });
     if (r.sharing) {
-      try { RM.screen.getTracks().forEach(t => t.stop()); } catch (e) {}
-      RM.screen = null;
+      try { RM.screenRaw.getTracks().forEach(t => t.stop()); } catch (e) {}
+      if (RM.mix) RM.mix.stop();
+      RM.screen = null; RM.mix = null; RM.screenRaw = null;
       const cam = RM.local.getVideoTracks()[0]; if (cam) setV(cam);
       this.setState({ room: Object.assign({}, this.state.room, { sharing: false }) });
       return;
@@ -13023,9 +13179,11 @@ class Component extends DCLogic {
     if (!r.hasCam) return this.flash("Screen sharing needs a camera track", "Join with your camera allowed to share your screen.", "no");
     try {
       const scr = await navigator.mediaDevices.getDisplayMedia({ video: true });
-      RM.screen = scr;
       const tr = scr.getVideoTracks()[0];
-      setV(tr);
+      RM.screenRaw = scr;
+      RM.mix = this.shareMix(scr, RM.local.getVideoTracks()[0]);
+      RM.screen = RM.mix.stream;
+      setV(RM.mix.track);
       tr.onended = () => { if (this.state.room && this.state.room.sharing) this.roomShare(); };
       this.setState({ room: Object.assign({}, this.state.room, { sharing: true }) });
     } catch (e) {}
@@ -13105,8 +13263,8 @@ class Component extends DCLogic {
     out.roomTime = String(Math.floor(sec / 60)).padStart(2, "0") + ":" + String(sec % 60).padStart(2, "0");
     const roomE = Object.keys(m.room || {}).filter(e => m.room[e] && e !== me && this.isOnline(e));
     const tile = (key, name, vid, sub) => ({ key: key, name: name, initials: initials(name), sub: sub,
-      vidStyle: vid ? "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent;" + (key === "me" && !r.sharing ? "transform:scaleX(-1);" : "") : "position:absolute;width:1px;height:1px;opacity:0;" });
-    out.roomTiles = [tile("me", "You", r.hasCam && !r.camOff, r.muted ? "🔇 Muted" : "")].concat(roomE.map(e => {
+      vidStyle: vid ? "position:absolute;inset:0;width:100%;height:100%;object-fit:" + (key === "me" ? "cover" : "contain") + ";background:#1E1E52;" + (key === "me" && !r.sharing ? "transform:scaleX(-1);" : "") + "" : "position:absolute;width:1px;height:1px;opacity:0;" });
+    out.roomTiles = [tile("me", r.sharing ? "You · sharing screen" : "You", r.sharing || (r.hasCam && !r.camOff), r.muted ? "🔇 Muted" : "")].concat(roomE.map(e => {
       const pc = RM && RM.pcs[e], ms = RM && RM.streams[e];
       const stt = pc ? pc.connectionState : "new";
       return tile(e, (this.acct(e) || {}).name || e, !!(ms && ms.getVideoTracks().length), stt === "connected" ? "" : stt === "failed" ? "Could not connect" : "Connecting…");
@@ -13139,6 +13297,8 @@ class Component extends DCLogic {
     out.rInvStyle = ctl(r.panel === "invite" ? "#1880A8" : "rgba(255,255,255,0.14)");
     out.rLeaveStyle = "flex:none;height:54px;padding:0 22px;border-radius:27px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;cursor:pointer;background:#D93A2F;color:#fff;";
     out.rEndStyle = "flex:none;height:54px;padding:0 18px;border-radius:27px;display:flex;align-items:center;font-weight:700;font-size:13.5px;cursor:pointer;background:#fff;color:#B4443A;";
+    out.endLbl = r.endArm && now - r.endArm < 5000 ? "Tap again to end for all" : "End for everyone";
+    if (r.endArm && now - r.endArm < 5000) out.rEndStyle = out.rEndStyle.replace("background:#fff;color:#B4443A;", "background:#B4443A;color:#fff;");
     out.roomMute = () => this.roomMute(); out.roomCam = () => this.roomCam(); out.roomShare = () => this.roomShare();
     out.leaveRoom = () => this.leaveRoom(); out.endMeeting = () => this.endMeeting();
     return out;
@@ -13170,6 +13330,7 @@ class Component extends DCLogic {
     let catTxt = "";
     for (const ln of cat) { if (out.length + catTxt.length + ln.length > 6800) break; catTxt += ln + "\n"; }
     if (catTxt) out += "\nOTHER THINGS IN ME:\n" + catTxt;
+    if (adminV) { try { out += this.aarefAdminData(); } catch (e) {} }
     return out;
   }
   aarefLinks(t, m) {
@@ -13198,6 +13359,96 @@ class Component extends DCLogic {
       return this.setState(s2 => { const L = (s2.helpOpen || []).filter(x => x !== id).concat([id]); try { localStorage.setItem("mrhub-help-v1", JSON.stringify(L)); } catch (e) {} return { helpOpen: L }; }, () => window.scrollTo(0, 0));
     }
     this.flash("Not found", "That item is no longer in ME.", "no");
+  }
+  directId(email) {
+    const st = this.state, me = st.me;
+    const key = [me.email, email].sort().join("|");
+    const ex = (st.chat || []).filter(t => t.kind === "direct" && t.key === key)[0];
+    if (ex) return ex.id;
+    const who = this.acct(email);
+    const t = { id: "d" + sha256hex(key).slice(0, 16), key: key, kind: "direct", name: who ? who.name : email, members: [me.email, email], msgs: [], created: today(), by: me.email, touched: Date.now() };
+    this.saveChat((st.chat || []).concat([t]));
+    return t.id;
+  }
+  callPerson(email, kind) { const id = this.directId(email); setTimeout(() => this.startCall(id, kind), 120); }
+  setPhoto(email, file) {
+    const me = this.state.me;
+    if (!me || !file) return;
+    if (email !== me.email && !this.can("accounts")) return;
+    this.readPhoto(file, async d => {
+      const sm = await this.shrinkImg(d, 260);
+      this.saveAccounts(this.state.accounts.map(a => a.email === email ? Object.assign({}, a, { photo: sm }) : a));
+      if (email === me.email) this.setState({ me: Object.assign({}, this.state.me, { photo: sm }) });
+      this.flash("Photo saved", email === me.email ? "Everyone now sees your photo in the directory." : "Their photo is updated.");
+    });
+  }
+  avStyle(a, size) {
+    const ph = a && a.photo && !/^mrblob:/.test(a.photo) ? a.photo : "";
+    let h = 7; String((a && a.email) || "").split("").forEach(c => { h = (h * 31 + c.charCodeAt(0)) | 0; });
+    const col = ["#1F5FD0", "#C96A0F", "#0E8F66", "#7433C6", "#1880A8"][Math.abs(h) % 5];
+    return "flex:none;width:" + size + "px;height:" + size + "px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mr-head);font-weight:800;font-size:" + Math.round(size * 0.36) + "px;color:#fff;box-sizing:border-box;" + (ph ? "background:#EDF1F6 url('" + ph + "') center/cover no-repeat;" : "background:" + col + ";");
+  }
+  peopleVals() {
+    const st = this.state, me = (st.me || {}).email || "";
+    const out = { vPeople: st.route === "people" };
+    if (!out.vPeople) return Object.assign(out, { ppCards: [], ppDepts: [], ppDeptOpts: [] });
+    const tab = st.ppTab || "dir", q = String(st.ppQ || "").toLowerCase().trim(), dep = st.ppDept || "";
+    const people = (st.accounts || []).filter(a => a.status !== "suspended" && a.role !== "Candidate");
+    const mgrOf = {};
+    people.forEach(m => (m.team || []).forEach(e => { if (!mgrOf[e]) mgrOf[e] = m; }));
+    const canAll = this.can("accounts");
+    const tabSt = on => "font-weight:700;font-size:13.5px;padding:8px 18px;border-radius:18px;cursor:pointer;white-space:nowrap;" + (on ? "background:var(--mr-navy);color:#fff;" : "color:#5C6B80;");
+    const card = a => {
+      const isMe = a.email === me, ph = !!(a.photo && !/^mrblob:/.test(a.photo)), m = mgrOf[a.email];
+      return { key: a.email, name: a.name, title: a.title || a.role || "", dept: a.dept || "", online: !isMe && this.isOnline(a.email),
+        avStyle: this.avStyle(a, 76), avSm: this.avStyle(a, 44), avText: ph ? "" : initials(a.name), isMe: isMe, notMe: !isMe,
+        hasMgr: !!m, mgrName: m ? m.name : "", canPhoto: isMe || canAll,
+        photoLbl: ph ? (isMe ? "Change my photo" : "Change photo") : (isMe ? "Add my photo" : "Add photo"),
+        onPhoto: e => { const f = e.target.files && e.target.files[0]; e.target.value = ""; this.setPhoto(a.email, f); },
+        msg: () => this.startDirect(a.email), callA: () => this.callPerson(a.email, "audio"), callV: () => this.callPerson(a.email, "video"),
+        teamCount: (a.team || []).length ? "Leads " + a.team.length : "" };
+    };
+    const match = a => (!dep || (a.dept || "") === dep) && (!q || [a.name, a.dept, a.title, a.role, a.email].join(" ").toLowerCase().indexOf(q) > -1);
+    const list = people.filter(match).sort((a, b) => ((b.email === me) - (a.email === me)) || String(a.name).localeCompare(b.name));
+    const depts = Array.from(new Set(people.map(a => a.dept).filter(Boolean))).sort();
+    Object.assign(out, {
+      ppDir: tab === "dir", ppOrg: tab === "org",
+      ppTabDir: () => this.setState({ ppTab: "dir" }), ppTabOrg: () => this.setState({ ppTab: "org" }),
+      ppTabDirStyle: tabSt(tab === "dir"), ppTabOrgStyle: tabSt(tab === "org"),
+      ppQ: st.ppQ || "", onPpQ: e => this.setState({ ppQ: e.target.value }),
+      ppDept: dep, onPpDept: e => this.setState({ ppDept: e.target.value }),
+      ppDeptOpts: [{ v: "", l: "All departments" }].concat(depts.map(d => ({ v: d, l: d }))),
+      ppLead: people.length + " people at " + (this.T().company || "Med Right Group") + " · " + people.filter(a => this.isOnline(a.email)).length + " online now",
+      ppCards: list.map(card), ppNone: !list.length
+    });
+    const shownD = (dep ? [dep] : depts.concat(people.some(a => !a.dept) ? ["Other"] : []));
+    out.ppDepts = shownD.map(d => {
+      const inD = people.filter(a => (a.dept || "Other") === d);
+      const leads = inD.filter(l => (l.team || []).length).map(l => Object.assign(card(l), {
+        team: (l.team || []).map(e => this.acct(e)).filter(x => x && x.status !== "suspended").sort((a, b) => String(a.name).localeCompare(b.name)).map(card) }));
+      const others = inD.filter(a => !(a.team || []).length && !mgrOf[a.email]).sort((a, b) => String(a.name).localeCompare(b.name)).map(card);
+      return { name: d, count: inD.length + (inD.length === 1 ? " person" : " people"), leads: leads, others: others, hasOthers: others.length > 0, othersLbl: leads.length ? "Not in a manager's team yet" : "Everyone in " + d };
+    }).filter(d => d.leads.length || d.hasOthers);
+    return out;
+  }
+  aarefAdminData() {
+    const st = this.state, UD = e => (st.userData || {})[e] || {};
+    const nm = l => l.slice(0, 30).map(a => a.name).join(", ") + (l.length > 30 ? " and " + (l.length - 30) + " more" : "");
+    let t = "\nADMIN DATA (live figures; this person is an admin and may see names):\n";
+    (st.policies || []).filter(p => p.status === "live" && p.mustAck).forEach(p => {
+      const au = this.ackAudience(p), not = au.filter(a => (UD(a.email).acked || []).indexOf(p.id) < 0);
+      t += "- Policy \"" + p.title + "\": " + (au.length - not.length) + " of " + au.length + " acknowledged." + (not.length ? " Not yet: " + nm(not) + "." : " Everyone has signed.") + " [[route:acks|Acknowledgements]]\n";
+    });
+    const mark = (st.attempts || []).filter(a => a.needsMarking).length;
+    if (mark) t += "- " + mark + " exam attempt(s) waiting to be marked. [[route:examadmin|Exams console]]\n";
+    const cands = st.cands || [];
+    if (cands.length) t += "- Recruitment: " + CAND_STAGES.map((sg, i) => sg + " " + cands.filter(c => (c.stage || 0) === i).length).join(", ") + ". [[route:recruit|Recruitment]]\n";
+    try { const rows = this.compPeople().map(a => this.compScore(a)), tt = rows.reduce((n, r) => n + r.total, 0), dd = rows.reduce((n, r) => n + r.done, 0);
+      t += "- Overall compliance " + (tt ? Math.round(dd * 100 / tt) : 100) + "%; " + rows.filter(r => r.overdue).length + " people have overdue items. [[route:compadmin|Compliance console]]\n"; } catch (e) {}
+    const staff = (st.accounts || []).filter(a => a.status !== "suspended" && a.role !== "Candidate");
+    t += "- Staff accounts: " + staff.length + "; online now: " + staff.filter(a => this.isOnline(a.email)).length + ". [[route:dash|Dashboard]]\n";
+    t += "When asked, draft announcements, emails, reminders or policy wording. To publish an announcement, point to [[route:ann|Announcements console]].\n";
+    return t.slice(0, 4200);
   }
   helpVals() {
     const st = this.state;
@@ -15642,7 +15893,7 @@ class Component extends DCLogic {
     const hairCol = { navigator: "#2B2337", sentinel: "#3A3A46", spark: "#1F1B24", beacon: "#241C2E" }[kind];
     const anim = still ? "" : { navigator: "animation:hbBob 4.2s ease-in-out infinite;", sentinel: "animation:hbFloat 5s ease-in-out infinite;", spark: "animation:hbSway 3.6s ease-in-out infinite;", beacon: "animation:hbBob 3.4s ease-in-out infinite;" }[kind];
     const wrap = "position:relative;flex:none;width:" + px(56) + ";height:" + px(56) + ";border-radius:50%;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(circle at 50% 22%," + color + " 0%," + color + "cc 58%," + color + "88 100%);" + anim;
-    const glow = "position:absolute;top:-30%;left:-25%;width:150%;height:150%;pointer-events:none;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,0.16) 0deg 8deg,transparent 8deg 16deg);" + (still ? "" : "animation:hbSpin 90s linear infinite;");
+    const glow = "position:absolute;left:50%;top:45%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;pointer-events:none;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,0.16) 0deg 7.5deg,transparent 7.5deg 15deg);" + (still ? "" : "animation:hbSpin 90s linear infinite;");
     const headW = 31 * u, headH = 36 * u;
     const face = "position:absolute;left:50%;top:" + px(12) + ";width:" + headW.toFixed(2) + "px;height:" + headH.toFixed(2) + "px;margin-left:" + (-headW / 2).toFixed(2) + "px;background:" + skin + ";border-radius:" + px(14) + " " + px(14) + " " + px(12) + " " + px(12) + ";";
     const hairShapes = {
@@ -16399,6 +16650,7 @@ class Component extends DCLogic {
     if (!staffMode && this.can("cases")) navDefs.push(["caseadmin", "Investigations", ""]);
     if (staffMode) navDefs.push(["comply", "My compliance", String(this.compItemsFor(st.me).filter(i => !i.done).length || "")]);
     if (!staffMode && this.can("compliance")) navDefs.push(["compadmin", "Compliance console", ""]);
+    navDefs.push(["people", "People directory", ""]);
     if (staffMode) navDefs.push(["events", "Events", ""]);
     if (!staffMode && this.can("events")) navDefs.push(["eventadmin", "Events", ""]);
     if (staffMode) navDefs.push(["know", "Knowledge hub", ""]);
@@ -16469,7 +16721,7 @@ class Component extends DCLogic {
         name: this.guideName(k), person: g.person, power: g.power, initial: g.initial,
         countLabel: n === 1 ? "Guides 1 policy" : "Guides " + n + " policies",
         topStyle: "background:" + this.guideColor(k) + ";padding:28px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;",
-        rayStyle: "position:absolute;top:-60%;left:50%;width:200%;height:230%;margin-left:-100%;background:repeating-conic-gradient(from 8deg at 50% 50%,rgba(255,255,255,0.16) 0deg 9deg,transparent 9deg 18deg);animation:hbSpin 150s linear infinite;",
+        rayStyle: "position:absolute;left:50%;top:55%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 8deg at 50% 50%,rgba(255,255,255,0.16) 0deg 9deg,transparent 9deg 18deg);animation:hbSpin 150s linear infinite;",
         halftoneStyle: "position:absolute;inset:0;background:radial-gradient(rgba(20,18,28,0.18) 24%,transparent 25%) 0 0/12px 12px;",
         discStyle: "width:88px;height:88px;border-radius:50%;background:#FFFDF6;border:3px solid #14121C;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;animation:hbFloat 5s ease-in-out infinite;",
         nameStyle: "font-family:var(--mr-comic);font-size:32px;line-height:1;letter-spacing:0.02em;color:" + g.color + ";text-shadow:2.5px 2.5px 0 #14121C;",
@@ -17232,7 +17484,7 @@ class Component extends DCLogic {
           const on = routes.indexOf(st.route) > -1 || (routes.indexOf("all") > -1 && st.route === "list");
           const badge = items.map(n => parseInt(n[2] || "0", 10) || 0).reduce((a, b) => a + b, 0);
           const single = items.length === 1;
-          const label = single ? (navLabels[items[0][0]] || items[0][1]) : gr[0];
+          const label = single && gr[0] === "Home" ? (navLabels[items[0][0]] || items[0][1]) : (self.T().navLabels || {})["grp:" + gr[0]] || gr[0];
           const open = st.menuOpen === gr[0];
           out.push({
             label: label, badge: badge ? " " + badge : "",
@@ -17243,8 +17495,8 @@ class Component extends DCLogic {
             toggle: () => single
               ? self.go(items[0][0] === "all" ? "list" : items[0][0], { query: "", cat: null, pub: null, menuOpen: null })
               : self.setState({ menuOpen: open ? null : gr[0] }),
-            style: "position:relative;display:flex;align-items:center;font-size:13.5px;font-weight:700;padding:15px 15px 14px;cursor:pointer;white-space:nowrap;transition:color 0.2s ease;color:" + (on || open ? "#fff;" : "#A9BBD2;"),
-            underStyle: on ? "position:absolute;left:12px;right:12px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--mr-warm);" : "display:none;",
+            style: "position:relative;display:flex;align-items:center;font-size:clamp(12px,0.95vw,13.5px);font-weight:700;padding:14px clamp(7px,0.9vw,15px) 13px;cursor:pointer;white-space:nowrap;transition:color 0.2s ease;color:" + (on || open ? "#fff;" : "#A9BBD2;"),
+            underStyle: on ? "position:absolute;left:8px;right:8px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--mr-warm);" : "display:none;",
             items: items.map(n => {
               const iBadge = parseInt(n[2] || "0", 10) || 0;
               const iOn = st.route === n[0] || (n[0] === "all" && st.route === "list");
@@ -17500,7 +17752,7 @@ class Component extends DCLogic {
         };
       }).filter(Boolean),
 
-      ...this.helpVals(), ...this.callVals(), ...this.meetVals(),
+      ...this.helpVals(), ...this.callVals(), ...this.meetVals(), ...this.peopleVals(),
       hasModal: !!st.modal,
       bdayPop: !!st.me && !st.candMode && !st.interviewMode && !st.bdayClosed && this.isBday(st.me) && localStorage.getItem("mrhub-bdayseen-v1:" + st.me.email) !== today(),
       closeBdayPop: () => { try { localStorage.setItem("mrhub-bdayseen-v1:" + st.me.email, today()); } catch (e) {} this.setState({ bdayClosed: true }); },
@@ -17630,7 +17882,7 @@ class Component extends DCLogic {
         guideDiscStyle: "flex:none;width:44px;height:44px;border-radius:50%;background:" + curGuide.color + ";border:2.5px solid #14121C;color:#FFFDF6;display:flex;align-items:center;justify-content:center;font-family:'Bangers',cursive;font-size:22px;",
         guideNameStyle: "font-family:'Bangers',cursive;font-size:20px;letter-spacing:0.02em;color:" + curGuide.color + ";",
         headStyle: "background:linear-gradient(140deg," + curGuide.color + " 0%,#181848 78%);padding:36px 34px 32px;position:relative;overflow:hidden;",
-        rayStyle: "position:absolute;top:-80%;left:64%;width:150%;height:280%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,0.1) 0deg 8deg,transparent 8deg 16deg);animation:hbSpin 200s linear infinite;pointer-events:none;",
+        rayStyle: "position:absolute;left:139%;top:60%;width:320%;aspect-ratio:1/1;margin-left:-160%;margin-top:-160%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,0.1) 0deg 7.5deg,transparent 7.5deg 15deg);animation:hbSpin 200s linear infinite;pointer-events:none;",
         halftoneStyle: "position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,0.1) 1px,transparent 1.5px) 0 0/20px 20px;pointer-events:none;",
         headTagStyle: "font-family:'Bangers',cursive;font-size:20px;letter-spacing:0.03em;color:" + curGuide.color + ";background:#FFFDF6;border:2px solid #14121C;padding:3px 13px;border-radius:7px;position:relative;",
         glanceStyle: "background:" + curGuide.color + "0F;border:1.5px solid " + curGuide.color + "38;border-radius:14px;padding:22px 24px;",
